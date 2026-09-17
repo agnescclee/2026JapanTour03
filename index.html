@@ -166,6 +166,13 @@
                         <span>費用預算</span>
                     </span>
                 </button>
+                <button onclick="switchTab('prep')" id="tab-prep"
+                    class="nav-tab-btn py-3.5 sm:py-4 px-3 md:px-6 text-center text-stone-400 border-b-2 border-transparent hover:text-stone-600 transition-colors">
+                    <span class="text-sm sm:text-base font-medium flex items-center gap-1.5">
+                        <i class="ph-duotone ph-clipboard-text text-lg sm:text-xl text-benikaba"></i>
+                        <span>行前準備</span>
+                    </span>
+                </button>
                 <button onclick="switchTab('record')" id="tab-record"
                     class="nav-tab-btn py-3.5 sm:py-4 px-3 md:px-6 text-center text-stone-400 border-b-2 border-transparent hover:text-stone-600 transition-colors">
                     <span class="text-sm sm:text-base font-medium flex items-center gap-1.5">
@@ -2394,6 +2401,196 @@
             </div>
         </section>
 
+        <!-- ===================================================================
+             TAB 5: PRE-TRIP PREPARATION (行前準備與預約攻略)
+             =================================================================== -->
+        <section id="content-prep" class="hidden space-y-8 animate-fade-in">
+            <div class="border-b border-stone-200 pb-4 mb-2">
+                <div class="flex items-center gap-2 mb-1.5">
+                    <span class="bg-benikaba text-white text-xs sm:text-sm font-bold px-3 py-1 rounded-full">行前必備須知</span>
+                    <span class="text-xs sm:text-sm bg-stone-100 text-stone-700 border border-stone-200 px-3 py-1 rounded-full font-bold">預約・票務・穿搭指南</span>
+                </div>
+                <h3 class="serif text-2xl sm:text-3xl font-bold text-stone-800">
+                    出發前準備事項與預約清單
+                </h3>
+                <p class="text-sm sm:text-base text-stone-600 mt-1.5">
+                    涵蓋鐵道車票聰明買法（免買 JR Pass 倒貼）、11 月深秋洋蔥式穿搭秘訣，以及會津定期觀光巴士預約時程
+                </p>
+            </div>
+
+            <!-- Prep Cards Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1: Train Tickets & JR East Pass Advice -->
+                <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-xs border-2 border-benikaba/40 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-benikaba text-white text-xs font-bold px-3 py-1 rounded-bl-xl">
+                        車票精算建議
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-10 h-10 rounded-xl bg-benikaba/10 flex items-center justify-center text-benikaba text-xl">
+                                <i class="ph-duotone ph-ticket"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-stone-800 text-lg">新幹線與鐵道票務策略</h4>
+                                <span class="text-xs text-stone-500 font-mono">強烈建議：單買車票・免買 JR Pass</span>
+                            </div>
+                        </div>
+
+                        <!-- Price Comparison Box -->
+                        <div class="bg-stone-50 p-3.5 rounded-xl border border-stone-200 space-y-2 text-xs sm:text-sm text-stone-700">
+                            <div class="font-bold text-stone-900 flex items-center justify-between pb-2 border-b border-stone-200">
+                                <span>JR East Pass (東北 5 日券)</span>
+                                <span class="text-stone-400 font-mono line-through">¥30,000 / 人</span>
+                            </div>
+                            <div class="font-bold text-benikaba flex items-center justify-between">
+                                <span>本行程 7 天實際 JR 車資</span>
+                                <span class="font-mono text-base font-black">約 ¥19,400 / 人</span>
+                            </div>
+                            <p class="text-xs text-stone-500 leading-relaxed pt-1">
+                                💡 <strong>為何不買周遊券？</strong> 買周遊券每人倒虧 ¥10,600（4 人多花上萬台幣）；且 Pass 規定「連續 5 天」，無法同時涵蓋 Day 1 去程與 Day 6 回程。
+                            </p>
+                        </div>
+
+                        <div class="space-y-2 text-xs sm:text-sm text-stone-700">
+                            <div class="flex items-start gap-2">
+                                <i class="ph-bold ph-check-circle text-benikaba text-base flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <strong class="text-stone-900">早鳥搶票 (えきねっと)：</strong>
+                                    乘車日 <strong>1 個月前（台灣時間 09:00）</strong> 於 JR 東日本官網預訂「新幹線 e-Ticket」，可搶 <strong>トクだ値 10%~30% 早鳥折扣</strong>，搶到後全趟 JR 僅需約 ¥15,000！
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="ph-bold ph-check-circle text-benikaba text-base flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <strong class="text-stone-900">手機交通 IC 卡必備：</strong>
+                                    磐越西線（會津若松 ⇄ 豬苗代 ⇄ 郡山）全線開通 Suica / PASMO 閘門，iPhone Apple Pay 綁定感應最優雅，免排隊買票。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Clothing & Weather Advice -->
+                <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-xs border border-stone-200 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-10 h-10 rounded-xl bg-yamabuki/20 flex items-center justify-center text-amber-800 text-xl">
+                                <i class="ph-duotone ph-coat-hanger"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-stone-800 text-lg">11 月深秋穿搭 ＆ 禦寒裝備</h4>
+                                <span class="text-xs text-stone-500 font-mono">溫差高達 15°C・洋蔥式三層穿搭</span>
+                            </div>
+                        </div>
+
+                        <!-- Weather Info Box -->
+                        <div class="bg-stone-50 p-3.5 rounded-xl border border-stone-200 space-y-1.5 text-xs sm:text-sm text-stone-700">
+                            <div class="flex justify-between items-center font-bold">
+                                <span>氣溫預估</span>
+                                <span class="text-benikaba font-mono">山區 1°C ~ 12°C ｜ 東京 8°C ~ 18°C</span>
+                            </div>
+                            <p class="text-xs text-stone-500 leading-relaxed">
+                                清晨裏磐梯與奧會津水氣重、步道可能結霜，體感接近寒冬；室內與新幹線上暖氣充足（約 22°C），<strong>切忌穿厚重高領毛衣</strong>，必須方便穿脫。
+                            </p>
+                        </div>
+
+                        <div class="space-y-2 text-xs sm:text-sm text-stone-700">
+                            <div class="flex items-start gap-2">
+                                <i class="ph-bold ph-sparkle text-yamabuki text-base flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <strong class="text-stone-900">外層防風防潑水：</strong>
+                                    防風輕羽絨外套或 GORE-TEX 外套（奧會津只見川與裏磐梯湖畔風大水氣多，防風最重要）。
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="ph-bold ph-sparkle text-yamabuki text-base flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <strong class="text-stone-900">保暖小配件三件套：</strong>
+                                    毛帽（護住頭部防風吹頭痛）、保暖手套、輕便圍巾。
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="ph-bold ph-sparkle text-yamabuki text-base flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <strong class="text-stone-900">防滑好走平底鞋：</strong>
+                                    大內宿碎石路、只見川觀景木梯清晨易結薄霜，建議穿著刻紋深的防滑運動健走鞋。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Aizu Bus & Tour Reservation -->
+                <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-xs border border-stone-200 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-stone-700 text-xl">
+                                <i class="ph-duotone ph-bus"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-stone-800 text-lg">會津定期觀光巴士預約指南</h4>
+                                <span class="text-xs text-stone-500 font-mono">Day 2 方案 B「奥会津ぶらり旅」</span>
+                            </div>
+                        </div>
+
+                        <!-- Reservation Timeline Box -->
+                        <div class="bg-stone-50 p-3.5 rounded-xl border border-stone-200 space-y-1.5 text-xs sm:text-sm text-stone-700">
+                            <div class="flex justify-between items-center font-bold">
+                                <span>預約開放時程</span>
+                                <span class="text-benikaba font-mono">預計 9 月中旬官網公布</span>
+                            </div>
+                            <p class="text-xs text-stone-500 leading-relaxed">
+                                會津巴士通常於每年 <strong>9 月中旬</strong> 於官網公布秋季（10~11月）的運行日期、最新時刻表與套票費用。
+                            </p>
+                        </div>
+
+                        <div class="space-y-2 text-xs sm:text-sm text-stone-700">
+                            <div class="flex items-start gap-2">
+                                <i class="ph-bold ph-calendar-check text-stone-600 text-base flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <strong class="text-stone-900">預約方式：</strong>
+                                    全預約制，公布後可於會津巴士官網或電話預約。套票已包含專屬巴士交通 ＋ 霧幻峽渡船船票，省去自行接洽舟子之手續。
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="ph-bold ph-arrows-left-right text-stone-600 text-base flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <strong class="text-stone-900">備案選擇：</strong>
+                                    若定期巴士滿位或開行日期不合，可直接選擇「方案 A 觀光包車」，時間更自由且多泡早戶溫泉鶴之湯秘湯。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 mt-2 border-t border-stone-100">
+                        <a href="https://www.aizubus.com/travel/okuaizu_burari/" target="_blank"
+                            class="w-full bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs sm:text-sm py-2.5 px-3 rounded-xl text-center font-bold transition-colors flex items-center justify-center gap-1.5">
+                            <i class="ph-bold ph-arrow-square-out"></i> 會津巴士官方「奥会津ぶらり旅」網頁
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Luggage Forwarding Strategy Banner -->
+            <div class="bg-stone-50 rounded-2xl p-5 border border-stone-200 shadow-xs space-y-2.5">
+                <div class="font-bold text-stone-800 flex items-center gap-2 text-base sm:text-lg">
+                    <i class="ph-bold ph-truck text-benikaba text-xl"></i> 行李配送關鍵日提醒（極致輕裝原則）
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs sm:text-sm text-stone-700">
+                    <div class="bg-white p-3.5 rounded-xl border border-stone-200/80 leading-relaxed">
+                        <strong class="text-stone-900 block mb-1">Day 3 早晨・會津若松飯店退房：</strong>
+                        利用飯店櫃檯宅急便，將<strong>「大件行李直接寄往 Day 4 裏磐梯湖畔渡假村」</strong>。全員僅背負含 Day 3 一晚換洗衣物之輕裝隨身包，搭乘會津鐵道與玩大內宿最輕鬆。
+                    </div>
+                    <div class="bg-white p-3.5 rounded-xl border border-stone-200/80 leading-relaxed">
+                        <strong class="text-stone-900 block mb-1">Day 6 早晨・裏磐梯渡假村出發：</strong>
+                        大行李隨渡假村免費大巴直上行李艙，轉新幹線直達上野，下車即抵達 MIMARU 上野 EAST 飯店放行李，完全不需要在東京市區狼狽拖行李換乘地鐵。
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="w-full max-w-[1280px] mx-auto py-10 px-4 text-center text-stone-500 border-t border-haiku/30 mt-12 space-y-2">
@@ -2406,7 +2603,7 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         function switchTab(tabId) {
-            const tabs = ['itinerary', 'info', 'souvenir', 'budget', 'record'];
+            const tabs = ['itinerary', 'info', 'souvenir', 'budget', 'prep', 'record'];
             tabs.forEach(t => {
                 const el = document.getElementById(`content-${t}`);
                 if (el) el.classList.add('hidden');
