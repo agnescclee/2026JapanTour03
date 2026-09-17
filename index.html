@@ -1574,13 +1574,15 @@
                     <!-- Transit Ribbon -->
                     <div class="mb-6 bg-stone-50 border border-stone-200 px-4 py-3 rounded-xl text-sm sm:text-base flex flex-wrap items-center gap-2 text-stone-700">
                         <span class="font-bold text-stone-800 flex items-center gap-1.5"><i class="ph-bold ph-airplane text-base text-benikaba"></i> 返家動線：</span>
-                        <span>上野飯店 10:00 退房</span>
+                        <span>上野飯店退房</span>
                         <span class="text-stone-300">➔</span>
-                        <span>Taxi 至東京站轉利木津巴士 / 或 JR 山手線至濱松町轉單軌電車</span>
+                        <span>Taxi/利木津巴士 直達羽田</span>
                         <span class="text-stone-300">➔</span>
-                        <span class="font-bold text-stone-800">羽田機場 (12:40 BR191)</span>
+                        <span class="font-bold text-stone-800">羽田機場 (HND)</span>
                         <span class="text-stone-300">➔</span>
-                        <span class="font-bold text-stone-800">松山機場 (15:05抵) ➔ 平安到家</span>
+                        <span class="font-bold text-stone-800">松山直飛班機 (BR / CI / JL)</span>
+                        <span class="text-stone-300">➔</span>
+                        <span class="font-bold text-stone-800">台北松山機場 (TSA) ➔ 平安到家</span>
                     </div>
 
                     <div class="space-y-6 relative">
@@ -1598,8 +1600,8 @@
                                 </div>
                                 <h3 class="font-bold text-stone-800 text-lg sm:text-xl">悠閒早餐 ＆ 整理戰利品</h3>
                                 <div class="text-sm sm:text-base text-stone-700 mt-2 space-y-2 bg-stone-50 p-4 rounded-xl border border-stone-200">
-                                    <p>• 早晨完全不催趕，在公寓式家庭房的寬敞餐桌悠閒享用早餐、喝咖啡。</p>
-                                    <p>• 從容將在福島與多慶屋採買的滿滿戰利品妥善裝箱，約 10:00 辦理退房手續。</p>
+                                    <p>• 早晨完全不催趕，在公寓式家庭房的寬敞餐桌悠閒享用早餐、喝現煮咖啡。</p>
+                                    <p>• 從容將在福島與多慶屋採買的滿滿戰利品妥善裝箱，依照所選班機時間輕鬆辦理退房手續。</p>
                                 </div>
                             </div>
                         </div>
@@ -1609,24 +1611,132 @@
                             <span class="absolute left-0 top-0 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white border-2 border-stone-300 shadow-xs flex items-center justify-center text-stone-700 text-2xl z-10">
                                 <i class="ph-bold ph-airplane-takeoff"></i>
                             </span>
-                            <div>
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="text-xs sm:text-sm font-mono font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">10:00 - 15:05</span>
-                                    <span class="text-xs sm:text-sm text-stone-600 font-bold bg-stone-100 border border-stone-200 px-2 py-0.5 rounded">啟程回台</span>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <span class="text-xs sm:text-sm font-mono font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">返台時刻</span>
+                                        <span class="text-xs sm:text-sm text-stone-600 font-bold bg-stone-100 border border-stone-200 px-2 py-0.5 rounded">東京羽田 (HND) ➔ 台北松山 (TSA)</span>
+                                    </div>
+                                    <h3 class="font-bold text-stone-800 text-lg sm:text-xl mt-1">
+                                        三大優質航空直飛返台・時間與票價評估
+                                    </h3>
                                 </div>
-                                <h3 class="font-bold text-stone-800 text-lg sm:text-xl">上野 ➔ 羽田機場 (HND) ✈️ 台北松山 (TSA) ➔ 平安到家</h3>
-                                <div class="text-sm sm:text-base text-stone-700 mt-2 space-y-2.5 bg-stone-50 p-4 rounded-xl border border-stone-200">
-                                    <div class="flex items-start gap-2.5">
-                                        <span class="font-bold text-stone-700 flex items-center gap-1 flex-shrink-0"><i class="ph-bold ph-taxi text-stone-500"></i> 前往機場</span>
-                                        <span>約 10:00 退房。考量行李較多，最省力的做法是直接從飯店門口搭計程車前往東京車站（車程約 15 分鐘，車資實惠），無縫轉乘利木津巴士直達羽田機場；或搭乘 JR 山手線至濱松町站轉乘單軌電車。</span>
+
+                                <!-- Flight Options Grid (Day 1 Style) -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+                                    <!-- Option 1: BR191 -->
+                                    <div class="bg-white rounded-2xl p-4 sm:p-5 border-2 border-benikaba/50 shadow-xs flex flex-col justify-between relative">
+                                        <div class="absolute -top-2.5 right-3 bg-benikaba text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
+                                            首選推薦・午後早返台
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-sm font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">方案 1：長榮航空</span>
+                                                <span class="text-xs text-stone-500">免早起・傍晚前抵台</span>
+                                            </div>
+
+                                            <div class="bg-stone-50 p-3 rounded-xl border border-stone-200/80 space-y-1.5">
+                                                <div class="flex justify-between items-center font-bold text-base sm:text-lg">
+                                                    <span class="text-stone-800">長榮 BR191</span>
+                                                    <span class="text-benikaba font-num">約 NT$ 16.8k~20.5k</span>
+                                                </div>
+                                                <div class="text-sm sm:text-base text-stone-700 flex justify-between font-mono">
+                                                    <span>12:40 HND ➔ 15:05 TSA</span>
+                                                    <span class="text-stone-500 font-sans text-xs">飛行 3h25m</span>
+                                                </div>
+                                                <div class="text-xs text-stone-500">行李 1~2件 (依票種) ｜ 降落松山出關極速，下午三點半就能回到家休息</div>
+                                            </div>
+
+                                            <div class="text-xs text-stone-700 bg-stone-50 border border-stone-200/80 p-2.5 rounded-lg leading-relaxed flex items-start gap-1.5">
+                                                <i class="ph-bold ph-clock text-stone-500 mt-0.5 flex-shrink-0"></i>
+                                                <span><strong>建議步調</strong>：09:40 飯店退房 ➔ 10:30 抵羽田報到與免稅採買 ➔ 12:40 起飛 ➔ 15:05 抵松山。</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="flex items-start gap-2.5">
-                                        <span class="font-bold text-stone-700 flex items-center gap-1 flex-shrink-0"><i class="ph-bold ph-airplane text-stone-500"></i> 長榮班機</span>
-                                        <span>搭乘<strong>長榮航空 BR191（12:40 起飛）</strong>，帶著福島滿山的紅葉記憶與東京戰利品，於 15:05 準時降落台北松山機場。</span>
+
+                                    <!-- Option 2: CI221 -->
+                                    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200 shadow-xs flex flex-col justify-between">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-sm font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">方案 2：中華航空</span>
+                                                <span class="text-xs text-stone-500">從容退房・悠閒午餐</span>
+                                            </div>
+
+                                            <div class="bg-stone-50 p-3 rounded-xl border border-stone-200/80 space-y-1.5">
+                                                <div class="flex justify-between items-center font-bold text-base sm:text-lg">
+                                                    <span class="text-stone-800">華航 CI221</span>
+                                                    <span class="text-benikaba font-num">約 NT$ 16.5k~19.8k</span>
+                                                </div>
+                                                <div class="text-sm sm:text-base text-stone-700 flex justify-between font-mono">
+                                                    <span>14:30 HND ➔ 16:55 TSA</span>
+                                                    <span class="text-stone-500 font-sans text-xs">飛行 3h25m</span>
+                                                </div>
+                                                <div class="text-xs text-stone-500">行李 1~2件 ｜ 中文服務溝通零障礙，在機場吃完美味午餐再登機</div>
+                                            </div>
+
+                                            <div class="text-xs text-stone-700 bg-stone-50 border border-stone-200/80 p-2.5 rounded-lg leading-relaxed flex items-start gap-1.5">
+                                                <i class="ph-bold ph-clock text-stone-500 mt-0.5 flex-shrink-0"></i>
+                                                <span><strong>建議步調</strong>：11:00 悠閒退房 ➔ 12:00 抵羽田享用午餐 ➔ 14:30 起飛 ➔ 16:55 抵松山返家晚餐。</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="flex items-start gap-2.5">
-                                        <span class="font-bold text-stone-700 flex items-center gap-1 flex-shrink-0"><i class="ph-bold ph-house text-stone-500"></i> 平安到家</span>
-                                        <span>松山機場出關極快，搭計程車不到半小時就能舒服回到溫暖的家，結束這趟極致完美的慢活七日賞楓之旅！</span>
+
+                                    <!-- Option 3: JL99 -->
+                                    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200 shadow-xs flex flex-col justify-between">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-sm font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">方案 3：日本航空</span>
+                                                <span class="text-xs text-stone-500">極致寬敞・玩滿整天</span>
+                                            </div>
+
+                                            <div class="bg-stone-50 p-3 rounded-xl border border-stone-200/80 space-y-1.5">
+                                                <div class="flex justify-between items-center font-bold text-base sm:text-lg">
+                                                    <span class="text-stone-800">日航 JL99 (波音787)</span>
+                                                    <span class="text-benikaba font-num">約 NT$ 17.5k~21.5k</span>
+                                                </div>
+                                                <div class="text-sm sm:text-base text-stone-700 flex justify-between font-mono">
+                                                    <span>18:25 HND ➔ 20:50 TSA</span>
+                                                    <span class="text-stone-500 font-sans text-xs">飛行 3h25m</span>
+                                                </div>
+                                                <div class="text-xs text-stone-500">行李 2件各23kg ｜ 84cm 業界最寬椅距，全天可在上野補買逛街</div>
+                                            </div>
+
+                                            <div class="text-xs text-stone-700 bg-stone-50 border border-stone-200/80 p-2.5 rounded-lg leading-relaxed flex items-start gap-1.5">
+                                                <i class="ph-bold ph-clock text-stone-500 mt-0.5 flex-shrink-0"></i>
+                                                <span><strong>建議步調</strong>：11:00 退房寄放行李 ➔ 上野公園散策 ➔ 15:30 赴機場 ➔ 18:25 起飛 ➔ 20:50 抵松山。</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Airport Transfer Strategy Card -->
+                                <div class="bg-stone-50 rounded-2xl p-4 sm:p-5 border border-stone-200 shadow-xs space-y-3">
+                                    <div class="font-bold text-stone-800 flex items-center gap-1.5 text-sm sm:text-base">
+                                        <i class="ph-bold ph-taxi text-benikaba"></i> 上野 ➔ 羽田機場 (HND) 交通接駁秘訣
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-stone-700">
+                                        <div class="bg-white p-3 rounded-xl border border-stone-200/80 space-y-1">
+                                            <div class="font-bold text-stone-800 flex items-center gap-1">
+                                                <span class="w-4 h-4 rounded-full bg-benikaba text-white text-[10px] font-mono flex items-center justify-center font-bold">A</span>
+                                                計程車直送 / 東京站轉利木津巴士（極致省力首選）
+                                            </div>
+                                            <p class="text-stone-600 text-xs leading-relaxed">
+                                                回程戰利品與大行李較重，建議直接從飯店門口搭乘計程車直達羽田機場（4人均攤約 ¥8,000~¥10,000，每人約 NT$ 450~550，車程僅 30 分鐘）；或搭 Taxi 15 分鐘至東京站八重洲口轉乘利木津巴士，司機全程搬運大行李，免去轉乘地鐵搬抬之累。
+                                            </p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-xl border border-stone-200/80 space-y-1">
+                                            <div class="font-bold text-stone-800 flex items-center gap-1">
+                                                <span class="w-4 h-4 rounded-full bg-stone-600 text-white text-[10px] font-mono flex items-center justify-center font-bold">B</span>
+                                                JR 山手線 ➔ 濱松町轉東京單軌電車（準時快速）
+                                            </div>
+                                            <p class="text-stone-600 text-xs leading-relaxed">
+                                                從上野站搭乘 JR 山手線（約 13 分鐘）至濱松町站，站內平坦電梯無縫轉乘「東京單軌電車空港快速」（約 13 分鐘）直達羽田機場第 3 航廈，全段僅需約 35 分鐘，單程車資僅 ¥650（約 NT$ 140）。
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-[11px] sm:text-xs text-stone-500 pt-1 border-t border-stone-200/60 leading-relaxed flex items-center gap-1.5">
+                                        <i class="ph-bold ph-house-heart text-benikaba flex-shrink-0 text-sm"></i>
+                                        <span><strong>松山機場回程優勢</strong>：降落台北松山機場後通關迅速，搭計程車不到半小時即可回到溫暖的家，從容整理行李、充分休息，迎接美好回憶！</span>
                                     </div>
                                 </div>
                             </div>
