@@ -956,7 +956,7 @@
 
                     <!-- Transit Ribbon -->
                     <div class="mb-6 bg-stone-50 border border-stone-200 px-4 py-3 rounded-xl text-sm sm:text-base flex flex-wrap items-center gap-2 text-stone-700">
-                        <span class="font-bold text-stone-800 flex items-center gap-1.5"><i class="ph-bold ph-bus text-base text-benikaba"></i> 接駁：</span>
+                        <span class="font-bold text-stone-800 flex items-center gap-1.5"><i class="ph-bold ph-train text-base text-benikaba"></i> 行程動線：</span>
                         <span>大川莊專車/Taxi</span>
                         <span class="text-stone-300">➔</span>
                         <span>會津若松市區</span>
@@ -965,9 +965,13 @@
                         <span class="text-stone-300">➔</span>
                         <span class="font-bold text-stone-800">七日町通老街</span>
                         <span class="text-stone-300">➔</span>
-                        <span>JR 磐越西線至豬苗代</span>
+                        <span>會津若松站 (13:30 發)</span>
                         <span class="text-stone-300">➔</span>
-                        <span class="font-bold text-stone-800">渡假村免費大巴直達門口 (15:30抵)</span>
+                        <span class="font-bold text-stone-800">JR 磐越西線・快速あいづ 4 號</span>
+                        <span class="text-stone-300">➔</span>
+                        <span>豬苗代站 (13:58 著)</span>
+                        <span class="text-stone-300">➔</span>
+                        <span class="font-bold text-stone-800">渡假村免費大巴直達 (14:10發/14:40抵)</span>
                     </div>
 
                     <div class="space-y-6 relative">
@@ -1019,14 +1023,120 @@
                         <!-- Step 3 -->
                         <div class="relative pl-12 sm:pl-16 group">
                             <span class="absolute left-0 top-0 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white border-2 border-stone-300 shadow-xs flex items-center justify-center text-stone-700 text-2xl z-10">
-                                <i class="ph-bold ph-bus"></i>
+                                <i class="ph-bold ph-train"></i>
                             </span>
-                            <div>
-                                <span class="text-xs sm:text-sm font-mono font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">13:45 - 15:30</span>
-                                <h3 class="font-bold text-stone-800 text-lg sm:text-xl mt-1">JR 磐越西線至豬苗代 ➔ 搭飯店免費專車直達裏磐梯</h3>
-                                <div class="text-sm sm:text-base text-stone-600 mt-1.5 space-y-1">
-                                    <p>• 會津若松站搭 JR 磐越西線（約 30 分鐘）至豬苗代站。</p>
-                                    <p>• <strong>免費大型接駁巴士</strong>：出站直搭渡假村專屬大巴（車程 30 分鐘），司機親切協助搬運行李，直送飯店大門，免風吹雨淋。</p>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <span class="text-xs sm:text-sm font-mono font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">13:30 - 14:40</span>
+                                        <span class="text-xs sm:text-sm text-stone-600 font-bold bg-stone-100 border border-stone-200 px-2 py-0.5 rounded">直達裏磐梯</span>
+                                    </div>
+                                    <h3 class="font-bold text-stone-800 text-lg sm:text-xl mt-1">
+                                        JR 磐越西線至豬苗代 ➔ 銜接渡假村免費專車直達裏磐梯
+                                    </h3>
+                                </div>
+
+                                <!-- Detailed Transport Card (Tour01 / Day 1 Style) -->
+                                <div class="bg-stone-50 rounded-2xl p-4 sm:p-5 border border-stone-200 shadow-xs space-y-4">
+                                    <!-- Card Header -->
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-stone-200/80 gap-2">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="w-9 h-9 rounded-lg bg-benikaba/10 flex items-center justify-center text-benikaba">
+                                                <i class="ph-duotone ph-train text-2xl"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-sm sm:text-base font-bold text-stone-800">JR 磐越西線 ＋ 渡假村免費接駁大巴</div>
+                                                <div class="text-xs text-stone-500">會津若松站 ➔ 豬苗代站（鐵道）➔ 裏磐梯湖畔渡假村（免費巴士）</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-left sm:text-right">
+                                            <div class="text-xs text-stone-500">單程車費預估 (每人)</div>
+                                            <div class="text-base sm:text-lg font-bold text-benikaba font-num">¥530 ~ ¥1,060 <span class="text-xs text-stone-500 font-normal">(約 NT$ 115~230)</span></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Schedule Options Breakdown -->
+                                    <div class="space-y-3">
+                                        <!-- Option 1: Recommended Express Train + Shuttle -->
+                                        <div class="bg-white p-3.5 rounded-xl border-2 border-benikaba/50 space-y-1.5 relative">
+                                            <div class="absolute -top-2.5 right-3 bg-benikaba text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
+                                                首選推薦・提早進房賞湖
+                                            </div>
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-xs sm:text-sm font-bold text-stone-800 flex items-center gap-1.5">
+                                                    <span class="w-5 h-5 rounded-full bg-benikaba text-white text-[11px] font-mono flex items-center justify-center font-bold">1</span>
+                                                    快速あいづ 4 號（Aizu Rapid 4）➔ 接駁 14:10 免費大巴
+                                                </span>
+                                                <span class="text-xs font-bold text-benikaba bg-stone-100 px-2 py-0.5 rounded">快速列車・車程僅 28 分</span>
+                                            </div>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-stone-600 font-mono pt-1">
+                                                <div class="bg-stone-50 p-2 rounded flex items-center justify-between">
+                                                    <span>會津若松站 發：<strong class="text-stone-900 font-bold">13:30</strong></span>
+                                                    <span>豬苗代站 著：<strong class="text-stone-900 font-bold">13:58</strong></span>
+                                                </div>
+                                                <div class="bg-stone-50 p-2 rounded flex items-center justify-between">
+                                                    <span>渡假村大巴 發：<strong class="text-stone-900 font-bold">14:10</strong></span>
+                                                    <span>抵達飯店大廳：<strong class="text-stone-900 font-bold">14:40</strong></span>
+                                                </div>
+                                            </div>
+                                            <div class="text-[11px] sm:text-xs text-stone-500 pt-1 leading-relaxed">
+                                                💡 <strong>換乘時間充足</strong>：豬苗代站出站後悠閒停留 12 分鐘，站前廣場即可看見渡假村大型巴士。下車後直接辦理入住手續，整整多出一個小時享受檜原湖景與露天溫泉。
+                                            </div>
+                                        </div>
+
+                                        <!-- Option 2: Backup Option (Later Departure) -->
+                                        <div class="bg-white p-3.5 rounded-xl border border-stone-200 space-y-1.5">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-xs sm:text-sm font-bold text-stone-800 flex items-center gap-1.5">
+                                                    <span class="w-5 h-5 rounded-full bg-stone-600 text-white text-[11px] font-mono flex items-center justify-center font-bold">2</span>
+                                                    JR 普通列車（郡山行）➔ 接駁 16:10 免費大巴
+                                                </span>
+                                                <span class="text-xs text-stone-500 bg-stone-100 px-2 py-0.5 rounded font-mono">備案車次・漫遊至午後</span>
+                                            </div>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-stone-600 font-mono pt-1">
+                                                <div class="bg-stone-50 p-2 rounded flex items-center justify-between">
+                                                    <span>會津若松站 發：<strong class="text-stone-900 font-bold">15:30</strong></span>
+                                                    <span>豬苗代站 著：<strong class="text-stone-900 font-bold">15:57</strong></span>
+                                                </div>
+                                                <div class="bg-stone-50 p-2 rounded flex items-center justify-between">
+                                                    <span>渡假村大巴 發：<strong class="text-stone-900 font-bold">16:10</strong></span>
+                                                    <span>抵達飯店大廳：<strong class="text-stone-900 font-bold">16:40</strong></span>
+                                                </div>
+                                            </div>
+                                            <div class="text-[11px] sm:text-xs text-stone-500 pt-1 leading-relaxed">
+                                                💡 <strong>午後充裕選項</strong>：若午間在七日町通想多逛特色酒造與文創店、吃下午茶甜點，可搭此班次，完美銜接 16:10 巴士。
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Price & Booking Details Table -->
+                                    <div class="bg-white rounded-xl p-3 border border-stone-200 text-xs sm:text-sm space-y-2">
+                                        <div class="font-bold text-stone-800 flex items-center gap-1.5">
+                                            <i class="ph-bold ph-ticket text-benikaba"></i> 費用明細 ＆ 票務指南
+                                        </div>
+                                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 font-mono text-stone-600">
+                                            <div class="bg-stone-50 p-2 rounded">
+                                                <div class="text-stone-500 text-[11px]">JR 乘車券（基本運費）</div>
+                                                <div class="font-bold text-stone-800">¥530 <span class="text-[11px] font-normal">(約 NT$ 115)</span></div>
+                                                <div class="text-[10px] text-stone-400 mt-0.5">普通車自由席僅需此票</div>
+                                            </div>
+                                            <div class="bg-stone-50 p-2 rounded">
+                                                <div class="text-stone-500 text-[11px]">快速指定席特急券（選配）</div>
+                                                <div class="font-bold text-stone-800">+¥530 <span class="text-[11px] font-normal">(約 NT$ 115)</span></div>
+                                                <div class="text-[10px] text-stone-400 mt-0.5">快速あいづ第1車廂指定席</div>
+                                            </div>
+                                            <div class="bg-stone-50 p-2 rounded">
+                                                <div class="text-stone-500 text-[11px]">渡假村大型接駁巴士</div>
+                                                <div class="font-bold text-benikaba">¥0 免費送迎</div>
+                                                <div class="text-[10px] text-stone-400 mt-0.5">出站即上車・免預約</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-[11px] sm:text-xs text-stone-500 space-y-1 pt-1 border-t border-stone-100">
+                                            <p>• <strong>支援交通 IC 卡</strong>：JR 磐越西線（會津若松 ➔ 豬苗代區間）已全面開通 Suica / PASMO 等 IC 卡感應閘門，刷手機即可進出站（IC 運費為 ¥528）。</p>
+                                            <p>• <strong>快速あいづ席位說明</strong>：快速あいづ 4 號共有 4 節車廂，第 2~4 節為一般自由席（直接憑 IC 卡或乘車券入座）；第 1 節為豪華指定席（設有大片觀景窗與杯架，如欲搭乘指定席可於 JR 綠色售票機加購 ¥530 指定券）。</p>
+                                            <p>• <strong>大巴行李直上</strong>：渡假村送迎大巴專為住客設計，司機親切協助將大行李搬入巴士底層行李艙，直達渡假村門口，完全免負擔。</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1038,7 +1148,7 @@
                             </span>
                             <div>
                                 <div class="flex items-center gap-2 mb-1">
-                                    <span class="text-xs sm:text-sm font-mono font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">15:30 入住</span>
+                                    <span class="text-xs sm:text-sm font-mono font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">14:40 / 15:30 入住</span>
                                     <span class="text-xs sm:text-sm text-stone-600 font-bold bg-stone-100 border border-stone-200 px-2 py-0.5 rounded">連住第 1 晚</span>
                                 </div>
                                 <h3 class="font-bold text-stone-800 text-lg sm:text-xl">宿：裏磐梯湖畔渡假村 (Urabandai Lake Resort)</h3>
