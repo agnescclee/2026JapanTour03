@@ -456,9 +456,11 @@
         }
 
         .option-block {
-            border: 1px solid rgba(215, 196, 187, 0.8);
+            border: 1px solid rgba(215, 196, 187, 0.42);
             border-radius: 0.75rem;
-            padding: 1rem;
+            padding: 0.875rem 1rem;
+            font-size: 0.875rem;
+            line-height: 1.65;
         }
 
         .item-card {
@@ -558,6 +560,70 @@
             .item-title { font-size: 1.25rem; }
             .subtab-btn { font-size: 1rem; }
         }
+
+        .route-switcher {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .route-switcher-inner {
+            display: inline-flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.25rem;
+            padding: 0.25rem;
+            border-radius: 9999px;
+            background: rgba(215, 196, 187, 0.38);
+            max-width: 100%;
+        }
+
+        .route-btn {
+            min-height: 2.75rem;
+            padding: 0.45rem 1.15rem;
+            border-radius: 9999px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--color-kesizumi);
+            line-height: 1.35;
+            text-align: center;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .route-btn.is-active {
+            background: var(--color-benitobi);
+            color: var(--color-gofun);
+            font-weight: 700;
+        }
+
+        .route-switcher[data-route="b"] .route-btn.is-active {
+            background: #566C73;
+        }
+
+        #route-b-content .subtab-btn.active {
+            background-color: #566C73;
+            border-color: #566C73;
+        }
+
+        #route-b-content .subtab-btn.is-today:not(.active) .today-mark {
+            color: #566C73;
+        }
+
+        #route-b-content .border-benitobi { border-color: #566C73 !important; }
+        #route-b-content .text-benitobi { color: #566C73 !important; }
+        #route-b-content .bg-benitobi,
+        #route-b-content .btn-primary { background-color: #566C73 !important; }
+        #route-b-content .btn-primary:hover { background-color: #3d5158 !important; }
+        #route-b-content .btn-outline {
+            border-color: #566C73;
+            color: #566C73;
+        }
+        #route-b-content .btn-outline:hover {
+            background: rgba(86, 108, 115, 0.08);
+        }
+        #route-b-content details.notice-fold > summary.notice-bulb:focus-visible {
+            outline-color: #566C73;
+        }
     </style>
 </head>
 
@@ -628,40 +694,48 @@
              =================================================================== -->
         <section id="content-itinerary" class="space-y-6">
 
+            <div class="route-switcher" data-route="a">
+                <div class="route-switcher-inner" role="tablist" aria-label="行程方案">
+                    <button type="button" id="route-btn-a" class="route-btn is-active" role="tab" aria-selected="true" aria-controls="route-a-content" onclick="switchRoute('a')">方案 A：先遊奧會津秘境</button>
+                    <button type="button" id="route-btn-b" class="route-btn" role="tab" aria-selected="false" aria-controls="route-b-content" onclick="switchRoute('b')">方案 B：先遊裏磐梯高山湖</button>
+                </div>
+            </div>
+
+            <div id="route-a-content" role="tabpanel" aria-labelledby="route-btn-a">
             <!-- Day Selector Bar -->
             <div class="sticky top-0 md:top-[57px] z-40 -mx-4 sm:-mx-8 px-4 sm:px-8 bg-shironeri/95 backdrop-blur-sm py-3 border-b border-haizakura/70 mb-8">
-                <div id="day-scroller" class="day-scroller py-0.5" role="tablist" aria-label="行程日期">
-                    <button type="button" onclick="switchDay(1)" id="subtab-day-1"
+                <div id="route-a-day-scroller" class="day-scroller py-0.5" role="tablist" aria-label="行程日期">
+                    <button type="button" onclick="switchDay('a', 1)" id="route-a-subtab-day-1" data-day="1"
                         class="subtab-btn active rounded-lg border text-center" aria-label="11月1日 星期日">
                         <span class="block">11/01</span>
                         <span class="today-mark">今日</span>
                     </button>
-                    <button type="button" onclick="switchDay(2)" id="subtab-day-2"
+                    <button type="button" onclick="switchDay('a', 2)" id="route-a-subtab-day-2" data-day="2"
                         class="subtab-btn rounded-lg border text-center" aria-label="11月2日 星期一">
                         <span class="block">11/02</span>
                         <span class="today-mark">今日</span>
                     </button>
-                    <button type="button" onclick="switchDay(3)" id="subtab-day-3"
+                    <button type="button" onclick="switchDay('a', 3)" id="route-a-subtab-day-3" data-day="3"
                         class="subtab-btn rounded-lg border text-center" aria-label="11月3日 星期二">
                         <span class="block">11/03</span>
                         <span class="today-mark">今日</span>
                     </button>
-                    <button type="button" onclick="switchDay(4)" id="subtab-day-4"
+                    <button type="button" onclick="switchDay('a', 4)" id="route-a-subtab-day-4" data-day="4"
                         class="subtab-btn rounded-lg border text-center" aria-label="11月4日 星期三">
                         <span class="block">11/04</span>
                         <span class="today-mark">今日</span>
                     </button>
-                    <button type="button" onclick="switchDay(5)" id="subtab-day-5"
+                    <button type="button" onclick="switchDay('a', 5)" id="route-a-subtab-day-5" data-day="5"
                         class="subtab-btn rounded-lg border text-center" aria-label="11月5日 星期四">
                         <span class="block">11/05</span>
                         <span class="today-mark">今日</span>
                     </button>
-                    <button type="button" onclick="switchDay(6)" id="subtab-day-6"
+                    <button type="button" onclick="switchDay('a', 6)" id="route-a-subtab-day-6" data-day="6"
                         class="subtab-btn rounded-lg border text-center" aria-label="11月6日 星期五">
                         <span class="block">11/06</span>
                         <span class="today-mark">今日</span>
                     </button>
-                    <button type="button" onclick="switchDay(7)" id="subtab-day-7"
+                    <button type="button" onclick="switchDay('a', 7)" id="route-a-subtab-day-7" data-day="7"
                         class="subtab-btn rounded-lg border text-center" aria-label="11月7日 星期六">
                         <span class="block">11/07</span>
                         <span class="today-mark">今日</span>
@@ -670,7 +744,7 @@
             </div>
 
             <!-- ================= DAY 1 ================= -->
-            <div id="day-1" class="day-content animate-fade-in">
+            <div id="route-a-day-1" class="day-content animate-fade-in">
                 <article class="day-sheet shadow-sm">
                     <div class="page-head">
                         <div class="flex items-center justify-between gap-4">
@@ -886,7 +960,7 @@
             </div>
 
             <!-- ================= DAY 2 ================= -->
-            <div id="day-2" class="day-content hidden animate-fade-in">
+            <div id="route-a-day-2" class="day-content hidden animate-fade-in">
                 <article class="day-sheet shadow-sm">
                     <div class="page-head">
                         <div class="flex items-center justify-between gap-4">
@@ -1036,7 +1110,7 @@
             </div>
 
             <!-- ================= DAY 3 ================= -->
-            <div id="day-3" class="day-content hidden animate-fade-in">
+            <div id="route-a-day-3" class="day-content hidden animate-fade-in">
                 <article class="day-sheet shadow-sm">
                     <div class="page-head">
                         <div class="flex items-center justify-between gap-4">
@@ -1218,7 +1292,7 @@
             </div>
 
             <!-- ================= DAY 4 ================= -->
-            <div id="day-4" class="day-content hidden animate-fade-in">
+            <div id="route-a-day-4" class="day-content hidden animate-fade-in">
                 <article class="day-sheet shadow-sm">
                     <div class="page-head">
                         <div class="flex items-center justify-between gap-4">
@@ -1407,7 +1481,7 @@
             </div>
 
             <!-- ================= DAY 5 ================= -->
-            <div id="day-5" class="day-content hidden animate-fade-in">
+            <div id="route-a-day-5" class="day-content hidden animate-fade-in">
                 <article class="day-sheet shadow-sm">
                     <div class="page-head">
                         <div class="flex items-center justify-between gap-4">
@@ -1578,7 +1652,7 @@
             </div>
 
             <!-- ================= DAY 6 ================= -->
-            <div id="day-6" class="day-content hidden animate-fade-in">
+            <div id="route-a-day-6" class="day-content hidden animate-fade-in">
                 <article class="day-sheet shadow-sm">
                     <div class="page-head">
                         <div class="flex items-center justify-between gap-4">
@@ -1712,7 +1786,7 @@
             </div>
 
             <!-- ================= DAY 7 ================= -->
-            <div id="day-7" class="day-content hidden animate-fade-in">
+            <div id="route-a-day-7" class="day-content hidden animate-fade-in">
                 <article class="day-sheet shadow-sm">
                     <div class="page-head">
                         <div class="flex items-center justify-between gap-4">
@@ -1814,6 +1888,638 @@
                 </article>
             </div>
 
+            </div>
+
+            <div id="route-b-content" class="hidden" role="tabpanel" aria-labelledby="route-btn-b">
+            <div class="sticky top-0 md:top-[57px] z-40 -mx-4 sm:-mx-8 px-4 sm:px-8 bg-shironeri/95 backdrop-blur-sm py-3 border-b border-haizakura/70 mb-8">
+                <div id="route-b-day-scroller" class="day-scroller py-0.5" role="tablist" aria-label="行程日期">
+                    <button type="button" onclick="switchDay('b', 1)" id="route-b-subtab-day-1"
+                        class="subtab-btn active rounded-lg border text-center" data-day="1" aria-label="11月1日 星期日">
+                        <span class="block">11/01</span>
+                        <span class="today-mark">今日</span>
+                    </button>
+                    <button type="button" onclick="switchDay('b', 2)" id="route-b-subtab-day-2"
+                        class="subtab-btn rounded-lg border text-center" data-day="2" aria-label="11月2日 星期一">
+                        <span class="block">11/02</span>
+                        <span class="today-mark">今日</span>
+                    </button>
+                    <button type="button" onclick="switchDay('b', 3)" id="route-b-subtab-day-3"
+                        class="subtab-btn rounded-lg border text-center" data-day="3" aria-label="11月3日 星期二">
+                        <span class="block">11/03</span>
+                        <span class="today-mark">今日</span>
+                    </button>
+                    <button type="button" onclick="switchDay('b', 4)" id="route-b-subtab-day-4"
+                        class="subtab-btn rounded-lg border text-center" data-day="4" aria-label="11月4日 星期三">
+                        <span class="block">11/04</span>
+                        <span class="today-mark">今日</span>
+                    </button>
+                    <button type="button" onclick="switchDay('b', 5)" id="route-b-subtab-day-5"
+                        class="subtab-btn rounded-lg border text-center" data-day="5" aria-label="11月5日 星期四">
+                        <span class="block">11/05</span>
+                        <span class="today-mark">今日</span>
+                    </button>
+                    <button type="button" onclick="switchDay('b', 6)" id="route-b-subtab-day-6"
+                        class="subtab-btn rounded-lg border text-center" data-day="6" aria-label="11月6日 星期五">
+                        <span class="block">11/06</span>
+                        <span class="today-mark">今日</span>
+                    </button>
+                    <button type="button" onclick="switchDay('b', 7)" id="route-b-subtab-day-7"
+                        class="subtab-btn rounded-lg border text-center" data-day="7" aria-label="11月7日 星期六">
+                        <span class="block">11/07</span>
+                        <span class="today-mark">今日</span>
+                    </button>
+                </div>
+            </div>
+            <div id="route-b-day-1" class="day-content animate-fade-in">
+                <article class="day-sheet shadow-sm">
+                    <div class="page-head">
+                        <div class="flex items-center justify-between gap-4">
+                            <h2 class="site-title page-title border-l-4 border-benitobi pl-4">第一日：啟程</h2>
+                            <span class="shrink-0 w-10 h-10 rounded-full bg-haizakura/30 text-kesizumi text-sm font-medium flex items-center justify-center">週日</span>
+                        </div>
+
+                    </div>
+                    <div class="timeline-list relative space-y-12">
+                        <div class="timeline-line" aria-hidden="true"></div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-airplane-tilt"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">松山 TSA → 羽田 HND</h3>
+                                <p class="text-secondary mt-1">07:20 發 → 11:15 抵</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-airplane-tilt text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>長榮航空 BR192</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 2 小時 55 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">07:20 松山起飛，11:15 抵羽田。</p>
+                                    <a href="https://www.google.com/search?q=BR192+status" target="_blank" rel="noopener" class="btn-outline mt-1">
+                                        <i class="ph ph-magnifying-glass" aria-hidden="true"></i> 查詢航班動態
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-train"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">東京 → 郡山</h3>
+                                <p class="text-secondary mt-1">14:36 發 → 15:57 抵</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-train text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>やまびこ 65 號</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 81 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">東京站搭東北新幹線指定席直達郡山。車廂後方有大行李放置處。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E6%9D%B1%E4%BA%AC%E8%BB%8A%E7%AB%99&destination=%E9%83%A1%E5%B1%B1%E7%AB%99&travelmode=transit" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 導航：東京車站 -> 郡山站
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node stay absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-bed"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">郡山站前商務飯店</h3>
+                                <p class="text-secondary mt-1">16:15 入住</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-person-simple-walk text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>步行</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">出站即達</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">晚餐推薦站內 S-PAL 百貨牛舌。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E9%83%A1%E5%B1%B1%E7%AB%99&destination=%E9%83%A1%E5%B1%B1%E7%AB%99%E5%89%8D%E5%95%86%E5%8B%99%E9%A3%AF%E5%BA%97&travelmode=walking" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 步行導航
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div id="route-b-day-2" class="day-content hidden animate-fade-in">
+                <article class="day-sheet shadow-sm">
+                    <div class="page-head">
+                        <div class="flex items-center justify-between gap-4">
+                            <h2 class="site-title page-title border-l-4 border-benitobi pl-4">第二日：裏磐梯散策</h2>
+                            <span class="shrink-0 w-10 h-10 rounded-full bg-haizakura/30 text-kesizumi text-sm font-medium flex items-center justify-center">週一</span>
+                        </div>
+                        <details class="quiet-details mt-3">
+                            <summary class="text-secondary text-kesizumi inline-flex items-center gap-1.5">
+                                <i class="ph ph-info" aria-hidden="true"></i> 宅急便提醒
+                            </summary>
+                            <p class="notice mt-3">
+                                <i class="ph ph-package text-xl flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                <span>請將大行李直接寄往 Day 3 會津若松飯店，攜帶輕裝上山。</span>
+                            </p>
+                        </details>
+                    </div>
+                    <div class="timeline-list relative space-y-12">
+                        <div class="timeline-line" aria-hidden="true"></div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-train"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">郡山 → 豬苗代</h3>
+                                <p class="text-secondary mt-1">09:38 發 → 10:20 抵</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-train text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>JR 磐越西線（快速）</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 42 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">郡山站搭快速列車前往豬苗代，沿途可見磐梯山。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E9%83%A1%E5%B1%B1%E7%AB%99&destination=%E8%B1%AC%E8%8B%97%E4%BB%A3%E7%AB%99&travelmode=transit" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 導航：郡山站 -> 豬苗代站
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-bus"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">豬苗代 → 裏磐梯</h3>
+                                <p class="text-secondary mt-1">10:45 發 → 11:15 抵</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-bus text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>渡假村免費大巴</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 30 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">出站即上車，免預約，直達飯店門口。</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node spot absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-person-simple-walk"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">五色沼（毘沙門沼）</h3>
+                                <p class="text-secondary mt-1">11:30 → 14:30</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-taxi text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>計程車</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 5 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">飯店放行李後前往入口。平緩木棧道散策與湖畔午餐。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=Urabandai+Lake+Resort&destination=%E4%BA%94%E8%89%B2%E6%B2%BC&travelmode=driving" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 導航：渡假村 -> 五色沼
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node stay absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-bed"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">裏磐梯湖畔渡假村</h3>
+                                <p class="text-secondary mt-1">15:00 入住（一泊）</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-hot-tub text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>貓魔溫泉</span>
+                                        </p>
+                                        
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">享受天然赤茶色露天風呂，全館平坦有電梯。</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div id="route-b-day-3" class="day-content hidden animate-fade-in">
+                <article class="day-sheet shadow-sm">
+                    <div class="page-head">
+                        <div class="flex items-center justify-between gap-4">
+                            <h2 class="site-title page-title border-l-4 border-benitobi pl-4">第三日：城下町巡禮</h2>
+                            <span class="shrink-0 w-10 h-10 rounded-full bg-haizakura/30 text-kesizumi text-sm font-medium flex items-center justify-center">週二</span>
+                        </div>
+
+                    </div>
+                    <div class="timeline-list relative space-y-12">
+                        <div class="timeline-line" aria-hidden="true"></div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-bus"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">裏磐梯 → 豬苗代</h3>
+                                <p class="text-secondary mt-1">10:10 發 → 10:45 抵</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-bus text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>渡假村免費大巴</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 35 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">退房後搭免費送迎大巴至豬苗代站。</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-train"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">豬苗代 → 會津若松</h3>
+                                <p class="text-secondary mt-1">11:03 發 → 11:34 抵</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-train text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>JR 磐越西線（快速）</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 31 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">快速列車直達會津若松，支援 Suica / PASMO。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E8%B1%AC%E8%8B%97%E4%BB%A3%E7%AB%99&destination=%E6%9C%83%E6%B4%A5%E8%8B%A5%E6%9D%BE%E7%AB%99&travelmode=transit" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 導航：豬苗代站 -> 會津若松站
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node spot absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-person-simple-walk"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">鶴城 ＆ 七日町通</h3>
+                                <p class="text-secondary mt-1">下午時段</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-person-simple-walk text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>步行</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">平坦綠道</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">鶴城賞楓，七日町大正浪漫老街漫步與下午茶。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E6%9C%83%E6%B4%A5%E8%8B%A5%E6%9D%BE%E7%AB%99&destination=%E9%B6%B4%E5%9F%8E&travelmode=walking" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 步行導航
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node stay absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-bed"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">會津若松站前飯店</h3>
+                                <p class="text-secondary mt-1">16:00 入住（連泊第 1 晚）</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-suitcase-simple text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>行李</span>
+                                        </p>
+                                        
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">大行李已由郡山宅急便送達。出站步行約 2 分鐘。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E6%9C%83%E6%B4%A5%E8%8B%A5%E6%9D%BE%E7%AB%99&destination=%E6%9C%83%E6%B4%A5%E8%8B%A5%E6%9D%BE%E8%8F%AF%E7%9B%9B%E9%A0%93%E9%A3%AF%E5%BA%97&travelmode=walking" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 步行導航
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div id="route-b-day-4" class="day-content hidden animate-fade-in">
+                <article class="day-sheet shadow-sm">
+                    <div class="page-head">
+                        <div class="flex items-center justify-between gap-4">
+                            <h2 class="site-title page-title border-l-4 border-benitobi pl-4">第四日：奧會津秘境</h2>
+                            <span class="shrink-0 w-10 h-10 rounded-full bg-haizakura/30 text-kesizumi text-sm font-medium flex items-center justify-center">週三</span>
+                        </div>
+
+                    </div>
+                    <div class="timeline-list relative space-y-12">
+                        <div class="timeline-line" aria-hidden="true"></div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-path"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">奧會津秘境漫遊</h3>
+                                <p class="text-secondary mt-1">09:00 → 15:30</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-taxi text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>方案 A：觀光包車</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 ¥35,000</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">專車前往只見川第一橋梁與霧幻峽木舟體驗，時間彈性。</p>
+
+                                </div>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-bus text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>方案 B：會津巴士</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 NT$ 1,500~2,000</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">會津巴士「奥会津ぶらり旅」定期觀光，含霧幻峽船票。</p>
+                                    <a href="https://www.aizubus.com/travel/okuaizu_burari/" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-arrow-square-out" aria-hidden="true"></i> 查看會津巴士官網
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node stay absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-moon-stars"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">會津若松站前飯店</h3>
+                                <p class="text-secondary mt-1">15:30 返抵（連泊第 2 晚）</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-bed text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>連泊</span>
+                                        </p>
+                                        
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">回房放鬆，無需打包。站前可尋味輪箱飯或喜多方拉麵。</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div id="route-b-day-5" class="day-content hidden animate-fade-in">
+                <article class="day-sheet shadow-sm">
+                    <div class="page-head">
+                        <div class="flex items-center justify-between gap-4">
+                            <h2 class="site-title page-title border-l-4 border-benitobi pl-4">第五日：茅葺古街與名湯</h2>
+                            <span class="shrink-0 w-10 h-10 rounded-full bg-haizakura/30 text-kesizumi text-sm font-medium flex items-center justify-center">週四</span>
+                        </div>
+                        <details class="quiet-details mt-3">
+                            <summary class="text-secondary text-kesizumi inline-flex items-center gap-1.5">
+                                <i class="ph ph-info" aria-hidden="true"></i> 宅急便提醒
+                            </summary>
+                            <p class="notice mt-3">
+                                <i class="ph ph-package text-xl flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                <span>大行李利用宅急便寄往 Day 6 的上野飯店。全員僅需輕裝前往大內宿與大川莊。</span>
+                            </p>
+                        </details>
+                    </div>
+                    <div class="timeline-list relative space-y-12">
+                        <div class="timeline-line" aria-hidden="true"></div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-train"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">會津若松 → 湯野上溫泉</h3>
+                                <p class="text-secondary mt-1">09:50 發 → 10:49 抵</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-train text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>會津鐵道（花號景觀車）</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 59 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">お座トロ展望列車，指定席景觀大窗。直達免轉車。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E6%9C%83%E6%B4%A5%E8%8B%A5%E6%9D%BE%E7%AB%99&destination=%E6%B9%AF%E9%87%8E%E4%B8%8A%E6%BA%AB%E6%B3%89%E7%AB%99&travelmode=transit" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 導航：會津若松站 -> 湯野上溫泉站
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node spot absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-taxi"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">大內宿 ＆ 塔崖</h3>
+                                <p class="text-secondary mt-1">11:00 → 15:00（預約包車）</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-taxi text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>觀光包車</span>
+                                        </p>
+                                    </div>
+                                    <div class="text-secondary space-y-1.5">
+                                        <p>1. <span class="font-medium text-kesizumi">11:00</span> 湯野上溫泉 → 大內宿（三澤屋蕎麥麵）</p>
+                                        <p>2. 塔崖 → 大川莊。平日完美避開人潮。</p>
+                                    </div>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E6%B9%AF%E9%87%8E%E4%B8%8A%E6%BA%AB%E6%B3%89%E7%AB%99&destination=%E5%A4%A7%E5%85%A7%E5%AE%BF&travelmode=driving" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 導航：湯野上溫泉站 -> 大內宿
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node stay absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-hot-tub"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">蘆之牧溫泉 大川莊</h3>
+                                <p class="text-secondary mt-1">15:15 入住</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-music-notes text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>浮舞台三味線</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">16:00</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">晚間享用會津黑毛和牛會席。專車直達大門。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E5%A1%94%E5%B4%96&destination=%E8%98%86%E4%B9%8B%E7%89%A7%E6%BA%AB%E6%B3%89%E5%A4%A7%E5%B7%9D%E8%8E%8A&travelmode=driving" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 導航：塔崖 -> 大川莊
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div id="route-b-day-6" class="day-content hidden animate-fade-in">
+                <article class="day-sheet shadow-sm">
+                    <div class="page-head">
+                        <div class="flex items-center justify-between gap-4">
+                            <h2 class="site-title page-title border-l-4 border-benitobi pl-4">第六日：東京採買</h2>
+                            <span class="shrink-0 w-10 h-10 rounded-full bg-haizakura/30 text-kesizumi text-sm font-medium flex items-center justify-center">週五</span>
+                        </div>
+
+                    </div>
+                    <div class="timeline-list relative space-y-12">
+                        <div class="timeline-line" aria-hidden="true"></div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-train"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">大川莊 → 郡山</h3>
+                                <p class="text-secondary mt-1">10:00 退房</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <p class="flex items-center gap-2 font-medium">
+                                        <i class="ph ph-bus text-xl flex-shrink-0" aria-hidden="true"></i>
+                                        <span>接駁＋磐越西線</span>
+                                    </p>
+                                    <div class="text-secondary space-y-1.5">
+                                        <p>1. <span class="font-medium text-kesizumi">10:10</span> 飯店接駁車至會津若松</p>
+                                        <p>2. <span class="font-medium text-kesizumi">11:09</span> 搭 JR 磐越西線至郡山（<span class="font-medium text-kesizumi">12:15</span> 抵）</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-train"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">郡山 → 上野</h3>
+                                <p class="text-secondary mt-1">13:06 發 → 14:18 抵</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-train text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>東北新幹線（やまびこ 54 號）</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 72 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">指定席直達上野，避開東京站人潮。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E9%83%A1%E5%B1%B1%E7%AB%99&destination=%E4%B8%8A%E9%87%8E%E7%AB%99&travelmode=transit" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 導航：郡山站 -> 上野站
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node spot absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-shopping-bag"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">多慶屋 ＆ 阿美橫町</h3>
+                                <p class="text-secondary mt-1">下午至晚間</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-shopping-bag text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>上野商圈</span>
+                                        </p>
+                                        
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">大採買，添購高級水果。可先至飯店放行李再出門。</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node stay absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-bed"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">MIMARU 上野 EAST</h3>
+                                <p class="text-secondary mt-1">14:40 入住</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-person-simple-walk text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>步行</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 6~8 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">公寓式房型，附大餐桌與廚房。</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=%E4%B8%8A%E9%87%8E%E7%AB%99&destination=MIMARU+TOKYO+UENO+EAST&travelmode=walking" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 步行導航
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div id="route-b-day-7" class="day-content hidden animate-fade-in">
+                <article class="day-sheet shadow-sm">
+                    <div class="page-head">
+                        <div class="flex items-center justify-between gap-4">
+                            <h2 class="site-title page-title border-l-4 border-benitobi pl-4">第七日：賦歸</h2>
+                            <span class="shrink-0 w-10 h-10 rounded-full bg-haizakura/30 text-kesizumi text-sm font-medium flex items-center justify-center">週六</span>
+                        </div>
+
+                    </div>
+                    <div class="timeline-list relative space-y-12">
+                        <div class="timeline-line" aria-hidden="true"></div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node stay absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-coffee"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">悠閒早晨</h3>
+                                <p class="text-secondary mt-1">睡到自然醒</p>
+<p class="mt-1.5 leading-[1.7]">飯店悠閒早餐，整理戰利品。配合 BR191 12:40 起飛從容退房。</p>
+                            </div>
+                        </div>
+                        <div class="relative pl-14 sm:pl-20">
+                            <span class="timeline-node transit absolute left-0 top-0.5 rounded-full flex items-center justify-center text-lg sm:text-xl z-10" aria-hidden="true">
+                                <i class="ph ph-airplane-takeoff"></i>
+                            </span>
+                            <div class="prose-narrow tracking-wide leading-loose">
+                                <h3 class="item-title">羽田 HND → 松山 TSA</h3>
+                                <p class="text-secondary mt-1">12:40 發 → 15:05 抵</p>
+                                <div class="option-block mt-3 space-y-2">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <p class="flex items-center gap-2 font-medium">
+                                            <i class="ph ph-airplane-tilt text-xl flex-shrink-0" aria-hidden="true"></i>
+                                            <span>長榮航空 BR191</span>
+                                        </p>
+                                        <p class="amount text-benitobi shrink-0">約 3 小時 25 分</p>
+                                    </div>
+                                    <p class="text-secondary border-l-2 border-haizakura pl-3">12:40 羽田起飛，15:05 抵松山。</p>
+                                    <a href="https://www.google.com/search?q=BR191+status" target="_blank" rel="noopener" class="btn-outline mt-1">
+                                        <i class="ph ph-magnifying-glass" aria-hidden="true"></i> 查詢航班動態
+                                    </a>
+                                    <a href="https://www.google.com/maps/dir/?api=1&origin=MIMARU+TOKYO+UENO+EAST&destination=%E7%BE%BD%E7%94%B0%E6%A9%9F%E5%A0%B4&travelmode=driving" target="_blank" rel="noopener" class="btn-outline">
+                                        <i class="ph ph-navigation-arrow" aria-hidden="true"></i> 導航：MIMARU -> 羽田機場
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            </div>
         </section>
 
 
@@ -2359,6 +3065,8 @@
         const TRIP_END = '2026-11-07';
         let currentDay = 1;
         let currentTab = 'itinerary';
+        let currentRoute = 'a';
+        const currentDays = { a: 1, b: 1 };
 
         function getTokyoIsoDate(now = new Date()) {
             return new Intl.DateTimeFormat('en-CA', {
@@ -2386,16 +3094,43 @@
 
         function markTodayBadges(now = new Date()) {
             const todayDay = getTokyoTodayTripDay(now);
-            document.querySelectorAll('.subtab-btn').forEach((btn, index) => {
-                btn.classList.toggle('is-today', todayDay === index + 1);
+            document.querySelectorAll('.subtab-btn[data-day]').forEach((btn) => {
+                btn.classList.toggle('is-today', todayDay === Number(btn.dataset.day));
             });
         }
 
         function scrollSelectedDayIntoView() {
-            const active = document.getElementById(`subtab-day-${currentDay}`);
+            const active = document.getElementById(`route-${currentRoute}-subtab-day-${currentDays[currentRoute]}`);
             if (active) {
                 active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
+        }
+
+        function switchRoute(route) {
+            currentRoute = route;
+            const a = document.getElementById('route-a-content');
+            const b = document.getElementById('route-b-content');
+            if (a) a.classList.toggle('hidden', route !== 'a');
+            if (b) b.classList.toggle('hidden', route !== 'b');
+            const btnA = document.getElementById('route-btn-a');
+            const btnB = document.getElementById('route-btn-b');
+            if (btnA) {
+                btnA.classList.toggle('is-active', route === 'a');
+                btnA.setAttribute('aria-selected', route === 'a' ? 'true' : 'false');
+            }
+            if (btnB) {
+                btnB.classList.toggle('is-active', route === 'b');
+                btnB.setAttribute('aria-selected', route === 'b' ? 'true' : 'false');
+            }
+            const switcher = document.querySelector('.route-switcher');
+            if (switcher) switcher.dataset.route = route;
+            const shown = route === 'a' ? a : b;
+            if (shown) {
+                shown.classList.remove('animate-fade-in');
+                void shown.offsetWidth;
+                shown.classList.add('animate-fade-in');
+            }
+            requestAnimationFrame(scrollSelectedDayIntoView);
         }
 
         function syncMobileNavSpace() {
@@ -2425,23 +3160,27 @@
             }
         }
 
-        function switchDay(dayNum) {
+        function switchDay(route, dayNum) {
+            currentRoute = route;
+            currentDays[route] = dayNum;
             currentDay = dayNum;
-            document.querySelectorAll('.day-content').forEach(day => day.classList.add('hidden'));
-
-            const target = document.getElementById(`day-${dayNum}`);
+            const root = document.getElementById(`route-${route}-content`);
+            if (!root) return;
+            root.querySelectorAll('.day-content').forEach(day => day.classList.add('hidden'));
+            const target = document.getElementById(`route-${route}-day-${dayNum}`);
             if (target) target.classList.remove('hidden');
-
-            document.querySelectorAll('.subtab-btn').forEach(btn => btn.classList.remove('active'));
-            const activeSubtab = document.getElementById(`subtab-day-${dayNum}`);
+            root.querySelectorAll('.subtab-btn').forEach(btn => btn.classList.remove('active'));
+            const activeSubtab = document.getElementById(`route-${route}-subtab-day-${dayNum}`);
             if (activeSubtab) activeSubtab.classList.add('active');
-
             scrollSelectedDayIntoView();
         }
 
         function initDefaultDay() {
             markTodayBadges();
-            switchDay(resolveTripDayFromTokyoIso(getTokyoIsoDate()));
+            const d = resolveTripDayFromTokyoIso(getTokyoIsoDate());
+            switchDay('a', d);
+            switchDay('b', d);
+            switchRoute('a');
         }
 
         let currentExchangeRate = 0.220;
