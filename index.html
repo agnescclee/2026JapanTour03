@@ -112,6 +112,21 @@
                 left: 24px;
             }
         }
+
+        /* Subtab Day Selector Styles */
+        .subtab-btn {
+            color: #57534e !important;
+            background-color: #ffffff !important;
+            border-color: #E2DDD6 !important;
+            font-weight: 500;
+        }
+        .subtab-btn.active {
+            color: #ffffff !important;
+            background-color: #B5495B !important;
+            border-color: #B5495B !important;
+            font-weight: 700;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
     </style>
 </head>
 
@@ -155,7 +170,7 @@
                 <button onclick="switchTab('souvenir')" id="tab-souvenir"
                     class="nav-tab-btn py-3.5 sm:py-4 px-3 md:px-6 text-center text-stone-400 border-b-2 border-transparent hover:text-stone-600 transition-colors">
                     <span class="text-sm sm:text-base font-medium flex items-center gap-1.5">
-                        <i class="ph-duotone ph-gift text-lg sm:text-xl text-benikaba"></i>
+                        <i class="ph-duotone ph-gift text-lg sm:text-xl"></i>
                         <span>嚴選伴手禮</span>
                     </span>
                 </button>
@@ -169,7 +184,7 @@
                 <button onclick="switchTab('prep')" id="tab-prep"
                     class="nav-tab-btn py-3.5 sm:py-4 px-3 md:px-6 text-center text-stone-400 border-b-2 border-transparent hover:text-stone-600 transition-colors">
                     <span class="text-sm sm:text-base font-medium flex items-center gap-1.5">
-                        <i class="ph-duotone ph-clipboard-text text-lg sm:text-xl text-benikaba"></i>
+                        <i class="ph-duotone ph-clipboard-text text-lg sm:text-xl"></i>
                         <span>行前準備</span>
                     </span>
                 </button>
@@ -196,31 +211,31 @@
             <div class="sticky top-[57px] sm:top-[65px] z-40 bg-[#FCFAF2]/95 backdrop-blur-sm py-2.5 px-1 border-b border-haiku/40 mb-5">
                 <div class="flex md:grid md:grid-cols-7 gap-2 overflow-x-auto no-scrollbar py-0.5">
                     <button onclick="switchDay(1)" id="subtab-day-1"
-                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border border-benikaba bg-benikaba text-white shadow-xs font-bold text-sm sm:text-base text-center transition-all">
+                        class="subtab-btn active flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border text-sm sm:text-base text-center transition-all">
                         11/01 (日)
                     </button>
                     <button onclick="switchDay(2)" id="subtab-day-2"
-                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border border-haiku bg-white text-stone-600 hover:border-benikaba hover:text-benikaba font-medium text-sm sm:text-base text-center transition-all">
+                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border text-sm sm:text-base text-center transition-all">
                         11/02 (一)
                     </button>
                     <button onclick="switchDay(3)" id="subtab-day-3"
-                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border border-haiku bg-white text-stone-600 hover:border-benikaba hover:text-benikaba font-medium text-sm sm:text-base text-center transition-all">
+                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border text-sm sm:text-base text-center transition-all">
                         11/03 (二)
                     </button>
                     <button onclick="switchDay(4)" id="subtab-day-4"
-                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border border-haiku bg-white text-stone-600 hover:border-benikaba hover:text-benikaba font-medium text-sm sm:text-base text-center transition-all">
+                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border text-sm sm:text-base text-center transition-all">
                         11/04 (三)
                     </button>
                     <button onclick="switchDay(5)" id="subtab-day-5"
-                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border border-haiku bg-white text-stone-600 hover:border-benikaba hover:text-benikaba font-medium text-sm sm:text-base text-center transition-all">
+                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border text-sm sm:text-base text-center transition-all">
                         11/05 (四)
                     </button>
                     <button onclick="switchDay(6)" id="subtab-day-6"
-                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border border-haiku bg-white text-stone-600 hover:border-benikaba hover:text-benikaba font-medium text-sm sm:text-base text-center transition-all">
+                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border text-sm sm:text-base text-center transition-all">
                         11/06 (五)
                     </button>
                     <button onclick="switchDay(7)" id="subtab-day-7"
-                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border border-haiku bg-white text-stone-600 hover:border-benikaba hover:text-benikaba font-medium text-sm sm:text-base text-center transition-all">
+                        class="subtab-btn flex-1 min-w-[95px] md:min-w-0 py-2.5 px-2 rounded-xl border text-sm sm:text-base text-center transition-all">
                         11/07 (六)
                     </button>
                 </div>
@@ -2634,14 +2649,12 @@
 
             const subtabs = document.querySelectorAll('.subtab-btn');
             subtabs.forEach(btn => {
-                btn.classList.remove('border-benikaba', 'bg-benikaba', 'text-white', '!text-white', 'shadow-xs', 'font-bold');
-                btn.classList.add('border-haiku', 'bg-white', 'text-stone-600', 'font-medium');
+                btn.classList.remove('active');
             });
 
             const activeSubtab = document.getElementById(`subtab-day-${dayNum}`);
             if (activeSubtab) {
-                activeSubtab.classList.remove('border-haiku', 'bg-white', 'text-stone-600', 'font-medium');
-                activeSubtab.classList.add('border-benikaba', 'bg-benikaba', 'text-white', 'shadow-xs', 'font-bold');
+                activeSubtab.classList.add('active');
             }
         }
 
