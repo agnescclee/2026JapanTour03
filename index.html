@@ -152,11 +152,11 @@
                         <span>住宿交通</span>
                     </span>
                 </button>
-                <button onclick="switchTab('senior')" id="tab-senior"
+                <button onclick="switchTab('souvenir')" id="tab-souvenir"
                     class="nav-tab-btn py-3.5 sm:py-4 px-3 md:px-6 text-center text-stone-400 border-b-2 border-transparent hover:text-stone-600 transition-colors">
                     <span class="text-sm sm:text-base font-medium flex items-center gap-1.5">
-                        <i class="ph-duotone ph-heart-straight text-lg sm:text-xl text-akane"></i>
-                        <span>舒活指南</span>
+                        <i class="ph-duotone ph-gift text-lg sm:text-xl text-benikaba"></i>
+                        <span>嚴選伴手禮</span>
                     </span>
                 </button>
                 <button onclick="switchTab('budget')" id="tab-budget"
@@ -1970,49 +1970,252 @@
 
 
         <!-- ===================================================================
-             TAB 3: SENIOR CARE (全齡舒活錦囊)
+             TAB 3: SOUVENIR GUIDE (嚴選在地伴手禮指南)
              =================================================================== -->
-        <section id="content-senior" class="hidden space-y-6 animate-fade-in">
-            <div class="border-b border-stone-200 pb-4 mb-5">
-                <h3 class="serif text-2xl sm:text-3xl font-bold text-stone-800">不自駕・極致舒活無壓力法則</h3>
-                <p class="text-sm sm:text-base text-stone-600 mt-1.5">四人同行搭計程車是日本東北最聰明、最省力的旅行方式</p>
+        <section id="content-souvenir" class="hidden space-y-8 animate-fade-in">
+            <div class="border-b border-stone-200 pb-4 mb-2">
+                <div class="flex items-center gap-2 mb-1.5">
+                    <span class="bg-benikaba text-white text-xs sm:text-sm font-bold px-3 py-1 rounded-full">沿途採買特輯</span>
+                    <span class="text-xs sm:text-sm bg-stone-100 text-stone-700 border border-stone-200 px-3 py-1 rounded-full font-bold">自用贈禮兩相宜</span>
+                </div>
+                <h3 class="serif text-2xl sm:text-3xl font-bold text-stone-800">
+                    旅途在地嚴選・必買伴手禮指南
+                </h3>
+                <p class="text-sm sm:text-base text-stone-600 mt-1.5">
+                    從奧會津、會津若松、裏磐梯到東京上野，精選沿途最具代表性的名菓甜點、在地銘酒、特色風土調味與民藝福物
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-haiku/60 space-y-2.5">
-                    <h4 class="font-bold text-stone-800 text-base sm:text-lg flex items-center gap-2">
-                        <i class="ph-bold ph-taxi text-yamabuki text-xl"></i> 四人搭 Taxi 的無價好處
-                    </h4>
-                    <p class="text-sm sm:text-base text-stone-700 leading-relaxed">
-                        在日本搭公車往往需要在寒風中站著久候，且上下車梯級高。短程直接搭乘計程車，四人均攤後每人只需幾十到兩百台幣，直接「門到門」上下車，免走遠路、不受凍！
-                    </p>
+            <!-- Souvenir Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                <!-- Item 1: 三島町紫蘇冰淇淋與桐木工藝 -->
+                <div class="bg-white rounded-2xl p-5 shadow-xs border border-stone-200 flex flex-col justify-between hover:border-stone-300 transition-colors">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-white bg-benikaba px-2.5 py-0.5 rounded">Day 2・奧會津三島町</span>
+                            <span class="text-xs text-stone-500">道の駅みしま宿</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800 text-lg">會津桐木工藝品 ＆ 奧會津紫蘇蜜餞</h4>
+                            <div class="text-xs font-mono text-benikaba font-semibold mt-0.5">約 ¥500 ~ ¥3,500</div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                            三島町以「會津桐」聞名全日本，質地輕盈且防潮防蟲。休息站內有精緻的桐木杯墊、收納盒與書籤；現場必吃特產「赤紫蘇霜淇淋」，酸甜清香，亦可買紫蘇濃縮汁與蜜餞回家沖泡。
+                        </p>
+                        <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80 text-xs text-stone-700 space-y-1">
+                            <div><strong class="text-stone-900">採買地點：</strong>第一只見川橋梁休息站（道の駅みしま宿）</div>
+                            <div><strong class="text-stone-900">推薦亮點：</strong>世界級只見線鐵橋明信片、會津桐木筷、紫蘇糖。</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-haiku/60 space-y-2.5">
-                    <h4 class="font-bold text-stone-800 text-base sm:text-lg flex items-center gap-2">
-                        <i class="ph-bold ph-bed text-benikaba text-xl"></i> 雙重連泊・極致消除行李負擔
-                    </h4>
-                    <p class="text-sm sm:text-base text-stone-700 leading-relaxed">
-                        行程精心安排兩次「連住兩晚」（會津若松站前連住 2 晚 ＋ 裏磐梯渡假村連住 2 晚），整趟旅行有 4 個晚上完全不用天天打包大行李箱或拖行李轉車，輕裝出遊最舒適！
-                    </p>
+                <!-- Item 2: 大內宿金胡麻、七味粉與民藝品 -->
+                <div class="bg-white rounded-2xl p-5 shadow-xs border border-stone-200 flex flex-col justify-between hover:border-stone-300 transition-colors">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">Day 3・大內宿老街</span>
+                            <span class="text-xs text-stone-500">茅草屋民藝店</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800 text-lg">大內宿特產金胡麻 ＆ 焙煎七味粉 ＆ 縮緬和布小物</h4>
+                            <div class="text-xs font-mono text-benikaba font-semibold mt-0.5">約 ¥600 ~ ¥2,000</div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                            江戶宿場町古街兩側小店販售當地農民自產的極品「焙煎金胡麻」與香氣濃郁的「生七味粉」，煮湯、拌麵皆是絕品。街道上的布作小店更有手工縫製的柿子、南瓜福氣吊飾，溫馨可愛。
+                        </p>
+                        <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80 text-xs text-stone-700 space-y-1">
+                            <div><strong class="text-stone-900">採買地點：</strong>大內宿街內百年茅草店鋪、湯野上溫泉站</div>
+                            <div><strong class="text-stone-900">推薦亮點：</strong>金胡麻油、蕎麥乾麵禮盒、大內宿限定地酒。</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-haiku/60 space-y-2.5">
-                    <h4 class="font-bold text-stone-800 text-base sm:text-lg flex items-center gap-2">
-                        <i class="ph-bold ph-stairs text-stone-600 text-xl"></i> 全程 0 陡階無障礙
-                    </h4>
-                    <p class="text-sm sm:text-base text-stone-700 leading-relaxed">
-                        大內宿不爬高坡觀景台、五色沼只走毘沙門沼平緩木棧道（步行3分鐘）、只見線在 B 點平整步道或休息站大窗賞景，完全不勉強爬高。
-                    </p>
+                <!-- Item 3: 會津若松吉祥物紅牛與起小法師 -->
+                <div class="bg-white rounded-2xl p-5 shadow-xs border-2 border-benikaba/30 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-benikaba text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-lg">
+                        必買吉祥福物
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">Day 1~4・會津若松</span>
+                            <span class="text-xs text-stone-500">鶴城會館 / 七日町通</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800 text-lg">會津吉祥紅牛 (赤べこ) ＆ 不倒翁小法師</h4>
+                            <div class="text-xs font-mono text-benikaba font-semibold mt-0.5">約 ¥800 ~ ¥3,800</div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                            會津傳承 400 年的守護福物「赤べこ (Akabeko)」，輕碰頭部會可愛地搖頭晃腦，自古有消災除病、招來福運之意；「起上り小法師」推倒後立刻站起，象徵百折不撓與闔家平安。
+                        </p>
+                        <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80 text-xs text-stone-700 space-y-1">
+                            <div><strong class="text-stone-900">採買地點：</strong>鶴城天守販賣部、鶴ヶ城会館、七日町手作店</div>
+                            <div><strong class="text-stone-900">推薦亮點：</strong>正統木模手繪紅牛、紅牛造型鑰匙圈、繪付體驗。</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-haiku/60 space-y-2.5">
-                    <h4 class="font-bold text-stone-800 text-base sm:text-lg flex items-center gap-2">
-                        <i class="ph-bold ph-first-aid text-stone-600 text-xl"></i> 隨身防寒與緊急聯絡
-                    </h4>
-                    <p class="text-sm sm:text-base text-stone-700 leading-relaxed">
-                        11 月早晚溫差大（5~16°C），洋蔥式穿著防風輕羽絨衣。日本外國人 24 小時多語言緊急醫療專線：<strong>050-3816-2720 (JNTO)</strong>。
-                    </p>
+                <!-- Item 4: 末廣酒造限定地酒與會津漆器 -->
+                <div class="bg-white rounded-2xl p-5 shadow-xs border border-stone-200 flex flex-col justify-between hover:border-stone-300 transition-colors">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">Day 4・七日町通老街</span>
+                            <span class="text-xs text-stone-500">末廣酒造嘉永藏</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800 text-lg">末廣酒造限定地酒 ＆ 會津傳統漆器茶杯</h4>
+                            <div class="text-xs font-mono text-benikaba font-semibold mt-0.5">約 ¥1,500 ~ ¥6,000</div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                            福島在全日本新酒鑑評會連續多年榮獲金賞第一！百年酒造「末廣酒造」的純米大吟釀（如貓魔の雫、嘉永藏限定酒）香氣高雅細緻。七日町老街的會津漆器店更有輕巧耐用的蒔繪漆木碗與茶杯。
+                        </p>
+                        <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80 text-xs text-stone-700 space-y-1">
+                            <div><strong class="text-stone-900">採買地點：</strong>末廣酒造嘉永藏直營門市、會津漆器百年老舖</div>
+                            <div><strong class="text-stone-900">推薦亮點：</strong>大吟釀生原酒、微氣泡清酒「ぷちぷち」、漆器筷匙組。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5: 裏磐梯幻之名產「會津山鹽」系列 -->
+                <div class="bg-white rounded-2xl p-5 shadow-xs border-2 border-yamabuki/50 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-yamabuki text-stone-900 text-[10px] font-bold px-2 py-0.5 rounded-bl-lg">
+                        裏磐梯唯一特產
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-white bg-stone-800 px-2.5 py-0.5 rounded">Day 4~6・裏磐梯高原</span>
+                            <span class="text-xs text-stone-500">渡假村賣店 / 五色沼商場</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800 text-lg">幻之極品「會津山鹽」系列（年輪蛋糕・鹽拉麵・山鹽糖）</h4>
+                            <div class="text-xs font-mono text-benikaba font-semibold mt-0.5">約 ¥450 ~ ¥2,200</div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                            由大鹽裏磐梯溫泉水經過大鍋柴火熬煮而成的「山鹽」，富含天然礦物質、溫潤回甘無苦味。此鹽產量極稀，認明「會津山鹽認定標章」的年輪蛋糕、山鹽柚餅子、山鹽生拉麵包是最高人氣之選！
+                        </p>
+                        <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80 text-xs text-stone-700 space-y-1">
+                            <div><strong class="text-stone-900">採買地點：</strong>裏磐梯湖畔渡假村 1 樓商店、裏磐梯物產館</div>
+                            <div><strong class="text-stone-900">推薦亮點：</strong>會津山鹽年輪蛋糕、罐裝研磨山鹽、山鹽仙貝。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6: 福島銘菓三大巨頭 (柏屋薄皮饅頭・Mamador・核桃柚餅) -->
+                <div class="bg-white rounded-2xl p-5 shadow-xs border border-stone-200 flex flex-col justify-between hover:border-stone-300 transition-colors">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">Day 6・郡山站轉乘</span>
+                            <span class="text-xs text-stone-500">S-PAL 郡山銘菓街</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800 text-lg">福島三大經典名菓（Mamador・柏屋薄皮饅頭・家傳柚餅子）</h4>
+                            <div class="text-xs font-mono text-benikaba font-semibold mt-0.5">約 ¥800 ~ ¥2,500</div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                            郡山站站內轉乘 30 分鐘即可一次買齊！「ままどおる (Mamador)」牛奶香濃入口即化；日本三大饅頭之一「柏屋薄皮饅頭」皮薄餡豐甜而不膩；「かんのや家伝ゆべし」軟糯三角形麻糬包紅豆餡，溫潤高雅大人氣。
+                        </p>
+                        <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80 text-xs text-stone-700 space-y-1">
+                            <div><strong class="text-stone-900">採買地點：</strong>JR 郡山站 2 樓 S-PAL 伴手禮商場（轉新幹線順買）</div>
+                            <div><strong class="text-stone-900">推薦亮點：</strong>季節限定巧克力 Mamador、柏屋宇治抹茶饅頭。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 7: 郡山站福島在地拉麵調理包與鐵路便當 -->
+                <div class="bg-white rounded-2xl p-5 shadow-xs border border-stone-200 flex flex-col justify-between hover:border-stone-300 transition-colors">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">Day 6・鐵道美食</span>
+                            <span class="text-xs text-stone-500">郡山站便當店</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800 text-lg">喜多方拉麵名店禮盒 ＆ 福島海陸鐵路便當</h4>
+                            <div class="text-xs font-mono text-benikaba font-semibold mt-0.5">約 ¥1,000 ~ ¥2,200</div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                            喜多方拉麵名列日本三大拉麵，特色為多加水扁平波浪捲麵，麵條彈牙吸汁。郡山站有坂內食堂、一平拉麵等知名生麵禮盒；新幹線上更推薦買個「福豆屋・海苔辨」或會津牛便當當午餐。
+                        </p>
+                        <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80 text-xs text-stone-700 space-y-1">
+                            <div><strong class="text-stone-900">採買地點：</strong>郡山站新幹線閘門內外便當鋪與土產店</div>
+                            <div><strong class="text-stone-900">推薦亮點：</strong>喜多方醬油拉麵禮盒、海苔便當世界一「海苔辨」。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 8: 上野多慶屋必掃清單 -->
+                <div class="bg-white rounded-2xl p-5 shadow-xs border border-stone-200 flex flex-col justify-between hover:border-stone-300 transition-colors">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">Day 6・東京上野</span>
+                            <span class="text-xs text-stone-500">多慶屋 (TAKEYA)</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800 text-lg">多慶屋零食藥妝 ＆ 日本當季高級水果（麝香葡萄・草莓）</h4>
+                            <div class="text-xs font-mono text-benikaba font-semibold mt-0.5">依個人採買預算</div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                            上野最傳奇的紫色百貨多慶屋，零食（干貝糖、杏仁白巧、仙貝）、常備藥妝（合利他命、止痛藥、眼藥水）皆有免稅折扣。生鮮超市更有產地直送的長野晴王麝香葡萄與草莓，買回飯店大餐桌現切享用！
+                        </p>
+                        <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80 text-xs text-stone-700 space-y-1">
+                            <div><strong class="text-stone-900">採買地點：</strong>多慶屋 TAビル (上野御徒町站旁)</div>
+                            <div><strong class="text-stone-900">推薦亮點：</strong>免稅 10% ＋ 信用卡優惠、大包裝零食、當季日本水果。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 9: 羽田機場最後採買指南 -->
+                <div class="bg-white rounded-2xl p-5 shadow-xs border border-stone-200 flex flex-col justify-between hover:border-stone-300 transition-colors">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">Day 7・羽田出境免稅</span>
+                            <span class="text-xs text-stone-500">羽田第 3 航廈</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-800 text-lg">羽田機場出境免稅必補貨（東京芭娜娜・獺祭・ROYCE）</h4>
+                            <div class="text-xs font-mono text-benikaba font-semibold mt-0.5">約 ¥900 ~ ¥6,000</div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                            過安檢出關後直接手提上機，完全不佔託運公斤數！羽田國際線免稅店集合了全日本最熱銷名產：ROYCE 生巧克力、白色戀人、YOKU MOKU 原味雪茄蛋捲、資生堂 Parlour 點心以及各大頂級清酒。
+                        </p>
+                        <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80 text-xs text-stone-700 space-y-1">
+                            <div><strong class="text-stone-900">採買地點：</strong>羽田機場第 3 航廈出境免稅綜合商店 (TIAT DUTY FREE)</div>
+                            <div><strong class="text-stone-900">推薦亮點：</strong>直接手提免秤重、免稅保證、最新包裝伴手禮禮盒。</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Smart Shopping Tips Banner -->
+            <div class="bg-stone-50 rounded-2xl p-5 border border-stone-200 shadow-xs space-y-3">
+                <div class="font-bold text-stone-800 flex items-center gap-2 text-base sm:text-lg">
+                    <i class="ph-bold ph-lightbulb text-yamabuki text-xl"></i> 旅伴採買智慧貼心叮嚀
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm text-stone-700">
+                    <div class="bg-white p-3.5 rounded-xl border border-stone-200/80 space-y-1">
+                        <div class="font-bold text-stone-900 flex items-center gap-1">
+                            <i class="ph-bold ph-truck text-benikaba"></i> 善用宅急便寄大行李
+                        </div>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            Day 3 退房時大行李直接寄往裏磐梯渡假村，沿途景點（只見線、大內宿）雙手輕鬆，買完紀念品直接塞進隨身後背包，零負擔。
+                        </p>
+                    </div>
+                    <div class="bg-white p-3.5 rounded-xl border border-stone-200/80 space-y-1">
+                        <div class="font-bold text-stone-900 flex items-center gap-1">
+                            <i class="ph-bold ph-shield-check text-benikaba"></i> 會津山鹽認明官方標章
+                        </div>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            裏磐梯溫泉水熬製的會津山鹽數量珍稀，購買相關商品時認明「會津山塩認定シール」貼紙，品質天然有保證。
+                        </p>
+                    </div>
+                    <div class="bg-white p-3.5 rounded-xl border border-stone-200/80 space-y-1">
+                        <div class="font-bold text-stone-900 flex items-center gap-1">
+                            <i class="ph-bold ph-airplane text-benikaba"></i> 液體膏狀物託運須知
+                        </div>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            地酒清酒、胡麻油、紫蘇濃縮汁、味噌等屬於液體類，必須在 Day 6 於上野飯店打包放入「託運行李箱」，不可手提上飛機；機場免稅店買的清酒則可直接手提。
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2203,7 +2406,7 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         function switchTab(tabId) {
-            const tabs = ['itinerary', 'info', 'senior', 'budget', 'record'];
+            const tabs = ['itinerary', 'info', 'souvenir', 'budget', 'record'];
             tabs.forEach(t => {
                 const el = document.getElementById(`content-${t}`);
                 if (el) el.classList.add('hidden');
