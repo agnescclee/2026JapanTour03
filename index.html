@@ -1355,17 +1355,19 @@
                     <!-- Transit Ribbon -->
                     <div class="mb-6 bg-stone-50 border border-stone-200 px-4 py-3 rounded-xl text-sm sm:text-base flex flex-wrap items-center gap-2 text-stone-700">
                         <span class="font-bold text-stone-800 flex items-center gap-1.5"><i class="ph-bold ph-train text-base text-benikaba"></i> 行程動線：</span>
-                        <span>渡假村免費大巴 (10:00)</span>
+                        <span>渡假村免費大巴 (11:10 發)</span>
                         <span class="text-stone-300">➔</span>
-                        <span>JR 豬苗代站</span>
+                        <span>JR 豬苗代站 (11:45 著)</span>
                         <span class="text-stone-300">➔</span>
-                        <span>磐越西線至郡山</span>
+                        <span class="font-bold text-stone-800">JR 磐越西線・快速 (11:58 發)</span>
                         <span class="text-stone-300">➔</span>
-                        <span>東北新幹線</span>
+                        <span>郡山站 (12:36 著 / 站內轉乘 30 分)</span>
                         <span class="text-stone-300">➔</span>
-                        <span class="font-bold text-stone-800">上野站下車</span>
+                        <span class="font-bold text-stone-800">東北新幹線・やまびこ 54 號 (13:06 發)</span>
                         <span class="text-stone-300">➔</span>
-                        <span class="font-bold text-stone-800">MIMARU 東京 上野 EAST</span>
+                        <span class="font-bold text-stone-800">上野站 (14:18 著)</span>
+                        <span class="text-stone-300">➔</span>
+                        <span>MIMARU 東京 上野 EAST (14:40 入住)</span>
                     </div>
 
                     <div class="space-y-6 relative">
@@ -1376,24 +1378,131 @@
                             <span class="absolute left-0 top-0 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white border-2 border-stone-300 shadow-xs flex items-center justify-center text-stone-700 text-2xl z-10">
                                 <i class="ph-bold ph-train"></i>
                             </span>
-                            <div>
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="text-xs sm:text-sm font-mono font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">10:00 - 14:00</span>
-                                    <span class="text-xs sm:text-sm text-stone-600 font-bold bg-stone-100 border border-stone-200 px-2 py-0.5 rounded">告別裏磐梯・新幹線直達上野</span>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <span class="text-xs sm:text-sm font-mono font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded">11:10 - 14:18</span>
+                                        <span class="text-xs sm:text-sm text-stone-600 font-bold bg-stone-100 border border-stone-200 px-2 py-0.5 rounded">告別裏磐梯・新幹線直達上野</span>
+                                    </div>
+                                    <h3 class="font-bold text-stone-800 text-lg sm:text-xl mt-1">
+                                        渡假村免費接駁 ➔ 磐越西線快速 ➔ 東北新幹線直達上野
+                                    </h3>
                                 </div>
-                                <h3 class="font-bold text-stone-800 text-lg sm:text-xl">渡假村退房 ➔ 專車接駁 ➔ 新幹線直達上野</h3>
-                                <div class="text-sm sm:text-base text-stone-700 mt-2 space-y-2.5 bg-stone-50 p-4 rounded-xl border border-stone-200">
-                                    <div class="flex items-start gap-2.5">
-                                        <span class="font-bold text-stone-700 flex items-center gap-1 flex-shrink-0"><i class="ph-bold ph-sun text-stone-500"></i> 悠閒退房</span>
-                                        <span>早上睡到自然醒，享用渡假村早餐後於 10:00 悠閒辦理退房手續。</span>
+
+                                <!-- Detailed Transport Card (Tour01 / Day 1 Style) -->
+                                <div class="bg-stone-50 rounded-2xl p-4 sm:p-5 border border-stone-200 shadow-xs space-y-4">
+                                    <!-- Card Header -->
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-stone-200/80 gap-2">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="w-9 h-9 rounded-lg bg-benikaba/10 flex items-center justify-center text-benikaba">
+                                                <i class="ph-duotone ph-train text-2xl"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-sm sm:text-base font-bold text-stone-800">渡假村大巴 ＋ 磐越西線快速 ＋ 東北新幹線</div>
+                                                <div class="text-xs text-stone-500">裏磐梯 ➔ 豬苗代站 ➔ 郡山站 (轉乘 30 分) ➔ 上野站（直達東京市區）</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-left sm:text-right">
+                                            <div class="text-xs text-stone-500">全段車票預估 (每人)</div>
+                                            <div class="text-base sm:text-lg font-bold text-benikaba font-num">約 ¥8,590 ~ ¥9,120 <span class="text-xs text-stone-500 font-normal">(約 NT$ 1,800~1,915)</span></div>
+                                        </div>
                                     </div>
-                                    <div class="flex items-start gap-2.5">
-                                        <span class="font-bold text-stone-700 flex items-center gap-1 flex-shrink-0"><i class="ph-bold ph-bus text-stone-500"></i> 免費接駁</span>
-                                        <span>搭乘飯店免費接駁專車（約 30 分鐘）輕鬆返回 JR 豬苗代站，免搬大行李。</span>
+
+                                    <!-- Segment Schedule Breakdown -->
+                                    <div class="space-y-3">
+                                        <!-- Segment 1: Resort Shuttle -->
+                                        <div class="bg-white p-3.5 rounded-xl border border-stone-200/80 space-y-1.5">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-xs sm:text-sm font-bold text-stone-800 flex items-center gap-1.5">
+                                                    <span class="w-5 h-5 rounded-full bg-benikaba text-white text-[11px] font-mono flex items-center justify-center font-bold">1</span>
+                                                    渡假村專屬大型接駁大巴（免費送迎・免預約）
+                                                </span>
+                                                <span class="text-xs font-bold text-stone-600 bg-stone-100 px-2 py-0.5 rounded font-num">車程 35 分</span>
+                                            </div>
+                                            <div class="flex items-center justify-between text-sm sm:text-base text-stone-700 font-num pl-6.5">
+                                                <span class="font-bold">11:10 渡假村大門 發</span>
+                                                <i class="ph-bold ph-arrow-right text-stone-400 text-xs"></i>
+                                                <span class="font-bold">11:45 JR 豬苗代站 著</span>
+                                                <span class="text-xs text-stone-500 font-sans">(免搬大行李)</span>
+                                            </div>
+                                            <div class="text-xs text-stone-500 pl-6.5">
+                                                早上睡到自然醒、悠閒享用早餐與泡晨湯後於 11:00 前退房。司機親切協助將大行李上車，直送豬苗代站前廣場。
+                                            </div>
+                                        </div>
+
+                                        <!-- Transfer Note 1 -->
+                                        <div class="flex items-center gap-2 pl-4 text-xs sm:text-sm text-stone-600 bg-amber-50/70 border border-amber-200/60 py-2 px-3 rounded-lg">
+                                            <i class="ph-bold ph-clock text-amber-600 text-base flex-shrink-0"></i>
+                                            <span><strong>豬苗代站換乘（13 分鐘）</strong>：巴士抵達站前廣場，步行 1 分鐘進站，直接感應 IC 卡或持車票進入月台候車，銜接極為順暢。</span>
+                                        </div>
+
+                                        <!-- Segment 2: Banetsu West Rapid -->
+                                        <div class="bg-white p-3.5 rounded-xl border border-stone-200/80 space-y-1.5">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-xs sm:text-sm font-bold text-stone-800 flex items-center gap-1.5">
+                                                    <span class="w-5 h-5 rounded-full bg-benikaba text-white text-[11px] font-mono flex items-center justify-center font-bold">2</span>
+                                                    JR 磐越西線・快速列車（郡山行）
+                                                </span>
+                                                <span class="text-xs font-bold text-stone-600 bg-stone-100 px-2 py-0.5 rounded font-num">快速・車程 38 分</span>
+                                            </div>
+                                            <div class="flex items-center justify-between text-sm sm:text-base text-stone-700 font-num pl-6.5">
+                                                <span class="font-bold">11:58 豬苗代站 發</span>
+                                                <i class="ph-bold ph-arrow-right text-stone-400 text-xs"></i>
+                                                <span class="font-bold">12:36 郡山站 著</span>
+                                                <span class="text-xs text-stone-500 font-sans">(普通車自由席)</span>
+                                            </div>
+                                            <div class="text-xs text-stone-500 pl-6.5">
+                                                持 Suica / PASMO 等交通 IC 卡即可刷卡進站入座。沿途飽覽磐梯山雄偉山景，快速奔馳直達交通樞紐郡山站。
+                                            </div>
+                                        </div>
+
+                                        <!-- Transfer Note 2 -->
+                                        <div class="flex items-center gap-2 pl-4 text-xs sm:text-sm text-stone-600 bg-benikaba-light/60 border border-benikaba/20 py-2 px-3 rounded-lg">
+                                            <i class="ph-bold ph-arrows-clockwise text-benikaba text-base flex-shrink-0"></i>
+                                            <span><strong>郡山站站內轉乘（充裕 30 分鐘）</strong>：在來線月台搭乘電梯至 2 樓，通過新幹線檢票閘門前往 11/12 號月台。站內設有大伴手禮商場與便當名店，可採買福島限定鐵路便當與熱茶帶上新幹線當午餐。</span>
+                                        </div>
+
+                                        <!-- Segment 3: Tohoku Shinkansen -->
+                                        <div class="bg-white p-3.5 rounded-xl border-2 border-benikaba/50 space-y-1.5 relative">
+                                            <div class="absolute -top-2.5 right-3 bg-benikaba text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
+                                                新幹線直達上野・避開東京人潮
+                                            </div>
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-xs sm:text-sm font-bold text-stone-800 flex items-center gap-1.5">
+                                                    <span class="w-5 h-5 rounded-full bg-benikaba text-white text-[11px] font-mono flex items-center justify-center font-bold">3</span>
+                                                    東北新幹線・やまびこ 54 號（Yamabiko 54）
+                                                </span>
+                                                <span class="text-xs font-bold text-benikaba bg-stone-100 px-2 py-0.5 rounded">指定席（提前劃位）</span>
+                                            </div>
+                                            <div class="flex items-center justify-between text-sm sm:text-base text-stone-700 font-num pl-6.5">
+                                                <span class="font-bold">13:06 郡山站 發</span>
+                                                <i class="ph-bold ph-arrow-right text-stone-400 text-xs"></i>
+                                                <span class="font-bold">14:18 上野站 著</span>
+                                                <span class="text-xs text-stone-500 font-sans">(車程 72 分)</span>
+                                            </div>
+                                            <div class="text-xs text-stone-500 pl-6.5">
+                                                全座席平穩寬敞，在車上一邊享用郡山名物便當一邊休息。<strong>直接在上野站下車</strong>，下車後搭乘電梯出站，步行約 6~8 分鐘即達 MIMARU 上野 EAST 飯店，免去東京站大型迷宮轉乘之苦！
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="flex items-start gap-2.5">
-                                        <span class="font-bold text-stone-700 flex items-center gap-1 flex-shrink-0"><i class="ph-bold ph-train text-stone-500"></i> 鐵道移動</span>
-                                        <span>豬苗代站搭乘 JR 磐越西線至郡山站，轉乘「東北新幹線」直達 <strong>上野站</strong>。在火車上可買個當地鐵路便當當午餐，邊吃邊看風景。</span>
+
+                                    <!-- Fare Breakdown -->
+                                    <div class="bg-white p-3.5 rounded-xl border border-stone-200/80 text-xs sm:text-sm text-stone-600 space-y-1.5">
+                                        <div class="font-bold text-stone-800 flex items-center gap-1">
+                                            <i class="ph-bold ph-receipt text-benikaba"></i> 車票費用細項（豬苗代 ➔ 上野）
+                                        </div>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-xs font-mono">
+                                            <div>• <strong>JR 乘車券 (豬苗代 ➔ 上野 全段基本運費)</strong>：¥5,060</div>
+                                            <div>• <strong>新幹線指定席特急券 (郡山 ➔ 上野)</strong>：¥4,060</div>
+                                            <div>• <strong>渡假村大型接駁巴士</strong>：¥0 免費送迎</div>
+                                            <div class="text-benikaba font-bold">• <strong>全段合計 (每人)</strong>：約 ¥9,120 (約 NT$ 1,915)</div>
+                                        </div>
+                                        <div class="text-[11px] text-stone-500 pt-1 border-t border-stone-100 flex items-start gap-1 leading-relaxed">
+                                            <i class="ph-bold ph-lightbulb text-amber-500 flex-shrink-0 mt-0.5"></i>
+                                            <span><strong>購票智慧建議</strong>：
+                                                乘車前 1 個月可於 JR 東日本「えきねっと (Eki-net)」預訂「新幹線 e-Ticket」，通常可搶到 <strong>トクだ値 10%~30% 早鳥優惠</strong>（郡山至上野約可省下 ¥800~¥2,400/人）。若未搶到優惠，亦可於郡山站轉乘時直接在綠色售票機或窗口購票。
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
