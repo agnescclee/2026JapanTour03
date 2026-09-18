@@ -471,6 +471,26 @@
             box-shadow: 0 1px 3px rgba(67, 67, 67, 0.08), 0 1px 2px rgba(67, 67, 67, 0.04);
         }
 
+        .list-icon {
+            flex-shrink: 0;
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .btn-outline.is-quiet {
+            width: auto;
+            min-height: 2rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8125rem;
+            border-width: 1px;
+        }
+
         .form-control {
             width: 100%;
             min-height: 2.75rem;
@@ -2530,151 +2550,161 @@
             <div class="page-head">
                 <p class="text-kicker text-kesizumi">零自駕壓力</p>
                 <h2 class="page-title mt-1">住宿精選 ＆ 大眾運輸接駁指南</h2>
-                <p class="text-secondary mt-2">精選站前無障礙飯店與具備免費接駁車之名湯，景點末端搭配計程車（Taxi）直達門口</p>
+                <p class="text-sm text-stone-500 mt-2 leading-relaxed">站前無障礙飯店與免費接駁名湯，末端以計程車直達門口</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <article class="item-card flex flex-col justify-between">
-                    <div>
-                        <p class="text-secondary">Day 1 & 2 (連泊 2 晚！)　會津若松站前</p>
-                        <h3 class="item-title mt-1">會津若松 華盛頓飯店 (Washington Hotel)</h3>
-                        <p class="text-secondary mt-1.5">會津若松站出站步行 2 分鐘（全平地、有電梯）</p>
-                        <p class="mt-3 leading-[1.7]"><span class="font-medium">抵達極速進房：</span>新幹線轉電車抵達後出站即進房，完全不需拖行李走遠路。</p>
-                        <p class="mt-1.5 leading-[1.7]"><span class="font-medium">連泊 2 晚免收行李：</span>第 2 天前往只見線與霧幻峽輕裝出門，免天天打包換房，體力消耗歸零。</p>
+            <article class="page-sheet shadow-sm">
+                <div class="flex flex-col">
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-aoni/20 text-aoni" aria-hidden="true">
+                            <i class="ph ph-buildings text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">會津若松 華盛頓飯店</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 1–2 連泊・會津若松站前</li>
+                                <li>出站步行 2 分鐘（平地、有電梯）</li>
+                                <li>抵達即進房，隔日輕裝出門</li>
+                            </ul>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Aizuwakamatsu+Washington+Hotel" target="_blank" rel="noopener" class="btn-outline is-quiet mt-3">
+                                <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖
+                            </a>
+                        </div>
                     </div>
-                    <div class="mt-5">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Aizuwakamatsu+Washington+Hotel" target="_blank" rel="noopener" class="btn-primary">
-                            <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖導航
-                        </a>
-                    </div>
-                </article>
 
-                <article class="item-card flex flex-col justify-between">
-                    <div>
-                        <p class="text-secondary">Day 3 宿泊　蘆之牧溫泉　11/3 假日重點指定入住</p>
-                        <h3 class="item-title mt-1">蘆之牧溫泉 大川莊 (Ookawaso)</h3>
-                        <p class="text-secondary mt-1.5">浮舞台三味線演奏（16:00~18:00）、梯田露天溫泉「四季舞台たな田」</p>
-                        <p class="mt-3 leading-[1.7]"><span class="font-medium">交通指南：</span>大內宿/塔崖搭計程車直接抵達飯店門口（約22分，¥4,800/4人）；隔日退房有飯店免費送迎專車至車站。</p>
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-aoni/20 text-aoni" aria-hidden="true">
+                            <i class="ph ph-bathtub text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">蘆之牧溫泉 大川莊</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 3・11/3 假日入住</li>
+                                <li>浮舞台三味線、梯田露天湯</li>
+                                <li>計程車直達門口；隔日免費送迎至車站</li>
+                            </ul>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Ashinomaki+Onsen+Ookawaso" target="_blank" rel="noopener" class="btn-outline is-quiet">
+                                    <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖
+                                </a>
+                                <a href="https://www.ookawaso.co.jp/" target="_blank" rel="noopener" class="btn-outline is-quiet">官網</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mt-5 flex flex-wrap gap-2">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Ashinomaki+Onsen+Ookawaso" target="_blank" rel="noopener" class="btn-primary">
-                            <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖導航
-                        </a>
-                        <a href="https://www.ookawaso.co.jp/" target="_blank" rel="noopener" class="btn-secondary">飯店官網</a>
-                    </div>
-                </article>
 
-                <article class="item-card flex flex-col justify-between">
-                    <div>
-                        <p class="text-secondary">Day 2 順訪體驗　奧會津三島町</p>
-                        <h3 class="item-title mt-1">早戶溫泉 鶴之湯 (Tsurunoyu)</h3>
-                        <p class="text-secondary mt-1.5">只見川河畔 1200 年天然秘湯藥泉（日歸泡湯）</p>
-                        <p class="mt-3 leading-[1.7]"><span class="font-medium">渡船碼頭就在旁邊：</span>霧幻峽木扁舟體驗後步行 3 分鐘直達，午後享受暖呼呼秘湯露天風呂，推窗飽覽只見川秋色。</p>
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-aoni/20 text-aoni" aria-hidden="true">
+                            <i class="ph ph-drop text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">早戶溫泉 鶴之湯</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 2 日歸・奧會津三島町</li>
+                                <li>霧幻峽步行 3 分鐘</li>
+                                <li>1200 年藥泉，推窗見只見川秋色</li>
+                            </ul>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Hayato+Onsen+Tsurunoyu" target="_blank" rel="noopener" class="btn-outline is-quiet mt-3">
+                                <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖
+                            </a>
+                        </div>
                     </div>
-                    <div class="mt-5">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Hayato+Onsen+Tsurunoyu" target="_blank" rel="noopener" class="btn-primary">
-                            <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖導航
-                        </a>
-                    </div>
-                </article>
 
-                <article class="item-card flex flex-col justify-between md:col-span-2">
-                    <div>
-                        <p class="text-secondary">Day 4 & 5 (連住 2 晚！)　裏磐梯高原 檜原湖畔</p>
-                        <h3 class="item-title mt-1">裏磐梯湖畔渡假村 (Urabandai Lake Resort)</h3>
-                        <p class="text-secondary mt-1.5">坐落檜原湖畔，天然赤茶色「貓魔溫泉」，全館平坦無障礙電梯設施</p>
-                        <p class="mt-3 leading-[1.7]"><span class="font-medium">豬苗代站免費專屬接駁大巴 (無料送迎)：</span>JR 豬苗代站出站即有渡假村大型接駁車直達飯店門口（約30分鐘），免搬行李。</p>
-                        <p class="mt-1.5 leading-[1.7]"><span class="font-medium">五色沼門口計程車 3 分鐘：</span>飯店門口搭計程車至五色沼入口僅 ¥900，第 5 天整天免打包行李，極度悠閒。</p>
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-aoni/20 text-aoni" aria-hidden="true">
+                            <i class="ph ph-mountains text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">裏磐梯湖畔渡假村</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 4–5 連住・檜原湖畔</li>
+                                <li>豬苗代站免費接駁約 30 分</li>
+                                <li>五色沼計程車約 3 分／¥900</li>
+                            </ul>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Urabandai+Lake+Resort" target="_blank" rel="noopener" class="btn-outline is-quiet">
+                                    <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖
+                                </a>
+                                <a href="https://www.lakeresort.jp/" target="_blank" rel="noopener" class="btn-outline is-quiet">官網</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mt-5 flex flex-wrap gap-2">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Urabandai+Lake+Resort" target="_blank" rel="noopener" class="btn-primary">
-                            <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖導航
-                        </a>
-                        <a href="https://www.lakeresort.jp/" target="_blank" rel="noopener" class="btn-secondary">飯店官網</a>
-                    </div>
-                </article>
 
-                <article class="item-card flex flex-col justify-between">
-                    <div>
-                        <p class="text-secondary">Day 6 宿泊　東京上野</p>
-                        <h3 class="item-title mt-1">MIMARU 東京 上野 EAST</h3>
-                        <p class="text-secondary mt-1.5">JR 上野站入谷口步行約 3 分鐘，全館公寓式家庭房型</p>
-                        <p class="mt-3 leading-[1.7]"><span class="font-medium">完整廚房 ＆ 大餐桌：</span>房內備有雙門冰箱、微波爐、餐具與寬敞大餐桌，採買高級日本水果回房洗切品嚐最舒適。</p>
-                        <p class="mt-1.5 leading-[1.7]"><span class="font-medium">上野商圈地利：</span>新幹線直達上野下車即到；多慶屋、阿美橫町購物採買超順手，避開東京車站人潮。</p>
+                    <div class="flex items-start gap-4 py-6">
+                        <span class="list-icon bg-aoni/20 text-aoni" aria-hidden="true">
+                            <i class="ph ph-house text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">MIMARU 東京 上野 EAST</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 6・上野站入谷口步行 3 分</li>
+                                <li>公寓式家庭房、完整廚房</li>
+                                <li>多慶屋、阿美橫町順路</li>
+                            </ul>
+                            <a href="https://www.google.com/maps/search/?api=1&query=MIMARU+TOKYO+UENO+EAST" target="_blank" rel="noopener" class="btn-outline is-quiet mt-3">
+                                <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖
+                            </a>
+                        </div>
                     </div>
-                    <div class="mt-5">
-                        <a href="https://www.google.com/maps/search/?api=1&query=MIMARU+TOKYO+UENO+EAST" target="_blank" rel="noopener" class="btn-primary">
-                            <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖導航
-                        </a>
-                    </div>
-                </article>
-            </div>
+                </div>
+            </article>
 
-            <article class="page-sheet px-3 py-5 sm:px-6 sm:py-6">
-                <h3 class="item-title mb-4">本行程必用關鍵專車 ＆ 計程車（Taxi）接駁預估</h3>
-                <div class="table-scroll" tabindex="0" role="region" aria-label="計程車接駁預估表">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>天數</th>
-                                <th>起訖接駁路線</th>
-                                <th>車程時間</th>
-                                <th>預估車資 (日幣)</th>
-                                <th>4人均攤 (每人台幣)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>D2</td>
-                                <td>
-                                    <p class="font-medium">奧會津秘境交通雙選：方案 A 包車漫遊 / 方案 B Local Tour</p>
-                                    <p class="text-secondary mt-1">只見鐵橋 ➔ 霧幻峽木舟 ➔ 返回會津若松（包車含鶴之湯秘湯 / 巴士團含船票）</p>
-                                </td>
-                                <td>約 6 小時</td>
-                                <td class="amount">包車約 ¥35,000 / 巴士團以官網為主</td>
-                                <td class="amount">每人約 NT$ 1,500 ~ 2,000</td>
-                            </tr>
-                            <tr>
-                                <td>D3</td>
-                                <td>
-                                    <p class="font-medium">湯野上溫泉 ➔ 大內宿 ➔ 塔崖 ➔ 大川莊（預約半日包車）</p>
-                                    <p class="text-secondary mt-1">11/3 連假強烈建議預約連續半日包車，免去各景點寒風中叫不到車窘境</p>
-                                </td>
-                                <td>約 4 小時 (專車待命)</td>
-                                <td class="amount">約 ¥20,000 ~ 24,000</td>
-                                <td class="amount">約 NT$ 1,100 ~ 1,300</td>
-                            </tr>
-                            <tr>
-                                <td>D3</td>
-                                <td>
-                                    <p class="text-secondary">* 若採單趟跳錶計費（湯野上➔大內宿 ¥2,500 ＋ 大內宿➔塔崖 ¥3,500 ＋ 塔崖➔大川莊 ¥4,800）</p>
-                                </td>
-                                <td>各段累計約 50 分</td>
-                                <td class="amount">累計約 ¥10,800</td>
-                                <td class="amount">每人約 NT$ 590</td>
-                            </tr>
-                            <tr>
-                                <td>D5</td>
-                                <td>
-                                    <p class="font-medium">渡假村 ⇄ 五色沼 ⇄ 諸橋近代美術館 短程接駁</p>
-                                    <p class="text-secondary mt-1">短程計程車或路線巴士，車程各約 3~5 分鐘</p>
-                                </td>
-                                <td>各約 3~5 分鐘</td>
-                                <td class="amount">約 ¥900 / 單趟</td>
-                                <td class="amount">每趟每人約 NT$ 50</td>
-                            </tr>
-                            <tr>
-                                <td>D7</td>
-                                <td>
-                                    <p class="font-medium">上野飯店 ➔ 東京車站八重洲口（轉利木津巴士直達羽田）</p>
-                                    <p class="text-secondary mt-1">行李多最省力選擇，飯店門口直達東京站巴士乘車處</p>
-                                </td>
-                                <td>約 15 分鐘</td>
-                                <td class="amount">約 ¥2,000 ~ 2,500</td>
-                                <td class="amount">每人約 NT$ 110 ~ 140</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <article class="page-sheet shadow-sm">
+                <div class="flex flex-col">
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ainezumi/20 text-ainezumi" aria-hidden="true">
+                            <i class="ph ph-car text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">D2 奧會津秘境接駁</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>方案 A 包車／方案 B Local Tour</li>
+                                <li>約 6 小時</li>
+                                <li>包車約 ¥35,000 ｜ 每人約 NT$ 1,500–2,000</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ainezumi/20 text-ainezumi" aria-hidden="true">
+                            <i class="ph ph-taxi text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">D3 湯野上 ➔ 大內宿 ➔ 塔崖 ➔ 大川莊</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>半日包車約 4 小時（建議預約）</li>
+                                <li>約 ¥20,000–24,000 ｜ 每人約 NT$ 1,100–1,300</li>
+                                <li>跳錶備案累計約 ¥10,800</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ainezumi/20 text-ainezumi" aria-hidden="true">
+                            <i class="ph ph-taxi text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">D5 渡假村 ⇄ 五色沼 ⇄ 諸橋美術館</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>短程計程車或路線巴士</li>
+                                <li>各約 3–5 分鐘</li>
+                                <li>約 ¥900／單趟 ｜ 每人約 NT$ 50</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6">
+                        <span class="list-icon bg-ainezumi/20 text-ainezumi" aria-hidden="true">
+                            <i class="ph ph-taxi text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">D7 上野飯店 ➔ 東京站八重洲口</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>轉利木津巴士直達羽田</li>
+                                <li>約 15 分鐘</li>
+                                <li>約 ¥2,000–2,500 ｜ 每人約 NT$ 110–140</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </article>
         </section>
@@ -2687,106 +2717,169 @@
             <div class="page-head">
                 <p class="text-kicker text-kesizumi">沿途採買特輯　自用贈禮兩相宜</p>
                 <h2 class="page-title mt-1">旅途在地嚴選・必買伴手禮指南</h2>
-                <p class="text-secondary mt-2">從奧會津、會津若松、裏磐梯到東京上野，精選沿途最具代表性的名菓甜點、在地銘酒、特色風土調味與民藝福物</p>
+                <p class="text-sm text-stone-500 mt-2 leading-relaxed">從奧會津、會津若松、裏磐梯到東京上野，精選名菓、銘酒、風土調味與民藝</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <article class="item-card">
-                    <p class="text-secondary">Day 2・奧會津三島町　道の駅みしま宿</p>
-                    <h3 class="item-title mt-1">會津桐木工藝品 ＆ 奧會津紫蘇蜜餞</h3>
-                    <p class="mt-1.5 leading-[1.7]">約 ¥500 ~ ¥3,500</p>
-                    <p class="mt-2 leading-[1.7]">三島町以「會津桐」聞名全日本，質地輕盈且防潮防蟲。休息站內有精緻的桐木杯墊、收納盒與書籤；現場必吃特產「赤紫蘇霜淇淋」，酸甜清香，亦可買紫蘇濃縮汁與蜜餞回家沖泡。</p>
-                    <p class="text-secondary mt-2 leading-[1.7]"><span class="font-medium">採買地點：</span>第一只見川橋梁休息站（道の駅みしま宿）</p>
-                    <p class="text-secondary mt-1 leading-[1.7]"><span class="font-medium">推薦亮點：</span>世界級只見線鐵橋明信片、會津桐木筷、紫蘇糖。</p>
-                </article>
-
-                <article class="item-card">
-                    <p class="text-secondary">Day 3・大內宿老街　茅草屋民藝店</p>
-                    <h3 class="item-title mt-1">大內宿特產金胡麻 ＆ 焙煎七味粉 ＆ 縮緬和布小物</h3>
-                    <p class="mt-1.5 leading-[1.7]">約 ¥600 ~ ¥2,000</p>
-                    <p class="mt-2 leading-[1.7]">江戶宿場町古街兩側小店販售當地農民自產的極品「焙煎金胡麻」與香氣濃郁的「生七味粉」，煮湯、拌麵皆是絕品。街道上的布作小店更有手工縫製的柿子、南瓜福氣吊飾，溫馨可愛。</p>
-                    <p class="text-secondary mt-2 leading-[1.7]"><span class="font-medium">採買地點：</span>大內宿街內百年茅草店鋪、湯野上溫泉站</p>
-                    <p class="text-secondary mt-1 leading-[1.7]"><span class="font-medium">推薦亮點：</span>金胡麻油、蕎麥乾麵禮盒、大內宿限定地酒。</p>
-                </article>
-
-                <article class="item-card">
-                    <p class="text-secondary">Day 1~4・會津若松　鶴城會館 / 七日町通　必買吉祥福物</p>
-                    <h3 class="item-title mt-1">會津吉祥紅牛 (赤べこ) ＆ 不倒翁小法師</h3>
-                    <p class="mt-1.5 leading-[1.7]">約 ¥800 ~ ¥3,800</p>
-                    <p class="mt-2 leading-[1.7]">會津傳承 400 年的守護福物「赤べこ (Akabeko)」，輕碰頭部會可愛地搖頭晃腦，自古有消災除病、招來福運之意；「起上り小法師」推倒後立刻站起，象徵百折不撓與闔家平安。</p>
-                    <p class="text-secondary mt-2 leading-[1.7]"><span class="font-medium">採買地點：</span>鶴城天守販賣部、鶴ヶ城会館、七日町手作店</p>
-                    <p class="text-secondary mt-1 leading-[1.7]"><span class="font-medium">推薦亮點：</span>正統木模手繪紅牛、紅牛造型鑰匙圈、繪付體驗。</p>
-                </article>
-
-                <article class="item-card">
-                    <p class="text-secondary">Day 4・七日町通老街　末廣酒造嘉永藏</p>
-                    <h3 class="item-title mt-1">末廣酒造限定地酒 ＆ 會津傳統漆器茶杯</h3>
-                    <p class="mt-1.5 leading-[1.7]">約 ¥1,500 ~ ¥6,000</p>
-                    <p class="mt-2 leading-[1.7]">福島在全日本新酒鑑評會連續多年榮獲金賞第一！百年酒造「末廣酒造」的純米大吟釀（如貓魔の雫、嘉永藏限定酒）香氣高雅細緻。七日町老街的會津漆器店更有輕巧耐用的蒔繪漆木碗與茶杯。</p>
-                    <p class="text-secondary mt-2 leading-[1.7]"><span class="font-medium">採買地點：</span>末廣酒造嘉永藏直營門市、會津漆器百年老舖</p>
-                    <p class="text-secondary mt-1 leading-[1.7]"><span class="font-medium">推薦亮點：</span>大吟釀生原酒、微氣泡清酒「ぷちぷち」、漆器筷匙組。</p>
-                </article>
-
-                <article class="item-card">
-                    <p class="text-secondary">Day 4~6・裏磐梯高原　渡假村賣店 / 五色沼商場　裏磐梯唯一特產</p>
-                    <h3 class="item-title mt-1">幻之極品「會津山鹽」系列（年輪蛋糕・鹽拉麵・山鹽糖）</h3>
-                    <p class="mt-1.5 leading-[1.7]">約 ¥450 ~ ¥2,200</p>
-                    <p class="mt-2 leading-[1.7]">由大鹽裏磐梯溫泉水經過大鍋柴火熬煮而成的「山鹽」，富含天然礦物質、溫潤回甘無苦味。此鹽產量極稀，認明「會津山鹽認定標章」的年輪蛋糕、山鹽柚餅子、山鹽生拉麵包是最高人氣之選！</p>
-                    <p class="text-secondary mt-2 leading-[1.7]"><span class="font-medium">採買地點：</span>裏磐梯湖畔渡假村 1 樓商店、裏磐梯物產館</p>
-                    <p class="text-secondary mt-1 leading-[1.7]"><span class="font-medium">推薦亮點：</span>會津山鹽年輪蛋糕、罐裝研磨山鹽、山鹽仙貝。</p>
-                </article>
-
-                <article class="item-card">
-                    <p class="text-secondary">Day 6・郡山站轉乘　S-PAL 郡山銘菓街</p>
-                    <h3 class="item-title mt-1">福島三大經典名菓（Mamador・柏屋薄皮饅頭・家傳柚餅子）</h3>
-                    <p class="mt-1.5 leading-[1.7]">約 ¥800 ~ ¥2,500</p>
-                    <p class="mt-2 leading-[1.7]">郡山站站內轉乘 30 分鐘即可一次買齊！「ままどおる (Mamador)」牛奶香濃入口即化；日本三大饅頭之一「柏屋薄皮饅頭」皮薄餡豐甜而不膩；「かんのや家伝ゆべし」軟糯三角形麻糬包紅豆餡，溫潤高雅大人氣。</p>
-                    <p class="text-secondary mt-2 leading-[1.7]"><span class="font-medium">採買地點：</span>JR 郡山站 2 樓 S-PAL 伴手禮商場（轉新幹線順買）</p>
-                    <p class="text-secondary mt-1 leading-[1.7]"><span class="font-medium">推薦亮點：</span>季節限定巧克力 Mamador、柏屋宇治抹茶饅頭。</p>
-                </article>
-
-                <article class="item-card">
-                    <p class="text-secondary">Day 6・鐵道美食　郡山站便當店</p>
-                    <h3 class="item-title mt-1">喜多方拉麵名店禮盒 ＆ 福島海陸鐵路便當</h3>
-                    <p class="mt-1.5 leading-[1.7]">約 ¥1,000 ~ ¥2,200</p>
-                    <p class="mt-2 leading-[1.7]">喜多方拉麵名列日本三大拉麵，特色為多加水扁平波浪捲麵，麵條彈牙吸汁。郡山站有坂內食堂、一平拉麵等知名生麵禮盒；新幹線上更推薦買個「福豆屋・海苔辨」或會津牛便當當午餐。</p>
-                    <p class="text-secondary mt-2 leading-[1.7]"><span class="font-medium">採買地點：</span>郡山站新幹線閘門內外便當鋪與土產店</p>
-                    <p class="text-secondary mt-1 leading-[1.7]"><span class="font-medium">推薦亮點：</span>喜多方醬油拉麵禮盒、海苔便當世界一「海苔辨」。</p>
-                </article>
-
-                <article class="item-card">
-                    <p class="text-secondary">Day 6・東京上野　多慶屋 (TAKEYA)</p>
-                    <h3 class="item-title mt-1">多慶屋零食藥妝 ＆ 深秋當季高級水果（蜜蘋果・身不知柿・晚生晴王）</h3>
-                    <p class="mt-1.5 leading-[1.7]">依個人採買預算</p>
-                    <p class="mt-2 leading-[1.7]">上野最傳奇的紫色百貨多慶屋，零食（干貝糖、杏仁白巧、仙貝）、常備藥妝（合利他命、止痛藥、眼藥水）皆有免稅折扣。11 月正值東北與長野深秋水果極盛期：福島蜜蘋果、會津身不知柿（御用貢品）、長野晚生晴王麝香葡萄，買回飯店大餐桌現切享用！</p>
-                    <p class="text-secondary mt-2 leading-[1.7]"><span class="font-medium">採買地點：</span>多慶屋 TAビル (上野御徒町站旁)</p>
-                    <p class="text-secondary mt-1 leading-[1.7]"><span class="font-medium">推薦亮點：</span>免稅 10% ＋ 信用卡優惠、大包裝零食、深秋限定蜜蘋果與甜柿。</p>
-                </article>
-
-                <article class="item-card md:col-span-2">
-                    <p class="text-secondary">Day 7・羽田出境免稅　羽田第 3 航廈</p>
-                    <h3 class="item-title mt-1">羽田機場出境免稅必補貨（東京芭娜娜・獺祭・ROYCE）</h3>
-                    <p class="mt-1.5 leading-[1.7]">約 ¥900 ~ ¥6,000</p>
-                    <p class="mt-2 leading-[1.7]">過安檢出關後直接手提上機，完全不佔託運公斤數！羽田國際線免稅店集合了全日本最熱銷名產：ROYCE 生巧克力、白色戀人、YOKU MOKU 原味雪茄蛋捲、資生堂 Parlour 點心以及各大頂級清酒。</p>
-                    <p class="text-secondary mt-2 leading-[1.7]"><span class="font-medium">採買地點：</span>羽田機場第 3 航廈出境免稅綜合商店 (TIAT DUTY FREE)</p>
-                    <p class="text-secondary mt-1 leading-[1.7]"><span class="font-medium">推薦亮點：</span>直接手提免秤重、免稅保證、最新包裝伴手禮禮盒。</p>
-                </article>
-            </div>
-
-            <article class="page-sheet px-3 py-5 sm:px-6 sm:py-6 space-y-4">
-                <h3 class="item-title">旅伴採買智慧貼心叮嚀</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div>
-                        <p class="font-medium">善用宅急便寄大行李</p>
-                        <p class="mt-1.5 leading-[1.7]">Day 3 退房時大行李直接寄往裏磐梯渡假村，沿途景點（只見線、大內宿）雙手輕鬆，買完紀念品直接塞進隨身後背包，零負擔。</p>
+            <article class="page-sheet shadow-sm">
+                <div class="flex flex-col">
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
+                            <i class="ph ph-gift text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">會津桐木工藝品 ＆ 奧會津紫蘇蜜餞</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 2・道の駅みしま宿</li>
+                                <li>約 ¥500 ~ ¥3,500</li>
+                                <li>桐木筷、紫蘇糖、鐵橋明信片</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div>
-                        <p class="font-medium">會津山鹽認明官方標章</p>
-                        <p class="mt-1.5 leading-[1.7]">裏磐梯溫泉水熬製的會津山鹽數量珍稀，購買相關商品時認明「會津山塩認定シール」貼紙，品質天然有保證。</p>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
+                            <i class="ph ph-leaf text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">大內宿金胡麻 ＆ 焙煎七味粉</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 3・茅草屋民藝店</li>
+                                <li>約 ¥600 ~ ¥2,000</li>
+                                <li>金胡麻油、蕎麥乾麵、限定地酒</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div>
-                        <p class="font-medium">液體膏狀物託運須知</p>
-                        <p class="mt-1.5 leading-[1.7]">地酒清酒、胡麻油、紫蘇濃縮汁、味噌等屬於液體類，必須在 Day 6 於上野飯店打包放入「託運行李箱」，不可手提上飛機；機場免稅店買的清酒則可直接手提。</p>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-benitobi/20 text-benitobi" aria-hidden="true">
+                            <i class="ph ph-cow text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">會津吉祥紅牛 ＆ 不倒翁小法師</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 1–4・鶴城會館／七日町通</li>
+                                <li>約 ¥800 ~ ¥3,800</li>
+                                <li>手繪赤べこ、鑰匙圈、繪付體驗</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
+                            <i class="ph ph-wine text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">末廣酒造限定地酒 ＆ 會津漆器</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 4・七日町通嘉永藏</li>
+                                <li>約 ¥1,500 ~ ¥6,000</li>
+                                <li>大吟釀生原酒、微氣泡清酒、漆器筷匙</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
+                            <i class="ph ph-cooking-pot text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">幻之極品「會津山鹽」系列</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 4–6・裏磐梯渡假村賣店</li>
+                                <li>約 ¥450 ~ ¥2,200</li>
+                                <li>年輪蛋糕、研磨山鹽、山鹽仙貝</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
+                            <i class="ph ph-cookie text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">福島三大經典名菓</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 6・郡山站 S-PAL 銘菓街</li>
+                                <li>約 ¥800 ~ ¥2,500</li>
+                                <li>Mamador、柏屋薄皮饅頭、家傳柚餅子</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
+                            <i class="ph ph-bowl-food text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">喜多方拉麵禮盒 ＆ 鐵路便當</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 6・郡山站便當店</li>
+                                <li>約 ¥1,000 ~ ¥2,200</li>
+                                <li>喜多方醬油拉麵禮盒、海苔辨</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-benitobi/20 text-benitobi" aria-hidden="true">
+                            <i class="ph ph-shopping-bag text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">多慶屋零食藥妝 ＆ 深秋水果</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 6・上野多慶屋</li>
+                                <li>依個人採買預算</li>
+                                <li>免稅 10%、蜜蘋果、身不知柿、晚生晴王</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6">
+                        <span class="list-icon bg-ainezumi/20 text-ainezumi" aria-hidden="true">
+                            <i class="ph ph-airplane-takeoff text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">羽田出境免稅必補貨</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 7・第 3 航廈 TIAT DUTY FREE</li>
+                                <li>約 ¥900 ~ ¥6,000</li>
+                                <li>東京芭娜娜、獺祭、ROYCE，手提免秤重</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="page-sheet shadow-sm">
+                <div class="flex flex-col">
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-aoni/20 text-aoni" aria-hidden="true">
+                            <i class="ph ph-suitcase-simple text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">善用宅急便寄大行李</h3>
+                            <p class="mt-2 text-sm text-stone-500 leading-loose">Day 3 退房寄往裏磐梯，紀念品放隨身包，零負擔。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
+                            <i class="ph ph-seal-check text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">會津山鹽認明官方標章</h3>
+                            <p class="mt-2 text-sm text-stone-500 leading-loose">認明「會津山塩認定シール」，品質天然有保證。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6">
+                        <span class="list-icon bg-ainezumi/20 text-ainezumi" aria-hidden="true">
+                            <i class="ph ph-drop text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">液體膏狀物託運須知</h3>
+                            <p class="mt-2 text-sm text-stone-500 leading-loose">地酒、胡麻油、紫蘇汁於 Day 6 放入託運；機場免稅清酒可手提。</p>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -2982,70 +3075,69 @@
             <div class="page-head">
                 <p class="text-kicker text-kesizumi">行前必備須知　預約・票務・穿搭指南</p>
                 <h2 class="page-title mt-1">出發前準備事項與預約清單</h2>
-                <p class="text-secondary mt-2">涵蓋鐵道車票聰明買法（免買 JR Pass 倒貼）、11 月深秋洋蔥式穿搭秘訣，以及會津定期觀光巴士預約時程</p>
+                <p class="text-sm text-stone-500 mt-2 leading-relaxed">車票精算、深秋穿搭、巴士預約與行李配送</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                <article class="item-card space-y-4">
-                    <div>
-                        <p class="text-secondary">車票精算建議</p>
-                        <h3 class="item-title mt-1">新幹線與鐵道票務策略</h3>
-                        <p class="text-secondary mt-1">強烈建議：單買車票・免買 JR Pass</p>
-                    </div>
-                    <div class="space-y-1.5 leading-[1.7]">
-                        <p>JR East Pass (東北 5 日券)：<span class="line-through text-secondary">¥30,000 / 人</span></p>
-                        <p class="font-medium">本行程 7 天實際 JR 車資：約 ¥19,400 / 人</p>
-                        <p class="text-secondary">為何不買周遊券？ 買周遊券每人倒虧 ¥10,600（4 人多花上萬台幣）；且 Pass 規定「連續 5 天」，無法同時涵蓋 Day 1 去程與 Day 6 回程。</p>
-                    </div>
-                    <ul class="space-y-3 leading-[1.7]">
-                        <li><span class="font-medium">早鳥搶票 (えきねっと)：</span>乘車日 1 個月前（台灣時間 09:00） 於 JR 東日本官網預訂「新幹線 e-Ticket」，可搶 トクだ値 10%~30% 早鳥折扣，搶到後全趟 JR 僅需約 ¥15,000！</li>
-                        <li><span class="font-medium">手機交通 IC 卡必備：</span>磐越西線（會津若松 ⇄ 豬苗代 ⇄ 郡山）全線開通 Suica / PASMO 閘門，iPhone Apple Pay 綁定感應最優雅，免排隊買票。</li>
-                    </ul>
-                </article>
-
-                <article class="item-card space-y-4">
-                    <div>
-                        <h3 class="item-title">11 月深秋穿搭 ＆ 禦寒裝備</h3>
-                        <p class="text-secondary mt-1">溫差高達 15°C・洋蔥式三層穿搭</p>
-                    </div>
-                    <div class="space-y-1.5 leading-[1.7]">
-                        <p><span class="font-medium">氣溫預估</span>　山區 1°C ~ 12°C ｜ 東京 8°C ~ 18°C</p>
-                        <p class="text-secondary">清晨裏磐梯與奧會津水氣重、步道可能結霜，體感接近寒冬；室內與新幹線上暖氣充足（約 22°C），切忌穿厚重高領毛衣，必須方便穿脫。</p>
-                    </div>
-                    <ul class="space-y-3 leading-[1.7]">
-                        <li><span class="font-medium">外層防風防潑水：</span>防風輕羽絨外套或 GORE-TEX 外套（奧會津只見川與裏磐梯湖畔風大水氣多，防風最重要）。</li>
-                        <li><span class="font-medium">保暖小配件三件套：</span>毛帽（護住頭部防風吹頭痛）、保暖手套、輕便圍巾。</li>
-                        <li><span class="font-medium">防滑好走平底鞋：</span>大內宿碎石路、只見川觀景木梯清晨易結薄霜，建議穿著刻紋深的防滑運動健走鞋。</li>
-                    </ul>
-                </article>
-
-                <article class="item-card flex flex-col justify-between space-y-4">
-                    <div class="space-y-4">
-                        <div>
-                            <h3 class="item-title">會津定期觀光巴士預約指南</h3>
-                            <p class="text-secondary mt-1">Day 2 方案 B「奥会津ぶらり旅」</p>
+            <article class="page-sheet shadow-sm">
+                <div class="flex flex-col">
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ainezumi/20 text-ainezumi" aria-hidden="true">
+                            <i class="ph ph-ticket text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">新幹線與鐵道票務策略</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>強烈建議：單買車票・免買 JR Pass</li>
+                                <li>早鳥搶票 (えきねっと)</li>
+                                <li>手機交通 IC 卡必備</li>
+                            </ul>
                         </div>
-                        <div class="space-y-1.5 leading-[1.7]">
-                            <p><span class="font-medium">預約開放時程</span>　預計 9 月中旬官網公布</p>
-                            <p class="text-secondary">會津巴士通常於每年 9 月中旬 於官網公布秋季（10~11月）的運行日期、最新時刻表與套票費用。</p>
-                        </div>
-                        <ul class="space-y-3 leading-[1.7]">
-                            <li><span class="font-medium">預約方式：</span>全預約制，公布後可於會津巴士官網或電話預約。套票已包含專屬巴士交通 ＋ 霧幻峽渡船船票，省去自行接洽舟子之手續。</li>
-                            <li><span class="font-medium">備案選擇：</span>若定期巴士滿位或開行日期不合，可直接選擇「方案 A 觀光包車」，時間更自由且多泡早戶溫泉鶴之湯秘湯。</li>
-                        </ul>
                     </div>
-                    <div>
-                        <a href="https://www.aizubus.com/travel/okuaizu_burari/" target="_blank" rel="noopener" class="btn-primary">
-                            <i class="ph ph-arrow-square-out" aria-hidden="true"></i> 會津巴士官方「奥会津ぶらり旅」網頁
-                        </a>
-                    </div>
-                </article>
-            </div>
 
-            <article class="page-sheet px-3 py-5 sm:px-6 sm:py-6 space-y-3">
-                <h3 class="item-title">行李配送關鍵日提醒（極致輕裝原則）</h3>
-                <p class="leading-[1.7]"><span class="font-medium">Day 3 早晨・會津若松飯店退房：</span>利用飯店櫃檯宅急便，將「大件行李直接寄往 Day 4 裏磐梯湖畔渡假村」。全員僅背負含 Day 3 一晚換洗衣物之輕裝隨身包，搭乘會津鐵道與玩大內宿最輕鬆。</p>
-                <p class="leading-[1.7]"><span class="font-medium">Day 6 早晨・裏磐梯渡假村出發：</span>大行李隨渡假村免費大巴直上行李艙，轉新幹線直達上野，下車即抵達 MIMARU 上野 EAST 飯店放行李，完全不需要在東京市區狼狽拖行李換乘地鐵。</p>
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
+                            <i class="ph ph-t-shirt text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">11月深秋穿搭 ＆ 禦寒裝備</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>洋蔥式三層穿搭</li>
+                                <li>外層防風</li>
+                                <li>保暖配件</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6 border-b border-stone-200/60">
+                        <span class="list-icon bg-ainezumi/20 text-ainezumi" aria-hidden="true">
+                            <i class="ph ph-bus text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">會津定期觀光巴士</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 2 方案 B「奥会津ぶらり旅」</li>
+                                <li>9 月中旬官網公布秋季班次</li>
+                                <li>全預約制，套票含巴士 ＋ 霧幻峽船票</li>
+                            </ul>
+                            <a href="https://www.aizubus.com/travel/okuaizu_burari/" target="_blank" rel="noopener" class="btn-outline is-quiet mt-3">
+                                <i class="ph ph-arrow-square-out" aria-hidden="true"></i> 會津巴士預約
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 py-6">
+                        <span class="list-icon bg-aoni/20 text-aoni" aria-hidden="true">
+                            <i class="ph ph-suitcase-simple text-2xl"></i>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-medium text-kesizumi">行李配送關鍵日</h3>
+                            <ul class="mt-2 space-y-1 text-sm text-stone-500 leading-loose list-none">
+                                <li>Day 3 早晨寄往裏磐梯</li>
+                                <li>Day 6 早晨隨車直達上野</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </article>
         </section>
 
