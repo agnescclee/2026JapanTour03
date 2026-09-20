@@ -542,7 +542,9 @@
         }
 
         body.itin-sheet-open,
-        body.expense-sheet-open {
+        body.expense-sheet-open,
+        body.souvenir-sheet-open,
+        body.souvenir-photo-open {
             overflow: hidden;
         }
 
@@ -863,34 +865,377 @@
             line-height: 1;
         }
 
-        #content-souvenir .souvenir-icon {
-            width: 1.75rem;
-            height: 1.75rem;
-            font-size: 1.125rem;
+        #content-souvenir:not(.hidden) {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
         }
 
-        #content-souvenir h3 {
-            font-size: var(--text-md);
+        .souvenir-tabs {
+            display: flex;
+            gap: 0.25rem;
+            margin: 0 0 1.5rem;
+            border-bottom: 0.5px solid rgba(215, 196, 187, 0.5);
+        }
+
+        .souvenir-tab {
+            font-family: var(--font-brand);
+            min-height: 2.75rem;
+            padding: 0.45rem 0.9rem 0.55rem;
+            margin-bottom: -0.5px;
+            border: 0;
+            border-bottom: 2px solid transparent;
+            background: transparent;
+            color: var(--color-kesizumi);
+            font-size: var(--text-base);
             font-weight: var(--weight-medium);
             line-height: var(--leading-tight);
         }
 
-        #content-souvenir .souvenir-body,
-        #content-souvenir .souvenir-body p,
-        #content-souvenir article p {
+        .souvenir-tab.is-active {
+            color: var(--color-benitobi);
+            border-bottom-color: var(--color-benitobi);
+            font-weight: var(--weight-bold);
+        }
+
+        .souvenir-tab-count {
+            font-variant-numeric: tabular-nums;
+            font-weight: var(--weight-medium);
+            opacity: 0.72;
+        }
+
+        .souvenir-day-block {
+            scroll-margin-top: 5.5rem;
+        }
+
+        .souvenir-day-block + .souvenir-day-block {
+            margin-top: 1.75rem;
+        }
+
+        .souvenir-day-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding-bottom: 0.65rem;
+            margin-bottom: 0.15rem;
+            border-bottom: 0.5px solid rgba(215, 196, 187, 0.5);
+        }
+
+        .souvenir-day-label {
+            font-family: var(--font-brand);
+            font-size: var(--text-lg);
+            font-weight: var(--weight-semibold);
+            line-height: var(--leading-tight);
+            color: var(--color-kesizumi);
+            border-left: 2px solid var(--color-benitobi);
+            padding-left: 0.75rem;
+        }
+
+        .souvenir-day-label .souvenir-day-num {
+            color: var(--color-benitobi);
+        }
+
+        .souvenir-today-pill {
+            flex-shrink: 0;
+            font-size: var(--text-xs);
+            font-weight: var(--weight-medium);
+            letter-spacing: 0.04em;
+            color: var(--color-benitobi);
+        }
+
+        .souvenir-rec-card {
+            display: grid;
+            grid-template-columns: 4.25rem minmax(0, 1fr);
+            column-gap: 0.9rem;
+            row-gap: 0.55rem;
+            padding: 1.05rem 0 1.1rem;
+            border-bottom: 0.5px solid rgba(215, 196, 187, 0.38);
+        }
+
+        .souvenir-rec-card:last-child {
+            border-bottom: 0;
+            padding-bottom: 0.25rem;
+        }
+
+        .souvenir-illust,
+        .souvenir-thumb {
+            width: 4.25rem;
+            height: 4.25rem;
+            border-radius: 0.75rem;
+            background: var(--color-shironeri);
+            border: 0.5px solid rgba(215, 196, 187, 0.55);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--color-spot);
+            padding: 0;
+        }
+
+        .souvenir-illust i,
+        .souvenir-thumb i {
+            font-size: 1.65rem;
+            line-height: 1;
+        }
+
+        .souvenir-illust img,
+        .souvenir-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .souvenir-thumb.is-photo {
+            cursor: zoom-in;
+        }
+
+        .souvenir-rec-copy {
+            min-width: 0;
+        }
+
+        .souvenir-rec-name {
+            font-size: var(--text-md);
+            font-weight: var(--weight-medium);
+            line-height: var(--leading-tight);
+            color: var(--color-kesizumi);
+        }
+
+        .souvenir-rec-desc {
+            margin-top: 0.35rem;
             font-size: var(--text-sm);
             line-height: var(--leading-relaxed);
+            color: rgba(67, 67, 67, 0.62);
+        }
+
+        .souvenir-rec-price {
+            margin-top: 0.4rem;
+            font-size: var(--text-sm);
+            font-weight: var(--weight-medium);
+            line-height: var(--leading-tight);
+            font-variant-numeric: tabular-nums;
+            color: var(--color-kesizumi);
+        }
+
+        .souvenir-buy-label {
+            margin-top: 0.55rem;
+            font-size: var(--text-xs);
+            font-weight: var(--weight-medium);
+            letter-spacing: 0.06em;
+            color: rgba(67, 67, 67, 0.46);
+        }
+
+        .souvenir-buy-list {
+            margin: 0.2rem 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .souvenir-buy-list li {
+            position: relative;
+            padding-left: 0.8rem;
+            font-size: var(--text-sm);
+            line-height: var(--leading-relaxed);
+            color: var(--color-transit);
+        }
+
+        .souvenir-buy-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.62em;
+            width: 0.22rem;
+            height: 0.22rem;
+            border-radius: 999px;
+            background: var(--color-haizakura);
+        }
+
+        .souvenir-rec-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .souvenir-rec-actions .btn-outline,
+        .souvenir-rec-actions .btn-secondary {
+            width: auto;
+            min-height: 2.25rem;
+            padding: 0.3rem 0.85rem;
+        }
+
+        .souvenir-notes {
+            margin-top: 2rem;
+        }
+
+        .souvenir-notes .item-title {
+            margin-bottom: 0.35rem;
+        }
+
+        .souvenir-filter {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 0.35rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .souvenir-filter .cat-btn {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+
+        #souvenir-panel-mine {
+            padding-bottom: 6rem;
+        }
+
+        .souvenir-mine-item {
+            display: grid;
+            grid-template-columns: 2.75rem 3.5rem minmax(0, 1fr) auto;
+            column-gap: 0.65rem;
+            align-items: start;
+            padding: 0.9rem 0;
+            border-bottom: 0.5px solid rgba(215, 196, 187, 0.38);
+        }
+
+        .souvenir-mine-item.is-done .souvenir-mine-name,
+        .souvenir-mine-item.is-done .souvenir-mine-meta {
+            opacity: 0.48;
+        }
+
+        .souvenir-mine-item:has(input:checked) .prep-check,
+        .souvenir-mine-item.is-done .prep-check {
+            background: var(--color-benitobi);
+            border-color: var(--color-benitobi);
+            color: var(--color-gofun);
+        }
+
+        .souvenir-mine-item .souvenir-illust,
+        .souvenir-mine-item .souvenir-thumb {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+
+        .souvenir-mine-item .souvenir-illust i,
+        .souvenir-mine-item .souvenir-thumb i {
+            font-size: 1.35rem;
+        }
+
+        .souvenir-mine-body {
+            min-width: 0;
+        }
+
+        .souvenir-mine-name {
+            font-size: var(--text-base);
+            font-weight: var(--weight-medium);
+            line-height: var(--leading-tight);
+            color: var(--color-kesizumi);
+        }
+
+        .souvenir-mine-meta,
+        .souvenir-mine-place,
+        .souvenir-mine-note {
+            margin-top: 0.22rem;
+            font-size: var(--text-sm);
+            line-height: var(--leading-relaxed);
+            color: rgba(67, 67, 67, 0.52);
+        }
+
+        .souvenir-mine-place {
+            color: var(--color-transit);
+        }
+
+        .souvenir-mine-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.1rem;
+        }
+
+        .souvenir-empty {
+            padding: 2.5rem 0.5rem;
+            text-align: center;
+            font-size: var(--text-sm);
+            line-height: var(--leading-relaxed);
+            color: rgba(67, 67, 67, 0.46);
+        }
+
+        .souvenir-photo-preview {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .souvenir-photo-preview .souvenir-thumb {
+            width: 4.25rem;
+            height: 4.25rem;
+        }
+
+        .souvenir-photo {
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(67, 67, 67, 0.88);
+            padding: 1.25rem;
+        }
+
+        .souvenir-photo.is-open {
+            display: flex;
+        }
+
+        .souvenir-photo img {
+            max-width: min(96vw, 42rem);
+            max-height: 86vh;
+            object-fit: contain;
+            background: var(--color-gofun);
+        }
+
+        .souvenir-photo-close {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            width: 2.75rem;
+            height: 2.75rem;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(255, 255, 251, 0.12);
+            color: var(--color-gofun);
+            font-size: 1.35rem;
+        }
+
+        .souvenir-fab {
+            bottom: calc(var(--mobile-nav-space, 0px) + 1.25rem);
         }
 
         @media (min-width: 768px) {
-            #content-souvenir .souvenir-icon {
-                width: 2.75rem;
-                height: 2.75rem;
-                font-size: 1.5rem;
+            .souvenir-rec-card {
+                grid-template-columns: 5.25rem minmax(0, 1fr);
+                column-gap: 1.15rem;
             }
 
-            #content-souvenir .souvenir-body {
-                padding-left: calc(2.75rem + 0.75rem);
+            .souvenir-illust {
+                width: 5.25rem;
+                height: 5.25rem;
+            }
+
+            .souvenir-illust i {
+                font-size: 1.9rem;
+            }
+
+            .souvenir-mine-item {
+                grid-template-columns: 2.75rem 4rem minmax(0, 1fr) auto;
+            }
+
+            .souvenir-mine-item .souvenir-illust,
+            .souvenir-mine-item .souvenir-thumb {
+                width: 4rem;
+                height: 4rem;
+            }
+
+            .souvenir-fab {
+                bottom: 2.5rem;
             }
         }
 
@@ -921,6 +1266,11 @@
             background: var(--color-shironeri);
             border-color: var(--color-benitobi);
             box-shadow: 0 0 0 1px rgba(153, 70, 57, 0.3);
+        }
+
+        textarea.form-control {
+            min-height: 4.5rem;
+            resize: vertical;
         }
 
         .prep-toolbar {
@@ -1737,17 +2087,9 @@
             margin-top: 0.75rem;
         }
 
-        @media (min-width: 640px) {
-            .overview-flights {
-                grid-template-columns: 1fr 1fr;
-                gap: 0;
-            }
-
-            .overview-flight + .overview-flight {
-                border-left: 1px solid rgba(215, 196, 187, 0.55);
-                padding-left: 2rem;
-                margin-left: 2rem;
-            }
+        .overview-flight + .overview-flight {
+            border-top: 1px solid rgba(215, 196, 187, 0.55);
+            padding-top: 1.5rem;
         }
 
         .overview-flight-kicker {
@@ -1785,11 +2127,13 @@
             font-size: var(--text-md);
             font-weight: var(--weight-semibold);
             letter-spacing: 0.02em;
+            white-space: nowrap;
         }
 
         .overview-flight-when {
             font-size: var(--text-sm);
             font-weight: var(--weight-medium);
+            white-space: nowrap;
         }
 
         .overview-flight-route .is-arr {
@@ -1808,36 +2152,55 @@
             line-height: 1;
         }
 
-        .overview-hotel {
+        .overview-hotel,
+        .overview-reserve {
             padding: 1.25rem 0;
             border-top: 1px solid rgba(215, 196, 187, 0.45);
         }
 
-        .overview-hotel:first-child {
+        .overview-hotel:first-child,
+        .overview-reserve:first-child {
             border-top: none;
         }
 
-        .overview-hotel-name {
+        .overview-hotel-when,
+        .overview-reserve-when {
+            font-size: var(--text-sm);
+            font-weight: var(--weight-medium);
+            line-height: var(--leading-tight);
+            color: #6b6560;
+        }
+
+        .overview-hotel-name,
+        .overview-reserve-name {
             font-size: var(--text-md);
             font-weight: var(--weight-medium);
             line-height: var(--leading-tight);
         }
 
-        .overview-hotel-meta {
+        .overview-hotel-when + .overview-hotel-name,
+        .overview-reserve-when + .overview-reserve-name {
+            margin-top: 0.25rem;
+        }
+
+        .overview-hotel-meta,
+        .overview-reserve-meta {
             margin-top: 0.7rem;
             font-size: var(--text-sm);
             line-height: var(--leading-relaxed);
             color: #6b6560;
         }
 
-        .overview-hotel-meta p {
+        .overview-hotel-meta p,
+        .overview-reserve-meta p {
             display: grid;
-            grid-template-columns: 2.5rem 1fr;
+            grid-template-columns: 3.25rem 1fr;
             gap: 0.75rem;
             align-items: start;
         }
 
-        .overview-hotel-meta p + p {
+        .overview-hotel-meta p + p,
+        .overview-reserve-meta p + p {
             margin-top: 0.2rem;
         }
 
@@ -1848,34 +2211,37 @@
             line-height: var(--leading-tight);
         }
 
-        .overview-hotel-meta a {
+        .overview-hotel-meta a,
+        .overview-reserve-meta a {
             color: var(--color-benitobi);
             font-weight: var(--weight-medium);
             overflow-wrap: anywhere;
         }
 
-        .overview-hotel-actions {
+        .overview-booking-no {
+            margin-top: 0.45rem;
+            font-size: var(--text-sm);
+            font-weight: var(--weight-medium);
+            line-height: var(--leading-tight);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .overview-hotel-actions,
+        .overview-reserve-actions {
             margin-top: 0.75rem;
             display: flex;
             flex-wrap: wrap;
-            align-items: flex-start;
-            gap: 0.5rem;
-        }
-
-        .overview-hotel-actions.has-booking {
-            position: relative;
-            justify-content: space-between;
-        }
-
-        .overview-hotel-actions.has-booking > a.btn-outline {
-            position: absolute;
-            top: 0;
-            right: 0;
+            align-items: center;
+            gap: 0.5rem 0.75rem;
         }
 
         .overview-booking {
             margin-top: 0;
             min-width: 0;
+        }
+
+        .overview-hotel-actions .overview-booking[open] {
+            flex: 1 1 100%;
         }
 
         .overview-booking > summary.btn-outline {
@@ -1923,37 +2289,6 @@
 
         .overview-booking-body .overview-label {
             padding-top: 0.05rem;
-        }
-
-        .overview-transit {
-            padding: 1.1rem 0;
-            border-top: 1px solid rgba(215, 196, 187, 0.45);
-        }
-
-        .overview-transit:first-child {
-            border-top: none;
-        }
-
-        .overview-transit-title {
-            font-size: var(--text-md);
-            font-weight: var(--weight-medium);
-            line-height: var(--leading-tight);
-        }
-
-        .overview-transit-note {
-            margin-top: 0.35rem;
-            font-size: var(--text-sm);
-            line-height: var(--leading-relaxed);
-            color: #6b6560;
-        }
-
-        .overview-transit-note p + p {
-            margin-top: 0.2rem;
-        }
-
-        .overview-transit-note a {
-            color: var(--color-benitobi);
-            font-weight: var(--weight-medium);
         }
 
     </style>
@@ -2357,7 +2692,7 @@
                         <ul class="itin-sheet-list">
                             <li><span class="font-medium">奧會津深秋氣候提醒：</span>水氣豐沛極冷易有晨霧（歷史均溫 3°C~10°C），請全員備妥防風禦寒保暖外套。</li>
                             <li><span class="font-medium">連泊免搬行李：</span>大行李安心留在會津若松客房內，全員隨身輕裝出遊，最省力舒心。</li>
-                            <li><span class="font-medium">全日包車：</span>五人改預約ジャンボ計程車。車行電話與估價寫在「總覽」。</li>
+                            <li><span class="font-medium">全日包車：</span>五人改預約ジャンボ計程車。車行電話見「總覽 → 其他預訂」。</li>
                         </ul>
                             </template>
                         </div>
@@ -2390,7 +2725,7 @@
                         <p class="itin-sheet-kicker">會津若松市區出發</p>
                         <ul class="itin-sheet-list">
                             <li>普通計程車最多 4 人。五人請訂ジャンボ（定員 9 名）。10:00–17:15 約 7.5–8 小時。</li>
-                            <li>車行、電話與估價見「總覽 → 交通資訊」。</li>
+                            <li>車行電話見「總覽 → 其他預訂」。</li>
                         </ul>
                             </template>
                                     </div>
@@ -2561,7 +2896,7 @@
                         <ul class="itin-sheet-list">
                             <li><span class="font-medium">山區氣候 ＆ 連假人潮：</span>風大，備妥防風外套。本日文化之日連假，人潮多。</li>
                             <li><span class="font-medium">行李寄送：</span>退房時把大行李寄往裏磐梯レイクリゾート，只帶一晚換洗衣物。</li>
-                            <li><span class="font-medium">包車：</span>08:45 飯店上車。車行電話與估價寫在「總覽」。</li>
+                            <li><span class="font-medium">包車：</span>08:45 飯店上車。車行電話見「總覽 → 其他預訂」。</li>
                         </ul>
                             </template>
                         </div>
@@ -2611,7 +2946,7 @@
                         <p class="itin-sheet-kicker">會津若松市區出發</p>
                         <ul class="itin-sheet-list">
                             <li>普通計程車最多 4 人。五人請訂ジャンボ（定員 9 名）。08:45–14:30 約 6 小時。</li>
-                            <li>車行、電話與估價見「總覽 → 交通資訊」。11/3 連假務必預先預約。</li>
+                            <li>車行電話見「總覽 → 其他預訂」。11/3 連假務必預先預約。</li>
                         </ul>
                             </template>
                                     </div>
@@ -3676,7 +4011,7 @@
 
 
         <!-- ===================================================================
-             TAB 2: OVERVIEW (路線・航班・住宿・交通)
+             TAB 2: OVERVIEW (路線・航班・住宿・其他預訂)
              =================================================================== -->
         <section id="content-info" class="hidden animate-fade-in grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 lg:items-start">
             <article class="page-sheet overview-block">
@@ -3684,32 +4019,7 @@
                     <i class="ph ph-path text-ainezumi" aria-hidden="true"></i>
                     旅行路線
                 </h2>
-                <div class="overview-route">
-                    <div class="overview-stop is-fly">
-                        <p class="overview-stop-name">松山</p>
-                        <p class="overview-stop-meta">長榮 BR192</p>
-                    </div>
-                    <div class="overview-stop">
-                        <p class="overview-stop-name">會津若松</p>
-                        <p class="overview-stop-meta">新幹線＋磐越西線</p>
-                    </div>
-                    <div class="overview-stop">
-                        <p class="overview-stop-name">蘆之牧溫泉</p>
-                        <p class="overview-stop-meta">ジャンボ包車</p>
-                    </div>
-                    <div class="overview-stop">
-                        <p class="overview-stop-name">裏磐梯</p>
-                        <p class="overview-stop-meta">磐越西線＋免費接駁</p>
-                    </div>
-                    <div class="overview-stop">
-                        <p class="overview-stop-name">東京・濱松町</p>
-                        <p class="overview-stop-meta">新幹線（郡山→上野）</p>
-                    </div>
-                    <div class="overview-stop is-fly">
-                        <p class="overview-stop-name">松山</p>
-                        <p class="overview-stop-meta">長榮 BR191</p>
-                    </div>
-                </div>
+                <div id="overview-route" class="overview-route"></div>
             </article>
 
             <article class="page-sheet overview-block">
@@ -3717,32 +4027,7 @@
                     <i class="ph ph-airplane-tilt text-ainezumi" aria-hidden="true"></i>
                     航班資訊
                 </h2>
-                <div class="overview-flights">
-                    <div class="overview-flight">
-                        <p class="overview-flight-kicker">去程</p>
-                        <p class="overview-flight-no">BR192</p>
-                        <div class="overview-flight-route">
-                            <p class="overview-flight-code">TSA T1</p>
-                            <i class="ph-fill ph-airplane overview-flight-plane" aria-hidden="true"></i>
-                            <p class="overview-flight-code is-arr">HND T3</p>
-                            <p class="overview-flight-when">11/01 07:20</p>
-                            <span></span>
-                            <p class="overview-flight-when is-arr">11/01 11:15</p>
-                        </div>
-                    </div>
-                    <div class="overview-flight">
-                        <p class="overview-flight-kicker">回程</p>
-                        <p class="overview-flight-no">BR191</p>
-                        <div class="overview-flight-route">
-                            <p class="overview-flight-code">HND T3</p>
-                            <i class="ph-fill ph-airplane overview-flight-plane" aria-hidden="true"></i>
-                            <p class="overview-flight-code is-arr">TSA T1</p>
-                            <p class="overview-flight-when">11/07 12:40</p>
-                            <span></span>
-                            <p class="overview-flight-when is-arr">11/07 15:05</p>
-                        </div>
-                    </div>
-                </div>
+                <div id="overview-flights" class="overview-flights"></div>
             </article>
 
             <article class="page-sheet overview-block">
@@ -3750,446 +4035,45 @@
                     <i class="ph ph-buildings text-aoni" aria-hidden="true"></i>
                     住宿一覽
                 </h2>
-                <div>
-                    <div class="overview-hotel">
-                        <h3 class="overview-hotel-name">会津若松ワシントンホテル</h3>
-                        <div class="overview-hotel-meta">
-                            <p><span class="overview-label">電話</span><a href="tel:+81242226111">0242-22-6111</a></p>
-                            <p><span class="overview-label">地址</span><span>〒965-0024 福島県会津若松市白虎町201</span></p>
-                            <p><span class="overview-label">網站</span><a href="https://washington-hotels.jp/aizuwakamatsu/" target="_blank" rel="noopener">washington-hotels.jp/aizuwakamatsu</a></p>
-                        </div>
-                        <div class="overview-hotel-actions">
-                            <a href="https://www.google.com/maps/search/?api=1&query=会津若松ワシントンホテル" target="_blank" rel="noopener" class="btn-outline is-quiet">
-                                <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="overview-hotel">
-                        <h3 class="overview-hotel-name">会津芦ノ牧温泉　大川荘</h3>
-                        <div class="overview-hotel-meta">
-                            <p><span class="overview-label">電話</span><a href="tel:+81242922111">0242-92-2111</a></p>
-                            <p><span class="overview-label">地址</span><span>〒969-5147 福島県会津若松市大戸町大字芦ノ牧字下平984</span></p>
-                            <p><span class="overview-label">網站</span><a href="https://www.ookawaso.co.jp/" target="_blank" rel="noopener">ookawaso.co.jp</a></p>
-                        </div>
-                        <div class="overview-hotel-actions has-booking">
-                            <details class="quiet-details overview-booking">
-                                <summary class="btn-outline is-quiet">
-                                    <i class="ph ph-ticket" aria-hidden="true"></i> 訂房資訊
-                                </summary>
-                                <div class="overview-booking-body">
-                                    <p><span class="overview-label">施設名</span><span>会津芦ノ牧温泉　大川荘</span></p>
-                                    <p><span class="overview-label">予約番号</span><span>37379（予約受付日時 2026/09/17 23:57:39）</span></p>
-                                    <p><span class="overview-label">プラン</span><span>【料理長特選-山海の幸-】県内産和牛◇刺身4種盛り◇あれもこれも食す♪欲張りグルメ</span></p>
-                                    <p><span class="overview-label">お部屋</span><span>■宵待亭-スタンダード■-禁煙-12～14.5畳-渓谷美を愛でる</span></p>
-                                    <p><span class="overview-label">お食事</span><span>朝夕食付</span></p>
-                                    <p><span class="overview-label">チェックアウト</span><span>チェックアウト時刻　10:00</span></p>
-                                    <p><span class="overview-label">宿泊日</span><span>2026/11/03(火)から1泊</span></p>
-                                    <p><span class="overview-label">部屋数</span><span>1室</span></p>
-                                    <p><span class="overview-label">部屋割り</span><span>1部屋目　男性 3 名、女性 2 名</span></p>
-                                </div>
-                            </details>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Ashinomaki+Onsen+Ookawaso" target="_blank" rel="noopener" class="btn-outline is-quiet">
-                                <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="overview-hotel">
-                        <h3 class="overview-hotel-name">裏磐梯レイクリゾート</h3>
-                        <div class="overview-hotel-meta">
-                            <p><span class="overview-label">電話</span><a href="tel:+81241371111">0241-37-1111</a></p>
-                            <p><span class="overview-label">地址</span><span>〒969-2701 福島県耶麻郡北塩原村大字桧原字湯平山1171-1</span></p>
-                            <p><span class="overview-label">網站</span><a href="https://www.lakeresort.jp/" target="_blank" rel="noopener">lakeresort.jp</a></p>
-                        </div>
-                        <div class="overview-hotel-actions">
-                            <a href="https://www.google.com/maps/search/?api=1&query=裏磐梯レイクリゾート" target="_blank" rel="noopener" class="btn-outline is-quiet">
-                                <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="overview-hotel">
-                        <h3 class="overview-hotel-name">Premium Apart MONday 濱松町ステーション</h3>
-                        <div class="overview-hotel-meta">
-                            <p><span class="overview-label">電話</span><a href="tel:+81354013190">03-5401-3190</a></p>
-                            <p><span class="overview-label">地址</span><span>〒105-0013 東京都港区浜松町1-15-4</span></p>
-                            <p><span class="overview-label">網站</span><a href="https://hotel-monday.com/apartment/hamamatsucho_station/" target="_blank" rel="noopener">hotel-monday.com/apartment/hamamatsucho_station</a></p>
-                        </div>
-                        <div class="overview-hotel-actions">
-                            <a href="https://www.google.com/maps/search/?api=1&query=Premium+Apart+MONday+%E6%B5%9C%E6%9D%BE%E7%94%BA%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank" rel="noopener" class="btn-outline is-quiet">
-                                <i class="ph ph-map-pin" aria-hidden="true"></i> 地圖
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <div id="overview-stays"></div>
             </article>
 
             <article class="page-sheet overview-block">
                 <h2 class="item-title">
-                    <i class="ph ph-train text-ainezumi" aria-hidden="true"></i>
-                    交通資訊
+                    <i class="ph ph-ticket text-ainezumi" aria-hidden="true"></i>
+                    其他預訂
                 </h2>
-                <div>
-                    <div class="overview-transit">
-                        <h3 class="overview-transit-title">羽田 → 東京站</h3>
-                        <div class="overview-transit-note">
-                            <p>利木津巴士，約 55 分，東京站八重洲北口下車。</p>
-                        </div>
-                    </div>
-                    <div class="overview-transit">
-                        <h3 class="overview-transit-title">東京 → 會津若松</h3>
-                        <div class="overview-transit-note">
-                            <p>東北新幹線至郡山，轉磐越西線。單買車票即可，不用 JR Pass。</p>
-                        </div>
-                    </div>
-                    <div class="overview-transit">
-                        <h3 class="overview-transit-title">會津ジャンボ包車</h3>
-                        <div class="overview-transit-note">
-                            <p>あいづタクシー（福島交通 會津支社）</p>
-                            <p>フリーダイヤル <a href="tel:0120692468">0120-69-2468</a></p>
-                            <p>預約窗口 9:00–17:00。會津若松市白虎町 193-2。</p>
-                            <p>車種：ジャンボ計程車（定員 9 名）。五人不可搭普通車（最多 4 人）。</p>
-                            <p>時間制 ¥11,060／時（每 30 分 ¥5,530）。過路費、停車費另計。</p>
-                            <p>11/02 路線：華盛頓飯店 → 早戶碼頭 → 道の駅みしま宿 → 柳津町 → 返回飯店。</p>
-                            <p>11/03 路線：08:45 華盛頓飯店 → 大內宿 → 塔崖 → 14:30 大川莊。</p>
-                        </div>
-                        <div class="overview-hotel-actions">
-                            <a href="tel:0120692468" class="btn-outline is-quiet">
-                                <i class="ph ph-phone" aria-hidden="true"></i> 打電話
-                            </a>
-                            <a href="https://taxi.aizubus.com/sightseeing/taxi_de_okuaizu" target="_blank" rel="noopener" class="btn-outline is-quiet">奥会津包車</a>
-                            <a href="https://taxi.aizubus.com/sightseeing/" target="_blank" rel="noopener" class="btn-outline is-quiet">觀光計程車</a>
-                        </div>
-                    </div>
-                    <div class="overview-transit">
-                        <h3 class="overview-transit-title">蘆之牧溫泉 → 會津若松</h3>
-                        <div class="overview-transit-note">
-                            <p>11/04：入住大川莊時預約站前接駁，配合 10:28 會津鐵道リレー 101 號。</p>
-                            <p>約 10:00–10:10 發車，10:17 抵蘆之牧溫泉站；10:28 發 → 10:51 會津若松（5 番線）。</p>
-                            <p>車資約 ¥620，現金購票。會津鐵道不收 Suica / PASMO。</p>
-                        </div>
-                    </div>
-                    <div class="overview-transit">
-                        <h3 class="overview-transit-title">會津若松 → 裏磐梯</h3>
-                        <div class="overview-transit-note">
-                            <p>11/04：14:30 七日町搭計程車回站。15:30 磐越西線快速（3 番線）→ 15:57 豬苗代。</p>
-                            <p>轉 16:10 渡假村免費接駁，16:45 抵大廳。車資約 ¥530，可用 Suica。</p>
-                            <p>15:30 是銜接當日末班免費接駁的最後一班，請準時回站。</p>
-                        </div>
-                    </div>
-                    <div class="overview-transit">
-                        <h3 class="overview-transit-title">裏磐梯紅葉日（11/05）</h3>
-                        <div class="overview-transit-note">
-                            <p>請櫃檯代叫計程車至五色沼入口（毘沙門沼／遊客中心），再沿探勝路走回高原駅／物產館。約 5 分、¥900 左右；5 人需ジャンボ或兩台。</p>
-                            <p>午餐在物產館麺処 零番（會津山鹽拉麵，11:00–15:00）。出發前請飯店確認是否仍營業。</p>
-                            <p>桧原湖觀光船 14:30 出航（35 分）。住宿客前賣 ¥1,000，早上在櫃檯買票。碼頭自物產館步行約 5 分。</p>
-                            <p>諸橋近代美術館改修休館至 2027 年 4 月，午後改在渡假村用湖畔下午茶。</p>
-                        </div>
-                    </div>
-                    <div class="overview-transit">
-                        <h3 class="overview-transit-title">裏磐梯 → 上野</h3>
-                        <div class="overview-transit-note">
-                            <p>11/06：09:15 五色の森免費接駁 → 09:45 豬苗代。09:59 磐越西線快速 → 10:36 郡山。</p>
-                            <p>郡山站買便當後，11:00 やまびこ 134（13 番線）→ 12:18 上野（21 番線）。</p>
-                            <p>上野淺草口攔計程車至 Premium Apart MONday 濱松町，約 20–25 分。5 人大行李請叫兩台。</p>
-                            <p>備案：山手線外回り約 13 分到濱松町，北口步行約 2 分。空手採買再用這段。</p>
-                            <p>JR 乘車券（豬苗代→上野）¥5,060；新幹線指定席特急券 ¥4,060；合計約 ¥9,120。接駁免費。</p>
-                            <p>えきねっと劃位請選最後列或 2／4／6／8 號車荷物置き場旁。錯過 09:15 接駁則改搭 11:15，銜接 13:06 やまびこ 54。</p>
-                        </div>
-                    </div>
-                    <div class="overview-transit">
-                        <h3 class="overview-transit-title">濱松町 → 羽田</h3>
-                        <div class="overview-transit-note">
-                            <p>飯店門口計程車約 15–20 分。備案：步行 5 分至濱松町單軌轉乘口，空港快速約 13–20 分直達第 3 航廈、¥500。</p>
-                        </div>
-                    </div>
-                </div>
+                <div id="overview-reservations"></div>
             </article>
         </section>
 
         <!-- ===================================================================
-             TAB 3: SOUVENIR GUIDE (嚴選在地伴手禮指南)
+             TAB 3: SOUVENIR
              =================================================================== -->
-        <section id="content-souvenir" class="hidden space-y-8 animate-fade-in lg:max-w-4xl lg:mx-auto">
-            <article class="page-sheet">
-                <div class="flex flex-col">
-                    <div class="py-6 border-b border-haizakura/40">
-                        <div class="flex items-start gap-3">
-                            <span class="list-icon souvenir-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
-                                <i class="ph ph-gift"></i>
-                            </span>
-                            <h3 class="text-lg font-medium text-benitobi min-w-0">會津桐木工藝品 ＆ 奧會津紫蘇蜜餞</h3>
-                        </div>
-                        <div class="souvenir-body mt-1.5 space-y-1">
-                            <p class="text-sm text-stone-500 leading-relaxed">三島町以「會津桐」聞名全日本，質地輕盈且防潮防蟲。休息站內有精緻的桐木杯墊、收納盒與書籤；現場必吃特產「赤紫蘇霜淇淋」，酸甜清香，亦可買紫蘇濃縮汁與蜜餞回家沖泡。</p>
-                            <p class="flex items-start gap-1.5 text-sm text-stone-400 leading-relaxed">
-                                <i class="ph ph-currency-jpy mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>500 ~ 3,500</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ainezumi leading-relaxed">
-                                <i class="ph ph-map-pin mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>第一只見川橋梁休息站（道の駅みしま宿）</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ohdo leading-relaxed">
-                                <i class="ph ph-star mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>世界級只見線鐵橋明信片、會津桐木筷、紫蘇糖。</span>
-                            </p>
-                        </div>
-                    </div>
+        <section id="content-souvenir" class="hidden animate-fade-in lg:max-w-4xl lg:mx-auto">
+            <div class="souvenir-tabs" role="tablist" aria-label="手信">
+                <button type="button" id="souvenir-tab-recommend" class="souvenir-tab is-active" role="tab" aria-selected="true" aria-controls="souvenir-panel-recommend" data-souvenir-view="recommend">推薦</button>
+                <button type="button" id="souvenir-tab-mine" class="souvenir-tab" role="tab" aria-selected="false" aria-controls="souvenir-panel-mine" data-souvenir-view="mine">我的手信<span class="souvenir-tab-count" id="souvenir-mine-count"></span></button>
+            </div>
 
-                    <div class="py-6 border-b border-haizakura/40">
-                        <div class="flex items-start gap-3">
-                            <span class="list-icon souvenir-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
-                                <i class="ph ph-bread"></i>
-                            </span>
-                            <h3 class="text-lg font-medium text-benitobi min-w-0">柳津名物　粟饅頭（あわまんじゅう）</h3>
-                        </div>
-                        <div class="souvenir-body mt-1.5 space-y-1">
-                            <p class="text-sm text-stone-500 leading-relaxed">圓藏寺和尚為求不再「あわ（逢）ない」災難，以粟與糯米製成的黃色饅頭。外皮有細緻粟粒口感，內餡紅豆。現蒸最好吃，也可買冷凍帶回。</p>
-                            <p class="flex items-start gap-1.5 text-sm text-stone-400 leading-relaxed">
-                                <i class="ph ph-currency-jpy mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>150 ~ 800</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ainezumi leading-relaxed">
-                                <i class="ph ph-map-pin mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>ほっとinやないづ 小池菓子舗、圓藏寺門前老舖</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ohdo leading-relaxed">
-                                <i class="ph ph-star mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>現蒸粟饅頭、冷凍伴手禮、茶饅頭。</span>
-                            </p>
-                        </div>
-                    </div>
+            <div id="souvenir-panel-recommend" role="tabpanel" aria-labelledby="souvenir-tab-recommend">
+                <div id="souvenir-recommend-list"></div>
+                <div id="souvenir-notes" class="souvenir-notes"></div>
+            </div>
 
-                    <div class="py-6 border-b border-haizakura/40">
-                        <div class="flex items-start gap-3">
-                            <span class="list-icon souvenir-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
-                                <i class="ph ph-leaf"></i>
-                            </span>
-                            <h3 class="text-lg font-medium text-benitobi min-w-0">大內宿特產金胡麻 ＆ 焙煎七味粉 ＆ 縮緬和布小物</h3>
-                        </div>
-                        <div class="souvenir-body mt-1.5 space-y-1">
-                            <p class="text-sm text-stone-500 leading-relaxed">江戶宿場町古街兩側小店販售當地農民自產的極品「焙煎金胡麻」與香氣濃郁的「生七味粉」，煮湯、拌麵皆是絕品。街道上的布作小店更有手工縫製的柿子、南瓜福氣吊飾，溫馨可愛。</p>
-                            <p class="flex items-start gap-1.5 text-sm text-stone-400 leading-relaxed">
-                                <i class="ph ph-currency-jpy mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>600 ~ 2,000</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ainezumi leading-relaxed">
-                                <i class="ph ph-map-pin mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>大內宿街內百年茅草店鋪</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ohdo leading-relaxed">
-                                <i class="ph ph-star mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>金胡麻油、蕎麥乾麵禮盒、大內宿限定地酒。</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="py-6 border-b border-haizakura/40">
-                        <div class="flex items-start gap-3">
-                            <span class="list-icon souvenir-icon bg-benitobi/20 text-benitobi" aria-hidden="true">
-                                <i class="ph ph-cow"></i>
-                            </span>
-                            <h3 class="text-lg font-medium text-benitobi min-w-0">會津吉祥紅牛 (赤べこ) ＆ 不倒翁小法師</h3>
-                        </div>
-                        <div class="souvenir-body mt-1.5 space-y-1">
-                            <p class="text-sm text-stone-500 leading-relaxed">會津傳承 400 年的守護福物「赤べこ (Akabeko)」，輕碰頭部會可愛地搖頭晃腦，自古有消災除病、招來福運之意；「起上り小法師」推倒後立刻站起，象徵百折不撓與闔家平安。</p>
-                            <p class="flex items-start gap-1.5 text-sm text-stone-400 leading-relaxed">
-                                <i class="ph ph-currency-jpy mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>800 ~ 3,800</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ainezumi leading-relaxed">
-                                <i class="ph ph-map-pin mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>鶴城天守販賣部、鶴ヶ城会館、七日町手作店</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ohdo leading-relaxed">
-                                <i class="ph ph-star mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>正統木模手繪紅牛、紅牛造型鑰匙圈、繪付體驗。</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="py-6 border-b border-haizakura/40">
-                        <div class="flex items-start gap-3">
-                            <span class="list-icon souvenir-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
-                                <i class="ph ph-wine"></i>
-                            </span>
-                            <h3 class="text-lg font-medium text-benitobi min-w-0">末廣酒造限定地酒 ＆ 會津傳統漆器茶杯</h3>
-                        </div>
-                        <div class="souvenir-body mt-1.5 space-y-1">
-                            <p class="text-sm text-stone-500 leading-relaxed">福島在全日本新酒鑑評會連續多年榮獲金賞第一！百年酒造「末廣酒造」的純米大吟釀（如貓魔の雫、嘉永藏限定酒）香氣高雅細緻。七日町老街的會津漆器店更有輕巧耐用的蒔繪漆木碗與茶杯。</p>
-                            <p class="flex items-start gap-1.5 text-sm text-stone-400 leading-relaxed">
-                                <i class="ph ph-currency-jpy mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>1,500 ~ 6,000</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ainezumi leading-relaxed">
-                                <i class="ph ph-map-pin mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>末廣酒造嘉永藏直營門市、會津漆器百年老舖</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ohdo leading-relaxed">
-                                <i class="ph ph-star mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>大吟釀生原酒、微氣泡清酒「ぷちぷち」、漆器筷匙組。</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="py-6 border-b border-haizakura/40">
-                        <div class="flex items-start gap-3">
-                            <span class="list-icon souvenir-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
-                                <i class="ph ph-cooking-pot"></i>
-                            </span>
-                            <h3 class="text-lg font-medium text-benitobi min-w-0">幻之極品「會津山鹽」系列（年輪蛋糕・鹽拉麵・山鹽糖）</h3>
-                        </div>
-                        <div class="souvenir-body mt-1.5 space-y-1">
-                            <p class="text-sm text-stone-500 leading-relaxed">由大鹽裏磐梯溫泉水經過大鍋柴火熬煮而成的「山鹽」，富含天然礦物質、溫潤回甘無苦味。此鹽產量極稀，認明「會津山鹽認定標章」的年輪蛋糕、山鹽柚餅子、山鹽生拉麵包是最高人氣之選！</p>
-                            <p class="flex items-start gap-1.5 text-sm text-stone-400 leading-relaxed">
-                                <i class="ph ph-currency-jpy mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>450 ~ 2,200</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ainezumi leading-relaxed">
-                                <i class="ph ph-map-pin mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>裏磐梯湖畔渡假村 1 樓商店、裏磐梯物產館</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ohdo leading-relaxed">
-                                <i class="ph ph-star mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>會津山鹽年輪蛋糕、罐裝研磨山鹽、山鹽仙貝。</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="py-6 border-b border-haizakura/40">
-                        <div class="flex items-start gap-3">
-                            <span class="list-icon souvenir-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
-                                <i class="ph ph-cookie"></i>
-                            </span>
-                            <h3 class="text-lg font-medium text-benitobi min-w-0">福島三大經典名菓（Mamador・柏屋薄皮饅頭・家傳柚餅子）</h3>
-                        </div>
-                        <div class="souvenir-body mt-1.5 space-y-1">
-                            <p class="text-sm text-stone-500 leading-relaxed">回程郡山站轉乘僅約 24 分，優先買鐵路便當與熱茶。「ままどおる (Mamador)」牛奶香濃入口即化；日本三大饅頭之一「柏屋薄皮饅頭」皮薄餡豐甜而不膩；「かんのや家伝ゆべし」軟糯三角形麻糬包紅豆餡。名菓若來不及，可改在上野多慶屋或羽田補。</p>
-                            <p class="flex items-start gap-1.5 text-sm text-stone-400 leading-relaxed">
-                                <i class="ph ph-currency-jpy mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>800 ~ 2,500</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ainezumi leading-relaxed">
-                                <i class="ph ph-map-pin mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>JR 郡山站新幹線轉乘口旁便當鋪、S-PAL 伴手禮商場（時間夠再買）</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ohdo leading-relaxed">
-                                <i class="ph ph-star mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>季節限定巧克力 Mamador、柏屋宇治抹茶饅頭。</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="py-6 border-b border-haizakura/40">
-                        <div class="flex items-start gap-3">
-                            <span class="list-icon souvenir-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
-                                <i class="ph ph-bowl-food"></i>
-                            </span>
-                            <h3 class="text-lg font-medium text-benitobi min-w-0">喜多方拉麵名店禮盒 ＆ 福島海陸鐵路便當</h3>
-                        </div>
-                        <div class="souvenir-body mt-1.5 space-y-1">
-                            <p class="text-sm text-stone-500 leading-relaxed">喜多方拉麵名列日本三大拉麵，特色為多加水扁平波浪捲麵，麵條彈牙吸汁。郡山站有坂內食堂、一平拉麵等知名生麵禮盒；新幹線上更推薦買個「福豆屋・海苔辨」或會津牛便當當午餐。</p>
-                            <p class="flex items-start gap-1.5 text-sm text-stone-400 leading-relaxed">
-                                <i class="ph ph-currency-jpy mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>1,000 ~ 2,200</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ainezumi leading-relaxed">
-                                <i class="ph ph-map-pin mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>郡山站新幹線閘門內外便當鋪與土產店</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ohdo leading-relaxed">
-                                <i class="ph ph-star mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>喜多方醬油拉麵禮盒、海苔便當世界一「海苔辨」。</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="py-6 border-b border-haizakura/40">
-                        <div class="flex items-start gap-3">
-                            <span class="list-icon souvenir-icon bg-benitobi/20 text-benitobi" aria-hidden="true">
-                                <i class="ph ph-shopping-bag"></i>
-                            </span>
-                            <h3 class="text-lg font-medium text-benitobi min-w-0">多慶屋零食藥妝 ＆ 深秋當季高級水果（蜜蘋果・身不知柿・晚生晴王）</h3>
-                        </div>
-                        <div class="souvenir-body mt-1.5 space-y-1">
-                            <p class="text-sm text-stone-500 leading-relaxed">上野最傳奇的紫色百貨多慶屋，零食（干貝糖、杏仁白巧、仙貝）、常備藥妝（合利他命、止痛藥、眼藥水）皆有免稅折扣。11 月正值東北與長野深秋水果極盛期：福島蜜蘋果、會津身不知柿（御用貢品）、長野晚生晴王麝香葡萄，買回飯店大餐桌現切享用！</p>
-                            <p class="flex items-start gap-1.5 text-sm text-stone-400 leading-relaxed">
-                                <i class="ph ph-currency-jpy mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>依預算</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ainezumi leading-relaxed">
-                                <i class="ph ph-map-pin mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>多慶屋 TAビル (上野御徒町站旁)</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ohdo leading-relaxed">
-                                <i class="ph ph-star mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>免稅 10% ＋ 信用卡優惠、大包裝零食、深秋限定蜜蘋果與甜柿。</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="py-6">
-                        <div class="flex items-start gap-3">
-                            <span class="list-icon souvenir-icon bg-ainezumi/20 text-ainezumi" aria-hidden="true">
-                                <i class="ph ph-airplane-takeoff"></i>
-                            </span>
-                            <h3 class="text-lg font-medium text-benitobi min-w-0">羽田機場出境免稅必補貨（東京芭娜娜・獺祭・ROYCE）</h3>
-                        </div>
-                        <div class="souvenir-body mt-1.5 space-y-1">
-                            <p class="text-sm text-stone-500 leading-relaxed">過安檢出關後直接手提上機，完全不佔託運公斤數！羽田國際線免稅店集合了全日本最熱銷名產：ROYCE 生巧克力、白色戀人、YOKU MOKU 原味雪茄蛋捲、資生堂 Parlour 點心以及各大頂級清酒。</p>
-                            <p class="flex items-start gap-1.5 text-sm text-stone-400 leading-relaxed">
-                                <i class="ph ph-currency-jpy mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>900 ~ 6,000</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ainezumi leading-relaxed">
-                                <i class="ph ph-map-pin mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>羽田機場第 3 航廈出境免稅綜合商店 (TIAT DUTY FREE)</span>
-                            </p>
-                            <p class="flex items-start gap-1.5 text-sm text-ohdo leading-relaxed">
-                                <i class="ph ph-star mt-0.5 shrink-0" aria-hidden="true"></i>
-                                <span>直接手提免秤重、免稅保證、最新包裝伴手禮禮盒。</span>
-                            </p>
-                        </div>
-                    </div>
+            <div id="souvenir-panel-mine" class="hidden" role="tabpanel" aria-labelledby="souvenir-tab-mine">
+                <div class="souvenir-filter" role="tablist" aria-label="購買狀態">
+                    <button type="button" class="cat-btn is-active" data-souvenir-filter="all">全部</button>
+                    <button type="button" class="cat-btn" data-souvenir-filter="open">未購買</button>
+                    <button type="button" class="cat-btn" data-souvenir-filter="done">已購買</button>
                 </div>
-            </article>
-
-            <article class="page-sheet">
-                <div class="flex flex-col">
-                    <div class="flex items-start gap-4 py-6 border-b border-haizakura/40">
-                        <span class="list-icon bg-aoni/20 text-aoni" aria-hidden="true">
-                            <i class="ph ph-suitcase-simple text-2xl"></i>
-                        </span>
-                        <div class="min-w-0 flex-1">
-                            <h3 class="text-lg font-medium text-kesizumi">善用宅急便寄大行李</h3>
-                            <p class="mt-1.5 text-sm text-stone-500 leading-relaxed">會津若松退房時把大行李寄往裏磐梯レイクリゾート，大內宿與塔崖輕裝走最輕鬆。</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4 py-6 border-b border-haizakura/40">
-                        <span class="list-icon bg-ohdo/20 text-ohdo" aria-hidden="true">
-                            <i class="ph ph-seal-check text-2xl"></i>
-                        </span>
-                        <div class="min-w-0 flex-1">
-                            <h3 class="text-lg font-medium text-kesizumi">會津山鹽認明官方標章</h3>
-                            <p class="mt-1.5 text-sm text-stone-500 leading-relaxed">裏磐梯溫泉水熬製的會津山鹽數量珍稀，購買相關商品時認明「會津山塩認定シール」貼紙，品質天然有保證。</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4 py-6">
-                        <span class="list-icon bg-ainezumi/20 text-ainezumi" aria-hidden="true">
-                            <i class="ph ph-drop text-2xl"></i>
-                        </span>
-                        <div class="min-w-0 flex-1">
-                            <h3 class="text-lg font-medium text-kesizumi">液體膏狀物託運須知</h3>
-                            <p class="mt-1.5 text-sm text-stone-500 leading-relaxed">地酒清酒、胡麻油、紫蘇濃縮汁、味噌等屬於液體類，必須在最後一天的飯店打包放入「託運行李箱」，不可手提上飛機；機場免稅店買的清酒則可直接手提。</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
+                <div id="souvenir-mine-list"></div>
+                <p id="souvenir-mine-empty" class="souvenir-empty hidden">還沒有手信。可從「推薦」加入，或自己新增要買的東西。</p>
+            </div>
         </section>
+        <button type="button" id="souvenir-fab" class="expense-fab souvenir-fab hidden fixed right-6 z-40 w-14 h-14 bg-benitobi text-gofun rounded-full flex items-center justify-center hover:bg-tobi transition-colors" data-souvenir-add aria-label="新增手信">
+            <i class="ph-duotone ph-plus text-2xl"></i>
+        </button>
 
 
         <!-- ===================================================================
@@ -4425,6 +4309,75 @@
     </div>
 
 
+    <div id="souvenir-sheet" class="itin-sheet" aria-hidden="true">
+        <div class="itin-sheet-backdrop" data-souvenir-sheet-close></div>
+        <div class="itin-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="souvenir-sheet-title">
+            <div class="itin-sheet-handle" aria-hidden="true"></div>
+            <div class="itin-sheet-header">
+                <h3 id="souvenir-sheet-title">新增手信</h3>
+                <button type="button" id="souvenir-sheet-close" class="itin-sheet-close" data-souvenir-sheet-close aria-label="關閉">×</button>
+            </div>
+            <div class="itin-sheet-body">
+                <form id="souvenir-form" class="expense-sheet-form">
+                    <input type="hidden" id="souvenir-edit-id" value="">
+                    <input type="hidden" id="souvenir-source" value="custom">
+                    <input type="hidden" id="souvenir-rec-id" value="">
+                    <div>
+                        <label for="souvenir-name" class="block text-secondary mb-1.5">商品名稱</label>
+                        <input type="text" id="souvenir-name" class="form-control" maxlength="80" autocomplete="off" required>
+                    </div>
+                    <div>
+                        <label for="souvenir-brand" class="block text-secondary mb-1.5">品牌（選填）</label>
+                        <input type="text" id="souvenir-brand" class="form-control" maxlength="40" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="souvenir-for-whom" class="block text-secondary mb-1.5">幫誰買（選填）</label>
+                        <input type="text" id="souvenir-for-whom" class="form-control" maxlength="40" placeholder="例如：媽媽" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="souvenir-qty" class="block text-secondary mb-1.5">數量</label>
+                        <input type="number" id="souvenir-qty" class="form-control font-num" min="1" step="1" value="1">
+                    </div>
+                    <div>
+                        <label for="souvenir-price" class="block text-secondary mb-1.5">參考價格 / 預算（選填）</label>
+                        <input type="number" id="souvenir-price" class="form-control font-num" min="0" step="1" placeholder="日圓">
+                    </div>
+                    <div>
+                        <label for="souvenir-day" class="block text-secondary mb-1.5">行程日（選填）</label>
+                        <select id="souvenir-day" class="form-control"></select>
+                    </div>
+                    <div>
+                        <label for="souvenir-place-label" class="block text-secondary mb-1.5">地點（選填）</label>
+                        <input type="text" id="souvenir-place-label" class="form-control" maxlength="40" placeholder="例如：上野" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="souvenir-locations" class="block text-secondary mb-1.5">購買地點</label>
+                        <textarea id="souvenir-locations" class="form-control" rows="3" placeholder="一列一間店，或用、分隔"></textarea>
+                    </div>
+                    <div>
+                        <label for="souvenir-note" class="block text-secondary mb-1.5">備註</label>
+                        <textarea id="souvenir-note" class="form-control" rows="3" placeholder="例如：360錠，大罐；黑色，M size"></textarea>
+                    </div>
+                    <div id="souvenir-photo-field">
+                        <p class="text-secondary mb-1.5">商品照片</p>
+                        <div id="souvenir-photo-preview" class="souvenir-photo-preview mb-2"></div>
+                        <label for="souvenir-photo-input" class="btn-secondary">
+                            <i class="ph ph-camera" aria-hidden="true"></i>
+                            加入商品照片
+                        </label>
+                        <input type="file" id="souvenir-photo-input" class="sr-only" accept="image/*">
+                    </div>
+                    <button type="submit" id="souvenir-submit" class="btn-primary w-full">新增</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="souvenir-photo" class="souvenir-photo" aria-hidden="true">
+        <button type="button" class="souvenir-photo-close" data-souvenir-photo-close aria-label="關閉">×</button>
+        <img id="souvenir-photo-img" alt="">
+    </div>
+
     <!-- JAVASCRIPT LOGIC -->
     <script>
         const TRIP_START = '2026-11-01';
@@ -4436,6 +4389,15 @@
             timeZone: TRIP_TIME_ZONE,
             startDate: TRIP_START,
             endDate: TRIP_END,
+            days: [
+                { day: 1, date: '2026-11-01', heading: '啟程' },
+                { day: 2, date: '2026-11-02', heading: '霧幻泛舟' },
+                { day: 3, date: '2026-11-03', heading: '茅葺古街' },
+                { day: 4, date: '2026-11-04', heading: '城下町巡禮' },
+                { day: 5, date: '2026-11-05', heading: '紅葉慢遊' },
+                { day: 6, date: '2026-11-06', heading: '東京採買' },
+                { day: 7, date: '2026-11-07', heading: '賦歸' }
+            ],
             defaultCurrency: 'JPY',
             allowedCurrencies: ['JPY', 'TWD'],
             travelType: 'international',
@@ -4464,6 +4426,250 @@
             defaultCurrency: TRIP_CONFIG.defaultCurrency,
             allowedCurrencies: TRIP_CONFIG.allowedCurrencies.slice()
         };
+
+        /* Shared trip domain: Place / Booking / Flight Segment.
+           Overview is a presentation layer over these records. */
+        const TRIP_ROUTE = [
+            { name: '松山', kind: 'fly', meta: '長榮 BR192' },
+            { name: '會津若松', kind: 'stay', meta: '新幹線＋磐越西線' },
+            { name: '蘆之牧溫泉', kind: 'stay', meta: 'ジャンボ包車' },
+            { name: '裏磐梯', kind: 'stay', meta: '磐越西線＋免費接駁' },
+            { name: '東京・濱松町', kind: 'stay', meta: '新幹線（郡山→上野）' },
+            { name: '松山', kind: 'fly', meta: '長榮 BR191' }
+        ];
+
+        const PLACES = [
+            {
+                id: 'place-washington',
+                type: 'accommodation',
+                name: '会津若松ワシントンホテル',
+                phone: '0242-22-6111',
+                tel: '+81242226111',
+                address: '〒965-0024 福島県会津若松市白虎町201',
+                email: '',
+                website: 'https://washington-hotels.jp/aizuwakamatsu/',
+                mapQuery: '会津若松ワシントンホテル'
+            },
+            {
+                id: 'place-ookawaso',
+                type: 'accommodation',
+                name: '会津芦ノ牧温泉　大川荘',
+                phone: '0242-92-2111',
+                tel: '+81242922111',
+                address: '〒969-5147 福島県会津若松市大戸町大字芦ノ牧字下平984',
+                email: '',
+                website: 'https://www.ookawaso.co.jp/',
+                mapQuery: 'Ashinomaki Onsen Ookawaso'
+            },
+            {
+                id: 'place-lakeresort',
+                type: 'accommodation',
+                name: '裏磐梯レイクリゾート',
+                phone: '0241-37-1111',
+                tel: '+81241371111',
+                address: '〒969-2701 福島県耶麻郡北塩原村大字桧原字湯平山1171-1',
+                email: '',
+                website: 'https://www.lakeresort.jp/',
+                mapQuery: '裏磐梯レイクリゾート'
+            },
+            {
+                id: 'place-monday',
+                type: 'accommodation',
+                name: 'Premium Apart MONday 濱松町ステーション',
+                phone: '03-5401-3190',
+                tel: '+81354013190',
+                address: '〒105-0013 東京都港区浜松町1-15-4',
+                email: '',
+                website: 'https://hotel-monday.com/apartment/hamamatsucho_station/',
+                mapQuery: 'Premium Apart MONday 濱松町ステーション'
+            },
+            {
+                id: 'place-aizu-taxi',
+                type: 'operator',
+                name: 'あいづタクシー',
+                nameNote: '福島交通 會津支社',
+                phone: '0120-69-2468',
+                tel: '0120692468',
+                address: '會津若松市白虎町 193-2',
+                hours: '09:00–17:00',
+                website: 'https://taxi.aizubus.com/sightseeing/taxi_de_okuaizu',
+                extraWebsite: 'https://taxi.aizubus.com/sightseeing/',
+                /* Preserved from old overview; not shown on overview first layer. */
+                notes: [
+                    'ジャンボ計程車（定員 9 名）。普通車最多 4 人。',
+                    '時間制 ¥11,060／時（每 30 分 ¥5,530）。過路費、停車費另計。'
+                ]
+            },
+            {
+                id: 'place-mugenkyo',
+                type: 'activity',
+                name: '霧幻峽の渡し',
+                website: 'https://www.mugenkyo.info/reservation/'
+            },
+            {
+                id: 'place-shibukawa',
+                type: 'restaurant',
+                name: '渋川問屋',
+                phone: '0242-28-4000',
+                tel: '+81242284000',
+                address: '七日町 3-28',
+                website: 'https://shibukawadonya.com/'
+            }
+        ];
+
+        const BOOKINGS = [
+            {
+                id: 'booking-eva-roundtrip',
+                type: 'flight',
+                status: 'confirmed',
+                confirmationNo: '',
+                segmentIds: ['seg-br192', 'seg-br191']
+            },
+            {
+                id: 'booking-washington',
+                type: 'accommodation',
+                placeId: 'place-washington',
+                checkIn: '2026-11-01',
+                checkOut: '2026-11-03',
+                status: 'confirmed',
+                confirmationNo: ''
+            },
+            {
+                id: 'booking-ookawaso',
+                type: 'accommodation',
+                placeId: 'place-ookawaso',
+                checkIn: '2026-11-03',
+                checkOut: '2026-11-04',
+                status: 'confirmed',
+                confirmationNo: '37379',
+                bookedAt: '2026-09-17 23:57:39',
+                plan: '【料理長特選-山海の幸-】県内産和牛◇刺身4種盛り◇あれもこれも食す♪欲張りグルメ',
+                room: '■宵待亭-スタンダード■-禁煙-12～14.5畳-渓谷美を愛でる',
+                meals: '朝夕食付',
+                checkoutTime: '10:00',
+                rooms: '1室',
+                occupancy: '1部屋目　男性 3 名、女性 2 名'
+            },
+            {
+                id: 'booking-lakeresort',
+                type: 'accommodation',
+                placeId: 'place-lakeresort',
+                checkIn: '2026-11-04',
+                checkOut: '2026-11-06',
+                status: 'confirmed',
+                confirmationNo: ''
+            },
+            {
+                id: 'booking-monday',
+                type: 'accommodation',
+                placeId: 'place-monday',
+                checkIn: '2026-11-06',
+                checkOut: '2026-11-07',
+                status: 'confirmed',
+                confirmationNo: ''
+            },
+            {
+                id: 'booking-jumbo-day2',
+                type: 'transport',
+                mode: 'taxi',
+                placeId: 'place-aizu-taxi',
+                title: '會津ジャンボ計程車',
+                date: '2026-11-02',
+                status: 'to-book',
+                channel: 'phone',
+                channelLabel: '電話預約',
+                note: '華盛頓飯店 → 早戶碼頭 → 道の駅みしま宿 → 柳津町 → 返回飯店',
+                confirmationNo: ''
+            },
+            {
+                id: 'booking-jumbo-day3',
+                type: 'transport',
+                mode: 'taxi',
+                placeId: 'place-aizu-taxi',
+                title: '會津ジャンボ計程車',
+                date: '2026-11-03',
+                status: 'to-book',
+                channel: 'phone',
+                channelLabel: '電話預約',
+                note: '08:45 華盛頓飯店 → 大內宿 → 塔崖 → 14:30 大川莊',
+                confirmationNo: ''
+            },
+            {
+                id: 'booking-train-outbound',
+                type: 'transport',
+                mode: 'train',
+                title: 'JR 新幹線指定席',
+                date: '2026-11-01',
+                status: 'to-book',
+                channel: 'web',
+                channelLabel: 'えきねっと',
+                href: 'https://www.eki-net.com/',
+                summary: '東京 → 郡山',
+                confirmationNo: ''
+            },
+            {
+                id: 'booking-train-return',
+                type: 'transport',
+                mode: 'train',
+                title: 'JR 新幹線指定席',
+                date: '2026-11-06',
+                status: 'to-book',
+                channel: 'web',
+                channelLabel: 'えきねっと',
+                href: 'https://www.eki-net.com/',
+                summary: '郡山 → 上野',
+                confirmationNo: ''
+            },
+            {
+                id: 'booking-mugenkyo',
+                type: 'activity',
+                placeId: 'place-mugenkyo',
+                title: '霧幻峽周遊船',
+                date: '2026-11-02',
+                status: 'to-book',
+                channel: 'web',
+                channelLabel: '官網預約',
+                href: 'https://www.mugenkyo.info/reservation/',
+                confirmationNo: ''
+            },
+            {
+                id: 'booking-shibukawa',
+                type: 'activity',
+                category: 'restaurant',
+                placeId: 'place-shibukawa',
+                title: '渋川問屋',
+                date: '2026-11-04',
+                status: 'to-book',
+                channel: 'phone',
+                channelLabel: '電話預約',
+                confirmationNo: ''
+            }
+        ];
+
+        const FLIGHT_SEGMENTS = [
+            {
+                id: 'seg-br192',
+                bookingId: 'booking-eva-roundtrip',
+                direction: 'outbound',
+                directionLabel: '去程',
+                flightNo: 'BR192',
+                airline: '長榮航空',
+                date: '2026-11-01',
+                departure: { airportCode: 'TSA', terminal: 'T1', time: '07:20' },
+                arrival: { airportCode: 'HND', terminal: 'T3', time: '11:15' }
+            },
+            {
+                id: 'seg-br191',
+                bookingId: 'booking-eva-roundtrip',
+                direction: 'inbound',
+                directionLabel: '回程',
+                flightNo: 'BR191',
+                airline: '長榮航空',
+                date: '2026-11-07',
+                departure: { airportCode: 'HND', terminal: 'T3', time: '12:40' },
+                arrival: { airportCode: 'TSA', terminal: 'T1', time: '15:05' }
+            }
+        ];
         const LEGACY_PAYER_NAMES_BY_ID = {
             'p-agnes': 'Agnes',
             'p-02': '家人 2',
@@ -4648,6 +4854,8 @@
         function switchTab(tabId) {
             closeItinSheet();
             closeExpenseSheet();
+            closeSouvenirSheet();
+            closeSouvenirPhoto();
             currentTab = tabId;
             const tabs = ['itinerary', 'info', 'souvenir', 'prep', 'record'];
             tabs.forEach(t => {
@@ -4662,6 +4870,11 @@
             if (tabId === 'itinerary') {
                 requestAnimationFrame(scrollSelectedDayIntoView);
             }
+            if (tabId === 'souvenir' && souvenirView === 'recommend') {
+                requestAnimationFrame(scrollSouvenirTodayIntoView);
+            }
+            const souvenirFab = document.getElementById('souvenir-fab');
+            if (souvenirFab) souvenirFab.classList.toggle('hidden', tabId !== 'souvenir' || souvenirView !== 'mine');
         }
 
         function switchDay(route, dayNum) {
@@ -5679,9 +5892,1049 @@
             bindPrepLists();
         }
 
+        const SOUVENIR_STORAGE_VERSION = 1;
+        const SOUVENIR_RECOMMENDATIONS = [
+            {
+                id: 'rec-aizu-kiri',
+                name: '會津桐木工藝品 ＆ 奧會津紫蘇蜜餞',
+                shortDescription: '三島町以會津桐聞名，質地輕盈且防潮防蟲。休息站可買桐木小物，赤紫蘇霜淇淋與蜜餞也可帶回沖泡。',
+                illustration: null,
+                icon: 'ph-gift',
+                referencePrice: 500,
+                priceNote: '約 ¥500～3,500',
+                packageInfo: '',
+                priceUpdatedAt: null,
+                relatedDay: 2,
+                relatedPlace: { id: 'mishima-juku', label: 'みしま宿' },
+                purchaseLocations: ['第一只見川橋梁休息站（道の駅みしま宿）']
+            },
+            {
+                id: 'rec-awa-manju',
+                name: '柳津名物　粟饅頭',
+                shortDescription: '圓藏寺相傳以粟與糯米製成的黃色饅頭，外皮有粟粒口感、內餡紅豆。現蒸最好吃，也可買冷凍帶回。',
+                illustration: null,
+                icon: 'ph-bread',
+                referencePrice: 150,
+                priceNote: '約 ¥150～800',
+                packageInfo: '',
+                priceUpdatedAt: null,
+                relatedDay: 2,
+                relatedPlace: { id: 'yanazu', label: '柳津' },
+                purchaseLocations: ['ほっとinやないづ 小池菓子舗', '圓藏寺門前老舖']
+            },
+            {
+                id: 'rec-ouchi-goma',
+                name: '大內宿金胡麻 ＆ 焙煎七味粉',
+                shortDescription: '江戶宿場町古街小店販售當地焙煎金胡麻與香氣濃郁的生七味粉。也有手工縫製的縮緬和布小物。',
+                illustration: null,
+                icon: 'ph-leaf',
+                referencePrice: 600,
+                priceNote: '約 ¥600～2,000',
+                packageInfo: '',
+                priceUpdatedAt: null,
+                relatedDay: 3,
+                relatedPlace: { id: 'ouchi-juku', label: '大內宿' },
+                purchaseLocations: ['大內宿街內百年茅草店鋪']
+            },
+            {
+                id: 'rec-akabeko',
+                name: '會津赤べこ ＆ 起上り小法師',
+                shortDescription: '會津傳承的守護福物赤べこ，輕碰頭部會搖頭。起上り小法師推倒後立刻站起，象徵百折不撓。',
+                illustration: null,
+                icon: 'ph-cow',
+                referencePrice: 800,
+                priceNote: '約 ¥800～3,800',
+                packageInfo: '',
+                priceUpdatedAt: null,
+                relatedDay: 4,
+                relatedPlace: { id: 'aizu-wakamatsu', label: '會津若松' },
+                purchaseLocations: ['鶴城天守販賣部', '鶴ヶ城会館', '七日町手作店']
+            },
+            {
+                id: 'rec-suehiro',
+                name: '末廣酒造限定地酒 ＆ 會津漆器',
+                shortDescription: '七日町可訪百年酒造末廣嘉永藏，選限定純米大吟釀。同街漆器店有輕巧的蒔繪茶杯與筷匙。',
+                illustration: null,
+                icon: 'ph-wine',
+                referencePrice: 1500,
+                priceNote: '約 ¥1,500～6,000',
+                packageInfo: '液體須託運',
+                priceUpdatedAt: null,
+                relatedDay: 4,
+                relatedPlace: { id: 'aizu-wakamatsu', label: '會津若松' },
+                purchaseLocations: ['末廣酒造嘉永藏直營門市', '會津漆器店（鈴善、白木屋）']
+            },
+            {
+                id: 'rec-yamashio',
+                name: '會津山鹽系列',
+                shortDescription: '裏磐梯溫泉水柴火熬成的山鹽，溫潤回甘。認明會津山鹽認定標章的年輪蛋糕、鹽拉麵與罐裝山鹽。',
+                illustration: null,
+                icon: 'ph-cooking-pot',
+                referencePrice: 450,
+                priceNote: '約 ¥450～2,200',
+                packageInfo: '',
+                priceUpdatedAt: null,
+                relatedDay: 5,
+                relatedPlace: { id: 'urabandai', label: '裏磐梯' },
+                purchaseLocations: ['裏磐梯湖畔渡假村 1 樓商店', '裏磐梯物產館']
+            },
+            {
+                id: 'rec-meika',
+                name: '福島三大名菓',
+                shortDescription: 'ままどおる、柏屋薄皮饅頭、かんのや家伝ゆべし。回程郡山轉乘時間短，來不及可改在上野或羽田補。',
+                illustration: null,
+                icon: 'ph-cookie',
+                referencePrice: 800,
+                priceNote: '約 ¥800～2,500',
+                packageInfo: '',
+                priceUpdatedAt: null,
+                relatedDay: 6,
+                relatedPlace: { id: 'koriyama-station', label: '郡山' },
+                purchaseLocations: ['JR 郡山站新幹線轉乘口旁便當鋪', 'S-PAL 伴手禮商場（時間夠再買）']
+            },
+            {
+                id: 'rec-kitakata-ramen',
+                name: '喜多方拉麵禮盒 ＆ 鐵路便當',
+                shortDescription: '郡山站有坂內食堂、一平拉麵等生麵禮盒可帶回。新幹線上也可順買海苔辨或會津牛便當當午餐。',
+                illustration: null,
+                icon: 'ph-bowl-food',
+                referencePrice: 1000,
+                priceNote: '約 ¥1,000～2,200',
+                packageInfo: '',
+                priceUpdatedAt: null,
+                relatedDay: 6,
+                relatedPlace: { id: 'koriyama-station', label: '郡山' },
+                purchaseLocations: ['郡山站新幹線閘門內外便當鋪與土產店']
+            },
+            {
+                id: 'rec-takeya',
+                name: '多慶屋藥妝零食 ＆ 深秋水果',
+                shortDescription: '上野多慶屋零食與常備藥妝有免稅折扣。11 月可買福島蜜蘋果、會津身不知柿與長野晚生晴王。',
+                illustration: null,
+                icon: 'ph-shopping-bag',
+                referencePrice: null,
+                priceNote: '依預算',
+                packageInfo: '',
+                priceUpdatedAt: null,
+                relatedDay: 6,
+                relatedPlace: { id: 'ueno', label: '上野' },
+                purchaseLocations: ['多慶屋 TAビル（上野御徒町站旁）']
+            },
+            {
+                id: 'rec-haneda-dutyfree',
+                name: '羽田出境免稅補貨',
+                shortDescription: '過安檢後可直接手提上機，不佔託運公斤數。免稅店有東京芭娜娜、獺祭、ROYCE 等熱銷名產。',
+                illustration: null,
+                icon: 'ph-airplane-takeoff',
+                referencePrice: 900,
+                priceNote: '約 ¥900～6,000',
+                packageInfo: '',
+                priceUpdatedAt: null,
+                relatedDay: 7,
+                relatedPlace: { id: 'haneda-t3', label: '羽田機場' },
+                purchaseLocations: ['羽田機場第 3 航廈出境免稅綜合商店（TIAT DUTY FREE）']
+            }
+        ];
+        const SOUVENIR_NOTES = [
+            {
+                id: 'note-takkyubin',
+                icon: 'ph-suitcase-simple',
+                title: '善用宅急便寄大行李',
+                body: '會津若松退房時把大行李寄往裏磐梯レイクリゾート，大內宿與塔崖輕裝走最輕鬆。'
+            },
+            {
+                id: 'note-yamashio-seal',
+                icon: 'ph-seal-check',
+                title: '會津山鹽認明官方標章',
+                body: '裏磐梯溫泉水熬製的會津山鹽數量珍稀，購買相關商品時認明「會津山塩認定シール」貼紙。'
+            },
+            {
+                id: 'note-liquids',
+                icon: 'ph-drop',
+                title: '液體膏狀物託運須知',
+                body: '地酒、胡麻油、紫蘇濃縮汁、味噌等液體，請在最後一晚裝進託運行李箱。機場免稅店買的清酒可直接手提。'
+            }
+        ];
+        let souvenirState = { version: SOUVENIR_STORAGE_VERSION, items: [] };
+        let souvenirView = 'recommend';
+        let souvenirFilter = 'all';
+        let souvenirSheetLastFocus = null;
+        let souvenirPhotoDraft = '';
+
+        function souvenirStorageKey() {
+            return TRIP_CONFIG.tripId + '_souvenirs';
+        }
+
+        function getItineraryDays() {
+            return Array.isArray(TRIP_CONFIG.days) ? TRIP_CONFIG.days : [];
+        }
+
+        function getItineraryDay(dayNum) {
+            const n = Number(dayNum);
+            return getItineraryDays().find((day) => day.day === n) || null;
+        }
+
+        function formatSouvenirDayPlace(dayNum, placeLabel) {
+            const day = Number(dayNum);
+            const place = (placeLabel || '').trim();
+            if (!day && !place) return '';
+            if (!place) return 'Day ' + day;
+            return 'Day ' + day + '｜' + place;
+        }
+
+        function formatSouvenirPrice(amount, note) {
+            if (amount == null || amount === '') {
+                return note ? '參考價格　' + note : '';
+            }
+            const n = Number(amount);
+            const yen = '¥' + n.toLocaleString();
+            return '參考價格 ' + yen + ' 起';
+        }
+
+        function findSouvenirRecommendation(id) {
+            return SOUVENIR_RECOMMENDATIONS.find((item) => item.id === id) || null;
+        }
+
+        function isRecommendationInMine(recId) {
+            return souvenirState.items.some((item) => item.recommendationId === recId);
+        }
+
+        function findSouvenirItem(id) {
+            return souvenirState.items.find((item) => item.id === id) || null;
+        }
+
+        function locationsToText(locations) {
+            if (Array.isArray(locations)) return locations.filter(Boolean).join('\n');
+            return locations ? String(locations) : '';
+        }
+
+        function textToLocations(text) {
+            return String(text || '')
+                .split(/\n|、/)
+                .map((line) => line.trim())
+                .filter(Boolean);
+        }
+
+        function loadSouvenirState() {
+            try {
+                const raw = localStorage.getItem(souvenirStorageKey());
+                if (!raw) {
+                    souvenirState = { version: SOUVENIR_STORAGE_VERSION, items: [] };
+                    return;
+                }
+                const parsed = JSON.parse(raw);
+                const items = Array.isArray(parsed.items) ? parsed.items : [];
+                souvenirState = {
+                    version: SOUVENIR_STORAGE_VERSION,
+                    items: items.filter((item) => item && item.id && item.name).map((item) => ({
+                        id: String(item.id),
+                        source: item.source === 'recommendation' ? 'recommendation' : 'custom',
+                        recommendationId: item.recommendationId || null,
+                        name: String(item.name),
+                        brand: item.brand ? String(item.brand) : '',
+                        forWhom: item.forWhom ? String(item.forWhom) : '',
+                        quantity: Math.max(1, Number(item.quantity) || 1),
+                        referencePrice: item.referencePrice == null || item.referencePrice === '' ? '' : item.referencePrice,
+                        priceNote: item.priceNote ? String(item.priceNote) : '',
+                        purchaseLocations: Array.isArray(item.purchaseLocations) ? item.purchaseLocations.map(String) : textToLocations(item.purchaseLocations),
+                        note: item.note ? String(item.note) : '',
+                        relatedDay: item.relatedDay ? Number(item.relatedDay) : null,
+                        relatedPlace: item.relatedPlace && item.relatedPlace.label
+                            ? { id: item.relatedPlace.id || '', label: String(item.relatedPlace.label) }
+                            : (item.relatedPlaceLabel ? { id: '', label: String(item.relatedPlaceLabel) } : null),
+                        imageKind: item.imageKind === 'photo' ? 'photo' : 'illustration',
+                        illustration: item.illustration || null,
+                        icon: item.icon || 'ph-gift',
+                        photoDataUrl: item.photoDataUrl || null,
+                        purchased: !!item.purchased,
+                        createdAt: item.createdAt || new Date().toISOString()
+                    }))
+                };
+            } catch (e) {
+                souvenirState = { version: SOUVENIR_STORAGE_VERSION, items: [] };
+            }
+        }
+
+        function saveSouvenirState() {
+            try {
+                localStorage.setItem(souvenirStorageKey(), JSON.stringify({
+                    version: SOUVENIR_STORAGE_VERSION,
+                    items: souvenirState.items
+                }));
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        function souvenirIllustrationHtml(item, extraClass) {
+            const cls = extraClass ? ' ' + extraClass : '';
+            if (item.imageKind === 'photo' && item.photoDataUrl) {
+                return `<button type="button" class="souvenir-thumb is-photo${cls}" data-souvenir-photo="${escapeHtml(item.id)}" aria-label="放大 ${escapeHtml(item.name)} 的商品照片"><img src="${escapeHtml(item.photoDataUrl)}" alt=""></button>`;
+            }
+            if (item.illustration) {
+                return `<span class="souvenir-illust${cls}" aria-hidden="true"><img src="${escapeHtml(item.illustration)}" alt=""></span>`;
+            }
+            const icon = item.icon || 'ph-gift';
+            return `<span class="souvenir-illust${cls}" aria-hidden="true"><i class="ph-duotone ${escapeHtml(icon)}"></i></span>`;
+        }
+
+        function renderSouvenirTabs() {
+            const countEl = document.getElementById('souvenir-mine-count');
+            const n = souvenirState.items.length;
+            if (countEl) countEl.textContent = n ? '（' + n + '）' : '';
+            document.querySelectorAll('[data-souvenir-view]').forEach((btn) => {
+                const on = btn.dataset.souvenirView === souvenirView;
+                btn.classList.toggle('is-active', on);
+                btn.setAttribute('aria-selected', on ? 'true' : 'false');
+            });
+            const rec = document.getElementById('souvenir-panel-recommend');
+            const mine = document.getElementById('souvenir-panel-mine');
+            if (rec) rec.classList.toggle('hidden', souvenirView !== 'recommend');
+            if (mine) mine.classList.toggle('hidden', souvenirView !== 'mine');
+            const fab = document.getElementById('souvenir-fab');
+            if (fab) fab.classList.toggle('hidden', currentTab !== 'souvenir' || souvenirView !== 'mine');
+        }
+
+        function renderSouvenirRecommendations() {
+            const root = document.getElementById('souvenir-recommend-list');
+            if (!root) return;
+            const todayDay = getTokyoTodayTripDay();
+            const groups = [];
+            const index = {};
+            SOUVENIR_RECOMMENDATIONS.forEach((rec) => {
+                const key = String(rec.relatedDay) + '::' + ((rec.relatedPlace && (rec.relatedPlace.id || rec.relatedPlace.label)) || '');
+                if (!index[key]) {
+                    const group = {
+                        day: rec.relatedDay,
+                        placeId: rec.relatedPlace ? rec.relatedPlace.id : '',
+                        placeLabel: rec.relatedPlace ? rec.relatedPlace.label : '',
+                        items: []
+                    };
+                    index[key] = group;
+                    groups.push(group);
+                }
+                index[key].items.push(rec);
+            });
+            groups.sort((a, b) => a.day - b.day);
+            root.innerHTML = groups.map((group) => {
+                const todayMark = todayDay === group.day ? '<span class="souvenir-today-pill">今日</span>' : '';
+                const cards = group.items.map((rec) => {
+                    const added = isRecommendationInMine(rec.id);
+                    const price = formatSouvenirPrice(rec.referencePrice, rec.priceNote);
+                    const locs = (rec.purchaseLocations || []).map((loc) => `<li>${escapeHtml(loc)}</li>`).join('');
+                    const action = added
+                        ? `<button type="button" class="btn-secondary" disabled><i class="ph ph-check" aria-hidden="true"></i> 已加入</button>`
+                        : `<button type="button" class="btn-outline" data-souvenir-add-rec="${escapeHtml(rec.id)}"><i class="ph ph-plus" aria-hidden="true"></i> 加入我的手信</button>`;
+                    return `
+                        <article class="souvenir-rec-card">
+                            ${souvenirIllustrationHtml(rec)}
+                            <div class="souvenir-rec-copy">
+                                <h3 class="souvenir-rec-name">${escapeHtml(rec.name)}</h3>
+                                <p class="souvenir-rec-desc">${escapeHtml(rec.shortDescription)}</p>
+                                ${price ? `<p class="souvenir-rec-price">${escapeHtml(price)}</p>` : ''}
+                                <p class="souvenir-buy-label">購買</p>
+                                <ul class="souvenir-buy-list">${locs}</ul>
+                            </div>
+                            <div class="souvenir-rec-actions">${action}</div>
+                        </article>
+                    `;
+                }).join('');
+                const blockId = 'souvenir-day-' + group.day + (group.placeId ? '-' + group.placeId : '');
+                return `
+                    <section class="souvenir-day-block page-sheet" id="${escapeHtml(blockId)}" data-souvenir-day="${group.day}">
+                        <div class="souvenir-day-head">
+                            <h2 class="souvenir-day-label"><span class="souvenir-day-num">Day ${group.day}</span>｜${escapeHtml(group.placeLabel)}</h2>
+                            ${todayMark}
+                        </div>
+                        ${cards}
+                    </section>
+                `;
+            }).join('');
+
+            const notesRoot = document.getElementById('souvenir-notes');
+            if (notesRoot) {
+                notesRoot.innerHTML = `
+                    <article class="page-sheet">
+                        ${SOUVENIR_NOTES.map((note, i) => `
+                            <div class="flex items-start gap-4 py-6${i < SOUVENIR_NOTES.length - 1 ? ' border-b border-haizakura/40' : ''}">
+                                <span class="list-icon bg-ohdo/20 text-ohdo" aria-hidden="true"><i class="ph ${escapeHtml(note.icon)}"></i></span>
+                                <div class="min-w-0 flex-1">
+                                    <h3 class="item-title">${escapeHtml(note.title)}</h3>
+                                    <p class="mt-1.5 text-sm text-secondary leading-relaxed">${escapeHtml(note.body)}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </article>
+                `;
+            }
+        }
+
+        function filteredSouvenirItems() {
+            const items = souvenirState.items.slice();
+            items.sort((a, b) => {
+                if (a.purchased !== b.purchased) return a.purchased ? 1 : -1;
+                const dayA = a.relatedDay || 99;
+                const dayB = b.relatedDay || 99;
+                if (dayA !== dayB) return dayA - dayB;
+                return String(a.createdAt).localeCompare(String(b.createdAt));
+            });
+            if (souvenirFilter === 'open') return items.filter((item) => !item.purchased);
+            if (souvenirFilter === 'done') return items.filter((item) => item.purchased);
+            return items;
+        }
+
+        function renderSouvenirMine() {
+            const root = document.getElementById('souvenir-mine-list');
+            const empty = document.getElementById('souvenir-mine-empty');
+            if (!root) return;
+            const items = filteredSouvenirItems();
+            document.querySelectorAll('[data-souvenir-filter]').forEach((btn) => {
+                btn.classList.toggle('is-active', btn.dataset.souvenirFilter === souvenirFilter);
+            });
+            if (!souvenirState.items.length) {
+                root.innerHTML = '';
+                if (empty) {
+                    empty.classList.remove('hidden');
+                    empty.textContent = '還沒有手信。可從「推薦」加入，或自己新增要買的東西。';
+                }
+                return;
+            }
+            if (!items.length) {
+                root.innerHTML = '';
+                if (empty) {
+                    empty.classList.remove('hidden');
+                    empty.textContent = souvenirFilter === 'done' ? '還沒有已購買的手信。' : '未購買的手信都買齊了。';
+                }
+                return;
+            }
+            if (empty) empty.classList.add('hidden');
+            root.innerHTML = items.map((item) => {
+                const qty = item.quantity > 1 ? ' ×' + item.quantity : '';
+                const brand = item.brand ? escapeHtml(item.brand) + '　' : '';
+                const who = item.forWhom ? '幫' + escapeHtml(item.forWhom) + '買' : '';
+                const price = formatSouvenirPrice(item.referencePrice, item.priceNote);
+                const metaBits = [who, qty.trim(), price].filter(Boolean);
+                const place = formatSouvenirDayPlace(item.relatedDay, item.relatedPlace && item.relatedPlace.label);
+                const locs = (item.purchaseLocations || []).join('、');
+                const placeLine = [place, locs].filter(Boolean).join('　');
+                const note = item.note ? `<p class="souvenir-mine-note">${escapeHtml(item.note)}</p>` : '';
+                const thumb = souvenirIllustrationHtml(item);
+                return `
+                    <article class="souvenir-mine-item${item.purchased ? ' is-done' : ''}">
+                        <label class="prep-check-wrap">
+                            <input type="checkbox" data-souvenir-bought="${escapeHtml(item.id)}" ${item.purchased ? 'checked' : ''} aria-label="已購買 ${escapeHtml(item.name)}">
+                            <span class="prep-check" aria-hidden="true"><i class="ph ph-check"></i></span>
+                        </label>
+                        ${thumb}
+                        <div class="souvenir-mine-body">
+                            <p class="souvenir-mine-name">${brand}${escapeHtml(item.name)}</p>
+                            ${metaBits.length ? `<p class="souvenir-mine-meta">${metaBits.join('　')}</p>` : ''}
+                            ${placeLine ? `<p class="souvenir-mine-place">${escapeHtml(placeLine)}</p>` : ''}
+                            ${note}
+                        </div>
+                        <div class="souvenir-mine-actions">
+                            <button type="button" class="expense-icon-btn edit" data-souvenir-edit="${escapeHtml(item.id)}" aria-label="編輯 ${escapeHtml(item.name)}"><i class="ph ph-pencil-simple" aria-hidden="true"></i></button>
+                            <button type="button" class="expense-icon-btn delete" data-souvenir-delete="${escapeHtml(item.id)}" aria-label="刪除 ${escapeHtml(item.name)}"><i class="ph ph-trash" aria-hidden="true"></i></button>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function renderSouvenirGuide() {
+            renderSouvenirTabs();
+            renderSouvenirRecommendations();
+            renderSouvenirMine();
+        }
+
+        function switchSouvenirView(view) {
+            souvenirView = view === 'mine' ? 'mine' : 'recommend';
+            renderSouvenirTabs();
+            if (souvenirView === 'recommend') {
+                requestAnimationFrame(scrollSouvenirTodayIntoView);
+            }
+        }
+
+        function scrollSouvenirTodayIntoView() {
+            const todayDay = getTokyoTodayTripDay();
+            if (todayDay == null) return;
+            const days = [];
+            SOUVENIR_RECOMMENDATIONS.forEach((rec) => {
+                if (days.indexOf(rec.relatedDay) === -1) days.push(rec.relatedDay);
+            });
+            days.sort((a, b) => a - b);
+            const targetDay = days.find((day) => day >= todayDay) || days[days.length - 1];
+            const el = document.querySelector('[data-souvenir-day="' + targetDay + '"]');
+            if (el) el.scrollIntoView({ block: 'start', behavior: 'auto' });
+        }
+
+        function addRecommendationToMine(recId) {
+            if (isRecommendationInMine(recId)) return;
+            const rec = findSouvenirRecommendation(recId);
+            if (!rec) return;
+            souvenirState.items.push({
+                id: 'sv-' + Date.now(),
+                source: 'recommendation',
+                recommendationId: rec.id,
+                name: rec.name,
+                brand: '',
+                forWhom: '',
+                quantity: 1,
+                referencePrice: rec.referencePrice == null ? '' : rec.referencePrice,
+                priceNote: rec.priceNote || '',
+                purchaseLocations: (rec.purchaseLocations || []).slice(),
+                note: rec.packageInfo || '',
+                relatedDay: rec.relatedDay,
+                relatedPlace: rec.relatedPlace ? { id: rec.relatedPlace.id, label: rec.relatedPlace.label } : null,
+                imageKind: 'illustration',
+                illustration: rec.illustration,
+                icon: rec.icon,
+                photoDataUrl: null,
+                purchased: false,
+                createdAt: new Date().toISOString()
+            });
+            saveSouvenirState();
+            renderSouvenirGuide();
+        }
+
+        function toggleSouvenirBought(id, bought) {
+            const item = findSouvenirItem(id);
+            if (!item) return;
+            item.purchased = !!bought;
+            saveSouvenirState();
+            renderSouvenirMine();
+            renderSouvenirTabs();
+        }
+
+        function deleteSouvenirItem(id) {
+            souvenirState.items = souvenirState.items.filter((item) => item.id !== id);
+            saveSouvenirState();
+            renderSouvenirGuide();
+        }
+
+        function fillSouvenirDayOptions(selected) {
+            const select = document.getElementById('souvenir-day');
+            if (!select) return;
+            const current = selected == null || selected === '' ? '' : String(selected);
+            const options = ['<option value="">不指定</option>'].concat(
+                getItineraryDays().map((day) => {
+                    const label = 'Day ' + day.day + '｜' + (day.heading || day.date || '');
+                    return `<option value="${day.day}"${String(day.day) === current ? ' selected' : ''}>${escapeHtml(label)}</option>`;
+                })
+            );
+            select.innerHTML = options.join('');
+        }
+
+        function resetSouvenirForm() {
+            souvenirPhotoDraft = '';
+            const ids = {
+                'souvenir-edit-id': '',
+                'souvenir-source': 'custom',
+                'souvenir-rec-id': '',
+                'souvenir-name': '',
+                'souvenir-brand': '',
+                'souvenir-for-whom': '',
+                'souvenir-qty': '1',
+                'souvenir-price': '',
+                'souvenir-place-label': '',
+                'souvenir-locations': '',
+                'souvenir-note': ''
+            };
+            Object.keys(ids).forEach((id) => {
+                const el = document.getElementById(id);
+                if (el) el.value = ids[id];
+            });
+            fillSouvenirDayOptions('');
+            const photoInput = document.getElementById('souvenir-photo-input');
+            if (photoInput) photoInput.value = '';
+            renderSouvenirPhotoPreview();
+            const photoWrap = document.getElementById('souvenir-photo-field');
+            if (photoWrap) photoWrap.classList.remove('hidden');
+            const titleEl = document.getElementById('souvenir-sheet-title');
+            const submitBtn = document.getElementById('souvenir-submit');
+            if (titleEl) titleEl.textContent = '新增手信';
+            if (submitBtn) submitBtn.textContent = '新增';
+        }
+
+        function fillSouvenirForm(item) {
+            souvenirPhotoDraft = item.photoDataUrl || '';
+            document.getElementById('souvenir-edit-id').value = item.id;
+            document.getElementById('souvenir-source').value = item.source;
+            document.getElementById('souvenir-rec-id').value = item.recommendationId || '';
+            document.getElementById('souvenir-name').value = item.name || '';
+            document.getElementById('souvenir-brand').value = item.brand || '';
+            document.getElementById('souvenir-for-whom').value = item.forWhom || '';
+            document.getElementById('souvenir-qty').value = item.quantity || 1;
+            document.getElementById('souvenir-price').value = item.referencePrice == null ? '' : item.referencePrice;
+            document.getElementById('souvenir-place-label').value = item.relatedPlace && item.relatedPlace.label ? item.relatedPlace.label : '';
+            document.getElementById('souvenir-locations').value = locationsToText(item.purchaseLocations);
+            document.getElementById('souvenir-note').value = item.note || '';
+            fillSouvenirDayOptions(item.relatedDay);
+            const photoInput = document.getElementById('souvenir-photo-input');
+            if (photoInput) photoInput.value = '';
+            const photoWrap = document.getElementById('souvenir-photo-field');
+            if (photoWrap) photoWrap.classList.toggle('hidden', item.source === 'recommendation');
+            renderSouvenirPhotoPreview();
+            const titleEl = document.getElementById('souvenir-sheet-title');
+            const submitBtn = document.getElementById('souvenir-submit');
+            if (titleEl) titleEl.textContent = '編輯手信';
+            if (submitBtn) submitBtn.textContent = '儲存';
+        }
+
+        function renderSouvenirPhotoPreview() {
+            const preview = document.getElementById('souvenir-photo-preview');
+            if (!preview) return;
+            if (!souvenirPhotoDraft) {
+                preview.innerHTML = '<span class="text-secondary">尚未加入照片</span>';
+                return;
+            }
+            preview.innerHTML = `
+                <span class="souvenir-thumb is-photo"><img src="${escapeHtml(souvenirPhotoDraft)}" alt=""></span>
+                <button type="button" class="btn-secondary" data-souvenir-clear-photo>移除照片</button>
+            `;
+        }
+
+        function closeSouvenirSheet() {
+            const sheet = document.getElementById('souvenir-sheet');
+            if (!sheet || !sheet.classList.contains('is-open')) return;
+            sheet.classList.remove('is-open');
+            document.body.classList.remove('souvenir-sheet-open');
+            sheet.setAttribute('aria-hidden', 'true');
+            if (souvenirSheetLastFocus) {
+                souvenirSheetLastFocus.focus();
+                souvenirSheetLastFocus = null;
+            }
+        }
+
+        function openSouvenirSheet(itemId) {
+            closeItinSheet();
+            closeExpenseSheet();
+            closeSouvenirPhoto();
+            const sheet = document.getElementById('souvenir-sheet');
+            if (!sheet) return;
+            if (itemId) {
+                const item = findSouvenirItem(itemId);
+                if (!item) return;
+                fillSouvenirForm(item);
+            } else {
+                resetSouvenirForm();
+            }
+            souvenirSheetLastFocus = document.activeElement;
+            sheet.classList.add('is-open');
+            document.body.classList.add('souvenir-sheet-open');
+            sheet.setAttribute('aria-hidden', 'false');
+            const nameInput = document.getElementById('souvenir-name');
+            if (nameInput) nameInput.focus();
+        }
+
+        function closeSouvenirPhoto() {
+            const overlay = document.getElementById('souvenir-photo');
+            if (!overlay || !overlay.classList.contains('is-open')) return;
+            overlay.classList.remove('is-open');
+            document.body.classList.remove('souvenir-photo-open');
+            overlay.setAttribute('aria-hidden', 'true');
+            const img = document.getElementById('souvenir-photo-img');
+            if (img) img.removeAttribute('src');
+        }
+
+        function openSouvenirPhoto(itemId) {
+            const item = findSouvenirItem(itemId);
+            if (!item || !item.photoDataUrl) return;
+            const overlay = document.getElementById('souvenir-photo');
+            const img = document.getElementById('souvenir-photo-img');
+            if (!overlay || !img) return;
+            img.src = item.photoDataUrl;
+            img.alt = item.name + ' 商品照片';
+            overlay.classList.add('is-open');
+            document.body.classList.add('souvenir-photo-open');
+            overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function compressImageFile(file) {
+            return new Promise((resolve, reject) => {
+                if (!file || !file.type || file.type.indexOf('image/') !== 0) {
+                    reject(new Error('not-image'));
+                    return;
+                }
+                const img = new Image();
+                const url = URL.createObjectURL(file);
+                img.onload = () => {
+                    const max = 1200;
+                    const scale = Math.min(1, max / Math.max(img.width, img.height));
+                    const canvas = document.createElement('canvas');
+                    canvas.width = Math.max(1, Math.round(img.width * scale));
+                    canvas.height = Math.max(1, Math.round(img.height * scale));
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    URL.revokeObjectURL(url);
+                    resolve(canvas.toDataURL('image/jpeg', 0.72));
+                };
+                img.onerror = () => {
+                    URL.revokeObjectURL(url);
+                    reject(new Error('load'));
+                };
+                img.src = url;
+            });
+        }
+
+        function collectSouvenirForm() {
+            const name = (document.getElementById('souvenir-name').value || '').trim();
+            const source = document.getElementById('souvenir-source').value || 'custom';
+            const recId = document.getElementById('souvenir-rec-id').value || null;
+            const dayVal = document.getElementById('souvenir-day').value;
+            const placeLabel = (document.getElementById('souvenir-place-label').value || '').trim();
+            const priceVal = (document.getElementById('souvenir-price').value || '').trim();
+            return {
+                name,
+                source,
+                recommendationId: recId,
+                brand: (document.getElementById('souvenir-brand').value || '').trim(),
+                forWhom: (document.getElementById('souvenir-for-whom').value || '').trim(),
+                quantity: Math.max(1, Number(document.getElementById('souvenir-qty').value) || 1),
+                referencePrice: priceVal === '' ? '' : Number(priceVal),
+                purchaseLocations: textToLocations(document.getElementById('souvenir-locations').value),
+                note: (document.getElementById('souvenir-note').value || '').trim(),
+                relatedDay: dayVal ? Number(dayVal) : null,
+                relatedPlace: placeLabel ? { id: '', label: placeLabel } : null
+            };
+        }
+
+        function submitSouvenirForm() {
+            const data = collectSouvenirForm();
+            if (!data.name) {
+                const nameInput = document.getElementById('souvenir-name');
+                if (nameInput) nameInput.focus();
+                return;
+            }
+            const editId = document.getElementById('souvenir-edit-id').value;
+            if (editId) {
+                const item = findSouvenirItem(editId);
+                if (!item) return;
+                const prevPlaceId = item.relatedPlace && item.relatedPlace.id ? item.relatedPlace.id : '';
+                const prevPriceNote = item.priceNote || '';
+                Object.assign(item, data);
+                if (item.relatedPlace) item.relatedPlace.id = prevPlaceId;
+                item.priceNote = prevPriceNote;
+                if (item.source === 'custom') {
+                    item.imageKind = souvenirPhotoDraft ? 'photo' : 'illustration';
+                    item.photoDataUrl = souvenirPhotoDraft || null;
+                    if (!item.icon) item.icon = 'ph-gift';
+                }
+            } else {
+                souvenirState.items.push({
+                    id: 'sv-' + Date.now(),
+                    source: 'custom',
+                    recommendationId: null,
+                    name: data.name,
+                    brand: data.brand,
+                    forWhom: data.forWhom,
+                    quantity: data.quantity,
+                    referencePrice: data.referencePrice,
+                    priceNote: '',
+                    purchaseLocations: data.purchaseLocations,
+                    note: data.note,
+                    relatedDay: data.relatedDay,
+                    relatedPlace: data.relatedPlace,
+                    imageKind: souvenirPhotoDraft ? 'photo' : 'illustration',
+                    illustration: null,
+                    icon: 'ph-gift',
+                    photoDataUrl: souvenirPhotoDraft || null,
+                    purchased: false,
+                    createdAt: new Date().toISOString()
+                });
+            }
+            const saved = saveSouvenirState();
+            if (!saved && souvenirPhotoDraft) {
+                const last = editId ? findSouvenirItem(editId) : souvenirState.items[souvenirState.items.length - 1];
+                if (last) {
+                    last.photoDataUrl = null;
+                    last.imageKind = last.source === 'recommendation' ? 'illustration' : 'illustration';
+                    saveSouvenirState();
+                }
+            }
+            closeSouvenirSheet();
+            switchSouvenirView('mine');
+            renderSouvenirGuide();
+        }
+
+        function bindSouvenirUi() {
+            const root = document.getElementById('content-souvenir');
+            if (root && root.dataset.souvenirBound !== '1') {
+                root.dataset.souvenirBound = '1';
+                root.addEventListener('click', (event) => {
+                    const tab = event.target.closest('[data-souvenir-view]');
+                    if (tab) {
+                        switchSouvenirView(tab.dataset.souvenirView);
+                        return;
+                    }
+                    const filterBtn = event.target.closest('[data-souvenir-filter]');
+                    if (filterBtn) {
+                        souvenirFilter = filterBtn.dataset.souvenirFilter;
+                        renderSouvenirMine();
+                        return;
+                    }
+                    const addRec = event.target.closest('[data-souvenir-add-rec]');
+                    if (addRec) {
+                        addRecommendationToMine(addRec.dataset.souvenirAddRec);
+                        return;
+                    }
+                    const addBtn = event.target.closest('[data-souvenir-add]');
+                    if (addBtn) {
+                        openSouvenirSheet();
+                        return;
+                    }
+                    const editBtn = event.target.closest('[data-souvenir-edit]');
+                    if (editBtn) {
+                        openSouvenirSheet(editBtn.dataset.souvenirEdit);
+                        return;
+                    }
+                    const delBtn = event.target.closest('[data-souvenir-delete]');
+                    if (delBtn) {
+                        deleteSouvenirItem(delBtn.dataset.souvenirDelete);
+                        return;
+                    }
+                    const photoBtn = event.target.closest('[data-souvenir-photo]');
+                    if (photoBtn) {
+                        openSouvenirPhoto(photoBtn.dataset.souvenirPhoto);
+                    }
+                });
+                root.addEventListener('change', (event) => {
+                    const box = event.target.closest('[data-souvenir-bought]');
+                    if (!box) return;
+                    toggleSouvenirBought(box.dataset.souvenirBought, box.checked);
+                });
+            }
+
+            const form = document.getElementById('souvenir-form');
+            if (form && form.dataset.souvenirBound !== '1') {
+                form.dataset.souvenirBound = '1';
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    submitSouvenirForm();
+                });
+                form.addEventListener('click', (event) => {
+                    if (event.target.closest('[data-souvenir-clear-photo]')) {
+                        souvenirPhotoDraft = '';
+                        const photoInput = document.getElementById('souvenir-photo-input');
+                        if (photoInput) photoInput.value = '';
+                        renderSouvenirPhotoPreview();
+                    }
+                });
+                const photoInput = document.getElementById('souvenir-photo-input');
+                if (photoInput) {
+                    photoInput.addEventListener('change', (event) => {
+                        const file = event.target.files && event.target.files[0];
+                        if (!file) return;
+                        compressImageFile(file).then((dataUrl) => {
+                            souvenirPhotoDraft = dataUrl;
+                            renderSouvenirPhotoPreview();
+                        }).catch(() => {
+                            souvenirPhotoDraft = '';
+                            renderSouvenirPhotoPreview();
+                        });
+                    });
+                }
+            }
+
+            const photo = document.getElementById('souvenir-photo');
+            if (photo && photo.dataset.souvenirBound !== '1') {
+                photo.dataset.souvenirBound = '1';
+                photo.addEventListener('click', (event) => {
+                    if (event.target === photo || event.target.closest('[data-souvenir-photo-close]')) {
+                        closeSouvenirPhoto();
+                    }
+                });
+            }
+
+            const fab = document.getElementById('souvenir-fab');
+            if (fab && fab.dataset.souvenirBound !== '1') {
+                fab.dataset.souvenirBound = '1';
+                fab.addEventListener('click', () => openSouvenirSheet());
+            }
+        }
+
+        function initSouvenirGuide() {
+            loadSouvenirState();
+            renderSouvenirGuide();
+            bindSouvenirUi();
+        }
+
+        function getPlace(id) {
+            return PLACES.find((place) => place.id === id) || null;
+        }
+
+        function formatTripMd(iso) {
+            const parts = String(iso || '').split('-');
+            if (parts.length < 3) return '';
+            return parts[1] + '/' + parts[2];
+        }
+
+        function nightsBetween(checkIn, checkOut) {
+            const start = Date.parse(checkIn + 'T00:00:00');
+            const end = Date.parse(checkOut + 'T00:00:00');
+            if (Number.isNaN(start) || Number.isNaN(end) || end <= start) return 0;
+            return Math.round((end - start) / 86400000);
+        }
+
+        function mapsSearchUrl(query) {
+            return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
+        }
+
+        function overviewMetaRow(label, valueHtml) {
+            if (!valueHtml) return '';
+            return `<p><span class="overview-label">${escapeHtml(label)}</span>${valueHtml}</p>`;
+        }
+
+        function renderOverviewRoute() {
+            const root = document.getElementById('overview-route');
+            if (!root) return;
+            root.innerHTML = TRIP_ROUTE.map((stop) => `
+                <div class="overview-stop${stop.kind === 'fly' ? ' is-fly' : ''}">
+                    <p class="overview-stop-name">${escapeHtml(stop.name)}</p>
+                    ${stop.meta ? `<p class="overview-stop-meta">${escapeHtml(stop.meta)}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function renderOverviewFlights() {
+            const root = document.getElementById('overview-flights');
+            if (!root) return;
+            const flightBooking = BOOKINGS.find((item) => item.type === 'flight');
+            const segments = flightBooking
+                ? FLIGHT_SEGMENTS.filter((seg) => (flightBooking.segmentIds || []).includes(seg.id) || seg.bookingId === flightBooking.id)
+                : FLIGHT_SEGMENTS.slice();
+            root.innerHTML = segments.map((seg) => {
+                const depCode = [seg.departure.airportCode, seg.departure.terminal].filter(Boolean).join(' ');
+                const arrCode = [seg.arrival.airportCode, seg.arrival.terminal].filter(Boolean).join(' ');
+                const depWhen = [formatTripMd(seg.date), seg.departure.time].filter(Boolean).join(' ');
+                const arrWhen = [formatTripMd(seg.date), seg.arrival.time].filter(Boolean).join(' ');
+                return `
+                    <div class="overview-flight">
+                        <p class="overview-flight-kicker">${escapeHtml(seg.directionLabel || '')}</p>
+                        <p class="overview-flight-no">${escapeHtml(seg.flightNo)}</p>
+                        <div class="overview-flight-route">
+                            <p class="overview-flight-code">${escapeHtml(depCode)}</p>
+                            <i class="ph-fill ph-airplane overview-flight-plane" aria-hidden="true"></i>
+                            <p class="overview-flight-code is-arr">${escapeHtml(arrCode)}</p>
+                            <p class="overview-flight-when">${escapeHtml(depWhen)}</p>
+                            <span></span>
+                            <p class="overview-flight-when is-arr">${escapeHtml(arrWhen)}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderOverviewStays() {
+            const root = document.getElementById('overview-stays');
+            if (!root) return;
+            const stays = BOOKINGS.filter((item) => item.type === 'accommodation');
+            root.innerHTML = stays.map((booking) => {
+                const place = getPlace(booking.placeId) || {};
+                const nights = nightsBetween(booking.checkIn, booking.checkOut);
+                const when = [formatTripMd(booking.checkIn), formatTripMd(booking.checkOut)].filter(Boolean).join('–')
+                    + (nights ? ` · ${nights} 晚` : '');
+                const phoneHtml = place.phone
+                    ? `<a href="tel:${escapeHtml(place.tel || place.phone)}">${escapeHtml(place.phone)}</a>`
+                    : '';
+                const addressHtml = place.address ? `<span>${escapeHtml(place.address)}</span>` : '';
+                const emailHtml = place.email
+                    ? `<a href="mailto:${escapeHtml(place.email)}">${escapeHtml(place.email)}</a>`
+                    : '';
+                const bookingNo = booking.confirmationNo
+                    ? `<p class="overview-booking-no">Booking #${escapeHtml(booking.confirmationNo)}</p>`
+                    : '';
+                const mapHtml = place.mapQuery
+                    ? `<a href="${escapeHtml(mapsSearchUrl(place.mapQuery))}" target="_blank" rel="noopener" class="btn-outline is-quiet"><i class="ph ph-map-pin" aria-hidden="true"></i> 地圖</a>`
+                    : '';
+                const siteHtml = place.website
+                    ? `<a href="${escapeHtml(place.website)}" target="_blank" rel="noopener" class="btn-outline is-quiet"><i class="ph ph-globe" aria-hidden="true"></i> 官網</a>`
+                    : '';
+                const detailRows = [];
+                if (booking.plan) detailRows.push(overviewMetaRow('プラン', `<span>${escapeHtml(booking.plan)}</span>`));
+                if (booking.room) detailRows.push(overviewMetaRow('お部屋', `<span>${escapeHtml(booking.room)}</span>`));
+                if (booking.meals) detailRows.push(overviewMetaRow('お食事', `<span>${escapeHtml(booking.meals)}</span>`));
+                if (booking.checkoutTime) detailRows.push(overviewMetaRow('チェックアウト', `<span>${escapeHtml(booking.checkoutTime)}</span>`));
+                if (booking.rooms) detailRows.push(overviewMetaRow('部屋数', `<span>${escapeHtml(booking.rooms)}</span>`));
+                if (booking.occupancy) detailRows.push(overviewMetaRow('部屋割り', `<span>${escapeHtml(booking.occupancy)}</span>`));
+                if (booking.bookedAt) detailRows.push(overviewMetaRow('予約受付', `<span>${escapeHtml(booking.bookedAt)}</span>`));
+                const detailsHtml = detailRows.length
+                    ? `<details class="quiet-details overview-booking">
+                            <summary class="btn-outline is-quiet">
+                                <i class="ph ph-ticket" aria-hidden="true"></i> 訂房明細
+                            </summary>
+                            <div class="overview-booking-body">${detailRows.join('')}</div>
+                        </details>`
+                    : '';
+                return `
+                    <div class="overview-hotel">
+                        <p class="overview-hotel-when">${escapeHtml(when)}</p>
+                        <h3 class="overview-hotel-name">${escapeHtml(place.name || '')}</h3>
+                        <div class="overview-hotel-meta">
+                            ${overviewMetaRow('電話', phoneHtml)}
+                            ${overviewMetaRow('地址', addressHtml)}
+                            ${overviewMetaRow('Email', emailHtml)}
+                        </div>
+                        ${bookingNo}
+                        <div class="overview-hotel-actions">
+                            ${mapHtml}
+                            ${siteHtml}
+                            ${detailsHtml}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderOverviewReservations() {
+            const root = document.getElementById('overview-reservations');
+            if (!root) return;
+            const items = BOOKINGS
+                .filter((item) => item.type !== 'flight' && item.type !== 'accommodation')
+                .slice()
+                .sort((a, b) => String(a.date).localeCompare(String(b.date)));
+            root.innerHTML = items.map((booking) => {
+                const place = getPlace(booking.placeId) || {};
+                const phone = place.phone || booking.phone;
+                const tel = place.tel || booking.tel || phone;
+                const phoneHtml = phone ? `<a href="tel:${escapeHtml(tel)}">${escapeHtml(phone)}</a>` : '';
+                const bookingNo = booking.confirmationNo
+                    ? `<p class="overview-booking-no">Booking #${escapeHtml(booking.confirmationNo)}</p>`
+                    : '';
+                const channelHtml = booking.channelLabel
+                    ? (booking.href
+                        ? `<a href="${escapeHtml(booking.href)}" target="_blank" rel="noopener">${escapeHtml(booking.channelLabel)}</a>`
+                        : `<span>${escapeHtml(booking.channelLabel)}</span>`)
+                    : '';
+                const summaryHtml = booking.summary ? `<span>${escapeHtml(booking.summary)}</span>` : '';
+                return `
+                    <div class="overview-reserve">
+                        <p class="overview-reserve-when">${escapeHtml(formatTripMd(booking.date))}</p>
+                        <h3 class="overview-reserve-name">${escapeHtml(booking.title || place.name || '')}</h3>
+                        <div class="overview-reserve-meta">
+                            ${overviewMetaRow('預約', channelHtml)}
+                            ${overviewMetaRow('電話', phoneHtml)}
+                            ${overviewMetaRow('內容', summaryHtml)}
+                        </div>
+                        ${bookingNo}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderOverview() {
+            renderOverviewRoute();
+            renderOverviewFlights();
+            renderOverviewStays();
+            renderOverviewReservations();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             initExpenses();
             initPrepChecklist();
+            initSouvenirGuide();
+            renderOverview();
             initDefaultDay();
             syncMobileNavSpace();
 
@@ -5704,12 +6957,22 @@
                 }
                 if (event.target.closest('[data-expense-sheet-close]')) {
                     closeExpenseSheet();
+                    return;
+                }
+                if (event.target.closest('[data-souvenir-sheet-close]')) {
+                    closeSouvenirSheet();
+                    return;
+                }
+                if (event.target.closest('[data-souvenir-photo-close]')) {
+                    closeSouvenirPhoto();
                 }
             });
             document.addEventListener('keydown', (event) => {
                 if (event.key !== 'Escape') return;
                 closeItinSheet();
                 closeExpenseSheet();
+                closeSouvenirSheet();
+                closeSouvenirPhoto();
             });
         });
     </script>
