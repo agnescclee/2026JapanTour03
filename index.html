@@ -135,7 +135,7 @@
         }
 
         .expense-fab {
-            box-shadow: 0 8px 24px rgba(153, 70, 57, 0.28);
+            box-shadow: 0 6px 16px rgba(153, 70, 57, 0.16);
         }
 
         #content-record .expense-fab {
@@ -1120,46 +1120,98 @@
         #content-record:not(.hidden) {
             display: flex;
             flex-direction: column;
-            gap: 0.85rem;
+            gap: 0.7rem;
             max-width: 42rem;
             margin-inline: auto;
         }
 
+        #content-record .page-sheet.expense-total-card,
+        #content-record .page-sheet.expense-card {
+            padding: 0.85rem 1rem;
+            border-color: rgba(215, 196, 187, 0.32);
+            box-shadow: none;
+        }
+
         .expense-total-card {
             display: flex;
-            flex-wrap: wrap;
-            align-items: baseline;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.12rem;
+        }
+
+        .expense-total-head {
+            display: flex;
+            align-items: center;
             justify-content: space-between;
-            gap: 0.5rem 1rem;
-            padding: 1.15rem 1.25rem;
+            gap: 0.5rem;
+            min-height: 2.5rem;
         }
 
         .expense-total-label {
             margin: 0;
-            font-size: 1rem;
-            color: rgba(67, 67, 67, 0.58);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: rgba(67, 67, 67, 0.62);
+        }
+
+        .expense-export-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: -0.35rem -0.4rem -0.35rem 0;
+            padding: 0;
+            border: 0;
+            border-radius: 999px;
+            background: transparent;
+            color: rgba(67, 67, 67, 0.4);
+        }
+
+        .expense-export-icon i {
+            font-size: 1.15rem;
+            line-height: 1;
+        }
+
+        .expense-export-icon:hover,
+        .expense-export-icon:focus-visible {
+            background: rgba(67, 67, 67, 0.06);
+            color: rgba(67, 67, 67, 0.62);
         }
 
         .expense-total-values {
             margin: 0;
-            font-size: 1.125rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.02rem;
+            font-size: 1.0625rem;
             font-weight: 600;
             color: var(--color-benitobi);
             font-variant-numeric: tabular-nums;
             letter-spacing: 0.01em;
+            line-height: 1.3;
             white-space: nowrap;
         }
 
+        .expense-total-values span {
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+        }
+
         .expense-filter {
-            display: grid;
-            grid-template-columns: repeat(7, minmax(0, 1fr));
-            gap: 0.4rem;
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 0.35rem;
+            overflow-x: auto;
+            overscroll-behavior-x: contain;
+            -webkit-overflow-scrolling: touch;
+            padding: 0.05rem 0.05rem 0.15rem;
         }
 
         .expense-filter-btn,
         .expense-cat-btn {
-            border: 1px solid rgba(215, 196, 187, 0.9);
-            background: var(--color-gofun);
             color: var(--color-kesizumi);
             font-weight: 500;
             line-height: 1.2;
@@ -1169,16 +1221,18 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            min-width: 0;
-            min-height: 2.75rem;
-            padding: 0.3rem 0;
+            flex: 0 0 auto;
+            width: 2.5rem;
+            min-width: 2.5rem;
+            min-height: 2.5rem;
+            padding: 0;
             border-radius: 999px;
+            border: 1px solid rgba(215, 196, 187, 0.38);
+            background: transparent;
         }
 
-        .expense-filter-btn i,
-        .expense-cat-btn i {
-            font-size: 1.25rem;
+        .expense-filter-btn i {
+            font-size: 1.05rem;
         }
 
         .expense-cat-btn {
@@ -1190,8 +1244,14 @@
             min-width: 0;
             min-height: 3.1rem;
             padding: 0.3rem 0.1rem;
+            border: 1px solid rgba(215, 196, 187, 0.9);
             border-radius: 0.75rem;
+            background: var(--color-gofun);
             font-size: 0.7rem;
+        }
+
+        .expense-cat-btn i {
+            font-size: 1.25rem;
         }
 
         #category-selector-buttons {
@@ -1264,11 +1324,11 @@
         .expense-list {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.55rem;
         }
 
         .expense-empty {
-            padding: 2rem 1rem;
+            padding: 1.75rem 1rem;
             text-align: center;
             color: rgba(67, 67, 67, 0.5);
         }
@@ -1276,8 +1336,7 @@
         .expense-card {
             display: flex;
             flex-direction: column;
-            gap: 0.45rem;
-            padding: 1.1rem 1.2rem 1rem;
+            gap: 0.28rem;
         }
 
         .expense-card-top,
@@ -1294,7 +1353,8 @@
 
         .expense-card-title {
             margin: 0;
-            font-weight: 600;
+            font-size: 0.9375rem;
+            font-weight: 500;
             line-height: 1.4;
             min-width: 0;
             flex: 1;
@@ -1303,7 +1363,9 @@
         .expense-card-amount {
             margin: 0;
             flex-shrink: 0;
+            font-size: 0.9375rem;
             font-weight: 600;
+            line-height: 1.3;
             color: var(--color-benitobi);
             font-variant-numeric: tabular-nums;
             white-space: nowrap;
@@ -1313,8 +1375,9 @@
             margin: 0;
             min-width: 0;
             flex: 1;
-            font-size: 0.875rem;
-            color: rgba(67, 67, 67, 0.5);
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: rgba(67, 67, 67, 0.48);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1324,27 +1387,31 @@
             flex-shrink: 0;
             display: flex;
             align-items: center;
-            gap: 0.35rem;
+            gap: 0.2rem;
         }
 
         .expense-icon-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 2.25rem;
-            height: 2.25rem;
+            width: 2.5rem;
+            height: 2.5rem;
             border-radius: 999px;
             border: 0;
         }
 
+        .expense-icon-btn i {
+            font-size: 1rem;
+        }
+
         .expense-icon-btn.edit {
-            background: rgba(81, 110, 65, 0.12);
-            color: var(--color-stay);
+            background: rgba(81, 110, 65, 0.08);
+            color: rgba(81, 110, 65, 0.72);
         }
 
         .expense-icon-btn.delete {
-            background: rgba(153, 70, 57, 0.12);
-            color: var(--color-benitobi);
+            background: rgba(153, 70, 57, 0.08);
+            color: rgba(153, 70, 57, 0.68);
         }
 
         @media (min-width: 768px) {
@@ -4008,11 +4075,19 @@
              =================================================================== -->
         <section id="content-record" class="hidden animate-fade-in">
             <article class="page-sheet expense-total-card">
-                <p class="expense-total-label">累積花費總計</p>
-                <p id="expense-total-values" class="expense-total-values font-num">¥0 | NT$0</p>
+                <div class="expense-total-head">
+                    <p class="expense-total-label">旅行支出</p>
+                    <button type="button" class="expense-export-icon" onclick="exportLedgerJson()" aria-label="匯出旅分帳 JSON" title="匯出旅分帳 JSON">
+                        <i class="ph ph-export" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div id="expense-total-values" class="expense-total-values font-num">
+                    <span>¥0</span>
+                    <span>NT$0</span>
+                </div>
             </article>
 
-            <div class="expense-filter" role="tablist" aria-label="消費分類">
+            <div class="expense-filter no-scrollbar" role="tablist" aria-label="消費分類">
                 <button type="button" class="expense-filter-btn is-active" data-cat="all" onclick="setExpenseFilter('all')" aria-label="全部" title="全部">
                     <i class="ph-duotone ph-squares-four" aria-hidden="true"></i>
                 </button>
@@ -4038,7 +4113,7 @@
 
             <div id="expense-list" class="expense-list"></div>
 
-            <button type="button" class="expense-fab fixed right-6 bottom-24 md:bottom-10 z-40 w-14 h-14 bg-benitobi text-gofun rounded-full shadow-lg flex items-center justify-center hover:bg-tobi transition-colors" onclick="openExpenseSheet()" aria-label="新增消費">
+            <button type="button" class="expense-fab fixed right-6 bottom-24 md:bottom-10 z-40 w-14 h-14 bg-benitobi text-gofun rounded-full flex items-center justify-center hover:bg-tobi transition-colors" onclick="openExpenseSheet()" aria-label="新增消費">
                 <i class="ph-duotone ph-plus text-2xl"></i>
             </button>
         </section>
@@ -4143,6 +4218,10 @@
                         <input type="hidden" id="expense-currency" value="JPY">
                     </div>
                     <div>
+                        <label for="expense-payer" class="block text-secondary mb-1.5">付款人</label>
+                        <input type="text" id="expense-payer" placeholder="輸入姓名，例如：哥哥" class="form-control" autocomplete="off">
+                    </div>
+                    <div>
                         <label for="expense-amount" class="block text-secondary mb-1.5">金額</label>
                         <input type="number" id="expense-amount" placeholder="金額"
                             class="form-control font-num">
@@ -4160,6 +4239,36 @@
     <script>
         const TRIP_START = '2026-11-01';
         const TRIP_END = '2026-11-07';
+        const TRIP_TIME_ZONE = 'Asia/Tokyo';
+        const TRIP_CONFIG = {
+            tripId: 'fukushima-2026-11',
+            tripName: '秋醉福島・慢活七日',
+            timeZone: TRIP_TIME_ZONE,
+            startDate: TRIP_START,
+            endDate: TRIP_END,
+            defaultCurrency: 'JPY',
+            allowedCurrencies: ['JPY', 'TWD']
+        };
+        const TRIP_CURRENCY_CONFIG = {
+            defaultCurrency: TRIP_CONFIG.defaultCurrency,
+            allowedCurrencies: TRIP_CONFIG.allowedCurrencies.slice()
+        };
+        const LEGACY_PAYER_NAMES_BY_ID = {
+            'p-agnes': 'Agnes',
+            'p-02': '家人 2',
+            'p-03': '家人 3',
+            'p-04': '家人 4',
+            'p-05': '家人 5'
+        };
+        const EXPENSE_CATEGORY_MAP = {
+            '餐飲': 'food',
+            '住宿': 'lodging',
+            '交通': 'transport',
+            '購物': 'shopping',
+            '門票': 'entertainment',
+            '雜支': 'other'
+        };
+        const EXPENSE_STORAGE_KEY = 'fukushima_trip_expenses';
         let currentDay = 1;
         let currentTab = 'itinerary';
         let currentRoute = 'a';
@@ -4167,7 +4276,7 @@
 
         function getTokyoIsoDate(now = new Date()) {
             return new Intl.DateTimeFormat('en-CA', {
-                timeZone: 'Asia/Tokyo',
+                timeZone: TRIP_TIME_ZONE,
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit'
@@ -4250,6 +4359,7 @@
         let expenseSheetLastFocus = null;
         let editingExpenseId = null;
         let expenseFilter = 'all';
+        let lastPayerName = '';
 
         function closeExpenseSheet() {
             const sheet = document.getElementById('expense-sheet');
@@ -4271,13 +4381,15 @@
             const itemInput = document.getElementById('expense-item');
             const amountInput = document.getElementById('expense-amount');
             const dateInput = document.getElementById('expense-date');
+            const payerInput = document.getElementById('expense-payer');
             if (titleEl) titleEl.textContent = '新增消費';
             if (submitBtn) submitBtn.textContent = '新增';
             if (itemInput) itemInput.value = '';
             if (amountInput) amountInput.value = '';
-            if (dateInput) dateInput.value = toDateInputValue(formatExpenseDate());
+            if (dateInput) dateInput.value = formatExpenseDate();
+            if (payerInput) payerInput.value = lastPayerName;
             selectCategory('餐飲');
-            selectCurrency('JPY');
+            selectCurrency(TRIP_CURRENCY_CONFIG.defaultCurrency);
         }
 
         function fillExpenseForm(exp) {
@@ -4286,11 +4398,13 @@
             const itemInput = document.getElementById('expense-item');
             const amountInput = document.getElementById('expense-amount');
             const dateInput = document.getElementById('expense-date');
+            const payerInput = document.getElementById('expense-payer');
             if (titleEl) titleEl.textContent = '編輯消費';
             if (submitBtn) submitBtn.textContent = '儲存';
-            if (itemInput) itemInput.value = exp.item || '';
-            if (amountInput) amountInput.value = exp.amount || '';
+            if (itemInput) itemInput.value = exp.name || '';
+            if (amountInput) amountInput.value = exp.amountOriginal || '';
             if (dateInput) dateInput.value = toDateInputValue(exp.date);
+            if (payerInput) payerInput.value = exp.payerName || '';
             selectCategory(exp.category || '餐飲');
             selectCurrency(exp.currency === 'TWD' ? 'TWD' : 'JPY');
         }
@@ -4300,9 +4414,9 @@
             const sheet = document.getElementById('expense-sheet');
             if (!sheet) return;
             if (expenseId != null) {
-                const exp = expenses.find((item) => item.id === expenseId);
+                const exp = findExpenseById(expenseId);
                 if (!exp) return;
-                editingExpenseId = expenseId;
+                editingExpenseId = String(exp.id);
                 fillExpenseForm(exp);
             } else {
                 resetExpenseForm();
@@ -4373,31 +4487,35 @@
         }
 
         function selectCurrency(code) {
+            const next = TRIP_CURRENCY_CONFIG.allowedCurrencies.includes(code)
+                ? code
+                : TRIP_CURRENCY_CONFIG.defaultCurrency;
             const hidden = document.getElementById('expense-currency');
-            if (hidden) hidden.value = code;
+            if (hidden) hidden.value = next;
             document.querySelectorAll('#currency-selector-buttons .cat-btn').forEach(btn => {
-                const on = btn.dataset.currency === code;
+                const on = btn.dataset.currency === next;
                 btn.classList.toggle('is-active', on);
                 btn.setAttribute('aria-pressed', on ? 'true' : 'false');
             });
         }
 
         function formatExpenseAmount(exp) {
-            const amt = Number(exp.amount) || 0;
+            const amt = Number(exp.amountOriginal) || 0;
             return exp.currency === 'TWD'
                 ? 'NT$' + amt.toLocaleString()
                 : '¥' + amt.toLocaleString();
         }
 
         function formatExpenseDate(now = new Date()) {
-            const y = now.getFullYear();
-            const m = String(now.getMonth() + 1).padStart(2, '0');
-            const d = String(now.getDate()).padStart(2, '0');
-            return `${y}/${m}/${d}`;
+            return getTokyoIsoDate(now);
+        }
+
+        function formatDisplayDate(dateStr) {
+            return toDateInputValue(dateStr).replace(/-/g, '/');
         }
 
         function toDateInputValue(dateStr) {
-            const fallback = formatExpenseDate().replace(/\//g, '-');
+            const fallback = formatExpenseDate();
             if (!dateStr) return fallback;
             const parts = String(dateStr).trim().split(/[./-]/).map(Number).filter((n) => !Number.isNaN(n));
             if (parts.length === 3 && parts[0] > 31) {
@@ -4410,61 +4528,299 @@
             }
             if (parts.length === 2) {
                 const [m, d] = parts;
-                return `${new Date().getFullYear()}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                const tokyoYear = Number(formatExpenseDate().slice(0, 4));
+                return `${tokyoYear}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
             }
             return fallback;
         }
 
         function fromDateInputValue(iso) {
-            if (!iso) return formatExpenseDate();
-            const [y, m, d] = iso.split('-');
-            if (!y || !m || !d) return formatExpenseDate();
-            return `${y}/${m}/${d}`;
+            return toDateInputValue(iso);
+        }
+
+        function createExpenseId() {
+            return crypto.randomUUID?.()
+                ?? `exp-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        }
+
+        function mapExpenseCategory(category) {
+            return EXPENSE_CATEGORY_MAP[category] || 'misc';
+        }
+
+        function compareExpensesDesc(a, b) {
+            const dateCmp = toDateInputValue(b.date).localeCompare(toDateInputValue(a.date));
+            if (dateCmp !== 0) return dateCmp;
+            return String(b.createdAt || '').localeCompare(String(a.createdAt || ''));
+        }
+
+        function resolvePayerName(exp) {
+            if (Object.prototype.hasOwnProperty.call(exp, 'payerName')) {
+                return String(exp.payerName || '').trim();
+            }
+            if (exp.payerParticipantId) {
+                return LEGACY_PAYER_NAMES_BY_ID[exp.payerParticipantId] || '';
+            }
+            return '';
+        }
+
+        function createParticipantId() {
+            const raw = crypto.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+            return `p-${String(raw).replace(/-/g, '').slice(0, 12)}`;
+        }
+
+        function buildExportParticipants(expenseList) {
+            const names = [];
+            const seen = new Set();
+            (expenseList || []).forEach((exp) => {
+                const payerName = String(exp.payerName || '').trim();
+                if (!payerName || seen.has(payerName)) return;
+                seen.add(payerName);
+                names.push(payerName);
+            });
+            return names.map((name) => ({
+                id: createParticipantId(),
+                name,
+                type: 'traveler'
+            }));
+        }
+
+        function expenseNeedsPersist(raw, next) {
+            if (!raw || typeof raw !== 'object' || !next) return true;
+            if ('item' in raw || 'amount' in raw || 'payerParticipantId' in raw) return true;
+            return [
+                'id',
+                'name',
+                'category',
+                'date',
+                'currency',
+                'exchangeRateToTwd',
+                'amountOriginal',
+                'payerName',
+                'createdAt',
+                'updatedAt'
+            ].some((key) => raw[key] !== next[key]);
         }
 
         function normalizeExpense(exp) {
-            const rawItem = String(exp.item || '');
-            const ntMatch = rawItem.match(/^(.*) \(NT\$(\d+)\)$/);
-            let item = rawItem;
-            let amount = Number(exp.amount) || 0;
+            if (!exp || typeof exp !== 'object') return null;
+            const sourceName = exp.name != null ? String(exp.name) : String(exp.item || '');
+            const ntMatch = sourceName.match(/^(.*) \(NT\$(\d+)\)$/);
+            let name = ntMatch ? ntMatch[1] : sourceName;
             let currency = exp.currency === 'TWD' ? 'TWD' : 'JPY';
+            let amountOriginal = Number(exp.amountOriginal != null ? exp.amountOriginal : exp.amount);
+            if (!Number.isFinite(amountOriginal)) amountOriginal = 0;
             if (currency !== 'TWD' && ntMatch) {
-                item = ntMatch[1];
-                amount = Number(ntMatch[2]) || 0;
+                name = ntMatch[1];
+                amountOriginal = Number(ntMatch[2]) || 0;
                 currency = 'TWD';
             } else if (currency === 'TWD' && ntMatch) {
-                item = ntMatch[1];
-                if (!amount) amount = Number(ntMatch[2]) || 0;
+                name = ntMatch[1];
+                if (!amountOriginal) amountOriginal = Number(ntMatch[2]) || 0;
             }
-            const category = exp.category === '宿泊' ? '住宿' : (exp.category || '雜支');
-            return { ...exp, item, amount, currency, category };
+            if (!TRIP_CURRENCY_CONFIG.allowedCurrencies.includes(currency)) {
+                currency = TRIP_CURRENCY_CONFIG.defaultCurrency;
+            }
+            const categoryRaw = exp.category === '宿泊' ? '住宿' : (exp.category || '雜支');
+            const category = EXPENSE_CATEGORY_MAP[categoryRaw] ? categoryRaw : '雜支';
+            const nowIso = new Date().toISOString();
+            const exchangeRateToTwd = exp.exchangeRateToTwd == null || exp.exchangeRateToTwd === ''
+                ? null
+                : Number(exp.exchangeRateToTwd);
+            return {
+                id: exp.id != null && String(exp.id) !== '' ? String(exp.id) : createExpenseId(),
+                name,
+                category,
+                date: toDateInputValue(exp.date),
+                currency,
+                exchangeRateToTwd: Number.isFinite(exchangeRateToTwd) ? exchangeRateToTwd : null,
+                amountOriginal,
+                payerName: resolvePayerName(exp),
+                createdAt: exp.createdAt || nowIso,
+                updatedAt: exp.updatedAt || exp.createdAt || nowIso
+            };
         }
 
-        const STORAGE_KEY = 'fukushima_trip_expenses';
+        class ExpenseStore {
+            async loadExpenses() { throw new Error('Not implemented'); }
+            async getExpense() { throw new Error('Not implemented'); }
+            async addExpense() { throw new Error('Not implemented'); }
+            async updateExpense() { throw new Error('Not implemented'); }
+            async deleteExpense() { throw new Error('Not implemented'); }
+            async replaceExpenses() { throw new Error('Not implemented'); }
+            async clearExpenses() { throw new Error('Not implemented'); }
+            async exportExpenses() { throw new Error('Not implemented'); }
+        }
+
+        class LocalStorageExpenseStore extends ExpenseStore {
+            constructor(storageKey = EXPENSE_STORAGE_KEY) {
+                super();
+                this.storageKey = storageKey;
+            }
+
+            readAll() {
+                try {
+                    const raw = localStorage.getItem(this.storageKey);
+                    if (!raw) return { expenses: [], migrated: false };
+                    const parsed = JSON.parse(raw);
+                    if (!Array.isArray(parsed)) return { expenses: [], migrated: false };
+                    let migrated = false;
+                    const expenses = parsed.map((item) => {
+                        const next = normalizeExpense(item);
+                        if (!next) return null;
+                        if (expenseNeedsPersist(item, next)) migrated = true;
+                        return next;
+                    }).filter(Boolean);
+                    expenses.sort(compareExpensesDesc);
+                    return { expenses, migrated };
+                } catch (error) {
+                    console.error('[ExpenseStore] load failed', error);
+                    return { expenses: [], migrated: false };
+                }
+            }
+
+            writeAll(expenses) {
+                try {
+                    localStorage.setItem(this.storageKey, JSON.stringify(expenses));
+                } catch (error) {
+                    console.error('[ExpenseStore] save failed', error);
+                    throw error;
+                }
+            }
+
+            async loadExpenses() {
+                const { expenses, migrated } = this.readAll();
+                if (migrated) this.writeAll(expenses);
+                return expenses.slice();
+            }
+
+            async getExpense(id) {
+                const expenses = await this.loadExpenses();
+                return expenses.find((exp) => String(exp.id) === String(id)) || null;
+            }
+
+            async addExpense(expense) {
+                const { expenses } = this.readAll();
+                const nowIso = new Date().toISOString();
+                const record = normalizeExpense({
+                    ...expense,
+                    id: createExpenseId(),
+                    createdAt: nowIso,
+                    updatedAt: nowIso
+                });
+                if (!record || !record.name || !(record.amountOriginal > 0)) {
+                    throw new Error('Invalid expense');
+                }
+                expenses.push(record);
+                expenses.sort(compareExpensesDesc);
+                this.writeAll(expenses);
+                return record;
+            }
+
+            async updateExpense(id, patch) {
+                const { expenses } = this.readAll();
+                const idx = expenses.findIndex((exp) => String(exp.id) === String(id));
+                if (idx < 0) throw new Error('Expense not found: ' + id);
+                const current = expenses[idx];
+                const record = normalizeExpense({
+                    ...current,
+                    ...patch,
+                    id: current.id,
+                    createdAt: current.createdAt,
+                    updatedAt: new Date().toISOString()
+                });
+                if (!record || !record.name || !(record.amountOriginal > 0)) {
+                    throw new Error('Invalid expense');
+                }
+                expenses[idx] = record;
+                expenses.sort(compareExpensesDesc);
+                this.writeAll(expenses);
+                return record;
+            }
+
+            async deleteExpense(id) {
+                const { expenses } = this.readAll();
+                this.writeAll(expenses.filter((exp) => String(exp.id) !== String(id)));
+                return true;
+            }
+
+            async replaceExpenses(nextExpenses) {
+                const expenses = (Array.isArray(nextExpenses) ? nextExpenses : [])
+                    .map(normalizeExpense)
+                    .filter(Boolean)
+                    .sort(compareExpensesDesc);
+                this.writeAll(expenses);
+                return expenses.slice();
+            }
+
+            async clearExpenses() {
+                this.writeAll([]);
+                return [];
+            }
+
+            async exportExpenses() {
+                const expenses = await this.loadExpenses();
+                const participants = buildExportParticipants(expenses);
+                const payerIdByName = new Map(participants.map((p) => [p.name, p.id]));
+                return {
+                    tripId: TRIP_CONFIG.tripId,
+                    tripName: TRIP_CONFIG.tripName,
+                    defaultCurrency: TRIP_CURRENCY_CONFIG.defaultCurrency,
+                    startDate: TRIP_CONFIG.startDate,
+                    endDate: TRIP_CONFIG.endDate,
+                    season: 'autumn',
+                    version: 1,
+                    timeZone: TRIP_CONFIG.timeZone,
+                    allowedCurrencies: TRIP_CURRENCY_CONFIG.allowedCurrencies.slice(),
+                    rates: [],
+                    participants,
+                    receipts: [],
+                    expenses: expenses.map((exp, index) => ({
+                        id: exp.id,
+                        tripId: TRIP_CONFIG.tripId,
+                        receiptId: null,
+                        receiptItemId: null,
+                        name: exp.name,
+                        category: mapExpenseCategory(exp.category),
+                        date: toDateInputValue(exp.date),
+                        currency: exp.currency,
+                        exchangeRateToTwd: exp.exchangeRateToTwd,
+                        amountOriginal: Number(exp.amountOriginal) || 0,
+                        itemQuantity: null,
+                        unitPriceOriginal: null,
+                        payerParticipantId: payerIdByName.get(String(exp.payerName || '').trim()) || '',
+                        allocationMode: 'single_person',
+                        sortOrder: index,
+                        createdByUserId: null,
+                        updatedByUserId: null,
+                        createdAt: exp.createdAt,
+                        updatedAt: exp.updatedAt,
+                        allocations: []
+                    })),
+                    paymentStatus: {}
+                };
+            }
+        }
+
+        const expenseStore = new LocalStorageExpenseStore(EXPENSE_STORAGE_KEY);
         let expenses = [];
 
-        function loadLocalExpenses() {
-            try {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                if (raw) {
-                    expenses = JSON.parse(raw).map(normalizeExpense);
-                    saveLocalExpenses();
-                } else {
-                    expenses = [
-                        { id: 1, date: '2026/11/03', category: '餐飲', item: '大內宿 三澤屋大蔥蕎麥麵 (5人)', amount: 8500, currency: 'JPY' },
-                        { id: 2, date: '2026/11/02', category: '交通', item: '會津ジャンボ包車 Day 2', amount: 88000, currency: 'JPY' },
-                        { id: 3, date: '2026/11/02', category: '門票', item: '霧幻峽周遊プラン (5人)', amount: 15000, currency: 'JPY' }
-                    ];
-                    saveLocalExpenses();
-                }
-            } catch (e) {
-                expenses = [];
-            }
+        function findExpenseById(id) {
+            return expenses.find((exp) => String(exp.id) === String(id)) || null;
+        }
+
+        async function refreshExpenses() {
+            expenses = await expenseStore.loadExpenses();
             renderExpenseList();
         }
 
-        function saveLocalExpenses() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(expenses));
+        async function initExpenses() {
+            try {
+                await refreshExpenses();
+            } catch (error) {
+                console.error('[ExpenseStore] init failed', error);
+                expenses = [];
+                renderExpenseList();
+            }
         }
 
         function setExpenseFilter(cat) {
@@ -4483,12 +4839,12 @@
             let totalJPY = 0;
             let totalTWD = 0;
             expenses.forEach((exp) => {
-                const amt = Number(exp.amount) || 0;
+                const amt = Number(exp.amountOriginal) || 0;
                 if (exp.currency === 'TWD') totalTWD += amt;
                 else totalJPY += amt;
             });
             if (totalEl) {
-                totalEl.textContent = `¥${totalJPY.toLocaleString()} | NT$${totalTWD.toLocaleString()}`;
+                totalEl.innerHTML = `<span>¥${totalJPY.toLocaleString()}</span><span>NT$${totalTWD.toLocaleString()}</span>`;
             }
 
             const visible = expenses.filter((exp) => expenseFilter === 'all' || exp.category === expenseFilter);
@@ -4498,21 +4854,23 @@
             }
 
             listEl.innerHTML = '';
-            visible.slice().reverse().forEach((exp) => {
+            visible.forEach((exp) => {
+                const payerName = String(exp.payerName || '').trim();
+                const idArg = JSON.stringify(String(exp.id));
                 const card = document.createElement('article');
                 card.className = 'page-sheet expense-card';
                 card.innerHTML = `
                     <div class="expense-card-top">
-                        <p class="expense-card-title">${escapeHtml(exp.item)}</p>
+                        <p class="expense-card-title">${escapeHtml(exp.name)}</p>
                         <p class="expense-card-amount font-num">${formatExpenseAmount(exp)}</p>
                     </div>
                     <div class="expense-card-bottom">
-                        <p class="expense-card-meta">${escapeHtml(exp.date || '')} ｜ ${escapeHtml(exp.category || '')} ｜ ${exp.currency === 'TWD' ? 'TWD' : 'JPY'}</p>
+                        <p class="expense-card-meta">${escapeHtml(formatDisplayDate(exp.date))} ｜ ${escapeHtml(exp.category || '')}${payerName ? ` ｜ ${escapeHtml(payerName)}` : ''} ｜ ${exp.currency === 'TWD' ? 'TWD' : 'JPY'}</p>
                         <div class="expense-card-actions">
-                            <button type="button" class="expense-icon-btn edit" onclick="openExpenseSheet(${Number(exp.id)})" aria-label="編輯這筆紀錄">
+                            <button type="button" class="expense-icon-btn edit" onclick='openExpenseSheet(${idArg})' aria-label="編輯這筆紀錄">
                                 <i class="ph ph-pencil-simple text-lg" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="expense-icon-btn delete" onclick="deleteExpense(${Number(exp.id)})" aria-label="刪除這筆紀錄">
+                            <button type="button" class="expense-icon-btn delete" onclick='deleteExpense(${idArg})' aria-label="刪除這筆紀錄">
                                 <i class="ph ph-trash text-lg" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -4522,20 +4880,22 @@
             });
         }
 
-        function addExpense() {
+        async function addExpense() {
             const itemInput = document.getElementById('expense-item');
             const amountInput = document.getElementById('expense-amount');
             const dateInput = document.getElementById('expense-date');
             const currencySelect = document.getElementById('expense-currency');
             const categoryInput = document.getElementById('selected-category');
+            const payerInput = document.getElementById('expense-payer');
 
-            const item = itemInput.value.trim();
-            const amount = parseInt(amountInput.value, 10);
+            const name = itemInput.value.trim();
+            const amountOriginal = parseInt(amountInput.value, 10);
             const date = fromDateInputValue(dateInput && dateInput.value);
             const currency = currencySelect.value === 'TWD' ? 'TWD' : 'JPY';
-            const category = categoryInput.value || '未分類';
+            const category = categoryInput.value || '雜支';
+            const payerName = payerInput ? payerInput.value.trim() : '';
 
-            if (!item || isNaN(amount) || amount <= 0) {
+            if (!name || isNaN(amountOriginal) || amountOriginal <= 0) {
                 alert('請輸入有效項目名稱與金額');
                 return;
             }
@@ -4543,37 +4903,55 @@
                 alert('請選擇日期');
                 return;
             }
-
-            if (editingExpenseId != null) {
-                const target = expenses.find((exp) => exp.id === editingExpenseId);
-                if (target) {
-                    target.item = item;
-                    target.amount = amount;
-                    target.currency = currency;
-                    target.category = category;
-                    target.date = date;
-                }
-            } else {
-                expenses.push({
-                    id: Date.now(),
-                    date,
-                    category,
-                    item,
-                    amount,
-                    currency
-                });
+            if (!TRIP_CURRENCY_CONFIG.allowedCurrencies.includes(currency)) {
+                alert('請選擇有效幣別');
+                return;
             }
 
-            saveLocalExpenses();
-            renderExpenseList();
-            closeExpenseSheet();
+            const payload = { name, amountOriginal, currency, category, date, payerName };
+
+            try {
+                if (editingExpenseId != null) {
+                    await expenseStore.updateExpense(editingExpenseId, payload);
+                } else {
+                    await expenseStore.addExpense(payload);
+                }
+                lastPayerName = payerName;
+                await refreshExpenses();
+                closeExpenseSheet();
+            } catch (error) {
+                console.error('[ExpenseStore] save expense failed', error);
+                alert('儲存失敗，請稍後再試');
+            }
         }
 
-        function deleteExpense(id) {
+        async function deleteExpense(id) {
             if (!confirm('確定要刪除這筆紀錄嗎？')) return;
-            expenses = expenses.filter((exp) => exp.id !== id);
-            saveLocalExpenses();
-            renderExpenseList();
+            try {
+                await expenseStore.deleteExpense(id);
+                await refreshExpenses();
+            } catch (error) {
+                console.error('[ExpenseStore] delete expense failed', error);
+                alert('刪除失敗，請稍後再試');
+            }
+        }
+
+        async function exportLedgerJson() {
+            try {
+                const payload = await expenseStore.exportExpenses();
+                const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${TRIP_CONFIG.tripId}-ledger.json`;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('[ExpenseStore] export failed', error);
+                alert('匯出失敗，請稍後再試');
+            }
         }
 
         const PREP_STORAGE_KEY = 'fukushima_trip_prep';
@@ -4918,7 +5296,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadLocalExpenses();
+            initExpenses();
             initPrepChecklist();
             initDefaultDay();
             syncMobileNavSpace();
