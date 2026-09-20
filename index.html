@@ -1061,6 +1061,53 @@
             padding-right: 1.1rem;
         }
 
+        .prep-card > summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-height: 2.75rem;
+        }
+
+        .prep-card > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .prep-card > summary:focus-visible {
+            outline: 2px solid var(--color-benitobi);
+            outline-offset: 4px;
+            border-radius: 0.5rem;
+        }
+
+        .prep-card .item-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .prep-card[open] > summary .prep-caret {
+            transform: rotate(180deg);
+        }
+
+        .prep-card-hint {
+            margin-top: 0.35rem;
+            color: #6b6560;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .prep-card .prep-item:first-child {
+            border-top: none;
+            padding-top: 1.1rem;
+        }
+
+        .prep-card .prep-add:first-of-type {
+            margin-top: 0.75rem;
+        }
+
         .cat-btn {
             min-height: 2.75rem;
             min-width: 2.75rem;
@@ -1182,22 +1229,36 @@
         .expense-total-values {
             margin: 0;
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 0.02rem;
+            flex-direction: row;
+            align-items: baseline;
+            justify-content: flex-end;
+            gap: 0.4rem;
             font-size: 1.0625rem;
             font-weight: 600;
-            color: var(--color-benitobi);
             font-variant-numeric: tabular-nums;
             letter-spacing: 0.01em;
             line-height: 1.3;
             white-space: nowrap;
         }
 
-        .expense-total-values span {
+        .expense-total-jpy,
+        .expense-total-twd {
             font-size: inherit;
             font-weight: inherit;
             line-height: inherit;
+        }
+
+        .expense-total-jpy {
+            color: var(--color-benitobi);
+        }
+
+        .expense-total-twd {
+            color: var(--color-stay);
+        }
+
+        .expense-total-sep {
+            color: rgba(67, 67, 67, 0.38);
+            font-weight: 500;
         }
 
         .expense-filter {
@@ -4082,8 +4143,9 @@
                     </button>
                 </div>
                 <div id="expense-total-values" class="expense-total-values font-num">
-                    <span>¥0</span>
-                    <span>NT$0</span>
+                    <span class="expense-total-jpy">¥0</span>
+                    <span class="expense-total-sep" aria-hidden="true">｜</span>
+                    <span class="expense-total-twd">NT$0</span>
                 </div>
             </article>
 
@@ -4123,26 +4185,93 @@
              TAB 5: PRE-TRIP PREPARATION (行前備忘清單)
              =================================================================== -->
         <section id="content-prep" class="hidden space-y-8 animate-fade-in lg:max-w-4xl lg:mx-auto">
-            <article class="page-sheet">
-                <div class="prep-toolbar">
-                    <h3 class="item-title">該辦／該買</h3>
-                    <button type="button" id="prep-todo-toggle" class="btn-secondary" onclick="togglePrepExpand('todo')">全部收合</button>
-                </div>
-                <div id="prep-todo-list"></div>
-            </article>
+            <details class="page-sheet prep-card" data-prep-category="documents">
+                <summary>
+                    <h3 class="item-title">
+                        <i class="ph ph-identification-card text-benitobi" aria-hidden="true"></i>
+                        證件與保障
+                    </h3>
+                    <i class="ph ph-caret-down prep-caret" aria-hidden="true"></i>
+                </summary>
+                <p class="prep-card-hint">國外旅行。日本免簽，入境前完成 Japan Visit Web。</p>
+                <div id="prep-list-documents"></div>
+            </details>
 
-            <article class="page-sheet">
-                <div class="prep-toolbar">
-                    <h3 class="item-title">該帶</h3>
-                    <button type="button" id="prep-packing-toggle" class="btn-secondary" onclick="togglePrepExpand('packing')">全部收合</button>
-                </div>
-                <div id="prep-packing-list"></div>
-                <form class="prep-add" onsubmit="addPrepPacking(event)">
-                    <label for="prep-add-input" class="sr-only">新增行李項目</label>
+            <details class="page-sheet prep-card" data-prep-category="money">
+                <summary>
+                    <h3 class="item-title">
+                        <i class="ph ph-currency-jpy text-ohdo" aria-hidden="true"></i>
+                        金錢與支付
+                    </h3>
+                    <i class="ph ph-caret-down prep-caret" aria-hidden="true"></i>
+                </summary>
+                <p class="prep-card-hint">本次使用日圓。</p>
+                <div id="prep-list-money"></div>
+            </details>
+
+            <details class="page-sheet prep-card" data-prep-category="clothes">
+                <summary>
+                    <h3 class="item-title">
+                        <i class="ph ph-t-shirt text-ohdo" aria-hidden="true"></i>
+                        衣物準備
+                    </h3>
+                    <i class="ph ph-caret-down prep-caret" aria-hidden="true"></i>
+                </summary>
+                <p class="prep-card-hint">會津與裏磐梯十一月偏冷，穿洋蔥式較從容。</p>
+                <div id="prep-list-clothes"></div>
+            </details>
+
+            <details class="page-sheet prep-card" data-prep-category="personal">
+                <summary>
+                    <h3 class="item-title">
+                        <i class="ph ph-first-aid text-aoni" aria-hidden="true"></i>
+                        個人用品
+                    </h3>
+                    <i class="ph ph-caret-down prep-caret" aria-hidden="true"></i>
+                </summary>
+                <div id="prep-list-personal"></div>
+            </details>
+
+            <details class="page-sheet prep-card" data-prep-category="electronics">
+                <summary>
+                    <h3 class="item-title">
+                        <i class="ph ph-plug text-ainezumi" aria-hidden="true"></i>
+                        通訊與電子設備
+                    </h3>
+                    <i class="ph ph-caret-down prep-caret" aria-hidden="true"></i>
+                </summary>
+                <p class="prep-card-hint">日本 100V、A 型兩腳插頭。</p>
+                <div id="prep-list-electronics"></div>
+            </details>
+
+            <details class="page-sheet prep-card" data-prep-category="pretrip">
+                <summary>
+                    <h3 class="item-title">
+                        <i class="ph ph-check-square text-benitobi" aria-hidden="true"></i>
+                        出發前待辦
+                    </h3>
+                    <i class="ph ph-caret-down prep-caret" aria-hidden="true"></i>
+                </summary>
+                <p class="prep-card-hint">出發前還要自己完成的事。已訂妥的機票與飯店不會出現在這裡。</p>
+                <div id="prep-list-pretrip"></div>
+            </details>
+
+            <details class="page-sheet prep-card" data-prep-category="custom">
+                <summary>
+                    <h3 class="item-title">
+                        <i class="ph ph-plus text-kesizumi" aria-hidden="true"></i>
+                        自己增加
+                    </h3>
+                    <i class="ph ph-caret-down prep-caret" aria-hidden="true"></i>
+                </summary>
+                <p class="prep-card-hint">想到什麼再寫下來。</p>
+                <div id="prep-list-custom"></div>
+                <form class="prep-add" onsubmit="addPrepCustomItem(event)">
+                    <label for="prep-add-input" class="sr-only">新增準備項目</label>
                     <input type="text" id="prep-add-input" class="form-control" placeholder="再想到什麼就寫下來" maxlength="80" autocomplete="off">
                     <button type="submit" class="btn-primary">新增</button>
                 </form>
-            </article>
+            </details>
         </section>
 
 
@@ -4247,7 +4376,28 @@
             startDate: TRIP_START,
             endDate: TRIP_END,
             defaultCurrency: 'JPY',
-            allowedCurrencies: ['JPY', 'TWD']
+            allowedCurrencies: ['JPY', 'TWD'],
+            travelType: 'international',
+            destinations: [
+                {
+                    countryCode: 'JP',
+                    name: '日本',
+                    currency: 'JPY',
+                    currencyLabel: '日圓',
+                    plugType: 'A',
+                    voltage: '100V',
+                    visaRequired: false,
+                    internationalLicenseRequired: false,
+                    entryPermit: {
+                        id: 'visit-web',
+                        name: 'Japan Visit Web',
+                        href: 'https://www.vjw.digital.go.jp/',
+                        linkLabel: '前往登記',
+                        note: '入境前每人登記一次，現場出示 QR 碼通關。出發前填好入境與海關資料，把 QR 碼截圖備存最安心。'
+                    },
+                    cashNote: '山區與小店有時只收現金，信用卡當備援。'
+                }
+            ]
         };
         const TRIP_CURRENCY_CONFIG = {
             defaultCurrency: TRIP_CONFIG.defaultCurrency,
@@ -4844,7 +4994,7 @@
                 else totalJPY += amt;
             });
             if (totalEl) {
-                totalEl.innerHTML = `<span>¥${totalJPY.toLocaleString()}</span><span>NT$${totalTWD.toLocaleString()}</span>`;
+                totalEl.innerHTML = `<span class="expense-total-jpy">¥${totalJPY.toLocaleString()}</span><span class="expense-total-sep" aria-hidden="true">｜</span><span class="expense-total-twd">NT$${totalTWD.toLocaleString()}</span>`;
             }
 
             const visible = expenses.filter((exp) => expenseFilter === 'all' || exp.category === expenseFilter);
@@ -4955,145 +5105,357 @@
         }
 
         const PREP_STORAGE_KEY = 'fukushima_trip_prep';
-        const PREP_GROUP_META = {
-            '入境必辦': { icon: 'ph-airplane-tilt', tone: 'bg-benitobi/15 text-benitobi' },
-            '票券': { icon: 'ph-ticket', tone: 'bg-ainezumi/20 text-ainezumi' },
-            '預約': { icon: 'ph-calendar-blank', tone: 'bg-ohdo/20 text-ohdo' },
-            '保險與通訊': { icon: 'ph-shield-check', tone: 'bg-aoni/20 text-aoni' },
-            '出發前確認': { icon: 'ph-check-square', tone: 'bg-ohdo/20 text-ohdo' },
-            '證件金錢': { icon: 'ph-wallet', tone: 'bg-benitobi/15 text-benitobi' },
-            '11月衣物': { icon: 'ph-t-shirt', tone: 'bg-ohdo/20 text-ohdo' },
-            '電器': { icon: 'ph-plug', tone: 'bg-ainezumi/20 text-ainezumi' },
-            '盥洗藥品': { icon: 'ph-first-aid', tone: 'bg-aoni/20 text-aoni' },
-            '出行配件': { icon: 'ph-backpack', tone: 'bg-ainezumi/20 text-ainezumi' },
-            '自己再加': { icon: 'ph-plus', tone: 'bg-haizakura/50 text-kesizumi' }
-        };
+        const PREP_STORAGE_VERSION = 2;
+        const PREP_CATEGORIES = [
+            { id: 'documents', title: '證件與保障' },
+            { id: 'money', title: '金錢與支付' },
+            { id: 'clothes', title: '衣物準備' },
+            { id: 'personal', title: '個人用品' },
+            { id: 'electronics', title: '通訊與電子設備' },
+            { id: 'pretrip', title: '出發前待辦' },
+            { id: 'custom', title: '自己增加' }
+        ];
 
-        const PREP_TODOS = [
+        const PREP_CLOTHES = [
             {
-                id: 'visit-web',
-                group: '入境必辦',
-                title: 'Japan Visit Web',
-                note: '入境前每人登記一次，現場出示 QR 碼通關。出發前填好入境與海關資料，把 QR 碼截圖備存最安心。',
-                href: 'https://www.vjw.digital.go.jp/',
-                linkLabel: '前往登記'
+                id: 'pack-base',
+                category: 'clothes',
+                title: '洋蔥式內層',
+                reason: '會津與裏磐梯溫差大，排汗或薄長袖當底層最穩妥。',
+                source: 'static'
             },
             {
-                id: 'flight-check',
-                group: '票券',
-                title: '機票確認',
-                note: '長榮 BR192／BR191 松山⇄羽田。出發前再核對航班時間與託運件數即可。'
+                id: 'pack-mid',
+                category: 'clothes',
+                title: '刷毛或毛衣中層',
+                reason: '裏磐梯清晨大約 8°C，中層保暖很有感。',
+                source: 'static'
             },
             {
-                id: 'ekinet-shinkansen',
-                group: '票券',
-                title: 'えきねっと新幹線指定席',
-                note: '去程東京→郡山（やまびこ 145）。回程郡山→上野請訂 11/06 11:00 やまびこ 134，座席表選最後列或荷物置き場旁。乘車前一個月可搶トクだ値；單買車票就好，不用 JR Pass。',
-                href: 'https://www.eki-net.com/',
-                linkLabel: 'えきねっと'
+                id: 'pack-wind',
+                category: 'clothes',
+                title: '防風外套',
+                reason: '奧會津歷史均溫 3°C～10°C，湖畔與月台會涼，建議準備保暖外套。',
+                source: 'static'
             },
             {
-                id: 'transit-ic',
-                group: '票券',
-                title: '手機交通 IC',
-                note: '先準備 Suica 或 PASMO（手機版即可）。磐越西線可以用。'
+                id: 'pack-accessories',
+                category: 'clothes',
+                title: '圍巾、帽子、手套',
+                reason: '裏磐梯歷史均溫 1°C～9°C，清晨步道可能結霜。',
+                source: 'static'
             },
             {
-                id: 'aizu-jumbo-taxi',
-                group: '預約',
-                title: '會津ジャンボ包車（5 人）',
-                note: 'Day 2 全日：10:00 華盛頓飯店 → 早戶碼頭 → みしま宿 → 柳津 → 17:15 返回。あいづタクシー 0120-69-2468，預約 9:00–17:00。',
-                href: 'https://taxi.aizubus.com/sightseeing/taxi_de_okuaizu',
-                linkLabel: '奥会津包車'
+                id: 'pack-shoes',
+                category: 'clothes',
+                title: '舒適走路鞋',
+                reason: '大內宿石板路與五色沼棧道都會走。',
+                source: 'static'
             },
             {
-                id: 'ouchi-taxi',
-                group: '預約',
-                title: '大內宿ジャンボ包車',
-                note: '11/3 連假不容易現場叫車。五人同樣要ジャンボ：08:45 華盛頓飯店 → 大內宿 → 塔崖 → 14:30 大川莊。'
-            },
-            {
-                id: 'genkyo-boat',
-                group: '預約',
-                title: '霧幻峽船票',
-                note: '周遊プラン約 45 分，3 名以上每人 ¥3,000。一艘最多 6 人、5 日前官網包船。建議訂 11:00 班。',
-                href: 'https://www.mugenkyo.info/reservation/',
-                linkLabel: '霧幻峽預約'
-            },
-            {
-                id: 'takkyubin',
-                group: '預約',
-                title: '宅急便寄大行李',
-                note: '會津若松退房時寄往裏磐梯レイクリゾート。只帶一晚換洗衣物。'
-            },
-            {
-                id: 'shibukawa-lunch',
-                group: '預約',
-                title: '渋川問屋午餐（5 人）',
-                note: '11/4 七日町。5 人請打電話 0242-28-4000（10:00–19:00）。午餐 11:00–15:00，最後入店 14:30。',
-                href: 'https://shibukawadonya.com/',
-                linkLabel: '渋川問屋'
-            },
-            {
-                id: 'travel-insurance',
-                group: '保險與通訊',
-                title: '旅平險',
-                note: '出發前保好即可，安心出門。'
-            },
-            {
-                id: 'esim',
-                group: '保險與通訊',
-                title: 'eSIM／網卡',
-                note: '落地就能上網，方便叫車與看地圖。'
-            },
-            {
-                id: 'cash-card',
-                group: '保險與通訊',
-                title: '日圓現金與信用卡',
-                note: '山區與小店有時只收現金，信用卡當備援。'
-            },
-            {
-                id: 'passport-check',
-                group: '出發前確認',
-                title: '護照效期',
-                note: '確認效期足夠，放在隨身包。'
-            },
-            {
-                id: 'online-checkin',
-                group: '出發前確認',
-                title: '線上報到／選位',
-                note: '起飛前一天在長榮 App 報到，少排一點隊。'
-            },
-            {
-                id: 'hotel-vouchers',
-                group: '出發前確認',
-                title: '飯店確認信截圖',
-                note: '華盛頓、大川莊、裏磐梯、MONday 濱松町的確認存在相簿，離線也看得到。'
+                id: 'pack-overnight',
+                category: 'clothes',
+                title: '過夜換洗衣物',
+                reason: '寄大行李那天，背包裡留一晚的換洗衣物。',
+                source: 'static'
             }
         ];
 
-        const PREP_PACKING = [
-            { id: 'pack-passport', group: '證件金錢', title: '護照', note: '隨身包，不要放託運。' },
-            { id: 'pack-ticket', group: '證件金錢', title: '機票／登機證', note: '電子票即可，截圖備存。' },
-            { id: 'pack-wallet', group: '證件金錢', title: '錢包與信用卡', note: '' },
-            { id: 'pack-cash', group: '證件金錢', title: '日圓現金', note: '山區小店備用。' },
-            { id: 'pack-base', group: '11月衣物', title: '洋蔥式內層', note: '排汗或薄長袖，裏磐梯與會津溫差大。' },
-            { id: 'pack-mid', group: '11月衣物', title: '刷毛或毛衣中層', note: '裏磐梯清晨大約 8°C。' },
-            { id: 'pack-wind', group: '11月衣物', title: '防風外套', note: '外層防風即可，湖畔與列車月台會涼。' },
-            { id: 'pack-accessories', group: '11月衣物', title: '圍巾、帽子、手套', note: '保暖配件帶一組就夠。' },
-            { id: 'pack-shoes', group: '11月衣物', title: '舒適走路鞋', note: '大內宿石板路與五色沼棧道都會走。' },
-            { id: 'pack-overnight', group: '11月衣物', title: '過夜換洗衣物', note: '寄大行李那天，背包裡留一晚的換洗衣物。' },
-            { id: 'pack-charger', group: '電器', title: '手機充電器', note: '' },
-            { id: 'pack-powerbank', group: '電器', title: '行動電源', note: '火車與山區插座不一定方便。' },
-            { id: 'pack-adapter', group: '電器', title: '日本兩腳轉接頭', note: '日本是 A 型兩孔。' },
-            { id: 'pack-medicine', group: '盥洗藥品', title: '個人藥品', note: '常備藥與處方藥。' },
-            { id: 'pack-mask', group: '盥洗藥品', title: '口罩', note: '' },
-            { id: 'pack-toiletry', group: '盥洗藥品', title: '盥洗用品', note: '溫泉飯店備品齊，可少帶。' },
-            { id: 'pack-daypack', group: '出行配件', title: '輕便後背包', note: '寄大行李日與散步用。' },
-            { id: 'pack-bags', group: '出行配件', title: '塑膠袋或衣物袋', note: '地酒、胡麻油等液體手信要放託運箱，不可手提上機。' }
+        const PREP_PERSONAL = [
+            { id: 'pack-medicine', category: 'personal', title: '個人藥物', note: '常備藥與處方藥。', source: 'static' },
+            { id: 'pack-mask', category: 'personal', title: '口罩', note: '', source: 'static' },
+            { id: 'pack-toiletry', category: 'personal', title: '盥洗用品', note: '溫泉飯店備品齊，可少帶。', source: 'static' },
+            { id: 'pack-daypack', category: 'personal', title: '輕便後背包', note: '寄大行李日與散步用。', source: 'static' },
+            { id: 'pack-bags', category: 'personal', title: '塑膠袋或衣物袋', note: '地酒、胡麻油等液體手信要放託運箱，不可手提上機。', source: 'static' }
         ];
 
-        let prepState = { checked: {}, customPacking: [] };
+        const PREP_ELECTRONICS_BASE = [
+            { id: 'pack-phone', category: 'electronics', title: '手機', note: '', source: 'static' },
+            { id: 'pack-charger', category: 'electronics', title: '充電器', note: '', source: 'static' },
+            { id: 'pack-cable', category: 'electronics', title: '充電線', note: '', source: 'static' },
+            { id: 'pack-powerbank', category: 'electronics', title: '行動電源', note: '火車與山區插座不一定方便。', source: 'static' }
+        ];
+
+        const PREP_ITINERARY_ACTIONS = [
+            {
+                id: 'flight-check',
+                category: 'pretrip',
+                title: '出發前再核對航班時間',
+                note: '長榮 BR192／BR191 松山⇄羽田已訂妥。出發前再看一次時間與託運件數即可。',
+                source: 'itinerary',
+                itineraryRef: 'day1-flight',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: true
+            },
+            {
+                id: 'ekinet-shinkansen',
+                category: 'pretrip',
+                title: 'えきねっと新幹線指定席',
+                note: '去程東京→郡山（やまびこ 145）。回程郡山→上野請訂 11/06 11:00 やまびこ 134，座席表選最後列或荷物置き場旁。乘車前一個月可搶トクだ値；單買車票就好，不用 JR Pass。',
+                href: 'https://www.eki-net.com/',
+                linkLabel: 'えきねっと',
+                source: 'itinerary',
+                itineraryRef: 'day1-shinkansen',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            },
+            {
+                id: 'transit-ic',
+                category: 'pretrip',
+                title: '準備手機交通 IC',
+                note: '先準備 Suica 或 PASMO（手機版即可）。磐越西線可以用。',
+                source: 'itinerary',
+                itineraryRef: 'day1-local-rail',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            },
+            {
+                id: 'aizu-jumbo-taxi',
+                category: 'pretrip',
+                title: '預約會津ジャンボ包車（5 人）',
+                note: 'Day 2 全日：10:00 華盛頓飯店 → 早戶碼頭 → みしま宿 → 柳津 → 17:15 返回。あいづタクシー 0120-69-2468，預約 9:00–17:00。',
+                href: 'https://taxi.aizubus.com/sightseeing/taxi_de_okuaizu',
+                linkLabel: '奥会津包車',
+                source: 'itinerary',
+                itineraryRef: 'day2-jumbo',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            },
+            {
+                id: 'ouchi-taxi',
+                category: 'pretrip',
+                title: '預約大內宿ジャンボ包車',
+                note: '11/3 連假不容易現場叫車。五人同樣要ジャンボ：08:45 華盛頓飯店 → 大內宿 → 塔崖 → 14:30 大川莊。',
+                source: 'itinerary',
+                itineraryRef: 'day3-jumbo',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            },
+            {
+                id: 'genkyo-boat',
+                category: 'pretrip',
+                title: '預約霧幻峽船票',
+                note: '周遊プラン約 45 分，3 名以上每人 ¥3,000。一艘最多 6 人、5 日前官網包船。建議訂 11:00 班。',
+                href: 'https://www.mugenkyo.info/reservation/',
+                linkLabel: '霧幻峽預約',
+                source: 'itinerary',
+                itineraryRef: 'day2-boat',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            },
+            {
+                id: 'takkyubin',
+                category: 'pretrip',
+                title: '會津退房寄宅急便',
+                note: '會津若松退房時寄往裏磐梯レイクリゾート。只帶一晚換洗衣物。',
+                source: 'itinerary',
+                itineraryRef: 'day4-takkyubin',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            },
+            {
+                id: 'shibukawa-lunch',
+                category: 'pretrip',
+                title: '電話預約渋川問屋午餐（5 人）',
+                note: '11/4 七日町。5 人請打電話 0242-28-4000（10:00–19:00）。午餐 11:00–15:00，最後入店 14:30。',
+                href: 'https://shibukawadonya.com/',
+                linkLabel: '渋川問屋',
+                source: 'itinerary',
+                itineraryRef: 'day4-lunch',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            },
+            {
+                id: 'esim',
+                category: 'pretrip',
+                title: '購買 eSIM／網卡',
+                note: '落地就能上網，方便叫車與看地圖。',
+                source: 'itinerary',
+                itineraryRef: 'communications',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            },
+            {
+                id: 'online-checkin',
+                category: 'pretrip',
+                title: '線上報到／選位',
+                note: '起飛前一天在長榮 App 報到，少排一點隊。',
+                source: 'itinerary',
+                itineraryRef: 'day1-flight',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            },
+            {
+                id: 'hotel-vouchers',
+                category: 'pretrip',
+                title: '飯店確認信截圖',
+                note: '華盛頓、大川莊、裏磐梯、MONday 濱松町的確認存在相簿，離線也看得到。機票與住房已訂妥，這裡只是把確認信備存。',
+                source: 'itinerary',
+                itineraryRef: 'lodging',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            },
+            {
+                id: 'cash-card',
+                category: 'pretrip',
+                title: '換日圓',
+                note: '山區小店有時只收現金。信用卡另放在「金錢與支付」。',
+                source: 'itinerary',
+                itineraryRef: 'money',
+                responsible: 'traveler',
+                requiresAdvanceAction: true,
+                alreadyBooked: false
+            }
+        ];
+
+        let prepState = { version: PREP_STORAGE_VERSION, checked: {}, customItems: [], openCards: {} };
+
+        function tripDestinations() {
+            return Array.isArray(TRIP_CONFIG.destinations) ? TRIP_CONFIG.destinations : [];
+        }
+
+        function buildDocumentItems() {
+            const items = [];
+            if (TRIP_CONFIG.travelType === 'domestic') {
+                items.push({
+                    id: 'health-card',
+                    category: 'documents',
+                    title: '健保卡',
+                    note: '國內行程隨身帶著。',
+                    source: 'destination'
+                });
+                items.push({
+                    id: 'travel-insurance',
+                    category: 'documents',
+                    title: '旅遊保險',
+                    note: '出發前保好即可。',
+                    source: 'destination'
+                });
+                return items;
+            }
+
+            items.push({
+                id: 'pack-passport',
+                category: 'documents',
+                title: '護照',
+                note: '確認效期足夠，放在隨身包，不要放託運。',
+                source: 'destination'
+            });
+            items.push({
+                id: 'travel-insurance',
+                category: 'documents',
+                title: '旅遊保險',
+                note: '出發前保好即可，安心出門。',
+                source: 'destination'
+            });
+            items.push({
+                id: 'pack-ticket',
+                category: 'documents',
+                title: '機票／登機證',
+                note: '電子票即可，截圖備存。',
+                source: 'static'
+            });
+
+            tripDestinations().forEach((dest) => {
+                if (dest.visaRequired) {
+                    items.push({
+                        id: 'visa-' + dest.countryCode,
+                        category: 'documents',
+                        title: dest.name + '簽證',
+                        note: dest.visaNote || '',
+                        source: 'destination'
+                    });
+                }
+                if (dest.entryPermit && dest.entryPermit.id) {
+                    items.push({
+                        id: dest.entryPermit.id,
+                        category: 'documents',
+                        title: dest.entryPermit.name,
+                        note: dest.entryPermit.note || '',
+                        href: dest.entryPermit.href,
+                        linkLabel: dest.entryPermit.linkLabel || '前往登記',
+                        source: 'destination'
+                    });
+                }
+                if (dest.internationalLicenseRequired) {
+                    items.push({
+                        id: 'idl-' + dest.countryCode,
+                        category: 'documents',
+                        title: '國際駕照',
+                        note: dest.licenseNote || '',
+                        source: 'destination'
+                    });
+                }
+            });
+            return items;
+        }
+
+        function buildMoneyItems() {
+            const items = tripDestinations().map((dest) => ({
+                id: dest.currency === 'JPY' ? 'pack-cash' : 'money-cash-' + dest.currency,
+                category: 'money',
+                title: dest.currencyLabel + '現金',
+                note: dest.cashNote || '',
+                currency: dest.currency,
+                source: 'destination'
+            }));
+            items.push({
+                id: 'pack-wallet',
+                category: 'money',
+                title: '信用卡',
+                note: '當備援。',
+                source: 'static'
+            });
+            return items;
+        }
+
+        function buildElectronicsItems() {
+            const items = PREP_ELECTRONICS_BASE.map((item) => Object.assign({}, item));
+            const seen = {};
+            tripDestinations().forEach((dest) => {
+                if (!dest.plugType || seen[dest.plugType]) return;
+                seen[dest.plugType] = true;
+                items.push({
+                    id: dest.plugType === 'A' ? 'pack-adapter' : 'adapter-' + dest.plugType,
+                    category: 'electronics',
+                    title: dest.plugType + ' 型轉接頭',
+                    note: dest.name + ' ' + (dest.voltage || '') + '、' + dest.plugType + ' 型兩腳插頭。',
+                    electrical: { plugType: dest.plugType, voltage: dest.voltage || '' },
+                    source: 'destination'
+                });
+            });
+            return items;
+        }
+
+        function buildPretripItems() {
+            return PREP_ITINERARY_ACTIONS.filter((item) => (
+                item.responsible === 'traveler' &&
+                item.requiresAdvanceAction === true &&
+                item.alreadyBooked !== true
+            ));
+        }
+
+        function getPrepItemsByCategory(category) {
+            if (category === 'documents') return buildDocumentItems();
+            if (category === 'money') return buildMoneyItems();
+            if (category === 'clothes') return PREP_CLOTHES;
+            if (category === 'personal') return PREP_PERSONAL;
+            if (category === 'electronics') return buildElectronicsItems();
+            if (category === 'pretrip') return buildPretripItems();
+            if (category === 'custom') return prepState.customItems;
+            return [];
+        }
 
         function escapeHtml(str) {
             return String(str)
@@ -5104,51 +5466,58 @@
                 .replace(/'/g, '&#39;');
         }
 
+        function migratePrepState(parsed) {
+            const checked = parsed.checked && typeof parsed.checked === 'object' ? Object.assign({}, parsed.checked) : {};
+            if (checked['passport-check'] && !checked['pack-passport']) {
+                checked['pack-passport'] = true;
+            }
+            const rawCustom = Array.isArray(parsed.customItems)
+                ? parsed.customItems
+                : (Array.isArray(parsed.customPacking) ? parsed.customPacking : []);
+            const customItems = rawCustom
+                .filter((item) => item && item.id && item.title)
+                .map((item) => ({
+                    id: String(item.id),
+                    category: 'custom',
+                    title: String(item.title),
+                    note: item.note ? String(item.note) : '',
+                    custom: true,
+                    source: 'custom'
+                }));
+            return {
+                version: PREP_STORAGE_VERSION,
+                checked,
+                customItems,
+                openCards: parsed.openCards && typeof parsed.openCards === 'object' ? parsed.openCards : {}
+            };
+        }
+
         function loadPrepState() {
             try {
                 const raw = localStorage.getItem(PREP_STORAGE_KEY);
-                if (!raw) return;
-                const parsed = JSON.parse(raw);
-                prepState = {
-                    checked: parsed.checked && typeof parsed.checked === 'object' ? parsed.checked : {},
-                    customPacking: Array.isArray(parsed.customPacking)
-                        ? parsed.customPacking
-                            .filter((item) => item && item.id && item.title)
-                            .map((item) => ({
-                                id: String(item.id),
-                                group: item.group || '自己再加',
-                                title: String(item.title),
-                                note: item.note ? String(item.note) : '',
-                                custom: true
-                            }))
-                        : []
-                };
+                if (!raw) {
+                    prepState = { version: PREP_STORAGE_VERSION, checked: {}, customItems: [], openCards: {} };
+                    return;
+                }
+                prepState = migratePrepState(JSON.parse(raw));
             } catch (e) {
-                prepState = { checked: {}, customPacking: [] };
+                prepState = { version: PREP_STORAGE_VERSION, checked: {}, customItems: [], openCards: {} };
             }
         }
 
         function savePrepState() {
-            localStorage.setItem(PREP_STORAGE_KEY, JSON.stringify(prepState));
-        }
-
-        function groupPrepItems(items) {
-            const groups = [];
-            const indexByName = {};
-            items.forEach((item) => {
-                const name = item.group;
-                if (indexByName[name] === undefined) {
-                    indexByName[name] = groups.length;
-                    groups.push({ name, items: [] });
-                }
-                groups[indexByName[name]].items.push(item);
-            });
-            return groups;
+            localStorage.setItem(PREP_STORAGE_KEY, JSON.stringify({
+                version: PREP_STORAGE_VERSION,
+                checked: prepState.checked,
+                customItems: prepState.customItems,
+                openCards: prepState.openCards || {}
+            }));
         }
 
         function prepItemHtml(item, canDelete) {
             const checked = !!prepState.checked[item.id];
-            const note = item.note ? `<p class="prep-note">${escapeHtml(item.note)}</p>` : '';
+            const detail = item.reason || item.note;
+            const note = detail ? `<p class="prep-note">${escapeHtml(detail)}</p>` : '';
             const link = item.href
                 ? `<a href="${escapeHtml(item.href)}" target="_blank" rel="noopener" class="prep-link">${escapeHtml(item.linkLabel || '開啟連結')} <i class="ph ph-arrow-square-out" aria-hidden="true"></i></a>`
                 : '';
@@ -5171,127 +5540,81 @@
             `;
         }
 
-        function renderPrepList(containerId, items, allowDeleteCustom, openGroups) {
-            const root = document.getElementById(containerId);
+        function renderPrepCategory(category) {
+            const root = document.getElementById('prep-list-' + category);
             if (!root) return;
-            const shouldOpen = (name) => !openGroups || openGroups.includes(name);
-            root.innerHTML = groupPrepItems(items).map((group) => {
-                const meta = PREP_GROUP_META[group.name] || PREP_GROUP_META['自己再加'];
-                const body = group.items.map((item) => prepItemHtml(item, allowDeleteCustom && !!item.custom)).join('');
-                return `
-                    <details class="prep-group" data-group="${escapeHtml(group.name)}" ${shouldOpen(group.name) ? 'open' : ''}>
-                        <summary>
-                            <span class="prep-group-icon ${meta.tone}" aria-hidden="true"><i class="ph ${meta.icon}"></i></span>
-                            <span>${escapeHtml(group.name)}</span>
-                            <i class="ph ph-caret-down prep-caret" aria-hidden="true"></i>
-                        </summary>
-                        <div>${body}</div>
-                    </details>
-                `;
-            }).join('');
+            const items = getPrepItemsByCategory(category);
+            root.innerHTML = items.map((item) => prepItemHtml(item, category === 'custom')).join('');
         }
 
-        function getOpenPrepGroups(containerId) {
-            const root = document.getElementById(containerId);
-            if (!root) return [];
-            return Array.from(root.querySelectorAll('details.prep-group'))
-                .filter((el) => el.open)
-                .map((el) => el.dataset.group);
+        function renderAllPrep() {
+            PREP_CATEGORIES.forEach((cat) => renderPrepCategory(cat.id));
         }
 
-        function getPackingItems() {
-            return PREP_PACKING.concat(prepState.customPacking);
-        }
-
-        function renderPrepTodos() {
-            renderPrepList('prep-todo-list', PREP_TODOS, false);
-            syncPrepToggleButton('todo');
-        }
-
-        function renderPrepPacking(preserveOpen, extraOpen) {
-            const openGroups = preserveOpen ? getOpenPrepGroups('prep-packing-list') : null;
-            if (openGroups && extraOpen && !openGroups.includes(extraOpen)) {
-                openGroups.push(extraOpen);
-            }
-            renderPrepList('prep-packing-list', getPackingItems(), true, openGroups);
-            syncPrepToggleButton('packing');
-        }
-
-        function syncPrepToggleButton(which) {
-            const listId = which === 'todo' ? 'prep-todo-list' : 'prep-packing-list';
-            const btnId = which === 'todo' ? 'prep-todo-toggle' : 'prep-packing-toggle';
-            const list = document.getElementById(listId);
-            const btn = document.getElementById(btnId);
-            if (!list || !btn) return;
-            const groups = Array.from(list.querySelectorAll('details.prep-group'));
-            const allOpen = groups.length > 0 && groups.every((el) => el.open);
-            btn.textContent = allOpen ? '全部收合' : '全部展開';
-        }
-
-        function togglePrepExpand(which) {
-            const listId = which === 'todo' ? 'prep-todo-list' : 'prep-packing-list';
-            const list = document.getElementById(listId);
-            if (!list) return;
-            const groups = Array.from(list.querySelectorAll('details.prep-group'));
-            const shouldOpen = groups.some((el) => !el.open);
-            groups.forEach((el) => { el.open = shouldOpen; });
-            syncPrepToggleButton(which);
-        }
-
-        function addPrepPacking(event) {
+        function addPrepCustomItem(event) {
             event.preventDefault();
             const input = document.getElementById('prep-add-input');
             const title = (input.value || '').trim();
             if (!title) return;
-            prepState.customPacking.push({
+            prepState.customItems.push({
                 id: 'custom-' + Date.now(),
-                group: '自己再加',
+                category: 'custom',
                 title,
                 note: '',
-                custom: true
+                custom: true,
+                source: 'custom'
             });
             savePrepState();
-            renderPrepPacking(true, '自己再加');
+            const card = document.querySelector('details.prep-card[data-prep-category="custom"]');
+            if (card) card.open = true;
+            if (!prepState.openCards) prepState.openCards = {};
+            prepState.openCards.custom = true;
+            savePrepState();
+            renderPrepCategory('custom');
             input.value = '';
             input.focus();
         }
 
         function bindPrepLists() {
-            [
-                { id: 'prep-todo-list', which: 'todo' },
-                { id: 'prep-packing-list', which: 'packing' }
-            ].forEach(({ id, which }) => {
-                const root = document.getElementById(id);
-                if (!root) return;
-                root.addEventListener('change', (event) => {
-                    const input = event.target.closest('input[data-prep-id]');
-                    if (!input) return;
-                    prepState.checked[input.dataset.prepId] = input.checked;
-                    savePrepState();
-                    const item = input.closest('.prep-item');
-                    if (item) item.classList.toggle('is-done', input.checked);
-                });
-                root.addEventListener('click', (event) => {
-                    const btn = event.target.closest('[data-prep-delete]');
-                    if (!btn) return;
-                    const itemId = btn.dataset.prepDelete;
-                    prepState.customPacking = prepState.customPacking.filter((item) => item.id !== itemId);
-                    delete prepState.checked[itemId];
-                    savePrepState();
-                    renderPrepPacking(true);
-                });
-                root.addEventListener('toggle', (event) => {
-                    if (event.target.matches && event.target.matches('details.prep-group')) {
-                        syncPrepToggleButton(which);
-                    }
-                }, true);
+            const root = document.getElementById('content-prep');
+            if (!root || root.dataset.prepBound === '1') return;
+            root.dataset.prepBound = '1';
+            root.addEventListener('change', (event) => {
+                const input = event.target.closest('input[data-prep-id]');
+                if (!input) return;
+                prepState.checked[input.dataset.prepId] = input.checked;
+                savePrepState();
+                const item = input.closest('.prep-item');
+                if (item) item.classList.toggle('is-done', input.checked);
+            });
+            root.addEventListener('click', (event) => {
+                const btn = event.target.closest('[data-prep-delete]');
+                if (!btn) return;
+                const itemId = btn.dataset.prepDelete;
+                prepState.customItems = prepState.customItems.filter((item) => item.id !== itemId);
+                delete prepState.checked[itemId];
+                savePrepState();
+                renderPrepCategory('custom');
+            });
+            root.addEventListener('toggle', (event) => {
+                const card = event.target;
+                if (!card.matches || !card.matches('details.prep-card[data-prep-category]')) return;
+                if (!prepState.openCards) prepState.openCards = {};
+                prepState.openCards[card.dataset.prepCategory] = card.open;
+                savePrepState();
+            }, true);
+        }
+
+        function applyPrepCardOpenState() {
+            document.querySelectorAll('details.prep-card[data-prep-category]').forEach((card) => {
+                card.open = !!(prepState.openCards && prepState.openCards[card.dataset.prepCategory]);
             });
         }
 
         function initPrepChecklist() {
             loadPrepState();
-            renderPrepTodos();
-            renderPrepPacking(false);
+            renderAllPrep();
+            applyPrepCardOpenState();
             bindPrepLists();
         }
 
