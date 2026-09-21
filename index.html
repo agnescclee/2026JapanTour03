@@ -1916,6 +1916,10 @@
                 display: contents;
             }
 
+            #content-itinerary #itinerary-days {
+                display: contents;
+            }
+
             #content-itinerary .day-scroller-wrap {
                 grid-column: 1;
                 grid-row: 1;
@@ -1952,9 +1956,21 @@
                 position: sticky;
                 top: 8.85rem;
                 align-self: start;
+                min-width: 0;
+                max-width: 100%;
                 padding-bottom: 0;
                 margin-bottom: 0;
                 border-bottom: none;
+            }
+
+            #content-itinerary .day-rail .page-title {
+                overflow-wrap: anywhere;
+                max-width: 100%;
+            }
+
+            #content-itinerary .day-climate-reminder {
+                overflow-wrap: anywhere;
+                max-width: 100%;
             }
 
             #content-itinerary .day-timeline {
@@ -2290,6 +2306,47 @@
             color: var(--color-transit);
             font-size: 1.35rem;
             line-height: 1;
+        }
+
+        .overview-hotel-top,
+        .overview-reserve-top,
+        .overview-flight-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .overview-done {
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
+            margin: -0.35rem -0.35rem 0 0;
+            color: #6b6560;
+            font-size: var(--text-sm);
+            font-weight: var(--weight-medium);
+            line-height: var(--leading-tight);
+            cursor: pointer;
+        }
+
+        .overview-done .prep-check-wrap {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        .overview-done-text {
+            padding-right: 0.15rem;
+        }
+
+        .overview-flight-top {
+            align-items: center;
+            margin-bottom: 0.85rem;
+        }
+
+        .overview-arrange-name {
+            font-size: var(--text-md);
+            font-weight: var(--weight-medium);
+            line-height: var(--leading-tight);
         }
 
         .overview-hotel,
@@ -2738,7 +2795,7 @@
                     </h3>
                     <i class="ph ph-caret-down prep-caret" aria-hidden="true"></i>
                 </summary>
-                <p class="prep-card-hint">出發前還要自己完成的事。已訂妥的機票與飯店不會出現在這裡。</p>
+                <p class="prep-card-hint">出發前還要自己完成的事。機票、飯店、新幹線、包車與霧幻峽是否已處理，請到總覽勾選。重要預約確認畫面請事先截圖存在自己的手機，旅途中網路不穩或無法登入 Email 時也能離線查看。</p>
                 <div id="prep-list-pretrip"></div>
             </details>
 
@@ -4439,13 +4496,6 @@
             return text;
         }
 
-        function bookingStatusLabel(booking) {
-            if (!booking || !booking.status) return '';
-            if (booking.status === 'to-book') return '未預約';
-            if (booking.status === 'confirmed') return '已確認';
-            return '';
-        }
-
         function eventChildren(event) {
             return (event && event.children) || [];
         }
@@ -4732,7 +4782,7 @@
             }
             if (event.bookingId) {
                 const booking = getBooking(event.bookingId);
-                if (booking && booking.href && booking.channelLabel) {
+                if (booking && booking.href && booking.channelLabel && booking.channelLabel !== 'えきねっと') {
                     buttons.push(itinActionButton(booking.href, 'ph-arrow-square-out', booking.channelLabel));
                 }
             }
@@ -4790,18 +4840,11 @@
             return bits.join('　');
         }
 
-        function eventFactHtml(event, ctx) {
+        function eventFactHtml(event) {
             const rows = [];
             const coverage = resolvedEventCoverage(event);
             if (coverage && coverage.label) {
                 rows.push(`<p class="itin-fact"><span class="itin-coverage">${escapeHtml(coverage.label)}</span></p>`);
-            }
-            const booking = getBooking(event.bookingId);
-            const status = bookingStatusLabel(booking);
-            const shown = ctx && ctx.shownBookings;
-            if (status && booking && booking.status === 'to-book' && shown && !shown.has(booking.id)) {
-                shown.add(booking.id);
-                rows.push(`<p class="itin-fact"><span class="itin-status">${escapeHtml(status)}</span></p>`);
             }
             return rows.join('');
         }
@@ -4845,7 +4888,7 @@
                                     ${bulb}
                                 </div>
                                 ${sub ? `<p class="text-secondary itin-sub">${escapeHtml(sub)}</p>` : ''}
-                                ${eventFactHtml(event, ctx)}
+                                ${eventFactHtml(event)}
                                 ${eventActionsHtml(event)}
                             </div>
                         </div>
@@ -4889,9 +4932,7 @@
                 const place = getPlace(booking.placeId);
                 const bits = [];
                 if (booking.title) bits.push(escapeHtml(booking.title));
-                const status = bookingStatusLabel(booking);
-                if (status) bits.push(escapeHtml(status));
-                if (booking.channelLabel) bits.push(escapeHtml(booking.channelLabel));
+                if (booking.channelLabel && booking.channelLabel !== 'えきねっと') bits.push(escapeHtml(booking.channelLabel));
                 if (place && place.phone) {
                     const tel = place.tel || place.phone;
                     bits.push(`<a href="tel:${escapeHtml(tel)}">${escapeHtml(place.phone)}</a>`);
@@ -5002,7 +5043,7 @@
         function renderDayHtml(day, progress) {
             const hidden = day.day === currentDays.a ? '' : ' hidden';
             const reminder = weatherReminderText(day);
-            const ctx = { shownBookings: new Set() };
+            const ctx = {};
             const items = flattenDayItems(day);
             const preItems = items.filter((row) => row.zone === 'pre');
             const midItems = items.filter((row) => row.zone === 'timeline');
@@ -5874,28 +5915,50 @@
 
         const PREP_ITINERARY_ACTIONS = [
             {
+                id: 'shot-flight',
+                category: 'pretrip',
+                title: '機票確認信截圖',
+                note: '存在自己的手機，不必上傳到這個網站。',
+                source: 'static',
+                responsible: 'traveler',
+                requiresAdvanceAction: true
+            },
+            {
+                id: 'shot-hotel',
+                category: 'pretrip',
+                title: '飯店確認信截圖',
+                note: '存在自己的手機，不必上傳到這個網站。',
+                source: 'static',
+                responsible: 'traveler',
+                requiresAdvanceAction: true
+            },
+            {
+                id: 'shot-transit',
+                category: 'pretrip',
+                title: '交通確認信截圖',
+                note: '新幹線或其他已訂交通的確認畫面，存在自己的手機。',
+                source: 'static',
+                responsible: 'traveler',
+                requiresAdvanceAction: true
+            },
+            {
+                id: 'shot-tour',
+                category: 'pretrip',
+                title: 'Local Tour 確認信截圖',
+                note: '霧幻峽等活動確認畫面，存在自己的手機。',
+                source: 'static',
+                responsible: 'traveler',
+                requiresAdvanceAction: true
+            },
+            {
                 id: 'flight-check',
                 category: 'pretrip',
                 title: '出發前再核對航班時間',
-                note: '長榮 BR192／BR191 松山⇄羽田已訂妥。出發前再看一次時間與託運件數即可。',
+                note: '出發前再看一次長榮 BR192／BR191 時刻與託運件數。',
                 source: 'itinerary',
                 itineraryRef: 'day1-flight',
                 responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: true
-            },
-            {
-                id: 'ekinet-shinkansen',
-                category: 'pretrip',
-                title: 'えきねっと新幹線指定席',
-                note: '去程東京→郡山（やまびこ 145）。回程郡山→上野請訂 11/06 11:00 やまびこ 134，座席表選最後列或荷物置き場旁。乘車前一個月可搶トクだ値；單買車票就好，不用 JR Pass。',
-                href: 'https://www.eki-net.com/',
-                linkLabel: 'えきねっと',
-                source: 'itinerary',
-                itineraryRef: 'day1-shinkansen',
-                responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
+                requiresAdvanceAction: true
             },
             {
                 id: 'transit-ic',
@@ -5905,45 +5968,7 @@
                 source: 'itinerary',
                 itineraryRef: 'day1-local-rail',
                 responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
-            },
-            {
-                id: 'aizu-jumbo-taxi',
-                category: 'pretrip',
-                title: '預約會津ジャンボ包車（5 人）',
-                note: 'Day 2 全日：10:00 華盛頓飯店 → 早戶碼頭 → みしま宿 → 柳津 → 17:15 返回。あいづタクシー 0120-69-2468，預約 9:00–17:00。',
-                href: 'https://taxi.aizubus.com/sightseeing/taxi_de_okuaizu',
-                linkLabel: '奥会津包車',
-                source: 'itinerary',
-                itineraryRef: 'day2-jumbo',
-                responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
-            },
-            {
-                id: 'ouchi-taxi',
-                category: 'pretrip',
-                title: '預約大內宿ジャンボ包車',
-                note: '11/3 連假不容易現場叫車。五人同樣要ジャンボ：08:45 華盛頓飯店 → 大內宿 → 塔崖 → 14:30 大川莊。',
-                source: 'itinerary',
-                itineraryRef: 'day3-jumbo',
-                responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
-            },
-            {
-                id: 'genkyo-boat',
-                category: 'pretrip',
-                title: '預約霧幻峽船票',
-                note: '周遊プラン約 45 分，3 名以上每人 ¥3,000。一艘最多 6 人、5 日前官網包船。建議訂 11:00 班。',
-                href: 'https://www.mugenkyo.info/reservation/',
-                linkLabel: '霧幻峽預約',
-                source: 'itinerary',
-                itineraryRef: 'day2-boat',
-                responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
+                requiresAdvanceAction: true
             },
             {
                 id: 'takkyubin',
@@ -5953,21 +5978,7 @@
                 source: 'itinerary',
                 itineraryRef: 'day4-takkyubin',
                 responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
-            },
-            {
-                id: 'shibukawa-lunch',
-                category: 'pretrip',
-                title: '電話預約渋川問屋午餐（5 人）',
-                note: '11/4 七日町。5 人請打電話 0242-28-4000（10:00–19:00）。午餐 11:00–15:00，最後入店 14:30。',
-                href: 'https://shibukawadonya.com/',
-                linkLabel: '渋川問屋',
-                source: 'itinerary',
-                itineraryRef: 'day4-lunch',
-                responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
+                requiresAdvanceAction: true
             },
             {
                 id: 'esim',
@@ -5977,8 +5988,7 @@
                 source: 'itinerary',
                 itineraryRef: 'communications',
                 responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
+                requiresAdvanceAction: true
             },
             {
                 id: 'online-checkin',
@@ -5988,19 +5998,7 @@
                 source: 'itinerary',
                 itineraryRef: 'day1-flight',
                 responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
-            },
-            {
-                id: 'hotel-vouchers',
-                category: 'pretrip',
-                title: '飯店確認信截圖',
-                note: '華盛頓、大川莊、裏磐梯、MONday 濱松町的確認存在相簿，離線也看得到。機票與住房已訂妥，這裡只是把確認信備存。',
-                source: 'itinerary',
-                itineraryRef: 'lodging',
-                responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
+                requiresAdvanceAction: true
             },
             {
                 id: 'cash-card',
@@ -6010,8 +6008,7 @@
                 source: 'itinerary',
                 itineraryRef: 'money',
                 responsible: 'traveler',
-                requiresAdvanceAction: true,
-                alreadyBooked: false
+                requiresAdvanceAction: true
             }
         ];
 
@@ -7203,6 +7200,52 @@
             return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
         }
 
+        const OVERVIEW_DONE_KEY = 'fukushima_trip_overview_done';
+        let overviewDone = {};
+
+        function loadOverviewDone() {
+            try {
+                const raw = localStorage.getItem(OVERVIEW_DONE_KEY);
+                const parsed = raw ? JSON.parse(raw) : {};
+                overviewDone = parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+            } catch (error) {
+                overviewDone = {};
+            }
+        }
+
+        function saveOverviewDone() {
+            localStorage.setItem(OVERVIEW_DONE_KEY, JSON.stringify(overviewDone));
+        }
+
+        function isOverviewDone(id) {
+            return overviewDone[id] === true;
+        }
+
+        function overviewDoneControl(id, label) {
+            const done = isOverviewDone(id);
+            return `
+                <label class="overview-done">
+                    <span class="prep-check-wrap">
+                        <input type="checkbox" data-overview-done="${escapeHtml(id)}" ${done ? 'checked' : ''} aria-label="已處理：${escapeHtml(label)}">
+                        <span class="prep-check" aria-hidden="true"><i class="ph ph-check"></i></span>
+                    </span>
+                    <span class="overview-done-text">已處理</span>
+                </label>
+            `;
+        }
+
+        function bindOverviewDone() {
+            const root = document.getElementById('content-info');
+            if (!root || root.dataset.overviewDoneBound === '1') return;
+            root.dataset.overviewDoneBound = '1';
+            root.addEventListener('change', (event) => {
+                const input = event.target.closest('input[data-overview-done]');
+                if (!input) return;
+                overviewDone[input.dataset.overviewDone] = input.checked;
+                saveOverviewDone();
+            });
+        }
+
         function overviewMetaRow(label, valueHtml) {
             if (!valueHtml) return '';
             return `<p><span class="overview-label">${escapeHtml(label)}</span>${valueHtml}</p>`;
@@ -7226,7 +7269,14 @@
             const segments = flightBooking
                 ? FLIGHT_SEGMENTS.filter((seg) => (flightBooking.segmentIds || []).includes(seg.id) || seg.bookingId === flightBooking.id)
                 : FLIGHT_SEGMENTS.slice();
-            root.innerHTML = segments.map((seg) => {
+            const doneId = flightBooking ? flightBooking.id : 'booking-eva-roundtrip';
+            const head = `
+                <div class="overview-flight-top">
+                    <p class="overview-arrange-name">往返機票</p>
+                    ${overviewDoneControl(doneId, '往返機票')}
+                </div>
+            `;
+            root.innerHTML = head + segments.map((seg) => {
                 const depCode = [seg.departure.airportCode, seg.departure.terminal].filter(Boolean).join(' ');
                 const arrCode = [seg.arrival.airportCode, seg.arrival.terminal].filter(Boolean).join(' ');
                 const depWhen = [formatTripMd(seg.date), seg.departure.time].filter(Boolean).join(' ');
@@ -7291,8 +7341,13 @@
                     : '';
                 return `
                     <div class="overview-hotel">
-                        <p class="overview-hotel-when">${escapeHtml(when)}</p>
-                        <h3 class="overview-hotel-name">${escapeHtml(place.name || '')}</h3>
+                        <div class="overview-hotel-top">
+                            <div>
+                                <p class="overview-hotel-when">${escapeHtml(when)}</p>
+                                <h3 class="overview-hotel-name">${escapeHtml(place.name || '')}</h3>
+                            </div>
+                            ${overviewDoneControl(booking.id, place.name || '住宿')}
+                        </div>
                         <div class="overview-hotel-meta">
                             ${overviewMetaRow('電話', phoneHtml)}
                             ${overviewMetaRow('地址', addressHtml)}
@@ -7332,8 +7387,13 @@
                 const summaryHtml = booking.summary ? `<span>${escapeHtml(booking.summary)}</span>` : '';
                 return `
                     <div class="overview-reserve">
-                        <p class="overview-reserve-when">${escapeHtml(formatTripMd(booking.date))}</p>
-                        <h3 class="overview-reserve-name">${escapeHtml(booking.title || place.name || '')}</h3>
+                        <div class="overview-reserve-top">
+                            <div>
+                                <p class="overview-reserve-when">${escapeHtml(formatTripMd(booking.date))}</p>
+                                <h3 class="overview-reserve-name">${escapeHtml(booking.title || place.name || '')}</h3>
+                            </div>
+                            ${overviewDoneControl(booking.id, booking.title || place.name || '預訂')}
+                        </div>
                         <div class="overview-reserve-meta">
                             ${overviewMetaRow('預約', channelHtml)}
                             ${overviewMetaRow('電話', phoneHtml)}
@@ -7346,10 +7406,12 @@
         }
 
         function renderOverview() {
+            loadOverviewDone();
             renderOverviewRoute();
             renderOverviewFlights();
             renderOverviewStays();
             renderOverviewReservations();
+            bindOverviewDone();
         }
 
         document.addEventListener('DOMContentLoaded', () => {
