@@ -865,6 +865,15 @@
             opacity: 0.72;
         }
 
+        .souvenir-col-title {
+            display: none;
+        }
+
+        .souvenir-layout {
+            display: flex;
+            flex-direction: column;
+        }
+
         .souvenir-day-block {
             scroll-margin-top: 5.5rem;
         }
@@ -1200,6 +1209,40 @@
             }
         }
 
+        @media (min-width: 1024px) {
+            .souvenir-tabs {
+                display: none;
+            }
+
+            .souvenir-col-title {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin: 0 0 1rem;
+                font-size: var(--text-lg);
+                font-weight: var(--weight-semibold);
+                line-height: var(--leading-tight);
+                color: var(--color-kesizumi);
+            }
+
+            .souvenir-layout {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                column-gap: 2rem;
+                align-items: start;
+            }
+
+            #souvenir-panel-recommend,
+            #souvenir-panel-mine {
+                display: block;
+                min-width: 0;
+            }
+
+            #souvenir-panel-mine {
+                padding-bottom: 5rem;
+            }
+        }
+
         .btn-outline.is-quiet {
             width: auto;
             min-height: 2rem;
@@ -1530,8 +1573,6 @@
             display: flex;
             flex-direction: column;
             gap: 0.7rem;
-            max-width: 42rem;
-            margin-inline: auto;
         }
 
         #content-record .page-sheet.expense-total-card,
@@ -2248,13 +2289,6 @@
                 gap: 2rem;
                 align-items: start;
             }
-
-            #content-souvenir,
-            #content-prep {
-                max-width: 56rem;
-                margin-left: auto;
-                margin-right: auto;
-            }
         }
 
         .overview-route {
@@ -2718,25 +2752,29 @@
         <!-- ===================================================================
              TAB 3: SOUVENIR
              =================================================================== -->
-        <section id="content-souvenir" class="hidden animate-fade-in lg:max-w-4xl lg:mx-auto">
+        <section id="content-souvenir" class="hidden animate-fade-in">
             <div class="souvenir-tabs" role="tablist" aria-label="手信">
                 <button type="button" id="souvenir-tab-recommend" class="souvenir-tab is-active" role="tab" aria-selected="true" aria-controls="souvenir-panel-recommend" data-souvenir-view="recommend">推薦</button>
-                <button type="button" id="souvenir-tab-mine" class="souvenir-tab" role="tab" aria-selected="false" aria-controls="souvenir-panel-mine" data-souvenir-view="mine">我的手信<span class="souvenir-tab-count" id="souvenir-mine-count"></span></button>
+                <button type="button" id="souvenir-tab-mine" class="souvenir-tab" role="tab" aria-selected="false" aria-controls="souvenir-panel-mine" data-souvenir-view="mine">我的手信<span class="souvenir-tab-count souvenir-mine-count"></span></button>
             </div>
 
-            <div id="souvenir-panel-recommend" role="tabpanel" aria-labelledby="souvenir-tab-recommend">
-                <div id="souvenir-recommend-list"></div>
-                <div id="souvenir-notes" class="souvenir-notes"></div>
-            </div>
-
-            <div id="souvenir-panel-mine" class="hidden" role="tabpanel" aria-labelledby="souvenir-tab-mine">
-                <div class="souvenir-filter" role="tablist" aria-label="購買狀態">
-                    <button type="button" class="cat-btn is-active" data-souvenir-filter="all">全部</button>
-                    <button type="button" class="cat-btn" data-souvenir-filter="open">未購買</button>
-                    <button type="button" class="cat-btn" data-souvenir-filter="done">已購買</button>
+            <div class="souvenir-layout">
+                <div id="souvenir-panel-recommend" role="tabpanel" aria-labelledby="souvenir-tab-recommend">
+                    <h2 class="souvenir-col-title">推薦</h2>
+                    <div id="souvenir-recommend-list"></div>
+                    <div id="souvenir-notes" class="souvenir-notes"></div>
                 </div>
-                <div id="souvenir-mine-list"></div>
-                <p id="souvenir-mine-empty" class="souvenir-empty hidden">還沒有手信。可從「推薦」加入，或自己新增要買的東西。</p>
+
+                <div id="souvenir-panel-mine" class="hidden" role="tabpanel" aria-labelledby="souvenir-tab-mine">
+                    <h2 class="souvenir-col-title">我的手信<span class="souvenir-tab-count souvenir-mine-count"></span></h2>
+                    <div class="souvenir-filter" role="tablist" aria-label="購買狀態">
+                        <button type="button" class="cat-btn is-active" data-souvenir-filter="all">全部</button>
+                        <button type="button" class="cat-btn" data-souvenir-filter="open">未購買</button>
+                        <button type="button" class="cat-btn" data-souvenir-filter="done">已購買</button>
+                    </div>
+                    <div id="souvenir-mine-list"></div>
+                    <p id="souvenir-mine-empty" class="souvenir-empty hidden">還沒有手信。可從「推薦」加入，或自己新增要買的東西。</p>
+                </div>
             </div>
         </section>
         <button type="button" id="souvenir-fab" class="expense-fab souvenir-fab hidden fixed right-6 z-40 w-14 h-14 bg-benitobi text-gofun rounded-full flex items-center justify-center hover:bg-tobi transition-colors" data-souvenir-add aria-label="新增手信">
@@ -2797,7 +2835,7 @@
         <!-- ===================================================================
              TAB 5: PRE-TRIP PREPARATION (行前備忘清單)
              =================================================================== -->
-        <section id="content-prep" class="hidden space-y-8 animate-fade-in lg:max-w-4xl lg:mx-auto">
+        <section id="content-prep" class="hidden space-y-8 animate-fade-in">
             <details class="page-sheet prep-card" data-prep-category="documents">
                 <summary>
                     <h3 class="item-title">
@@ -5857,11 +5895,13 @@
                 updateItineraryProgress();
                 requestAnimationFrame(scrollSelectedDayIntoView);
             }
-            if (tabId === 'souvenir' && souvenirView === 'recommend') {
-                requestAnimationFrame(scrollSouvenirTodayIntoView);
+            if (tabId === 'souvenir') {
+                renderSouvenirTabs();
+                if (souvenirView === 'recommend' || souvenirDesktopSplit()) {
+                    requestAnimationFrame(scrollSouvenirTodayIntoView);
+                }
             }
-            const souvenirFab = document.getElementById('souvenir-fab');
-            if (souvenirFab) souvenirFab.classList.toggle('hidden', tabId !== 'souvenir' || souvenirView !== 'mine');
+            syncSouvenirFab();
         }
 
         function switchDay(route, dayNum) {
@@ -7004,6 +7044,17 @@
         let souvenirSheetLastFocus = null;
         let souvenirPhotoDraft = '';
 
+        function souvenirDesktopSplit() {
+            return window.matchMedia('(min-width: 1024px)').matches;
+        }
+
+        function syncSouvenirFab() {
+            const fab = document.getElementById('souvenir-fab');
+            if (!fab) return;
+            const show = currentTab === 'souvenir' && (souvenirDesktopSplit() || souvenirView === 'mine');
+            fab.classList.toggle('hidden', !show);
+        }
+
         function souvenirStorageKey() {
             return TRIP_CONFIG.tripId + '_souvenirs';
         }
@@ -7123,9 +7174,11 @@
         }
 
         function renderSouvenirTabs() {
-            const countEl = document.getElementById('souvenir-mine-count');
             const n = souvenirState.items.length;
-            if (countEl) countEl.textContent = n ? '（' + n + '）' : '';
+            const countText = n ? '（' + n + '）' : '';
+            document.querySelectorAll('.souvenir-mine-count').forEach((el) => {
+                el.textContent = countText;
+            });
             document.querySelectorAll('[data-souvenir-view]').forEach((btn) => {
                 const on = btn.dataset.souvenirView === souvenirView;
                 btn.classList.toggle('is-active', on);
@@ -7133,10 +7186,10 @@
             });
             const rec = document.getElementById('souvenir-panel-recommend');
             const mine = document.getElementById('souvenir-panel-mine');
-            if (rec) rec.classList.toggle('hidden', souvenirView !== 'recommend');
-            if (mine) mine.classList.toggle('hidden', souvenirView !== 'mine');
-            const fab = document.getElementById('souvenir-fab');
-            if (fab) fab.classList.toggle('hidden', currentTab !== 'souvenir' || souvenirView !== 'mine');
+            const split = souvenirDesktopSplit();
+            if (rec) rec.classList.toggle('hidden', !split && souvenirView !== 'recommend');
+            if (mine) mine.classList.toggle('hidden', !split && souvenirView !== 'mine');
+            syncSouvenirFab();
         }
 
         function renderSouvenirRecommendations() {
@@ -7701,6 +7754,15 @@
             loadSouvenirState();
             renderSouvenirGuide();
             bindSouvenirUi();
+            if (!window.__souvenirSplitBound) {
+                window.__souvenirSplitBound = true;
+                const mq = window.matchMedia('(min-width: 1024px)');
+                const onChange = () => {
+                    if (currentTab === 'souvenir') renderSouvenirTabs();
+                };
+                if (mq.addEventListener) mq.addEventListener('change', onChange);
+                else if (mq.addListener) mq.addListener(onChange);
+            }
         }
 
         function getPlace(id) {
