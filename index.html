@@ -5,59 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>秋醉福島・慢活七日｜極致舒適慢活版</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Chiron GoRound TC (body), Zen Maru Gothic (brand / tabs) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'benitobi': '#994639',       /* 紅鳶 BENITOBI (Nippon Colors col031) - 主色 */
-                        'tobi': '#724832',           /* 鳶 TOBI (col043) - 按下與較深強調 */
-                        'akakuchiba': '#C78550',     /* 赤朽葉 AKAKUCHIBA (col068) - 氣溫等點綴 */
-                        'shironeri': '#FCFAF2',      /* 白練 SHIRONERI (col233) - 頁面底 */
-                        'gofun': '#FFFFFB',          /* 胡粉 GOFUN (col234) - 紙面卡片 */
-                        'kesizumi': '#434343',       /* 消炭 KESHIZUMI (col247) - 內文 */
-                        'haizakura': '#D7C4BB',      /* 灰桜 HAIZAKURA (col026) - 分隔線 */
-                        'ainezumi': '#566C73',       /* 藍鼠 AINEZUMI (col184) - 交通節點 */
-                        'aoni': '#516E41',           /* 青丹 AONI (col146) - 住宿節點 */
-                        'ohdo': '#B68E55',           /* 黄土 OHDO (col091) - 景點節點 */
-                        /* 既有 class 對應新色，其餘天數暫不改結構 */
-                        'benikaba': '#994639',
-                        'benikaba-dark': '#724832',
-                        'benikaba-light': '#FCFAF2',
-                        'benikaba-soft': '#F3EDE6',
-                        'yamabuki': '#C78550',
-                        'akane': '#994639',
-                        'kohaku': '#C78550',
-                        'kuriume': '#724832',
-                        'neriiro': '#FCFAF2',
-                        'haiku': '#D7C4BB',
-                        'wasen': '#724832',
-                    },
-                    fontFamily: {
-                        'sans': ['"Chiron GoRound TC"', '"PingFang TC"', '"Hiragino Sans CNS"', '"Noto Sans TC"', '"Microsoft JhengHei"', 'sans-serif'],
-                        'brand': ['"Zen Maru Gothic"', '"Chiron GoRound TC"', '"PingFang TC"', 'sans-serif'],
-                        'serif': ['"Chiron GoRound TC"', '"PingFang TC"', 'serif'],
-                        'mono': ['"Chiron GoRound TC"', '"PingFang TC"', '"Hiragino Sans CNS"', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Local assets so the handbook works on a plane / in the mountains. -->
+    <link rel="stylesheet" href="assets/tailwind.css">
+    <link rel="stylesheet" href="assets/icons/regular/style.css">
+    <link rel="stylesheet" href="assets/icons/duotone/style.css">
+    <link rel="stylesheet" href="assets/icons/fill/style.css">
 
     <style>
         :root {
-            --font-sans: "Chiron GoRound TC", "PingFang TC", "Hiragino Sans CNS", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-            --font-brand: "Zen Maru Gothic", "Chiron GoRound TC", "PingFang TC", "Hiragino Sans CNS", sans-serif;
-            --font-serif: "Chiron GoRound TC", "PingFang TC", "Songti TC", serif;
+            --font-sans: "PingFang TC", "Hiragino Sans CNS", "Hiragino Sans", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            --font-brand: "PingFang TC", "Hiragino Sans CNS", "Hiragino Sans", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            --font-serif: "PingFang TC", "Songti TC", "Hiragino Mincho ProN", serif;
             --color-benitobi: #994639;
             --color-tobi: #724832;
             --color-kesizumi: #434343;
@@ -574,8 +532,22 @@
             border-bottom-color: var(--color-benitobi);
         }
 
+        .nav-desktop {
+            display: none;
+        }
+
         .nav-mobile {
             padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        @media (min-width: 768px) {
+            .nav-desktop {
+                display: block;
+            }
+
+            .nav-mobile {
+                display: none;
+            }
         }
 
         .nav-mobile-inner {
@@ -2079,8 +2051,52 @@
         .day-climate-temp {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.5rem;
             min-height: 0;
+        }
+
+        .day-climate-seg {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            flex-wrap: nowrap;
+        }
+
+        .day-climate-place {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.15rem;
+            flex-wrap: nowrap;
+        }
+
+        .day-climate-arrow {
+            color: rgba(67, 67, 67, 0.4);
+        }
+
+        .day-climate-badge {
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
+            padding: 0.05rem 0.45rem;
+            border: 1px solid var(--color-ohdo);
+            border-radius: 999px;
+            color: var(--color-ohdo);
+            font-size: 0.6875rem;
+            font-weight: var(--weight-medium);
+            letter-spacing: 0.04em;
+            line-height: 1.5;
+            white-space: nowrap;
+        }
+
+        .day-climate-badge.is-live {
+            border-color: var(--color-stay);
+            color: var(--color-stay);
+        }
+
+        .day-climate-badge.is-pending {
+            border-color: rgba(67, 67, 67, 0.28);
+            color: rgba(67, 67, 67, 0.55);
         }
 
         .day-climate-reminder {
@@ -2157,6 +2173,60 @@
             font-size: var(--text-lg);
             font-weight: var(--weight-semibold);
             line-height: var(--leading-tight);
+        }
+
+        .review-banner {
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            padding: 0.5rem 1rem;
+            background: var(--color-kesizumi, #333);
+            color: #fff;
+            font-size: var(--text-sm);
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        .overview-review-flag,
+        .overview-review-cost {
+            margin-top: 0.5rem;
+            font-size: var(--text-sm);
+        }
+
+        .overview-review-flag {
+            color: var(--color-ohdo, #b8860b);
+        }
+
+        .day-review-notes {
+            margin-top: 0.75rem;
+            padding: 0.65rem 0.85rem;
+            border-radius: 0.6rem;
+            background: rgba(182, 142, 85, 0.12);
+            color: var(--color-ohdo, #b8860b);
+            font-size: var(--text-sm);
+            line-height: var(--leading-relaxed);
+            text-align: left;
+        }
+
+        .day-review-notes p + p {
+            margin-top: 0.35rem;
+        }
+
+        .overview-asset-list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .overview-asset img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-md, 0.5rem);
+        }
+
+        .overview-asset figcaption {
+            margin-top: 0.25rem;
+            font-size: var(--text-sm);
+            color: var(--color-secondary, #666);
         }
 
         #content-info:not(.hidden) {
@@ -2978,6 +3048,23 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        /* Review Mode：主理人製作期視圖。
+           以 ?review=1 開啟、?review=0 關閉，狀態記於 localStorage。
+           開啟時顯示 _review 註記、成本與憑證缺漏；交付給旅客的版本必須為關閉狀態。 */
+        const REVIEW_MODE = (() => {
+            let on = false;
+            try {
+                const q = new URLSearchParams(window.location.search);
+                if (q.has('review')) {
+                    on = q.get('review') !== '0';
+                    try { localStorage.setItem('trip_review_mode', on ? '1' : '0'); } catch (e) {}
+                    return on;
+                }
+                on = localStorage.getItem('trip_review_mode') === '1';
+            } catch (e) { on = false; }
+            return on;
+        })();
+
         const TRIP_START = '2026-11-01';
         const TRIP_END = '2026-11-07';
         const TRIP_TIME_ZONE = 'Asia/Tokyo';
@@ -3121,6 +3208,8 @@
                 type: 'flight',
                 status: 'confirmed',
                 confirmationNo: '',
+                cost: null,
+                offlineAsset: [],
                 segmentIds: ['seg-br192', 'seg-br191']
             },
             {
@@ -3130,7 +3219,9 @@
                 checkIn: '2026-11-01',
                 checkOut: '2026-11-03',
                 status: 'confirmed',
-                confirmationNo: ''
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
             },
             {
                 id: 'booking-ookawaso',
@@ -3139,7 +3230,9 @@
                 checkIn: '2026-11-03',
                 checkOut: '2026-11-04',
                 status: 'confirmed',
-                confirmationNo: ''
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
             },
             {
                 id: 'booking-lakeresort',
@@ -3148,7 +3241,9 @@
                 checkIn: '2026-11-04',
                 checkOut: '2026-11-06',
                 status: 'confirmed',
-                confirmationNo: ''
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
             },
             {
                 id: 'booking-monday',
@@ -3157,7 +3252,9 @@
                 checkIn: '2026-11-06',
                 checkOut: '2026-11-07',
                 status: 'confirmed',
-                confirmationNo: ''
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
             },
             {
                 id: 'booking-jumbo-day2',
@@ -3170,7 +3267,9 @@
                 channel: 'phone',
                 channelLabel: '電話預約',
                 note: '華盛頓飯店 → 早戶碼頭 → 道の駅みしま宿 → 柳津町 → 返回飯店',
-                confirmationNo: ''
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
             },
             {
                 id: 'booking-jumbo-day3',
@@ -3183,7 +3282,9 @@
                 channel: 'phone',
                 channelLabel: '電話預約',
                 note: '08:45 華盛頓飯店 → 大內宿 → 塔崖 → 14:30 大川莊',
-                confirmationNo: ''
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
             },
             {
                 id: 'booking-train-outbound',
@@ -3196,7 +3297,9 @@
                 channelLabel: 'えきねっと',
                 href: 'https://www.eki-net.com/',
                 summary: '東京 → 郡山',
-                confirmationNo: ''
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
             },
             {
                 id: 'booking-train-return',
@@ -3209,7 +3312,9 @@
                 channelLabel: 'えきねっと',
                 href: 'https://www.eki-net.com/',
                 summary: '郡山 → 上野',
-                confirmationNo: ''
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
             },
             {
                 id: 'booking-mugenkyo',
@@ -3221,7 +3326,9 @@
                 channel: 'web',
                 channelLabel: '官網預約',
                 href: 'https://www.mugenkyo.info/reservation/',
-                confirmationNo: ''
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
             },
             {
                 id: 'booking-shibukawa',
@@ -3233,7 +3340,9 @@
                 status: 'to-book',
                 channel: 'phone',
                 channelLabel: '電話預約',
-                confirmationNo: ''
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
             }
         ];
 
@@ -3301,7 +3410,7 @@
                 bookingRequired: true,
                 channel: 'hotel_front_desk',
                 deliveryTiming: 'Day 3 退房寄出，Day 4 入住裏磐梯レイクリゾート時領取',
-                todos: ['尚未有宅配價格資料。']
+                _review: ['尚未有宅配價格資料。']
             },
             {
                 id: 'svc-aizu-locker',
@@ -3333,8 +3442,19 @@
                     day: 1,
                     date: '2026-11-01',
                     title: '第一日：啟程',
-                    weather: { icon: 'ph-sun', text: '8°C ~ 16°C' },
-                    todos: ['Breakfast handling 未記載（清晨出發、07:20 起飛）。'],
+                    weather: {
+                        location: '台北',
+                        low: null, high: 24, unit: 'C',
+                        condition: 'sunny',
+                        advice: '抵達會津後早晚偏冷，建議洋蔥式穿搭。',
+                        secondary: { location: '會津若松', low: 8, high: 16, condition: 'partly-cloudy' },
+                        source: 'seasonal-average',
+                        freshness: 'far',
+                        needsVerification: true,
+                        verifiedAt: null,
+                        forecastPlaces: [{ id: 'taipei' }, { id: 'aizu' }]
+                    },
+                    _review: ['Breakfast handling 未記載（清晨出發、07:20 起飛）。'],
                     startAnchor: { kind: 'airport', placeId: 'place-hnd-t3', flightSegmentId: 'seg-br192', role: 'arrival' },
                     endAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington', time: '21:10' },
                     preBoundary: [
@@ -3361,7 +3481,7 @@
                                 '11:15 落地、通關取行李後約 12:30 開始用餐。',
                                 '第 3 航廈有羽田市場、拉麵與定食，午餐人均約 ¥1,200～2,000。'
                             ],
-                            unresolved: ['尚無足夠資料列出 2–3 家指定餐廳。']
+                            _review: ['尚無足夠資料列出 2–3 家指定餐廳。']
                         },
                         {
                             id: 'd1-bus-tokyo',
@@ -3426,7 +3546,7 @@
                                 '牛舌可在站內餐廳街依當日菜單選擇。',
                                 '1F 成城石井（10:00–21:00）與伴手禮區可買福島當季果物、點心，帶上晚班火車。'
                             ],
-                            unresolved: ['晚餐僅有 1 家點名餐廳，尚不足以列出 2–3 家推薦。']
+                            _review: ['晚餐僅有 1 家點名餐廳，尚不足以列出 2–3 家推薦。']
                         },
                         {
                             id: 'd1-banetsu',
@@ -3462,7 +3582,17 @@
                     day: 2,
                     date: '2026-11-02',
                     title: '第二日：霧幻泛舟',
-                    weather: { icon: 'ph-thermometer', text: '3°C ~ 10°C' },
+                    weather: {
+                        location: '奧會津',
+                        low: 3, high: 10, unit: 'C',
+                        condition: 'partly-cloudy',
+                        advice: '山區偏冷，請著防風保暖外套。',
+                        source: 'seasonal-average',
+                        freshness: 'far',
+                        needsVerification: true,
+                        verifiedAt: null,
+                        forecastPlaces: [{ id: 'okuaizu' }]
+                    },
                     startAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington' },
                     endAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington', time: '17:15' },
                     timeline: [
@@ -3473,7 +3603,7 @@
                             meal: { slot: 'breakfast', resolution: 'unresolved' },
                             areaLabel: '會津若松',
                             notes: ['大行李留在會津若松客房，輕裝出遊。'],
-                            unresolved: ['華盛頓飯店未記載早餐處理方式。']
+                            _review: ['華盛頓飯店未記載早餐處理方式。']
                         },
                         {
                             id: 'd2-charter-hayato',
@@ -3620,7 +3750,7 @@
                             startTime: '18:00',
                             meal: { slot: 'dinner', resolution: 'recommendations' },
                             areaLabel: '會津若松站前',
-                            unresolved: ['既有資料為料理類型（輪箱飯、喜多方拉麵、會津地雞），尚未指定 2–3 家店名與地點。']
+                            _review: ['既有資料為料理類型（輪箱飯、喜多方拉麵、會津地雞），尚未指定 2–3 家店名與地點。']
                         }
                     ]
                 },
@@ -3628,7 +3758,17 @@
                     day: 3,
                     date: '2026-11-03',
                     title: '第三日：茅葺古街',
-                    weather: { icon: 'ph-thermometer', text: '4°C ~ 12°C' },
+                    weather: {
+                        location: '大內宿・蘆之牧',
+                        low: 4, high: 12, unit: 'C',
+                        condition: 'partly-cloudy',
+                        advice: '早晚偏冷，建議洋蔥式穿搭。',
+                        source: 'seasonal-average',
+                        freshness: 'far',
+                        needsVerification: true,
+                        verifiedAt: null,
+                        forecastPlaces: [{ id: 'ouchi' }]
+                    },
                     startAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington' },
                     endAnchor: { kind: 'accommodation', placeId: 'place-ookawaso', bookingId: 'booking-ookawaso', time: '14:30' },
                     timeline: [
@@ -3638,7 +3778,7 @@
                             timeLabel: '早餐',
                             meal: { slot: 'breakfast', resolution: 'unresolved' },
                             areaLabel: '會津若松',
-                            unresolved: ['華盛頓飯店未記載早餐處理方式。']
+                            _review: ['華盛頓飯店未記載早餐處理方式。']
                         },
                         {
                             id: 'd3-luggage',
@@ -3759,7 +3899,17 @@
                     day: 4,
                     date: '2026-11-04',
                     title: '第四日：城下町巡禮',
-                    weather: { icon: 'ph-sun', text: '6°C ~ 14°C' },
+                    weather: {
+                        location: '會津若松',
+                        low: 6, high: 14, unit: 'C',
+                        condition: 'sunny',
+                        advice: '早晚偏涼，記得加件外套。',
+                        source: 'seasonal-average',
+                        freshness: 'far',
+                        needsVerification: true,
+                        verifiedAt: null,
+                        forecastPlaces: [{ id: 'aizu' }]
+                    },
                     startAnchor: { kind: 'accommodation', placeId: 'place-ookawaso', bookingId: 'booking-ookawaso' },
                     endAnchor: { kind: 'accommodation', placeId: 'place-lakeresort', bookingId: 'booking-lakeresort', time: '16:45' },
                     timeline: [
@@ -3974,7 +4124,17 @@
                     day: 5,
                     date: '2026-11-05',
                     title: '第五日：紅葉慢遊',
-                    weather: { icon: 'ph-thermometer', text: '1°C ~ 9°C' },
+                    weather: {
+                        location: '裏磐梯',
+                        low: 1, high: 9, unit: 'C',
+                        condition: 'partly-cloudy',
+                        advice: '清晨步道可能結霜，備妥保暖防滑。',
+                        source: 'seasonal-average',
+                        freshness: 'far',
+                        needsVerification: true,
+                        verifiedAt: null,
+                        forecastPlaces: [{ id: 'urabandai' }]
+                    },
                     startAnchor: { kind: 'accommodation', placeId: 'place-lakeresort', bookingId: 'booking-lakeresort' },
                     endAnchor: { kind: 'accommodation', placeId: 'place-lakeresort', bookingId: 'booking-lakeresort' },
                     timeline: [
@@ -4137,7 +4297,18 @@
                     day: 6,
                     date: '2026-11-06',
                     title: '第六日：東京採買',
-                    weather: { icon: 'ph-thermometer', text: '8°C / 18°C' },
+                    weather: {
+                        location: '裏磐梯',
+                        low: 8, high: null, unit: 'C',
+                        condition: 'partly-cloudy',
+                        advice: '山區到市區溫差大，建議洋蔥式穿搭。',
+                        secondary: { location: '東京', low: null, high: 18 },
+                        source: 'seasonal-average',
+                        freshness: 'far',
+                        needsVerification: true,
+                        verifiedAt: null,
+                        forecastPlaces: [{ id: 'urabandai' }, { id: 'tokyo' }]
+                    },
                     startAnchor: { kind: 'accommodation', placeId: 'place-lakeresort', bookingId: 'booking-lakeresort' },
                     endAnchor: { kind: 'accommodation', placeId: 'place-monday', bookingId: 'booking-monday' },
                     timeline: [
@@ -4306,7 +4477,7 @@
                             options: [
                                 { kind: 'restaurant', placeId: 'place-jojoen-ueno', name: '敘敘苑 上野不忍口' }
                             ],
-                            unresolved: ['僅 1 家點名餐廳，尚不足以列出 2–3 家推薦。']
+                            _review: ['僅 1 家點名餐廳，尚不足以列出 2–3 家推薦。']
                         },
                         {
                             id: 'd6-yamanote-back',
@@ -4331,8 +4502,19 @@
                     day: 7,
                     date: '2026-11-07',
                     title: '第七日：賦歸',
-                    weather: { icon: 'ph-thermometer', text: '東京 18°C ➔ 台北 24°C' },
-                    todos: ['Meal Handling TODO: BR191 12:40 起飛與 12:00 Lunch Anchor 衝突。現有資料無機場早午餐、takeaway 或機上餐處理方式。'],
+                    weather: {
+                        location: '東京',
+                        low: null, high: 18, unit: 'C',
+                        condition: 'partly-cloudy',
+                        advice: '回程偏暖，厚外套可收進行李。',
+                        secondary: { location: '台北', low: null, high: 24 },
+                        source: 'seasonal-average',
+                        freshness: 'far',
+                        needsVerification: true,
+                        verifiedAt: null,
+                        forecastPlaces: [{ id: 'tokyo' }, { id: 'taipei' }]
+                    },
+                    _review: ['Meal Handling TODO: BR191 12:40 起飛與 12:00 Lunch Anchor 衝突。現有資料無機場早午餐、takeaway 或機上餐處理方式。'],
                     startAnchor: { kind: 'accommodation', placeId: 'place-monday', bookingId: 'booking-monday' },
                     endAnchor: { kind: 'airport', placeId: 'place-hnd-t3', flightSegmentId: 'seg-br191', role: 'departure', kicker: '今日終點' },
                     timeline: [
@@ -4585,17 +4767,339 @@
             return 'major';
         }
 
+        const WEATHER_FORECAST_DAYS = 7;
+        const WEATHER_CACHE_KEY = 'trip_weather_live_v2';
+        const WEATHER_CACHE_MS = 6 * 60 * 60 * 1000;
+        const WEATHER_WIND_KMH = 35;
+        const WEATHER_CONDITION_ICON = {
+            sunny: 'ph-sun',
+            'mainly-clear': 'ph-sun-dim',
+            'partly-cloudy': 'ph-cloud-sun',
+            cloudy: 'ph-cloud',
+            fog: 'ph-cloud-fog',
+            rain: 'ph-cloud-rain',
+            snow: 'ph-cloud-snow',
+            thunder: 'ph-cloud-lightning',
+            wind: 'ph-wind'
+        };
+        const WEATHER_CONDITION_LABEL = {
+            sunny: '晴',
+            'mainly-clear': '大致晴朗',
+            'partly-cloudy': '多雲時晴',
+            cloudy: '陰',
+            fog: '霧',
+            rain: '雨',
+            snow: '雪',
+            thunder: '雷雨',
+            wind: '強風'
+        };
+        const WEATHER_PLACES = {
+            tokyo: { label: '東京', lat: 35.6812, lon: 139.7671, href: 'https://tenki.jp/search/?keyword=%E6%9D%B1%E4%BA%AC' },
+            aizu: { label: '會津若松', lat: 37.4947, lon: 139.9298, href: 'https://tenki.jp/search/?keyword=%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE' },
+            okuaizu: { label: '奧會津', lat: 37.4703, lon: 139.6444, href: 'https://tenki.jp/search/?keyword=%E4%B8%89%E5%B3%B6%E7%94%BA%20%E7%A6%8F%E5%B3%B6' },
+            ouchi: { label: '大內宿', lat: 37.3347, lon: 139.8606, href: 'https://tenki.jp/search/?keyword=%E4%B8%8B%E9%83%B7%E7%94%BA%20%E5%A4%A7%E5%86%85%E5%AE%BF' },
+            urabandai: { label: '裏磐梯', lat: 37.6554, lon: 140.0876, href: 'https://tenki.jp/search/?keyword=%E8%A3%8F%E7%A3%90%E6%A2%AF' },
+            taipei: { label: '台北', lat: 25.0375, lon: 121.5637, href: 'https://www.cwa.gov.tw/V8/C/W/Town/Town.html?TID=6300100' }
+        };
+
+        let liveWeatherByKey = {};
+        let liveWeatherFetchedAt = 0;
+        let liveWeatherStatus = 'idle';
+
+        function isoDaysBetween(fromIso, toIso) {
+            const start = Date.parse(fromIso + 'T00:00:00Z');
+            const end = Date.parse(toIso + 'T00:00:00Z');
+            if (Number.isNaN(start) || Number.isNaN(end)) return null;
+            return Math.round((end - start) / 86400000);
+        }
+
+        function addIsoDays(iso, days) {
+            const start = Date.parse(iso + 'T00:00:00Z');
+            if (Number.isNaN(start)) return '';
+            return new Date(start + days * 86400000).toISOString().slice(0, 10);
+        }
+
+        function forecastUnlockDate() {
+            return addIsoDays(TRIP_START, -WEATHER_FORECAST_DAYS);
+        }
+
+        function shouldFetchLiveWeather(todayIso) {
+            const today = todayIso || getTokyoWallNow().date;
+            const untilStart = isoDaysBetween(today, TRIP_START);
+            const untilEnd = isoDaysBetween(today, TRIP_END);
+            if (untilStart == null || untilEnd == null) return false;
+            return untilStart <= WEATHER_FORECAST_DAYS && untilEnd >= 0;
+        }
+
+        function wmoCondition(code) {
+            const n = Number(code);
+            if (!Number.isFinite(n)) return 'partly-cloudy';
+            if (n === 0) return 'sunny';
+            if (n === 1) return 'mainly-clear';
+            if (n === 2) return 'partly-cloudy';
+            if (n === 3) return 'cloudy';
+            if (n === 45 || n === 48) return 'fog';
+            if ((n >= 71 && n <= 77) || n === 85 || n === 86) return 'snow';
+            if (n >= 95) return 'thunder';
+            if (n >= 51) return 'rain';
+            return 'partly-cloudy';
+        }
+
+        function weatherIconName(condition, windKmh) {
+            const precip = condition === 'rain' || condition === 'snow' || condition === 'thunder' || condition === 'fog';
+            if (!precip && windKmh != null && windKmh >= WEATHER_WIND_KMH) return WEATHER_CONDITION_ICON.wind;
+            return WEATHER_CONDITION_ICON[condition] || WEATHER_CONDITION_ICON['partly-cloudy'];
+        }
+
+        function weatherIconHtml(condition, windKmh) {
+            const icon = weatherIconName(condition, windKmh);
+            const windy = icon === WEATHER_CONDITION_ICON.wind;
+            const label = windy ? WEATHER_CONDITION_LABEL.wind : (WEATHER_CONDITION_LABEL[condition] || '天氣');
+            return `<i class="ph-duotone ${icon} text-ohdo text-xl" aria-hidden="true" title="${escapeHtml(label)}"></i>`;
+        }
+
+        function uniqueForecastPlaceIds() {
+            const ids = [];
+            ITINERARY.days.forEach((day) => {
+                ((day.weather && day.weather.forecastPlaces) || []).forEach((item) => {
+                    if (item && item.id && WEATHER_PLACES[item.id] && ids.indexOf(item.id) === -1) ids.push(item.id);
+                });
+            });
+            return ids;
+        }
+
+        function weatherCacheStore(payload) {
+            try { localStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify(payload)); } catch (err) {}
+        }
+
+        function hydrateWeatherCache() {
+            try {
+                const raw = localStorage.getItem(WEATHER_CACHE_KEY);
+                if (!raw) return;
+                const parsed = JSON.parse(raw);
+                if (!parsed || !parsed.byKey) return;
+                liveWeatherByKey = parsed.byKey;
+                liveWeatherFetchedAt = Number(parsed.fetchedAt) || 0;
+                liveWeatherStatus = Object.keys(liveWeatherByKey).length ? 'ready' : 'idle';
+            } catch (err) {
+                liveWeatherByKey = {};
+            }
+        }
+
+        function applyForecastBlock(placeId, block, fetchedAt) {
+            const dates = (block && block.daily && block.daily.time) || [];
+            dates.forEach((date, index) => {
+                const high = block.daily.temperature_2m_max && block.daily.temperature_2m_max[index];
+                const low = block.daily.temperature_2m_min && block.daily.temperature_2m_min[index];
+                const code = block.daily.weather_code && block.daily.weather_code[index];
+                const wind = block.daily.wind_speed_10m_max && block.daily.wind_speed_10m_max[index];
+                if (low == null && high == null) return;
+                liveWeatherByKey[placeId + '|' + date] = {
+                    low: low == null ? null : Math.round(low),
+                    high: high == null ? null : Math.round(high),
+                    condition: wmoCondition(code),
+                    windKmh: wind == null ? null : Math.round(wind),
+                    fetchedAt: fetchedAt
+                };
+            });
+        }
+
+        function fetchLiveWeather() {
+            if (!shouldFetchLiveWeather()) {
+                liveWeatherStatus = 'idle';
+                return Promise.resolve();
+            }
+            const ids = uniqueForecastPlaceIds();
+            if (!ids.length) return Promise.resolve();
+            const cacheAge = Date.now() - liveWeatherFetchedAt;
+            if (liveWeatherFetchedAt && cacheAge >= 0 && cacheAge < WEATHER_CACHE_MS) {
+                liveWeatherStatus = 'ready';
+                return Promise.resolve();
+            }
+            const today = getTokyoWallNow().date;
+            const start = today < TRIP_START ? TRIP_START : today;
+            liveWeatherStatus = 'loading';
+            const fetchedAt = Date.now();
+            const requests = ids.map((id) => {
+                const place = WEATHER_PLACES[id];
+                const url = 'https://api.open-meteo.com/v1/forecast'
+                    + '?latitude=' + encodeURIComponent(place.lat)
+                    + '&longitude=' + encodeURIComponent(place.lon)
+                    + '&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max'
+                    + '&timezone=' + encodeURIComponent(TRIP_TIME_ZONE)
+                    + '&start_date=' + encodeURIComponent(start)
+                    + '&end_date=' + encodeURIComponent(TRIP_END);
+                return fetch(url).then((res) => {
+                    if (!res.ok) throw new Error('weather ' + res.status);
+                    return res.json();
+                }).then((block) => applyForecastBlock(id, block, fetchedAt));
+            });
+            return Promise.all(requests).then(() => {
+                liveWeatherFetchedAt = fetchedAt;
+                liveWeatherStatus = 'ready';
+                weatherCacheStore({ fetchedAt, byKey: liveWeatherByKey });
+            }).catch(() => {
+                liveWeatherStatus = Object.keys(liveWeatherByKey).length ? 'ready' : 'error';
+            });
+        }
+
+        function liveReading(placeId, dateIso) {
+            return liveWeatherByKey[placeId + '|' + dateIso] || null;
+        }
+
+        function resolvedWeather(day) {
+            const base = Object.assign({}, (day && day.weather) || {});
+            const inWindow = shouldFetchLiveWeather();
+            const places = base.forecastPlaces || [];
+            if (!inWindow || !places.length) {
+                return Object.assign(base, { phase: 'seasonal', live: false });
+            }
+            const readings = places.map((item) => {
+                const place = WEATHER_PLACES[item.id];
+                const hit = liveReading(item.id, day.date);
+                if (!place || !hit) return null;
+                return Object.assign({ id: item.id, label: item.label || place.label, href: place.href }, hit);
+            });
+            const main = readings[0];
+            const secondary = readings[1];
+            if (!main) {
+                return Object.assign(base, {
+                    phase: 'forecast',
+                    live: false,
+                    forecastPending: liveWeatherStatus === 'loading'
+                });
+            }
+            const out = Object.assign({}, base, {
+                phase: 'forecast',
+                live: true,
+                source: 'open-meteo',
+                needsVerification: false,
+                location: main.label,
+                low: main.low,
+                high: main.high,
+                condition: main.condition,
+                windKmh: main.windKmh,
+                displayText: null,
+                verifiedAt: main.fetchedAt,
+                href: main.href
+            });
+            if (secondary) {
+                out.secondary = {
+                    location: secondary.label,
+                    low: secondary.low,
+                    high: secondary.high,
+                    condition: secondary.condition,
+                    windKmh: secondary.windKmh,
+                    href: secondary.href
+                };
+            }
+            return out;
+        }
+
         function weatherReminderText(day) {
-            const reminders = {
-                1: '早晚偏冷，建議洋蔥式穿搭。',
-                2: '山區偏冷，請著防風保暖外套。',
-                3: '早晚偏冷，建議洋蔥式穿搭。',
-                4: '早晚偏涼，記得加件外套。',
-                5: '清晨步道可能結霜，備妥保暖防滑。',
-                6: '山區到市區溫差大，建議洋蔥式穿搭。',
-                7: '回程偏暖，厚外套可收進行李。'
-            };
-            return reminders[day.day] || '';
+            const w = resolvedWeather(day);
+            return w.advice || '';
+        }
+
+        function weatherRangeText(low, high, unit) {
+            const u = '°' + (unit || 'C');
+            if (low != null && high != null) return low + u + ' ~ ' + high + u;
+            if (high != null) return high + u;
+            if (low != null) return low + u;
+            return '';
+        }
+
+        function weatherText(day) {
+            const w = resolvedWeather(day);
+            const main = weatherRangeText(w.low, w.high, w.unit);
+            const sec = w.secondary
+                ? weatherRangeText(w.secondary.low, w.secondary.high, w.unit)
+                : '';
+            if (main && sec) {
+                return [
+                    (w.location ? w.location + ' ' : '') + main,
+                    (w.secondary.location ? w.secondary.location + ' ' : '') + sec
+                ].join(' ➔ ');
+            }
+            if (main) return main;
+            return w.displayText || '';
+        }
+
+        function weatherSourceHtml(day) {
+            const w = resolvedWeather(day);
+            const href = w.href || (w.forecastPlaces && w.forecastPlaces[0] && WEATHER_PLACES[w.forecastPlaces[0].id] && WEATHER_PLACES[w.forecastPlaces[0].id].href);
+            let text = '季節預測';
+            let mod = 'is-seasonal';
+            if (w.live) {
+                text = '真實預報';
+                mod = 'is-live';
+            } else if (w.forecastPending) {
+                text = '讀取中';
+                mod = 'is-pending';
+            }
+            const label = escapeHtml(text);
+            if (href && (w.live || w.phase === 'forecast')) {
+                return `<a class="day-climate-badge ${mod}" href="${escapeHtml(href)}" target="_blank" rel="noopener">${label}</a>`;
+            }
+            return `<span class="day-climate-badge ${mod}">${label}</span>`;
+        }
+
+        function weatherSegmentHtml(label, low, high, unit, condition, windKmh, prefixHtml) {
+            const range = weatherRangeText(low, high, unit);
+            if (!label && !range && !prefixHtml) return '';
+            const icon = weatherIconHtml(condition, windKmh);
+            const hugging = label || range;
+            const place = hugging
+                ? `<span class="day-climate-place">${icon}<span>${escapeHtml(label || range)}</span></span>`
+                : icon;
+            const temp = label && range ? `<span>${escapeHtml(range)}</span>` : '';
+            return `<span class="day-climate-seg">${prefixHtml || ''}${place}${temp}</span>`;
+        }
+
+        function weatherTempHtml(day) {
+            const w = resolvedWeather(day);
+            const badge = weatherSourceHtml(day);
+            const main = weatherSegmentHtml(w.secondary ? w.location : '', w.low, w.high, w.unit, w.condition, w.windKmh, badge);
+            const sec = w.secondary
+                ? weatherSegmentHtml(w.secondary.location, w.secondary.low, w.secondary.high, w.unit, w.secondary.condition || w.condition, w.secondary.windKmh)
+                : '';
+            if (main && sec) {
+                return main + '<span class="day-climate-arrow" aria-hidden="true">➔</span>' + sec;
+            }
+            if (main) return main;
+            if (w.displayText) {
+                return `<span class="day-climate-seg">${badge}<span class="day-climate-place">${weatherIconHtml(w.condition, w.windKmh)}<span>${escapeHtml(w.displayText)}</span></span></span>`;
+            }
+            return `<span class="day-climate-seg">${badge}${weatherIconHtml(w.condition, w.windKmh)}</span>`;
+        }
+
+        function weatherClimateInnerHtml(day) {
+            const reminder = weatherReminderText(day);
+            const resolved = resolvedWeather(day);
+            const verifyHtml = REVIEW_MODE && resolved.phase === 'seasonal'
+                ? `<p class="overview-review-flag">${escapeHtml(formatTripMd(forecastUnlockDate()))} 起改抓 7 天真實預報。</p>`
+                : '';
+            return `
+                <p class="day-climate-temp text-kesizumi">
+                    ${weatherTempHtml(day)}
+                </p>
+                ${reminder ? `<p class="day-climate-reminder">${escapeHtml(reminder)}</p>` : ''}
+                ${verifyHtml}
+            `;
+        }
+
+        function refreshWeatherClimate() {
+            ITINERARY.days.forEach((day) => {
+                const root = document.getElementById('route-a-day-' + day.day);
+                const copy = root && root.querySelector('.day-climate-copy');
+                if (copy) copy.innerHTML = weatherClimateInnerHtml(day);
+            });
+        }
+
+        function initWeatherForecast() {
+            hydrateWeatherCache();
+            refreshWeatherClimate();
+            fetchLiveWeather().then(refreshWeatherClimate);
         }
 
         function eventIconName(event) {
@@ -4639,6 +5143,28 @@
             return ITINERARY_TYPE_LABEL[event.type] || '';
         }
 
+        function eventReviewNotes(event) {
+            if (!REVIEW_MODE) return [];
+            const notes = collectEventList(event, '_review').slice();
+            const service = getService(event.serviceId);
+            if (service && Array.isArray(service._review)) notes.push(...service._review);
+            return notes;
+        }
+
+        function dayReviewNotes(day) {
+            if (!REVIEW_MODE || !day) return [];
+            const notes = [];
+            if (Array.isArray(day._review)) notes.push(...day._review);
+            const weather = day.weather || {};
+            if (Array.isArray(weather._review) && !resolvedWeather(day).live) notes.push(...weather._review);
+            return notes;
+        }
+
+        function reviewNotesHtml(notes) {
+            if (!REVIEW_MODE || !notes || !notes.length) return '';
+            return `<div class="day-review-notes">${notes.map((item) => `<p>${escapeHtml(item)}</p>`).join('')}</div>`;
+        }
+
         function eventHasSheet(event) {
             const service = getService(event.serviceId);
             return Boolean(
@@ -4646,7 +5172,7 @@
                 isOpenMeal(event) ||
                 eventOptions(event).length ||
                 (event.details && event.details.length) ||
-                (event.unresolved && event.unresolved.length) ||
+                eventReviewNotes(event).length ||
                 event.baggage ||
                 event.operationalCondition ||
                 (service && service.details && service.details.length) ||
@@ -4986,7 +5512,7 @@
                 blocks.push('<p class="itin-sheet-label">提醒</p>');
                 blocks.push(sheetList(notes.map((item) => escapeHtml(item))));
             }
-            const unresolved = collectEventList(event, 'unresolved');
+            const unresolved = eventReviewNotes(event);
             if (unresolved.length) {
                 blocks.push(`<p class="itin-unresolved">${unresolved.map((item) => escapeHtml(item)).join('<br>')}</p>`);
             }
@@ -5037,12 +5563,13 @@
         }
 
         function weatherIcon(day) {
-            return day.weather && day.weather.icon ? day.weather.icon : 'ph-thermometer';
+            const w = resolvedWeather(day);
+            if (w.icon) return w.icon;
+            return weatherIconName(w.condition, w.windKmh);
         }
 
         function renderDayHtml(day, progress) {
             const hidden = day.day === currentDays.a ? '' : ' hidden';
-            const reminder = weatherReminderText(day);
             const ctx = {};
             const items = flattenDayItems(day);
             const preItems = items.filter((row) => row.zone === 'pre');
@@ -5056,13 +5583,10 @@
                         </div>
                         <div class="day-climate mt-3">
                             <div class="day-climate-copy text-secondary">
-                                <p class="day-climate-temp text-kesizumi">
-                                    <i class="ph-duotone ${weatherIcon(day)} text-ohdo text-xl" aria-hidden="true"></i>
-                                    <span>${escapeHtml((day.weather && day.weather.text) || '')}</span>
-                                </p>
-                                ${reminder ? `<p class="day-climate-reminder">${escapeHtml(reminder)}</p>` : ''}
+                                ${weatherClimateInnerHtml(day)}
                             </div>
                         </div>
+                        ${reviewNotesHtml(dayReviewNotes(day))}
                     </div>
                     <div class="day-timeline">
                         <div class="timeline-list itin-list">
@@ -7246,6 +7770,57 @@
             });
         }
 
+        function formatCost(cost) {
+            if (!cost || cost.amount == null) return '';
+            const amount = Number(cost.amount);
+            const shown = Number.isFinite(amount) ? amount.toLocaleString('en-US') : cost.amount;
+            return [cost.currency || '', shown].filter(Boolean).join(' ');
+        }
+
+        /* 成本僅供主理人檢視，不對旅客顯示。 */
+        function bookingCostHtml(booking) {
+            if (!REVIEW_MODE || !booking) return '';
+            const text = formatCost(booking.cost);
+            return text
+                ? `<p class="overview-review-cost">成本 ${escapeHtml(text)}</p>`
+                : '<p class="overview-review-flag">成本未填</p>';
+        }
+
+        /* confirmed 卻沒有訂位代號：現場無法對帳。 */
+        function bookingRefHtml(booking) {
+            if (!booking) return '';
+            if (booking.confirmationNo) {
+                return `<p class="overview-booking-no">Booking #${escapeHtml(booking.confirmationNo)}</p>`;
+            }
+            if (!REVIEW_MODE) return '';
+            if (booking.status === 'confirmed') {
+                return '<p class="overview-review-flag">已標 confirmed，但沒有訂位代號</p>';
+            }
+            return '';
+        }
+
+        /* 離線憑證：現場必要資產，不得僅依賴外部連結。 */
+        function bookingAssetHtml(booking) {
+            const assets = (booking && booking.offlineAsset) || [];
+            if (!assets.length) {
+                return REVIEW_MODE ? '<p class="overview-review-flag">尚未附上離線憑證</p>' : '';
+            }
+            const figures = assets.map((asset) => `
+                <figure class="overview-asset">
+                    <img src="${escapeHtml(asset.src)}" alt="${escapeHtml(asset.label || '憑證')}" loading="lazy">
+                    ${asset.label ? `<figcaption>${escapeHtml(asset.label)}</figcaption>` : ''}
+                </figure>
+            `).join('');
+            return `
+                <details class="quiet-details overview-booking">
+                    <summary class="btn-outline is-quiet">
+                        <i class="ph ph-qr-code" aria-hidden="true"></i> 憑證
+                    </summary>
+                    <div class="overview-booking-body overview-asset-list">${figures}</div>
+                </details>
+            `;
+        }
+
         function overviewMetaRow(label, valueHtml) {
             if (!valueHtml) return '';
             return `<p><span class="overview-label">${escapeHtml(label)}</span>${valueHtml}</p>`;
@@ -7276,7 +7851,10 @@
                     ${overviewDoneControl(doneId, '往返機票')}
                 </div>
             `;
-            root.innerHTML = head + segments.map((seg) => {
+            const reviewHead = flightBooking
+                ? `${bookingRefHtml(flightBooking)}${bookingCostHtml(flightBooking)}${bookingAssetHtml(flightBooking)}`
+                : '';
+            root.innerHTML = head + reviewHead + segments.map((seg) => {
                 const depCode = [seg.departure.airportCode, seg.departure.terminal].filter(Boolean).join(' ');
                 const arrCode = [seg.arrival.airportCode, seg.arrival.terminal].filter(Boolean).join(' ');
                 const depWhen = [formatTripMd(seg.date), seg.departure.time].filter(Boolean).join(' ');
@@ -7314,9 +7892,7 @@
                 const emailHtml = place.email
                     ? `<a href="mailto:${escapeHtml(place.email)}">${escapeHtml(place.email)}</a>`
                     : '';
-                const bookingNo = booking.confirmationNo
-                    ? `<p class="overview-booking-no">Booking #${escapeHtml(booking.confirmationNo)}</p>`
-                    : '';
+                const bookingNo = bookingRefHtml(booking);
                 const mapHtml = place.mapQuery
                     ? `<a href="${escapeHtml(mapsSearchUrl(place.mapQuery))}" target="_blank" rel="noopener" class="btn-outline is-quiet"><i class="ph ph-map-pin" aria-hidden="true"></i> 地圖</a>`
                     : '';
@@ -7354,10 +7930,12 @@
                             ${overviewMetaRow('Email', emailHtml)}
                         </div>
                         ${bookingNo}
+                        ${bookingCostHtml(booking)}
                         <div class="overview-hotel-actions">
                             ${mapHtml}
                             ${siteHtml}
                             ${detailsHtml}
+                            ${bookingAssetHtml(booking)}
                         </div>
                     </div>
                 `;
@@ -7376,9 +7954,7 @@
                 const phone = place.phone || booking.phone;
                 const tel = place.tel || booking.tel || phone;
                 const phoneHtml = phone ? `<a href="tel:${escapeHtml(tel)}">${escapeHtml(phone)}</a>` : '';
-                const bookingNo = booking.confirmationNo
-                    ? `<p class="overview-booking-no">Booking #${escapeHtml(booking.confirmationNo)}</p>`
-                    : '';
+                const bookingNo = bookingRefHtml(booking);
                 const channelHtml = booking.channelLabel
                     ? (booking.href
                         ? `<a href="${escapeHtml(booking.href)}" target="_blank" rel="noopener">${escapeHtml(booking.channelLabel)}</a>`
@@ -7400,6 +7976,8 @@
                             ${overviewMetaRow('內容', summaryHtml)}
                         </div>
                         ${bookingNo}
+                        ${bookingCostHtml(booking)}
+                        ${bookingAssetHtml(booking)}
                     </div>
                 `;
             }).join('');
@@ -7414,12 +7992,22 @@
             bindOverviewDone();
         }
 
+        function mountReviewBanner() {
+            if (!REVIEW_MODE) return;
+            const bar = document.createElement('div');
+            bar.className = 'review-banner';
+            bar.textContent = '主理人檢查模式：顯示製作註記與成本，交付旅客前請以 ?review=0 關閉。';
+            document.body.prepend(bar);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            mountReviewBanner();
             initExpenses();
             initPrepChecklist();
             initSouvenirGuide();
             renderOverview();
             renderItinerary();
+            initWeatherForecast();
             initDefaultDay();
             syncMobileNavSpace();
 
