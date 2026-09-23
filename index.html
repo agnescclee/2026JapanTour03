@@ -2422,24 +2422,65 @@
         }
 
         .overview-done {
+            position: relative;
             display: inline-flex;
             align-items: center;
             flex-shrink: 0;
-            margin: -0.35rem -0.35rem 0 0;
+            gap: 0.1rem;
+            margin: -0.2rem -0.35rem 0 0;
+            padding: 0.2rem 0.35rem;
             color: #6b6560;
             font-size: var(--text-sm);
             font-weight: var(--weight-medium);
             line-height: var(--leading-tight);
             cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
-        .overview-done .prep-check-wrap {
-            width: 2.5rem;
-            height: 2.5rem;
+        .overview-done input {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            margin: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .overview-done .prep-check {
+            position: relative;
+            left: auto;
+            top: auto;
+            transform: none;
+            flex-shrink: 0;
+        }
+
+        .overview-done:has(input:checked) .prep-check {
+            background: var(--color-benitobi);
+            border-color: var(--color-benitobi);
+            color: var(--color-gofun);
         }
 
         .overview-done-text {
+            position: relative;
             padding-right: 0.15rem;
+        }
+
+        .overview-status {
+            display: inline-block;
+            margin-left: 0.4rem;
+            font-size: var(--text-xs);
+            font-weight: var(--weight-medium);
+            line-height: var(--leading-tight);
+            letter-spacing: 0.06em;
+        }
+
+        .overview-status.is-pending {
+            color: var(--color-benitobi);
+        }
+
+        .overview-status.is-confirmed {
+            color: var(--color-stay);
         }
 
         .overview-flight-top {
@@ -3154,7 +3195,8 @@
            Overview is a presentation layer over these records. */
         const TRIP_ROUTE = [
             { name: '松山', kind: 'fly', meta: '長榮 BR192' },
-            { name: '會津若松', kind: 'stay', meta: '新幹線＋磐越西線' },
+            { name: '郡山', kind: 'stay', meta: '東北新幹線' },
+            { name: '會津若松', kind: 'stay', meta: '磐越西線' },
             { name: '蘆之牧溫泉', kind: 'stay', meta: 'ジャンボ包車' },
             { name: '裏磐梯', kind: 'stay', meta: '磐越西線＋免費接駁' },
             { name: '東京・濱松町', kind: 'stay', meta: '新幹線（郡山→上野）' },
@@ -3162,6 +3204,18 @@
         ];
 
         const PLACES = [
+            {
+                id: 'place-daiwa-koriyama',
+                type: 'accommodation',
+                name: 'ダイワロイネットホテル郡山駅前',
+                phone: '024-927-4855',
+                tel: '+81249274855',
+                address: '〒963-8002 福島県郡山市駅前1-6-10',
+                email: '',
+                website: 'https://www.daiwaroynet.jp/koriyamaekimae/',
+                mapQuery: 'ダイワロイネットホテル郡山駅前',
+                access: 'JR 郡山站西口徒歩約 1 分'
+            },
             {
                 id: 'place-washington',
                 type: 'accommodation',
@@ -3171,7 +3225,8 @@
                 address: '〒965-0024 福島県会津若松市白虎町201',
                 email: '',
                 website: 'https://washington-hotels.jp/aizuwakamatsu/',
-                mapQuery: '会津若松ワシントンホテル'
+                mapQuery: '会津若松ワシントンホテル',
+                access: '會津若松站徒歩約 2 分'
             },
             {
                 id: 'place-ookawaso',
@@ -3251,12 +3306,31 @@
                 segmentIds: ['seg-br192', 'seg-br191']
             },
             {
+                id: 'booking-daiwa-koriyama',
+                type: 'accommodation',
+                placeId: 'place-daiwa-koriyama',
+                checkIn: '2026-11-01',
+                checkOut: '2026-11-02',
+                checkInTime: '14:00',
+                checkoutTime: '11:00',
+                meals: '早餐自助可加購，大人 ¥1,700（2F ヴィスコンティ 06:00–10:00）',
+                status: 'to-book',
+                note: '推薦入住，尚未預訂。',
+                confirmationNo: '',
+                cost: null,
+                offlineAsset: []
+            },
+            {
                 id: 'booking-washington',
                 type: 'accommodation',
                 placeId: 'place-washington',
-                checkIn: '2026-11-01',
+                checkIn: '2026-11-02',
                 checkOut: '2026-11-03',
-                status: 'confirmed',
+                checkInTime: '15:00',
+                checkoutTime: '11:00',
+                meals: '不含早餐',
+                status: 'to-book',
+                note: '原訂 11/01–11/03 連泊，改為 11/02 一晚，請改訂。',
                 confirmationNo: '',
                 cost: null,
                 offlineAsset: []
@@ -3278,7 +3352,7 @@
                 placeId: 'place-lakeresort',
                 checkIn: '2026-11-04',
                 checkOut: '2026-11-06',
-                status: 'confirmed',
+                status: 'to-book',
                 confirmationNo: '',
                 cost: null,
                 offlineAsset: []
@@ -3289,7 +3363,7 @@
                 placeId: 'place-monday',
                 checkIn: '2026-11-06',
                 checkOut: '2026-11-07',
-                status: 'confirmed',
+                status: 'to-book',
                 confirmationNo: '',
                 cost: null,
                 offlineAsset: []
@@ -3304,7 +3378,7 @@
                 status: 'to-book',
                 channel: 'phone',
                 channelLabel: '電話預約',
-                note: '華盛頓飯店 → 早戶碼頭 → 道の駅みしま宿 → 柳津町 → 返回飯店',
+                note: '會津若松站 → 早戶碼頭 → 道の駅みしま宿 → 柳津町 → 返回華盛頓飯店',
                 confirmationNo: '',
                 cost: null,
                 offlineAsset: []
@@ -3484,17 +3558,17 @@
                         location: '台北',
                         low: null, high: 24, unit: 'C',
                         condition: 'sunny',
-                        advice: '抵達會津後早晚偏冷，建議洋蔥式穿搭。',
-                        secondary: { location: '會津若松', low: 8, high: 16, condition: 'partly-cloudy' },
+                        advice: '抵達郡山後早晚偏冷，建議洋蔥式穿搭。',
+                        secondary: { location: '郡山', low: 8, high: 16, condition: 'partly-cloudy' },
                         source: 'seasonal-average',
                         freshness: 'far',
                         needsVerification: true,
                         verifiedAt: null,
-                        forecastPlaces: [{ id: 'taipei' }, { id: 'aizu' }]
+                        forecastPlaces: [{ id: 'taipei' }, { id: 'koriyama' }]
                     },
                     _review: ['Breakfast handling 未記載（清晨出發、07:20 起飛）。'],
                     startAnchor: { kind: 'airport', placeId: 'place-hnd-t3', flightSegmentId: 'seg-br192', role: 'arrival' },
-                    endAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington', time: '21:10' },
+                    endAnchor: { kind: 'accommodation', placeId: 'place-daiwa-koriyama', bookingId: 'booking-daiwa-koriyama', time: '19:45' },
                     preBoundary: [
                         {
                             id: 'd1-flight-br192',
@@ -3560,59 +3634,69 @@
                             mode: 'shinkansen',
                             travelMode: 'transit',
                             serviceName: 'やまびこ 145 號　指定席',
-                            price: { amount: 9100, currency: 'JPY', approx: true },
+                            price: { amount: 8450, currency: 'JPY', approx: true },
                             bookingId: 'booking-train-outbound',
                             details: [
                                 '東京站 20–23 月台。車廂後方有大行李放置處。',
-                                '全段預估每人約 ¥9,100：JR 乘車券（東京–會津若松）¥5,170；新幹線指定席特急券（東京–郡山）¥3,930。磐越西線普通車已含在乘車券內。',
+                                '預估每人約 ¥8,450：JR 乘車券（東京–郡山）¥4,180；新幹線指定席特急券 ¥4,270。',
                                 '乘車前 1 個月可於 JR 東日本「えきねっと」預約新幹線 e-Ticket，常有トクだ値 10%～30% 早鳥優惠。'
                             ]
                         },
                         {
+                            id: 'd1-walk-hotel',
+                            type: 'movement',
+                            startTime: '17:45',
+                            fromPlaceId: 'place-koriyama-station',
+                            toPlaceId: 'place-daiwa-koriyama',
+                            mode: 'walk',
+                            travelMode: 'walking',
+                            duration: '約 1 分',
+                            details: [
+                                'JR 郡山站西口出站即達。Check-in 14:00 起。',
+                                '先放行李進房，再走回車站共構的 S-PAL 吃晚餐。'
+                            ]
+                        },
+                        {
+                            id: 'd1-walk-spal',
+                            type: 'movement',
+                            startTime: '18:15',
+                            fromPlaceId: 'place-daiwa-koriyama',
+                            toPlaceId: 'place-spal-koriyama',
+                            mode: 'walk',
+                            travelMode: 'walking',
+                            duration: '約 2 分'
+                        },
+                        {
                             id: 'd1-dinner-koriyama',
                             type: 'meal',
-                            startTime: '17:34',
-                            endTime: '19:20',
+                            startTime: '18:15',
+                            endTime: '19:30',
                             placeId: 'place-spal-koriyama',
                             meal: { slot: 'dinner', resolution: 'recommendations' },
                             price: { amount: 2000, currency: 'JPY', approx: true },
                             options: [
-                                { kind: 'restaurant', placeId: 'place-wako-koriyama', name: 'とんかつ和幸', note: 'S-PAL 2F，11:00–21:30，晚餐約 ¥1,450～2,330。' }
+                                { kind: 'restaurant', placeId: 'place-wako-koriyama', name: 'とんかつ和幸', note: 'S-PAL 2F，11:00–21:30，晚餐約 ¥1,450～2,330。' },
+                                { kind: 'restaurant', name: '牛舌料理', note: '站內餐廳街依當日菜單選擇。' }
                             ],
                             details: [
-                                '出新幹線改札即達。',
-                                '牛舌可在站內餐廳街依當日菜單選擇。',
-                                '1F 成城石井（10:00–21:00）與伴手禮區可買福島當季果物、點心，帶上晚班火車。'
+                                '全家走到車站共構的 S-PAL。',
+                                '1F 成城石井（10:00–21:00）可買福島當季水果、點心。',
+                                '吃飽買完就回飯店洗澡睡覺。'
                             ],
                             _review: ['晚餐僅有 1 家點名餐廳，尚不足以列出 2–3 家推薦。']
                         },
                         {
-                            id: 'd1-banetsu',
+                            id: 'd1-walk-hotel-return',
                             type: 'movement',
-                            startTime: '19:40',
-                            endTime: '20:58',
-                            fromPlaceId: 'place-koriyama-station',
-                            toPlaceId: 'place-aizu-station',
-                            mode: 'train',
-                            travelMode: 'transit',
-                            serviceName: 'JR 磐越西線　普通',
-                            price: { amount: 1230, currency: 'JPY', approx: true },
-                            coverage: { label: '已含乘車券' },
-                            details: [
-                                '郡山 1 號月台。此區間為普通車，不需加購特急券。',
-                                '東京出發時已買到會津若松的乘車券。若現場單買，郡山→會津若松約 ¥1,230（IC 亦可）。'
-                            ],
-                            notes: ['回新幹線改札後轉在來線 1 號月台。有電梯，免出站。']
-                        },
-                        {
-                            id: 'd1-walk-hotel',
-                            type: 'movement',
-                            startTime: '21:10',
-                            fromPlaceId: 'place-aizu-station',
-                            toPlaceId: 'place-washington',
+                            startTime: '19:30',
+                            fromPlaceId: 'place-spal-koriyama',
+                            toPlaceId: 'place-daiwa-koriyama',
                             mode: 'walk',
                             travelMode: 'walking',
-                            duration: '約 2 分'
+                            duration: '約 2 分',
+                            details: [
+                                '從 S-PAL 走回西口飯店。早早洗澡睡覺。'
+                            ]
                         }
                     ]
                 },
@@ -3631,23 +3715,82 @@
                         verifiedAt: null,
                         forecastPlaces: [{ id: 'okuaizu' }]
                     },
-                    startAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington' },
+                    startAnchor: { kind: 'accommodation', placeId: 'place-daiwa-koriyama', bookingId: 'booking-daiwa-koriyama' },
                     endAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington', time: '17:15' },
                     timeline: [
                         {
                             id: 'd2-breakfast',
                             type: 'meal',
-                            timeLabel: '早餐',
-                            meal: { slot: 'breakfast', resolution: 'unresolved' },
-                            areaLabel: '會津若松',
-                            notes: ['大行李留在會津若松客房，輕裝出遊。'],
-                            _review: ['華盛頓飯店未記載早餐處理方式。']
+                            startTime: '07:00',
+                            endTime: '08:00',
+                            placeId: 'place-daiwa-koriyama',
+                            title: '飯店早餐',
+                            meal: { slot: 'breakfast', resolution: 'restaurant' },
+                            price: { amount: 1700, currency: 'JPY' },
+                            details: [
+                                '2F レストラン「ヴィスコンティ」和洋自助。06:00–10:00（L.O. 09:45）。',
+                                '大人 ¥1,700。悠哉吃完再退房，大行李一起帶走。'
+                            ]
+                        },
+                        {
+                            id: 'd2-walk-station',
+                            type: 'movement',
+                            startTime: '08:15',
+                            fromPlaceId: 'place-daiwa-koriyama',
+                            toPlaceId: 'place-koriyama-station',
+                            mode: 'walk',
+                            travelMode: 'walking',
+                            duration: '約 1 分',
+                            details: [
+                                '西口步行進站，直上磐越西線月台。'
+                            ],
+                            notes: [
+                                '郡山是磐越西線起點站。提早 10–15 分鐘上月台排隊，大行李可放靠門邊，也比較有位子坐。'
+                            ]
+                        },
+                        {
+                            id: 'd2-banetsu',
+                            type: 'movement',
+                            startTime: '08:30',
+                            endTime: '09:45',
+                            fromPlaceId: 'place-koriyama-station',
+                            toPlaceId: 'place-aizu-station',
+                            mode: 'train',
+                            travelMode: 'transit',
+                            serviceName: 'JR 磐越西線　快速',
+                            price: { amount: 1230, currency: 'JPY', approx: true },
+                            details: [
+                                '參考班次：08:29 郡山發 → 09:41 會津若松著（快速，約 72 分）。',
+                                '郡山 1 號月台始發。此區間為快速／普通車，不需加購特急券。IC（Suica / PASMO）可用。'
+                            ],
+                            notes: [
+                                '務必 08:15 前到月台。起點站先上車，才能把大行李放靠門、有位子坐。'
+                            ]
+                        },
+                        {
+                            id: 'd2-luggage',
+                            type: 'service',
+                            subtype: 'luggage_storage',
+                            serviceId: 'svc-aizu-locker',
+                            action: 'dropoff',
+                            startTime: '09:45',
+                            endTime: '10:00',
+                            title: '寄放行李',
+                            placeId: 'place-aizu-station',
+                            options: [
+                                { name: '會津若松站置物櫃', note: '改札外三處。小 ¥300、中 ¥400–600、大 ¥600–800。只收硬貨。晚上先回車站取行李，再步行回飯店。' },
+                                { name: '華盛頓飯店櫃台', note: '出站步行約 2 分。15:00 才能入住，先寄放櫃台再折回車站。晚上包車直送飯店，最省事。' }
+                            ],
+                            details: [
+                                '車站或飯店都可以寄。寄完折回會津若松站，10:00 ジャンボ在車站上車。'
+                            ],
+                            notes: ['記得留硬幣，以備寄車站置物櫃。']
                         },
                         {
                             id: 'd2-charter-hayato',
                             type: 'movement',
                             startTime: '10:00',
-                            fromPlaceId: 'place-washington',
+                            fromPlaceId: 'place-aizu-station',
                             toPlaceId: 'place-hayato',
                             mode: 'charter',
                             travelMode: 'driving',
@@ -3655,7 +3798,7 @@
                             bookingId: 'booking-jumbo-day2',
                             details: [
                                 '普通計程車最多 4 人。五人請訂ジャンボ（定員 9 名）。10:00–17:15 約 7.5–8 小時。',
-                                '飯店上車，沿只見川先到最遠的早戶碼頭，回程再順路停點。'
+                                '會津若松站上車，沿只見川先到最遠的早戶碼頭，回程再順路停點。'
                             ]
                         },
                         {
@@ -4833,6 +4976,7 @@
         };
         const WEATHER_PLACES = {
             tokyo: { label: '東京', lat: 35.6812, lon: 139.7671, href: 'https://tenki.jp/search/?keyword=%E6%9D%B1%E4%BA%AC' },
+            koriyama: { label: '郡山', lat: 37.4005, lon: 140.3596, href: 'https://tenki.jp/search/?keyword=%E9%83%A1%E5%B1%B1' },
             aizu: { label: '會津若松', lat: 37.4947, lon: 139.9298, href: 'https://tenki.jp/search/?keyword=%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE' },
             okuaizu: { label: '奧會津', lat: 37.4703, lon: 139.6444, href: 'https://tenki.jp/search/?keyword=%E4%B8%89%E5%B3%B6%E7%94%BA%20%E7%A6%8F%E5%B3%B6' },
             ouchi: { label: '大內宿', lat: 37.3347, lon: 139.8606, href: 'https://tenki.jp/search/?keyword=%E4%B8%8B%E9%83%B7%E7%94%BA%20%E5%A4%A7%E5%86%85%E5%AE%BF' },
@@ -6530,7 +6674,7 @@
                 title: '準備手機交通 IC',
                 note: '先準備 Suica 或 PASMO（手機版即可）。磐越西線可以用。',
                 source: 'itinerary',
-                itineraryRef: 'day1-local-rail',
+                itineraryRef: 'day2-local-rail',
                 responsible: 'traveler',
                 requiresAdvanceAction: true
             },
@@ -7787,6 +7931,10 @@
         }
 
         const OVERVIEW_DONE_KEY = 'fukushima_trip_overview_done';
+        const OVERVIEW_DONE_DEFAULTS = {
+            'booking-eva-roundtrip': true,
+            'booking-ookawaso': true
+        };
         let overviewDone = {};
 
         function loadOverviewDone() {
@@ -7804,20 +7952,34 @@
         }
 
         function isOverviewDone(id) {
-            return overviewDone[id] === true;
+            if (Object.prototype.hasOwnProperty.call(overviewDone, id)) {
+                return overviewDone[id] === true;
+            }
+            return OVERVIEW_DONE_DEFAULTS[id] === true;
         }
 
         function overviewDoneControl(id, label) {
             const done = isOverviewDone(id);
             return `
                 <label class="overview-done">
-                    <span class="prep-check-wrap">
-                        <input type="checkbox" data-overview-done="${escapeHtml(id)}" ${done ? 'checked' : ''} aria-label="已處理：${escapeHtml(label)}">
-                        <span class="prep-check" aria-hidden="true"><i class="ph ph-check"></i></span>
-                    </span>
+                    <input type="checkbox" data-overview-done="${escapeHtml(id)}" ${done ? 'checked' : ''} aria-label="已處理：${escapeHtml(label)}">
+                    <span class="prep-check" aria-hidden="true"><i class="ph ph-check"></i></span>
                     <span class="overview-done-text">已處理</span>
                 </label>
             `;
+        }
+
+        function overviewStatusHtml(id) {
+            const done = isOverviewDone(id);
+            return `<span class="overview-status ${done ? 'is-confirmed' : 'is-pending'}" data-overview-status="${escapeHtml(id)}">${done ? '已確認' : '待訂'}</span>`;
+        }
+
+        function syncOverviewStatus(id, done) {
+            document.querySelectorAll('[data-overview-status="' + id + '"]').forEach((el) => {
+                el.textContent = done ? '已確認' : '待訂';
+                el.classList.toggle('is-confirmed', done);
+                el.classList.toggle('is-pending', !done);
+            });
         }
 
         function bindOverviewDone() {
@@ -7827,8 +7989,10 @@
             root.addEventListener('change', (event) => {
                 const input = event.target.closest('input[data-overview-done]');
                 if (!input) return;
-                overviewDone[input.dataset.overviewDone] = input.checked;
+                const done = !!input.checked;
+                overviewDone[input.dataset.overviewDone] = done;
                 saveOverviewDone();
+                syncOverviewStatus(input.dataset.overviewDone, done);
             });
         }
 
@@ -7909,7 +8073,7 @@
             const doneId = flightBooking ? flightBooking.id : 'booking-eva-roundtrip';
             const head = `
                 <div class="overview-flight-top">
-                    <p class="overview-arrange-name">往返機票</p>
+                    <p class="overview-arrange-name">往返機票 ${overviewStatusHtml(doneId)}</p>
                     ${overviewDoneControl(doneId, '往返機票')}
                 </div>
             `;
@@ -7954,6 +8118,13 @@
                 const emailHtml = place.email
                     ? `<a href="mailto:${escapeHtml(place.email)}">${escapeHtml(place.email)}</a>`
                     : '';
+                const accessHtml = place.access ? `<span>${escapeHtml(place.access)}</span>` : '';
+                const hoursBits = [
+                    booking.checkInTime ? '入住 ' + booking.checkInTime : '',
+                    booking.checkoutTime ? '退房 ' + booking.checkoutTime : ''
+                ].filter(Boolean);
+                const hoursHtml = hoursBits.length ? `<span>${escapeHtml(hoursBits.join('　'))}</span>` : '';
+                const noteHtml = booking.note ? `<span>${escapeHtml(booking.note)}</span>` : '';
                 const bookingNo = bookingRefHtml(booking);
                 const mapHtml = place.mapQuery
                     ? `<a href="${escapeHtml(mapsSearchUrl(place.mapQuery))}" target="_blank" rel="noopener" class="btn-outline is-quiet"><i class="ph ph-map-pin" aria-hidden="true"></i> 地圖</a>`
@@ -7965,6 +8136,7 @@
                 if (booking.plan) detailRows.push(overviewMetaRow('プラン', `<span>${escapeHtml(booking.plan)}</span>`));
                 if (booking.room) detailRows.push(overviewMetaRow('お部屋', `<span>${escapeHtml(booking.room)}</span>`));
                 if (booking.meals) detailRows.push(overviewMetaRow('お食事', `<span>${escapeHtml(booking.meals)}</span>`));
+                if (booking.checkInTime) detailRows.push(overviewMetaRow('チェックイン', `<span>${escapeHtml(booking.checkInTime)}</span>`));
                 if (booking.checkoutTime) detailRows.push(overviewMetaRow('チェックアウト', `<span>${escapeHtml(booking.checkoutTime)}</span>`));
                 if (booking.rooms) detailRows.push(overviewMetaRow('部屋数', `<span>${escapeHtml(booking.rooms)}</span>`));
                 if (booking.occupancy) detailRows.push(overviewMetaRow('部屋割り', `<span>${escapeHtml(booking.occupancy)}</span>`));
@@ -7981,7 +8153,7 @@
                     <div class="overview-hotel">
                         <div class="overview-hotel-top">
                             <div>
-                                <p class="overview-hotel-when">${escapeHtml(when)}</p>
+                                <p class="overview-hotel-when">${escapeHtml(when)} ${overviewStatusHtml(booking.id)}</p>
                                 <h3 class="overview-hotel-name">${escapeHtml(place.name || '')}</h3>
                             </div>
                             ${overviewDoneControl(booking.id, place.name || '住宿')}
@@ -7989,7 +8161,10 @@
                         <div class="overview-hotel-meta">
                             ${overviewMetaRow('電話', phoneHtml)}
                             ${overviewMetaRow('地址', addressHtml)}
+                            ${overviewMetaRow('交通', accessHtml)}
+                            ${overviewMetaRow('時間', hoursHtml)}
                             ${overviewMetaRow('Email', emailHtml)}
+                            ${overviewMetaRow('備註', noteHtml)}
                         </div>
                         ${bookingNo}
                         ${bookingCostHtml(booking)}
@@ -8027,7 +8202,7 @@
                     <div class="overview-reserve">
                         <div class="overview-reserve-top">
                             <div>
-                                <p class="overview-reserve-when">${escapeHtml(formatTripMd(booking.date))}</p>
+                                <p class="overview-reserve-when">${escapeHtml(formatTripMd(booking.date))} ${overviewStatusHtml(booking.id)}</p>
                                 <h3 class="overview-reserve-name">${escapeHtml(booking.title || place.name || '')}</h3>
                             </div>
                             ${overviewDoneControl(booking.id, booking.title || place.name || '預訂')}
