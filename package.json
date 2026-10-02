@@ -2,9 +2,13 @@
   "name": "2026-japan-tour-handbook",
   "private": true,
   "scripts": {
-    "build:css": "tailwindcss -c tailwind.config.js -i assets/tailwind.input.css -o assets/tailwind.css --minify"
+    "build:css": "tailwindcss -c tailwind.config.js -i assets/tailwind.input.css -o assets/tailwind.css --minify",
+    "build:crypto": "node tools/build-booking-crypto.mjs"
   },
   "devDependencies": {
+    "@noble/ciphers": "^2.4.0",
+    "@noble/hashes": "^2.4.0",
+    "esbuild": "^0.28.2",
     "tailwindcss": "^3.4.17"
   }
 }

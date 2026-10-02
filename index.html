@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>秋醉福島・慢活七日｜極致舒適慢活版</title>
+    <meta name="theme-color" content="#FCFAF2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="秋醉福島">
+    <!-- 發布新版時遞增。離線包用這段辨識是否已有更新。 -->
+    <meta name="trip-build" content="2026-10-02.1">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icons/icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <!-- Local Tailwind / icons so the handbook still works on a plane. -->
     <link rel="stylesheet" href="assets/tailwind.css">
     <link rel="stylesheet" href="assets/icons/regular/style.css">
@@ -2425,51 +2433,6 @@
             gap: 0.75rem;
         }
 
-        .overview-done {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            flex-shrink: 0;
-            gap: 0.1rem;
-            margin: -0.2rem -0.35rem 0 0;
-            padding: 0.2rem 0.35rem;
-            color: #6b6560;
-            font-size: var(--text-sm);
-            font-weight: var(--weight-medium);
-            line-height: var(--leading-tight);
-            cursor: pointer;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-
-        .overview-done input {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            margin: 0;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .overview-done .prep-check {
-            position: relative;
-            left: auto;
-            top: auto;
-            transform: none;
-            flex-shrink: 0;
-        }
-
-        .overview-done:has(input:checked) .prep-check {
-            background: var(--color-benitobi);
-            border-color: var(--color-benitobi);
-            color: var(--color-gofun);
-        }
-
-        .overview-done-text {
-            position: relative;
-            padding-right: 0.15rem;
-        }
-
         .overview-status {
             display: inline-block;
             margin-left: 0.4rem;
@@ -2586,8 +2549,15 @@
             min-width: 0;
         }
 
-        .overview-hotel-actions .overview-booking[open] {
-            flex: 1 1 100%;
+        /* 展開時只把內容換到下一行，摘要按鈕留在原位。 */
+        .overview-hotel-actions .overview-booking {
+            display: contents;
+        }
+
+        .overview-hotel-actions .overview-booking::details-content,
+        .overview-hotel-actions .overview-booking-body {
+            flex: 1 0 100%;
+            order: 1;
         }
 
         .overview-booking > summary.btn-outline {
@@ -2608,8 +2578,7 @@
         }
 
         .overview-booking[open] > summary.btn-outline::after {
-            transform: rotate(-135deg);
-            margin-top: 0.15rem;
+            transform: translateY(0.15rem) rotate(-135deg);
         }
 
         .overview-booking-body {
@@ -2635,6 +2604,175 @@
 
         .overview-booking-body .overview-label {
             padding-top: 0.05rem;
+        }
+
+        .secret-unlock-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            min-height: 2.75rem;
+            padding: 0.15rem 0;
+            color: var(--color-benitobi);
+            font-size: var(--text-sm);
+            font-weight: var(--weight-medium);
+            line-height: var(--leading-tight);
+            text-align: left;
+        }
+
+        .secret-unlock-btn i {
+            font-size: 1.2rem;
+        }
+
+        .secret-form {
+            display: grid;
+            gap: 0.55rem;
+            max-width: 24rem;
+        }
+
+        .secret-form-label {
+            display: grid;
+            gap: 0.35rem;
+            color: #8a8178;
+            font-size: var(--text-xs);
+            font-weight: var(--weight-medium);
+        }
+
+        .secret-form-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .secret-form button:disabled {
+            opacity: 0.55;
+        }
+
+        .overview-booking-body .secret-form-error {
+            display: block;
+            margin: 0;
+            color: var(--color-benitobi);
+            font-size: var(--text-sm);
+            line-height: var(--leading-tight);
+        }
+
+        .overview-booking-body .secret-form-error[hidden] {
+            display: none;
+        }
+
+        .secret-value {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .offline-card {
+            grid-column: 1 / -1;
+            padding: 0.8rem 0.95rem;
+        }
+
+        @media (min-width: 640px) {
+            .offline-card {
+                padding: 0.9rem 1.05rem;
+            }
+        }
+
+        .offline-row {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            min-width: 0;
+        }
+
+        .offline-card .item-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin: 0;
+            font-size: var(--text-md);
+            white-space: nowrap;
+        }
+
+        .offline-card .item-title i {
+            font-size: 1.15rem;
+            color: var(--color-ainezumi);
+        }
+
+        .offline-status {
+            margin: 0;
+            color: var(--color-stay);
+            font-size: var(--text-sm);
+            font-weight: var(--weight-medium);
+            line-height: var(--leading-tight);
+            white-space: nowrap;
+        }
+
+        .offline-help {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.75rem;
+            height: 1.75rem;
+            margin-left: auto;
+            color: #8a8178;
+            font-size: 1.15rem;
+            flex: 0 0 auto;
+        }
+
+        .offline-help[aria-expanded="true"] {
+            color: var(--color-benitobi);
+        }
+
+        .offline-actions {
+            margin-top: 0.28rem;
+        }
+
+        .offline-saved-at {
+            margin: 0;
+            color: #8a8178;
+            font-size: var(--text-xs);
+            line-height: var(--leading-tight);
+        }
+
+        .offline-card .offline-save {
+            min-height: 2rem;
+            min-width: 0;
+            margin-left: auto;
+            padding: 0.15rem 0.75rem;
+            font-size: var(--text-sm);
+            flex: 0 0 auto;
+        }
+
+        .offline-card .offline-save:disabled {
+            opacity: 0.55;
+        }
+
+        .offline-hint,
+        .offline-help-text,
+        .offline-link-note {
+            margin: 0.4rem 0 0;
+            font-size: var(--text-xs);
+            line-height: var(--leading-relaxed);
+        }
+
+        .offline-hint {
+            color: #6b6560;
+        }
+
+        .offline-hint.is-error,
+        .offline-link-note {
+            color: var(--color-benitobi);
+        }
+
+        .offline-help-text {
+            color: #6b6560;
+        }
+
+        .offline-status[hidden],
+        .offline-saved-at[hidden],
+        .offline-hint[hidden],
+        .offline-help-text[hidden],
+        .offline-link-note[hidden],
+        .offline-save[hidden] {
+            display: none;
         }
 
     </style>
@@ -2761,6 +2899,25 @@
              TAB 2: OVERVIEW (路線・航班・住宿・其他預訂)
              =================================================================== -->
         <section id="content-info" class="hidden animate-fade-in grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 lg:items-start">
+            <article class="page-sheet offline-card" id="offline-card">
+                <div class="offline-row">
+                    <h2 class="item-title">
+                        <i class="ph ph-download-simple" aria-hidden="true"></i>
+                        離線行程
+                    </h2>
+                    <p id="offline-status" class="offline-status" hidden></p>
+                    <button type="button" id="offline-help" class="offline-help" aria-expanded="false" aria-controls="offline-help-text" aria-label="說明">
+                        <i class="ph ph-info" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="offline-row offline-actions">
+                    <p id="offline-saved-at" class="offline-saved-at" hidden></p>
+                    <button type="button" id="offline-save" class="btn-primary offline-save">儲存</button>
+                </div>
+                <p id="offline-hint" class="offline-hint" role="status" hidden></p>
+                <p id="offline-help-text" class="offline-help-text" hidden>出發前儲存行程，並用飛航模式確認能開啟。建議加入手機主畫面。地圖、天氣及外部網站需網路。</p>
+                <p id="offline-link-note" class="offline-link-note" hidden></p>
+            </article>
             <article class="page-sheet overview-block">
                 <h2 class="item-title">
                     <i class="ph ph-path text-ainezumi" aria-hidden="true"></i>
@@ -3130,6 +3287,7 @@
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
+    <script src="assets/booking-crypto-fallback.js"></script>
     <script>
         /* Review Mode：主理人製作期視圖。
            以 ?review=1 開啟、?review=0 關閉，狀態記於 localStorage。
@@ -3348,7 +3506,18 @@
                 status: 'confirmed',
                 confirmationNo: '',
                 cost: null,
-                offlineAsset: []
+                offlineAsset: [],
+                /* 私人訂房明細。只放 AES-GCM 密文，不含明文或 passphrase。 */
+                secret: {
+                    v: 1,
+                    alg: 'AES-GCM',
+                    kdf: 'PBKDF2',
+                    hash: 'SHA-256',
+                    iterations: 600000,
+                    salt: 'EWYDsu2nfMPBDoz3mWqsZA==',
+                    iv: 'cUZWa4fFQOnwV+B/',
+                    data: 'unW80VK2altexAXvOHAVm6Ib3OZXHRkt0mDEAegDUQZ/CLO1fPA0ZunGKSIyA6RetBEVmuar9NPZ88EwqPsHF1u2vSz58/qdy06972mC1OHiXcQO676dhEmpokwgPslVB5e2e97KHedYjwyJ+ZFs3omXmeAlQsi6rq3QY41AmaVxJS1SiJuSrfAZwjaLxPoWkfIbwjnu08eU/vOCIhZXmMwHl/LAWIs8YYYlj5xRRE5RLkegkkIfWqi+fKmEYEapYSTsSuAVYkX3g1e/ODTQCJg2UQIVO5FFsRgGRoouiOsgzJNQ2WEaqSBT78a4k/xMa7AbNar0rOr+0yY9Z36bqRYoX+qAtj2k0fzgetnStwr7is8mH12iOK4Ykj478Xeu2/mfo5vM07x54pJDrCXZIDs3xsit0fJblDT//wANjCf9DsbHKEdEhbALU2Oacfuk0+6YP/8T9zBw3Km8x/UdVbI8F9Iyxo3ZIinuHe8d57d10O4qFWafyZOVV5uH6ePzjRmC8ezURTe2t2Kgscbc3F4JhDV4kyjaOmjseTtDB44n/SKr/Fq+gsGJSCtiCd+N4azPOAWirIEDNHeu2+e9stFVhphaYEAIGHNUqN8doj8i3ls3Iq5swMbMk3NGkzNIpLnGTLv0Rk6quRoSGYcdeX6tXhNFlIcDeDkP7dMI2RVutgK9x3rqwYLpYYpMICkeoDDQN1UAgkfJjIq4cJUvqSlmiu1NwG6rz3M+Rk+nJDHmstYfgeMUGsohIwdqBV5M+aDfE9LJLIcLNFGA9pEE/gYm5YwsztmUKGCEO6Gy938G64e5rH1u1DceMuRJ63KyRY3FllpXpf9sP3Wr8Xq+zF5dwuRyOK4nwHBuBwUAo271YVHg44OAOBTHzBQ7IGXXOk3nVSauPc+jXv28HBncur9prQ8a'
+                }
             },
             {
                 id: 'booking-lakeresort',
@@ -7934,70 +8103,10 @@
             return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
         }
 
-        const OVERVIEW_DONE_KEY = 'fukushima_trip_overview_done';
-        const OVERVIEW_DONE_DEFAULTS = {
-            'booking-eva-roundtrip': true,
-            'booking-ookawaso': true
-        };
-        let overviewDone = {};
-
-        function loadOverviewDone() {
-            try {
-                const raw = localStorage.getItem(OVERVIEW_DONE_KEY);
-                const parsed = raw ? JSON.parse(raw) : {};
-                overviewDone = parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
-            } catch (error) {
-                overviewDone = {};
-            }
-        }
-
-        function saveOverviewDone() {
-            localStorage.setItem(OVERVIEW_DONE_KEY, JSON.stringify(overviewDone));
-        }
-
-        function isOverviewDone(id) {
-            if (Object.prototype.hasOwnProperty.call(overviewDone, id)) {
-                return overviewDone[id] === true;
-            }
-            return OVERVIEW_DONE_DEFAULTS[id] === true;
-        }
-
-        function overviewDoneControl(id, label) {
-            const done = isOverviewDone(id);
-            return `
-                <label class="overview-done">
-                    <input type="checkbox" data-overview-done="${escapeHtml(id)}" ${done ? 'checked' : ''} aria-label="已處理：${escapeHtml(label)}">
-                    <span class="prep-check" aria-hidden="true"><i class="ph ph-check"></i></span>
-                    <span class="overview-done-text">已處理</span>
-                </label>
-            `;
-        }
-
         function overviewStatusHtml(id) {
-            const done = isOverviewDone(id);
-            return `<span class="overview-status ${done ? 'is-confirmed' : 'is-pending'}" data-overview-status="${escapeHtml(id)}">${done ? '已確認' : '待訂'}</span>`;
-        }
-
-        function syncOverviewStatus(id, done) {
-            document.querySelectorAll('[data-overview-status="' + id + '"]').forEach((el) => {
-                el.textContent = done ? '已確認' : '待訂';
-                el.classList.toggle('is-confirmed', done);
-                el.classList.toggle('is-pending', !done);
-            });
-        }
-
-        function bindOverviewDone() {
-            const root = document.getElementById('content-info');
-            if (!root || root.dataset.overviewDoneBound === '1') return;
-            root.dataset.overviewDoneBound = '1';
-            root.addEventListener('change', (event) => {
-                const input = event.target.closest('input[data-overview-done]');
-                if (!input) return;
-                const done = !!input.checked;
-                overviewDone[input.dataset.overviewDone] = done;
-                saveOverviewDone();
-                syncOverviewStatus(input.dataset.overviewDone, done);
-            });
+            const booking = getBooking(id);
+            const confirmed = booking && booking.status === 'confirmed';
+            return `<span class="overview-status ${confirmed ? 'is-confirmed' : 'is-pending'}">${confirmed ? '已訂' : '待訂'}</span>`;
         }
 
         function formatCost(cost) {
@@ -8023,7 +8132,7 @@
                 return `<p class="overview-booking-no">Booking #${escapeHtml(booking.confirmationNo)}</p>`;
             }
             if (!REVIEW_MODE) return '';
-            if (booking.status === 'confirmed') {
+            if (booking.status === 'confirmed' && !booking.secret) {
                 return '<p class="overview-review-flag">已標 confirmed，但沒有訂位代號</p>';
             }
             return '';
@@ -8078,7 +8187,6 @@
             const head = `
                 <div class="overview-flight-top">
                     <p class="overview-arrange-name">往返機票 ${overviewStatusHtml(doneId)}</p>
-                    ${overviewDoneControl(doneId, '往返機票')}
                 </div>
             `;
             const reviewHead = flightBooking
@@ -8104,6 +8212,267 @@
                     </div>
                 `;
             }).join('');
+        }
+
+        const SECRET_LIMITS = {
+            minIterations: 100000,
+            maxIterations: 2000000,
+            maxFields: 40,
+            maxLabel: 40,
+            maxValue: 4000,
+            maxPlainChars: 20000
+        };
+
+        function b64ToBytes(b64) {
+            if (typeof b64 !== 'string' || !/^[A-Za-z0-9+/]+={0,2}$/.test(b64) || b64.length % 4 === 1) {
+                throw new Error('不支援的加密格式');
+            }
+            const bin = atob(b64);
+            const out = new Uint8Array(bin.length);
+            for (let i = 0; i < bin.length; i += 1) out[i] = bin.charCodeAt(i);
+            return out;
+        }
+
+        function assertSecretPayload(payload) {
+            if (!payload || payload.v !== 1 || payload.alg !== 'AES-GCM' || payload.kdf !== 'PBKDF2' || payload.hash !== 'SHA-256') {
+                throw new Error('不支援的加密格式');
+            }
+            if (!Number.isInteger(payload.iterations) || payload.iterations < SECRET_LIMITS.minIterations || payload.iterations > SECRET_LIMITS.maxIterations) {
+                throw new Error('不支援的加密格式');
+            }
+            const salt = b64ToBytes(payload.salt);
+            const iv = b64ToBytes(payload.iv);
+            const data = b64ToBytes(payload.data);
+            if (salt.length < 16 || salt.length > 64 || iv.length !== 12 || data.length < 17 || data.length > 65536) {
+                throw new Error('不支援的加密格式');
+            }
+            return { salt, iv, data };
+        }
+
+        async function decryptSecretText(payload, passphrase) {
+            const normalized = String(passphrase || '').normalize('NFC');
+            if (!normalized) throw new Error('請輸入 passphrase');
+            const { salt, iv, data } = assertSecretPayload(payload);
+            if (globalThis.crypto && crypto.subtle) {
+                const baseKey = await crypto.subtle.importKey(
+                    'raw',
+                    new TextEncoder().encode(normalized),
+                    'PBKDF2',
+                    false,
+                    ['deriveKey']
+                );
+                const key = await crypto.subtle.deriveKey(
+                    { name: 'PBKDF2', salt, iterations: payload.iterations, hash: 'SHA-256' },
+                    baseKey,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['decrypt']
+                );
+                const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
+                return new TextDecoder().decode(plain);
+            }
+            const fallback = globalThis.BookingCryptoFallback;
+            if (fallback && typeof fallback.decryptBookingSecretFallback === 'function') {
+                return fallback.decryptBookingSecretFallback(payload, normalized);
+            }
+            throw new Error('這個瀏覽器環境無法在本機解密');
+        }
+
+        function parseSecretRecord(text) {
+            if (typeof text !== 'string' || text.length > SECRET_LIMITS.maxPlainChars) {
+                throw new Error('訂房資料格式不正確');
+            }
+            let record;
+            try {
+                record = JSON.parse(text);
+            } catch (err) {
+                throw new Error('訂房資料格式不正確');
+            }
+            if (!record || !Array.isArray(record.fields)) throw new Error('訂房資料格式不正確');
+            return record;
+        }
+
+        function secretErrorMessage(err) {
+            if (!err) return '無法解密';
+            if (err.name === 'OperationError' || err.message === 'passphrase 不正確') return 'passphrase 不正確';
+            if (err.message === '請輸入 passphrase' || err.message === '不支援的加密格式' || err.message === '訂房資料格式不正確' || err.message === '這個瀏覽器環境無法在本機解密') {
+                return err.message;
+            }
+            return '無法解密';
+        }
+
+        function renderLockedState(panel, bookingId) {
+            panel.replaceChildren();
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'secret-unlock-btn';
+            button.dataset.secretUnlock = bookingId;
+            const icon = document.createElement('i');
+            icon.className = 'ph ph-lock-key';
+            icon.setAttribute('aria-hidden', 'true');
+            const label = document.createElement('span');
+            label.textContent = '訂房資訊已加密';
+            button.append(icon, label);
+            panel.append(button);
+            return button;
+        }
+
+        let secretUnlockEpoch = 0;
+
+        function bumpSecretEpoch() {
+            secretUnlockEpoch += 1;
+            return secretUnlockEpoch;
+        }
+
+        function secretAttemptIsCurrent(epoch, form) {
+            if (epoch !== secretUnlockEpoch) return false;
+            if (!form || !form.isConnected) return false;
+            const details = form.closest('[data-secret-booking]');
+            return Boolean(details && details.open);
+        }
+
+        function showSecretPrompt(button) {
+            const panel = button.closest('[data-secret-panel]');
+            const details = button.closest('[data-secret-booking]');
+            const bookingId = button.dataset.secretUnlock;
+            if (!panel || !details || !bookingId) return;
+            bumpSecretEpoch();
+            panel.replaceChildren();
+            const form = document.createElement('form');
+            form.className = 'secret-form';
+            form.dataset.secretForm = bookingId;
+            form.autocomplete = 'off';
+            form.noValidate = true;
+
+            const label = document.createElement('label');
+            label.className = 'secret-form-label';
+            const caption = document.createElement('span');
+            caption.textContent = '共用 passphrase';
+            const input = document.createElement('input');
+            input.type = 'password';
+            input.className = 'form-control';
+            input.autocomplete = 'off';
+            input.spellcheck = false;
+            input.autocapitalize = 'off';
+            input.setAttribute('aria-label', '共用 passphrase');
+            label.append(caption, input);
+
+            const actions = document.createElement('div');
+            actions.className = 'secret-form-actions';
+            const submit = document.createElement('button');
+            submit.type = 'submit';
+            submit.className = 'btn-outline is-quiet';
+            submit.textContent = '解鎖';
+            const cancel = document.createElement('button');
+            cancel.type = 'button';
+            cancel.className = 'btn-outline is-quiet';
+            cancel.textContent = '取消';
+            cancel.addEventListener('click', () => {
+                const locked = discardSecretUnlock(details);
+                if (locked) locked.focus();
+            });
+            actions.append(submit, cancel);
+
+            const error = document.createElement('p');
+            error.className = 'secret-form-error';
+            error.hidden = true;
+            error.setAttribute('role', 'alert');
+            form.append(label, actions, error);
+            panel.append(form);
+            input.focus();
+        }
+
+        function renderSecretPlain(panel, record) {
+            if (!panel || !panel.isConnected) return;
+            panel.replaceChildren();
+            const fields = record.fields.slice(0, SECRET_LIMITS.maxFields);
+            let shown = 0;
+            fields.forEach((field) => {
+                if (!field || typeof field.label !== 'string' || typeof field.value !== 'string') return;
+                const labelText = field.label.trim();
+                if (!labelText || !field.value.trim()) return;
+                if (labelText.length > SECRET_LIMITS.maxLabel || field.value.length > SECRET_LIMITS.maxValue) return;
+                const row = document.createElement('p');
+                const label = document.createElement('span');
+                label.className = 'overview-label';
+                label.textContent = labelText;
+                const value = document.createElement('span');
+                value.className = 'secret-value';
+                value.textContent = field.value;
+                row.append(label, value);
+                panel.append(row);
+                shown += 1;
+            });
+            if (!shown) {
+                const empty = document.createElement('p');
+                empty.className = 'secret-form-error';
+                empty.textContent = '沒有可顯示的訂房欄位';
+                panel.append(empty);
+            }
+        }
+
+        async function unlockSecret(form) {
+            const bookingId = form.dataset.secretForm;
+            const booking = getBooking(bookingId);
+            const input = form.querySelector('input');
+            const error = form.querySelector('.secret-form-error');
+            const submit = form.querySelector('button[type="submit"]');
+            if (!booking || !booking.secret || !input || !error || !submit) return;
+            const passphrase = input.value;
+            if (!passphrase) {
+                error.hidden = false;
+                error.textContent = '請輸入 passphrase';
+                input.focus();
+                return;
+            }
+            const epoch = bumpSecretEpoch();
+            submit.disabled = true;
+            submit.textContent = '解密中…';
+            error.hidden = true;
+            await new Promise((resolve) => { setTimeout(resolve, 20); });
+            if (!secretAttemptIsCurrent(epoch, form)) return;
+            try {
+                const text = await decryptSecretText(booking.secret, passphrase);
+                if (!secretAttemptIsCurrent(epoch, form)) return;
+                const record = parseSecretRecord(text);
+                if (!secretAttemptIsCurrent(epoch, form)) return;
+                input.value = '';
+                renderSecretPlain(form.closest('[data-secret-panel]'), record);
+            } catch (err) {
+                if (!secretAttemptIsCurrent(epoch, form)) return;
+                error.hidden = false;
+                error.textContent = secretErrorMessage(err);
+                submit.disabled = false;
+                submit.textContent = '解鎖';
+                input.focus();
+            }
+        }
+
+        function discardSecretUnlock(details) {
+            bumpSecretEpoch();
+            if (!details) return null;
+            const panel = details.querySelector('[data-secret-panel]');
+            const bookingId = details.dataset.secretBooking;
+            if (!panel || !bookingId) return null;
+            const input = panel.querySelector('input');
+            if (input) input.value = '';
+            return renderLockedState(panel, bookingId);
+        }
+
+        function encryptedBookingHtml(booking) {
+            return `
+                <details class="quiet-details overview-booking" data-secret-booking="${escapeHtml(booking.id)}">
+                    <summary class="btn-outline is-quiet">
+                        <i class="ph ph-ticket" aria-hidden="true"></i> 訂房明細
+                    </summary>
+                    <div class="overview-booking-body" data-secret-panel>
+                        <button type="button" class="secret-unlock-btn" data-secret-unlock="${escapeHtml(booking.id)}">
+                            <i class="ph ph-lock-key" aria-hidden="true"></i>
+                            <span>訂房資訊已加密</span>
+                        </button>
+                    </div>
+                </details>
+            `;
         }
 
         function renderOverviewStays() {
@@ -8145,14 +8514,16 @@
                 if (booking.rooms) detailRows.push(overviewMetaRow('部屋数', `<span>${escapeHtml(booking.rooms)}</span>`));
                 if (booking.occupancy) detailRows.push(overviewMetaRow('部屋割り', `<span>${escapeHtml(booking.occupancy)}</span>`));
                 if (booking.bookedAt) detailRows.push(overviewMetaRow('予約受付', `<span>${escapeHtml(booking.bookedAt)}</span>`));
-                const detailsHtml = detailRows.length
-                    ? `<details class="quiet-details overview-booking">
+                const detailsHtml = booking.secret
+                    ? encryptedBookingHtml(booking)
+                    : (detailRows.length
+                        ? `<details class="quiet-details overview-booking">
                             <summary class="btn-outline is-quiet">
                                 <i class="ph ph-ticket" aria-hidden="true"></i> 訂房明細
                             </summary>
                             <div class="overview-booking-body">${detailRows.join('')}</div>
                         </details>`
-                    : '';
+                        : '');
                 return `
                     <div class="overview-hotel">
                         <div class="overview-hotel-top">
@@ -8160,7 +8531,6 @@
                                 <p class="overview-hotel-when">${escapeHtml(when)} ${overviewStatusHtml(booking.id)}</p>
                                 <h3 class="overview-hotel-name">${escapeHtml(place.name || '')}</h3>
                             </div>
-                            ${overviewDoneControl(booking.id, place.name || '住宿')}
                         </div>
                         <div class="overview-hotel-meta">
                             ${overviewMetaRow('電話', phoneHtml)}
@@ -8209,7 +8579,6 @@
                                 <p class="overview-reserve-when">${escapeHtml(formatTripMd(booking.date))} ${overviewStatusHtml(booking.id)}</p>
                                 <h3 class="overview-reserve-name">${escapeHtml(booking.title || place.name || '')}</h3>
                             </div>
-                            ${overviewDoneControl(booking.id, booking.title || place.name || '預訂')}
                         </div>
                         <div class="overview-reserve-meta">
                             ${overviewMetaRow('預約', channelHtml)}
@@ -8225,12 +8594,258 @@
         }
 
         function renderOverview() {
-            loadOverviewDone();
             renderOverviewRoute();
             renderOverviewFlights();
             renderOverviewStays();
             renderOverviewReservations();
-            bindOverviewDone();
+        }
+
+        const OFFLINE_META_CACHE = 'trip-offline-meta';
+        const OFFLINE_META_PATH = 'offline-pack-meta';
+        const OFFLINE_FILES = [
+            'index.html',
+            'sw.js',
+            'manifest.json',
+            'icons/icon-192.png',
+            'icons/icon-512.png',
+            'assets/tailwind.css',
+            'assets/booking-crypto-fallback.js',
+            'assets/icons/regular/style.css',
+            'assets/icons/regular/Phosphor.woff2',
+            'assets/icons/duotone/style.css',
+            'assets/icons/duotone/Phosphor-Duotone.woff2',
+            'assets/icons/fill/style.css',
+            'assets/icons/fill/Phosphor-Fill.woff2'
+        ];
+
+        function tripPageVersion() {
+            const meta = document.querySelector('meta[name="trip-build"]');
+            return meta ? meta.getAttribute('content') || '' : '';
+        }
+
+        function offlineMetaUrl() {
+            return new URL(OFFLINE_META_PATH, document.baseURI).href;
+        }
+
+        function formatOfflineTime(iso) {
+            const date = new Date(iso);
+            if (Number.isNaN(date.getTime())) return '';
+            const parts = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Taipei',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hourCycle: 'h23'
+            }).formatToParts(date);
+            const part = (type) => {
+                const found = parts.find((item) => item.type === type);
+                return found ? found.value : '';
+            };
+            const stamp = part('month') + '/' + part('day') + ' ' + part('hour') + ':' + part('minute');
+            return stamp === '/ :' ? '' : stamp;
+        }
+
+        async function readOfflineMeta() {
+            if (!('caches' in window)) return null;
+            const cache = await caches.open(OFFLINE_META_CACHE);
+            const response = await cache.match(offlineMetaUrl());
+            if (!response) return null;
+            try {
+                const meta = await response.json();
+                if (!meta || typeof meta.cacheName !== 'string' || typeof meta.version !== 'string' || !Array.isArray(meta.files)) return null;
+                return meta;
+            } catch (err) {
+                return null;
+            }
+        }
+
+        async function offlinePackIsComplete(meta) {
+            if (!meta) return false;
+            const cache = await caches.open(meta.cacheName);
+            for (const path of meta.files) {
+                const url = new URL(path, document.baseURI).href;
+                if (!await cache.match(url)) return false;
+            }
+            const index = await cache.match(new URL('index.html', document.baseURI).href);
+            if (!index) return false;
+            const html = await index.text();
+            return html.includes('name="trip-build" content="' + meta.version + '"');
+        }
+
+        function renderOfflineStatus(state) {
+            const status = document.getElementById('offline-status');
+            const savedAt = document.getElementById('offline-saved-at');
+            const hint = document.getElementById('offline-hint');
+            const button = document.getElementById('offline-save');
+            if (!status || !savedAt || !hint || !button) return;
+            const showSaved = Boolean(state.saved && state.complete);
+            status.hidden = !showSaved;
+            status.textContent = showSaved ? '✓ 已儲存' : '';
+            const stamp = showSaved ? formatOfflineTime(state.saved.savedAt) : '';
+            savedAt.hidden = !stamp;
+            savedAt.textContent = stamp ? '更新於 ' + stamp : '';
+            hint.className = 'offline-hint';
+            hint.hidden = true;
+            hint.textContent = '';
+            button.hidden = false;
+            button.disabled = false;
+            if (state.phase === 'working') {
+                button.disabled = true;
+                button.textContent = '儲存中…';
+                return;
+            }
+            if (state.phase === 'unsupported') {
+                button.hidden = true;
+                hint.classList.add('is-error');
+                hint.hidden = false;
+                hint.textContent = '請用 GitHub Pages 或 localhost 開啟。';
+                return;
+            }
+            if (state.phase === 'error') {
+                button.textContent = '重試';
+                hint.classList.add('is-error');
+                hint.hidden = false;
+                hint.textContent = showSaved ? '儲存沒有完成，仍使用目前的行程。' : '儲存沒有完成。';
+                return;
+            }
+            if (showSaved && state.saved.version !== state.pageVersion) {
+                button.textContent = '更新';
+                hint.hidden = false;
+                hint.textContent = '有新版可更新。';
+                return;
+            }
+            button.textContent = showSaved ? '更新' : '儲存';
+        }
+
+        async function refreshOfflineStatus(phase) {
+            const pageVersion = tripPageVersion();
+            if (!('caches' in window) || !('serviceWorker' in navigator)) {
+                renderOfflineStatus({ phase: 'unsupported', pageVersion: pageVersion });
+                return null;
+            }
+            const saved = await readOfflineMeta();
+            const complete = await offlinePackIsComplete(saved);
+            renderOfflineStatus({
+                phase: phase || (complete ? 'ready' : 'idle'),
+                pageVersion: pageVersion,
+                saved: complete ? saved : saved,
+                complete: complete
+            });
+            return complete ? saved : null;
+        }
+
+        async function saveOfflinePack() {
+            const button = document.getElementById('offline-save');
+            const previous = await readOfflineMeta();
+            const previousComplete = await offlinePackIsComplete(previous);
+            const kept = previousComplete ? previous : null;
+            const total = OFFLINE_FILES.length;
+            renderOfflineStatus({ phase: 'working', done: 0, total: total, pageVersion: tripPageVersion(), saved: kept, complete: Boolean(kept) });
+            const cacheName = 'trip-pack-' + Date.now();
+            let cache;
+            try {
+                if (!('caches' in window) || !('serviceWorker' in navigator)) throw new Error('unsupported');
+                const scopeUrl = new URL('./', document.baseURI);
+                await navigator.serviceWorker.register(new URL('sw.js', scopeUrl).href, {
+                    scope: scopeUrl.href,
+                    updateViaCache: 'none'
+                });
+                cache = await caches.open(cacheName);
+                let version = '';
+                for (let index = 0; index < OFFLINE_FILES.length; index += 1) {
+                    const path = OFFLINE_FILES[index];
+                    if (path.split('/').includes('secrets')) throw new Error('refusing secrets');
+                    const url = new URL(path, document.baseURI).href;
+                    const response = await fetch(url, { cache: 'no-store', credentials: 'same-origin' });
+                    if (!response.ok) throw new Error(path);
+                    const type = response.headers.get('Content-Type') || 'application/octet-stream';
+                    const bytes = await response.arrayBuffer();
+                    if (path === 'index.html') {
+                        const html = new TextDecoder().decode(bytes);
+                        const found = html.match(/name="trip-build" content="([^"]+)"/);
+                        if (!found) throw new Error('missing version');
+                        version = found[1];
+                        const headers = { 'Content-Type': 'text/html; charset=utf-8' };
+                        await cache.put(url, new Response(bytes.slice(0), { status: 200, headers: headers }));
+                        await cache.put(new URL('./', document.baseURI).href, new Response(bytes.slice(0), { status: 200, headers: headers }));
+                    } else {
+                        await cache.put(url, new Response(bytes, { status: 200, headers: { 'Content-Type': type } }));
+                    }
+                    if (button) {
+                        renderOfflineStatus({ phase: 'working', done: index + 1, total: total, pageVersion: tripPageVersion(), saved: kept, complete: Boolean(kept) });
+                    }
+                }
+                for (const path of OFFLINE_FILES) {
+                    if (!await cache.match(new URL(path, document.baseURI).href)) throw new Error('incomplete ' + path);
+                }
+                const meta = {
+                    version: version,
+                    savedAt: new Date().toISOString(),
+                    cacheName: cacheName,
+                    files: OFFLINE_FILES.slice()
+                };
+                const metaCache = await caches.open(OFFLINE_META_CACHE);
+                await metaCache.put(offlineMetaUrl(), new Response(JSON.stringify(meta), {
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' }
+                }));
+                const names = await caches.keys();
+                await Promise.all(names
+                    .filter((name) => name.startsWith('trip-pack-') && name !== cacheName)
+                    .map((name) => caches.delete(name)));
+                await refreshOfflineStatus('ready');
+            } catch (err) {
+                if ('caches' in window && cacheName) await caches.delete(cacheName);
+                const still = await readOfflineMeta();
+                const stillComplete = await offlinePackIsComplete(still);
+                renderOfflineStatus({
+                    phase: 'error',
+                    pageVersion: tripPageVersion(),
+                    saved: stillComplete ? still : null,
+                    complete: stillComplete
+                });
+            }
+        }
+
+        function initOfflineHandbook() {
+            const scopeUrl = new URL('./', document.baseURI);
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register(new URL('sw.js', scopeUrl).href, {
+                    scope: scopeUrl.href,
+                    updateViaCache: 'none'
+                }).catch(() => {});
+            }
+            const button = document.getElementById('offline-save');
+            if (button) {
+                button.addEventListener('click', () => {
+                    if (button.disabled) return;
+                    saveOfflinePack();
+                });
+            }
+            const help = document.getElementById('offline-help');
+            const helpText = document.getElementById('offline-help-text');
+            if (help && helpText) {
+                help.addEventListener('click', () => {
+                    const open = help.getAttribute('aria-expanded') === 'true';
+                    help.setAttribute('aria-expanded', open ? 'false' : 'true');
+                    helpText.hidden = open;
+                });
+            }
+            refreshOfflineStatus();
+            document.addEventListener('click', (event) => {
+                const link = event.target.closest('a[href]');
+                if (!link || navigator.onLine) return;
+                let url;
+                try { url = new URL(link.href, location.href); } catch (err) { return; }
+                if (url.origin === location.origin) return;
+                if (url.protocol === 'tel:' || url.protocol === 'mailto:') return;
+                event.preventDefault();
+                const note = document.getElementById('offline-link-note');
+                if (!note) return;
+                note.hidden = false;
+                note.textContent = '目前沒有網路。地圖、飯店官網、天氣和外部預約網站要連線後才能開啟。';
+            });
         }
 
         function mountReviewBanner() {
@@ -8243,6 +8858,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             mountReviewBanner();
+            initOfflineHandbook();
             initExpenses();
             initPrepChecklist();
             initSouvenirGuide();
@@ -8281,6 +8897,29 @@
                     closeSouvenirPhoto();
                 }
             });
+            document.addEventListener('click', (event) => {
+                const unlock = event.target.closest('[data-secret-unlock]');
+                if (!unlock) return;
+                event.preventDefault();
+                showSecretPrompt(unlock);
+            });
+            document.addEventListener('submit', (event) => {
+                const form = event.target;
+                if (!(form instanceof HTMLFormElement) || !form.matches('[data-secret-form]')) return;
+                event.preventDefault();
+                unlockSecret(form);
+            });
+            document.addEventListener('click', (event) => {
+                const summary = event.target.closest('summary');
+                const details = summary && summary.closest('[data-secret-booking]');
+                if (!details || !details.open) return;
+                discardSecretUnlock(details);
+            }, true);
+            document.addEventListener('toggle', (event) => {
+                const details = event.target;
+                if (!(details instanceof HTMLDetailsElement) || !details.matches('[data-secret-booking]')) return;
+                if (!details.open) discardSecretUnlock(details);
+            }, true);
             document.addEventListener('keydown', (event) => {
                 if (event.key !== 'Escape') return;
                 closeItinSheet();

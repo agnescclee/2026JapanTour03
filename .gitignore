@@ -1,3 +1,6 @@
 node_modules/
 npm-debug.log*
 .DS_Store
+
+# 訂房明文與本機暫存。不要提交，也不要放進網站發布內容。
+secrets/

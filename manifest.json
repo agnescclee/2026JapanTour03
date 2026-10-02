@@ -1,0 +1,25 @@
+{
+  "name": "秋醉福島・慢活七日",
+  "short_name": "秋醉福島",
+  "description": "福島七日行程。可下載整份行程供離線查看。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FCFAF2",
+  "theme_color": "#FCFAF2",
+  "lang": "zh-TW",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
