@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="秋醉福島">
     <!-- 發布新版時遞增。離線包用這段辨識是否已有更新。 -->
-    <meta name="trip-build" content="2026-10-28.11">
+    <meta name="trip-build" content="2026-10-28.12">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icons/icon-192.png" type="image/png">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -3393,16 +3393,16 @@
                 access: 'JR 郡山站西口徒歩約 2 分'
             },
             {
-                id: 'place-washington',
+                id: 'place-alpha1',
                 type: 'accommodation',
-                name: '会津若松ワシントンホテル',
-                phone: '0242-22-6111',
-                tel: '+81242226111',
-                address: '〒965-0024 福島県会津若松市白虎町201',
+                name: 'ホテル・アルファ-ワン会津若松',
+                phone: '0242-32-6868',
+                tel: '+81242326868',
+                address: '〒965-0041 福島県会津若松市駅前町5-8',
                 email: '',
-                website: 'https://washington-hotels.jp/aizuwakamatsu/',
-                mapQuery: '会津若松ワシントンホテル',
-                access: '會津若松站徒歩約 2 分'
+                website: 'https://www.alpha-1.co.jp/aizuwakamatsu/',
+                mapQuery: 'ホテル・アルファ-ワン会津若松',
+                access: 'JR 會津若松站徒歩約 3 分'
             },
             {
                 id: 'place-ookawaso',
@@ -3509,14 +3509,14 @@
                 }
             },
             {
-                id: 'booking-washington',
+                id: 'booking-alpha1',
                 type: 'accommodation',
-                placeId: 'place-washington',
+                placeId: 'place-alpha1',
                 checkIn: '2026-11-02',
                 checkOut: '2026-11-03',
                 checkInTime: '15:00',
-                checkoutTime: '11:00',
-                meals: '含早餐（10F ガスライト 06:30–09:30）',
+                checkoutTime: '10:00',
+                meals: '含早餐（1F アルファ-ガーデン 06:30–09:30，最後入店 09:15）',
                 status: 'confirmed',
                 secretUi: 'stay',
                 note: '3 間（雙人 2、雙人 2、單人 1）。現地付款合計 ¥44,800。含早餐。預計 15:00 抵達。',
@@ -3619,7 +3619,7 @@
                 channel: 'phone',
                 channelLabel: '方案頁',
                 href: 'https://taxi.aizubus.com/sightseeing/taxi_de_okuaizu',
-                summary: '10:00–16:00，5 名ジャンボ。五ノ井酒店 → 柳津午餐 → 第一只見川橋梁 → つるの湯 → かねやまふれあい広場 → 華盛頓飯店。',
+                summary: '10:00–16:00，5 名ジャンボ。五ノ井酒店 → 柳津午餐 → 第一只見川橋梁 → つるの湯 → かねやまふれあい広場 → 阿爾法萬會津若松。',
                 note: '￥66,360。霧幻峽 11/2 已滿。集合在出改札右側的赤べこ前。',
                 secretUi: 'reservation',
                 confirmationNo: '',
@@ -3646,7 +3646,7 @@
                 status: 'to-book',
                 channel: 'phone',
                 channelLabel: '電話預約',
-                note: '08:45 華盛頓飯店 → 大內宿 → 塔崖 → 14:30 大川莊',
+                note: '08:45 阿爾法萬會津若松 → 大內宿 → 塔崖 → 14:30 大川莊',
                 confirmationNo: '',
                 cost: null,
                 offlineAsset: []
@@ -3781,7 +3781,7 @@
             {
                 id: 'svc-luggage-delivery-d3',
                 type: 'luggage_delivery',
-                fromPlaceId: 'place-washington',
+                fromPlaceId: 'place-alpha1',
                 toPlaceId: 'place-lakeresort',
                 bookingRequired: true,
                 channel: 'hotel_front_desk',
@@ -3978,7 +3978,7 @@
                         forecastPlaces: [{ id: 'okuaizu' }]
                     },
                     startAnchor: { kind: 'accommodation', placeId: 'place-chisun-koriyama', bookingId: 'booking-chisun-koriyama' },
-                    endAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington', time: '16:00' },
+                    endAnchor: { kind: 'accommodation', placeId: 'place-alpha1', bookingId: 'booking-alpha1', time: '16:00' },
                     timeline: [
                         {
                             id: 'd2-breakfast',
@@ -4040,7 +4040,7 @@
                             placeId: 'place-aizu-station',
                             options: [
                                 { name: '會津若松站置物櫃', note: '改札外三處。小 ¥300、中 ¥400–600、大 ¥600–800。只收硬貨。晚上先回車站取行李，再步行回飯店。' },
-                                { name: '華盛頓飯店櫃台', note: '出站步行約 2 分。15:00 才能入住，先寄放櫃台再折回車站。回程計程車直接送到飯店。' }
+                                { name: '阿爾法萬會津若松櫃台', note: '出站步行約 3 分。15:00 起可入住，先寄放櫃台再折回車站。回程計程車直接送到飯店。' }
                             ],
                             details: [
                                 '車站或飯店都可以寄。寄完折回會津若松站，10:00 觀光計程車在車站上車。'
@@ -4062,7 +4062,7 @@
                             price: { amount: 66360, currency: 'JPY', unit: '台' },
                             details: [
                                 'あいづタクシー「タクシーで行く 奥会津を巡る旅」。5 名ジャンボ，10:00–16:00，￥66,360。',
-                                '順序：五ノ井酒店 → 道の駅あいづ柳津午餐 → 第一只見川橋梁 → 早戸温泉つるの湯 → かねやまふれあい広場 → 華盛頓飯店。',
+                                '順序：五ノ井酒店 → 道の駅あいづ柳津午餐 → 第一只見川橋梁 → 早戸温泉つるの湯 → かねやまふれあい広場 → 阿爾法萬會津若松。',
                                 '出改札後右側、大赤べこ前面集合。',
                                 '霧幻峽 11/2 已滿，不划船。入場、入浴、餐費另計。各站時間會依路況調整。'
                             ],
@@ -4188,7 +4188,7 @@
                             stay: '看只見川與只見線',
                             details: [
                                 '國道 252 號沿線，含大志集落拍照。水面、聚落、田園與川邊的只見線在同一畫面。',
-                                '可改從會津川口站搭只見線到會津柳津站（每人 ¥530），再換回ジャンボ送飯店。不搭車就由計程車直接送華盛頓飯店。'
+                                '可改從會津川口站搭只見線到會津柳津站（每人 ¥530），再換回ジャンボ送飯店。不搭車就由計程車直接送阿爾法萬會津若松。'
                             ]
                         },
                         {
@@ -4197,14 +4197,14 @@
                             startTime: '14:30',
                             endTime: '16:00',
                             fromPlaceId: 'place-kaneyama',
-                            toPlaceId: 'place-washington',
+                            toPlaceId: 'place-alpha1',
                             mode: 'taxi',
                             serviceName: '觀光計程車',
                             travelMode: 'driving',
                             duration: '約 90 分',
                             bookingId: 'booking-jumbo-day2',
                             details: [
-                                '約 16:00 送到華盛頓飯店門口。確認信預計 15:00 抵達。',
+                                '約 16:00 送到阿爾法萬會津若松門口。確認信預計 15:00 抵達。',
                                 '行李若在車站置物櫃，請司機先在車站停一下取出。'
                             ]
                         },
@@ -4233,7 +4233,7 @@
                         verifiedAt: null,
                         forecastPlaces: [{ id: 'ouchi' }]
                     },
-                    startAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington' },
+                    startAnchor: { kind: 'accommodation', placeId: 'place-alpha1', bookingId: 'booking-alpha1' },
                     endAnchor: { kind: 'accommodation', placeId: 'place-ookawaso', bookingId: 'booking-ookawaso', time: '14:30' },
                     timeline: [
                         {
@@ -4241,14 +4241,14 @@
                             type: 'meal',
                             startTime: '07:00',
                             endTime: '08:15',
-                            placeId: 'place-washington',
+                            placeId: 'place-alpha1',
                             title: '飯店早餐',
                             meal: { slot: 'breakfast', resolution: 'included' },
                             coverage: { label: '住宿含' },
-                            bookingId: 'booking-washington',
+                            bookingId: 'booking-alpha1',
                             details: [
-                                '10F レストラン「ガスライト」和洋自助，方案已含。06:30–09:30。',
-                                '08:45 包車出發，請先吃完再寄行李。'
+                                '1F レストラン「アルファ-ガーデン」和洋自助，方案已含。06:30–09:30（最後入店 09:15）。',
+                                '退房截止 10:00。08:45 包車出發，請先吃完再寄行李。'
                             ]
                         },
                         {
@@ -4258,7 +4258,7 @@
                             serviceId: 'svc-luggage-delivery-d3',
                             startTime: '08:30',
                             title: '行李宅配',
-                            fromPlaceId: 'place-washington',
+                            fromPlaceId: 'place-alpha1',
                             toPlaceId: 'place-lakeresort',
                             bookingRequired: true,
                             details: [
@@ -4270,7 +4270,7 @@
                             id: 'd3-charter-ouchi',
                             type: 'movement',
                             startTime: '08:45',
-                            fromPlaceId: 'place-washington',
+                            fromPlaceId: 'place-alpha1',
                             toPlaceId: 'place-ouchi',
                             mode: 'charter',
                             travelMode: 'driving',
