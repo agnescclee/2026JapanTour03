@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="秋醉福島">
     <!-- 發布新版時遞增。離線包用這段辨識是否已有更新。 -->
-    <meta name="trip-build" content="2026-10-02.1">
+    <meta name="trip-build" content="2026-10-28.11">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icons/icon-192.png" type="image/png">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -2550,12 +2550,15 @@
         }
 
         /* 展開時只把內容換到下一行，摘要按鈕留在原位。 */
-        .overview-hotel-actions .overview-booking {
+        .overview-hotel-actions .overview-booking,
+        .overview-reserve-actions .overview-booking {
             display: contents;
         }
 
         .overview-hotel-actions .overview-booking::details-content,
-        .overview-hotel-actions .overview-booking-body {
+        .overview-hotel-actions .overview-booking-body,
+        .overview-reserve-actions .overview-booking::details-content,
+        .overview-reserve-actions .overview-booking-body {
             flex: 1 0 100%;
             order: 1;
         }
@@ -2662,6 +2665,17 @@
         .secret-value {
             white-space: pre-wrap;
             overflow-wrap: anywhere;
+        }
+
+        .secret-qr {
+            display: block;
+            width: 168px;
+            height: auto;
+            margin-top: 0.15rem;
+            padding: 6px;
+            background: #fff;
+            border-radius: 4px;
+            image-rendering: pixelated;
         }
 
         .offline-card {
@@ -3317,7 +3331,7 @@
             endDate: TRIP_END,
             days: [
                 { day: 1, date: '2026-11-01', heading: '啟程' },
-                { day: 2, date: '2026-11-02', heading: '霧幻泛舟' },
+                { day: 2, date: '2026-11-02', heading: '奧會津巡遊' },
                 { day: 3, date: '2026-11-03', heading: '茅葺古街' },
                 { day: 4, date: '2026-11-04', heading: '城下町巡禮' },
                 { day: 5, date: '2026-11-05', heading: '紅葉慢遊' },
@@ -3361,22 +3375,22 @@
             { name: '會津若松', kind: 'stay', meta: '磐越西線' },
             { name: '蘆之牧溫泉', kind: 'stay', meta: 'ジャンボ包車' },
             { name: '裏磐梯', kind: 'stay', meta: '磐越西線＋免費接駁' },
-            { name: '東京・濱松町', kind: 'stay', meta: '新幹線（郡山→上野）' },
+            { name: '東京・上野御徒町', kind: 'stay', meta: '新幹線（郡山→上野）' },
             { name: '松山', kind: 'fly', meta: '長榮 BR191' }
         ];
 
         const PLACES = [
             {
-                id: 'place-daiwa-koriyama',
+                id: 'place-chisun-koriyama',
                 type: 'accommodation',
-                name: 'ダイワロイネットホテル郡山駅前',
-                phone: '024-927-4855',
-                tel: '+81249274855',
-                address: '〒963-8002 福島県郡山市駅前1-6-10',
+                name: 'チサン ホテル 郡山',
+                phone: '024-923-6711',
+                tel: '+81249236711',
+                address: '〒963-8002 福島県郡山市駅前1-8-18',
                 email: '',
-                website: 'https://www.daiwaroynet.jp/koriyamaekimae/',
-                mapQuery: 'ダイワロイネットホテル郡山駅前',
-                access: 'JR 郡山站西口徒歩約 1 分'
+                website: 'https://www.solarehotels.com/hotel/fukushima/chisunhotel-koriyama/',
+                mapQuery: 'チサンホテル郡山',
+                access: 'JR 郡山站西口徒歩約 2 分'
             },
             {
                 id: 'place-washington',
@@ -3415,13 +3429,14 @@
             {
                 id: 'place-monday',
                 type: 'accommodation',
-                name: 'Premium Apart MONday 濱松町ステーション',
-                phone: '03-5401-3190',
-                tel: '+81354013190',
-                address: '〒105-0013 東京都港区浜松町1-15-4',
+                name: 'GRAND MONday 上野御徒町',
+                phone: '03-3837-7781',
+                tel: '+81338377781',
+                address: '〒110-0016 東京都台東区台東4-6-1',
                 email: '',
-                website: 'https://hotel-monday.com/apartment/hamamatsucho_station/',
-                mapQuery: 'Premium Apart MONday 濱松町ステーション'
+                website: 'https://hotel-monday.com/grand/uenookachimachi/',
+                mapQuery: 'GRAND MONday 上野御徒町',
+                access: '日比谷線仲御徒町站 1 號出口徒歩約 1 分；JR 御徒町站南口徒歩約 6 分'
             },
             {
                 id: 'place-aizu-taxi',
@@ -3468,19 +3483,30 @@
                 segmentIds: ['seg-br192', 'seg-br191']
             },
             {
-                id: 'booking-daiwa-koriyama',
+                id: 'booking-chisun-koriyama',
                 type: 'accommodation',
-                placeId: 'place-daiwa-koriyama',
+                placeId: 'place-chisun-koriyama',
                 checkIn: '2026-11-01',
                 checkOut: '2026-11-02',
-                checkInTime: '14:00',
-                checkoutTime: '11:00',
-                meals: '早餐自助可加購，大人 ¥1,700（2F ヴィスコンティ 06:00–10:00）',
-                status: 'to-book',
-                note: '推薦入住，尚未預訂。',
+                checkInTime: '15:00',
+                checkoutTime: '10:00',
+                meals: '方案含早餐（2F AZUMA 06:30–09:30）',
+                status: 'confirmed',
+                secretUi: 'stay',
+                note: '3 間（雙人 2、雙人 2、單人 1）。現地付款合計 ¥31,500。含早餐，預計 18:00 抵達。',
                 confirmationNo: '',
-                cost: null,
-                offlineAsset: []
+                cost: { amount: 31500, currency: 'JPY' },
+                offlineAsset: [],
+                secret: {
+                    v: 1,
+                    alg: 'AES-GCM',
+                    kdf: 'PBKDF2',
+                    hash: 'SHA-256',
+                    iterations: 600000,
+                    salt: 'R5jdmQXvXvrQ1G6P1jWAZw==',
+                    iv: '2MDkVFKrxL87cH74',
+                    data: 'Dei6WUErOE3Jpt2yPhor3BHh9TwcNeCigC0Jdz/B8JTmKvQgESr0mfwi5kVvN2gfjl7JW/TDEIcGB32CqxeDTeAXP9JxXwEfMkFrFY6tLVuMWMeCEluHcyrSblcQXFaKiZpL69K6Y2v8zW/e1XenP0ZZl4jWDl1HGarzRFLj+zd/ieIR3sadAL2a3n5X9+ikVaZyi/4xHKh3bZg4kdCHnAu+XmP5R/KXicCNNj8XZfXn2hADiH2VnPKmSe+ljAWA4okCNCxea88IzY0q0uEHo5r3Zqfw3CIP5+Sz3ogQ9vVKuHZwxEHbQt+UkCik0rdH7PeNzgSpNNp/CvmSyD/zNnbP2GDsmG2Z1ZzyD2WWiKDx5iXT5hUjgerrJitlO6wGuajx87vRFqEEZOF9reAb3jLKXwaWxnye3w2wf7mJesp7T3cLuicZ7m++ZpvDndq1lolheE5WC6O22fNqzm3Ifu+wOZfI2fSAb4sT1YMuX6NDGuQ/iD/X25mTcbQkYrYyQ1YKqGcNBRSkTifrfKEY3hAzCk4NBWYCNdVLtZY+bkD0nIh/aKjgTd9HyM8C3Z8gFlq7dlhA+Ib/L7/o/K4bZ/kGmuJfuV6EnQdC5+MDYhT/gVIjDXeECvj5LUc50Iqf4534TRbjHUTPrHzborh81P7qqNX5JXBzwI/DKmRCgKwATLsOYHux2JiWcq47BFacp9Tz4QoZ24PNm+wnhnyVgj8qheWUM1BsCTMBcDqo+343E/wTVWszicfU0YcAmu/r7XVI9KxIdboW6PJbWwGtt/IcWZUocSgd5ENMO6IqvT3Cow2CLUOqzH332cy2ilq3tIhGCacV/vSbYEyp0/xsjVct2qtpABAmDIo18I/pNkOGEamdq9LaLUg6SL4I3yYX/IgPa6ODzpyqHV/g9UKX9NYG'
+                }
             },
             {
                 id: 'booking-washington',
@@ -3490,12 +3516,23 @@
                 checkOut: '2026-11-03',
                 checkInTime: '15:00',
                 checkoutTime: '11:00',
-                meals: '不含早餐',
-                status: 'to-book',
-                note: '原訂 11/01–11/03 連泊，改為 11/02 一晚，請改訂。',
+                meals: '含早餐（10F ガスライト 06:30–09:30）',
+                status: 'confirmed',
+                secretUi: 'stay',
+                note: '3 間（雙人 2、雙人 2、單人 1）。現地付款合計 ¥44,800。含早餐。預計 15:00 抵達。',
                 confirmationNo: '',
-                cost: null,
-                offlineAsset: []
+                cost: { amount: 44800, currency: 'JPY' },
+                offlineAsset: [],
+                secret: {
+                    v: 1,
+                    alg: 'AES-GCM',
+                    kdf: 'PBKDF2',
+                    hash: 'SHA-256',
+                    iterations: 600000,
+                    salt: 'qh1BsyYDcvMQNANFiKFx9Q==',
+                    iv: 'nwwelX6HecPmZTSz',
+                    data: 'rlwsvWv327AO/z8BqfgJplv4KC+I0El1UZ+COS/hzAY3hrxTzfNCLrO7f2H5HKAuO3okvc6E9HTMi8a7xRFzUXlDjWSAOyuZmjCzE+tnB//W/5b3Ymn2ml4Dpqkw99pkuP+QzxlxuUh1qK5oTLu+S5LBiLLB7cZkKgIRbjNHEeh0c1vKOL3WSywCpsYHrYqTIq9HT0e3dkQ57h1kx7LcEq2WnaTZehM9Yg2njO+e6KP1ZqfPQ+5hZWcWiBJqoTOsi9J8oIiahS7OUwX2agCJ0V91teW8uyInaOn4pNTSgjK2eKaxWZW5CKhcXtPp7K7jDFhd8ldHh6X67bM9qNkcU5OxtCF2II2t/uVj0umHpwA2fesJoV1c/DRd2CE6+fDNCPI/utKo3ILzb+AKNZmwx2Wr//4m/qE93Zox9+ZGGr4nQrOKvvaVaupoSAmsgt65VItK4+MmZfIcZLcDfnkTP9hxejhqR90wrwIl2IrTAj3qa2+L4X9g+uwlCgGNP+wnAe81Nrkfy1dCSQYJRWq8WLsUseMeCX3Hy2vSk14/CAglfp+0dQtAmv1VoH/Ip8oguUu+zzakpfXLN6klbqVvJ09pFVuTjyCCe8pVBhi//BhcT2S5kzYXB0PdtfyD/DHRHjWFpdhCJyBUwUckOy301sKCtMR4ae5YK4M0'
+                }
             },
             {
                 id: 'booking-ookawaso',
@@ -3503,9 +3540,13 @@
                 placeId: 'place-ookawaso',
                 checkIn: '2026-11-03',
                 checkOut: '2026-11-04',
+                checkoutTime: '10:00',
+                meals: '早晚餐付',
                 status: 'confirmed',
+                secretUi: 'stay',
+                note: '5 位、1 間宵待亭標準和室。現地付款 ¥104,500，入湯稅另計。含早晚餐。',
                 confirmationNo: '',
-                cost: null,
+                cost: { amount: 104500, currency: 'JPY' },
                 offlineAsset: [],
                 /* 私人訂房明細。只放 AES-GCM 密文，不含明文或 passphrase。 */
                 secret: {
@@ -3514,9 +3555,9 @@
                     kdf: 'PBKDF2',
                     hash: 'SHA-256',
                     iterations: 600000,
-                    salt: 'EWYDsu2nfMPBDoz3mWqsZA==',
-                    iv: 'cUZWa4fFQOnwV+B/',
-                    data: 'unW80VK2altexAXvOHAVm6Ib3OZXHRkt0mDEAegDUQZ/CLO1fPA0ZunGKSIyA6RetBEVmuar9NPZ88EwqPsHF1u2vSz58/qdy06972mC1OHiXcQO676dhEmpokwgPslVB5e2e97KHedYjwyJ+ZFs3omXmeAlQsi6rq3QY41AmaVxJS1SiJuSrfAZwjaLxPoWkfIbwjnu08eU/vOCIhZXmMwHl/LAWIs8YYYlj5xRRE5RLkegkkIfWqi+fKmEYEapYSTsSuAVYkX3g1e/ODTQCJg2UQIVO5FFsRgGRoouiOsgzJNQ2WEaqSBT78a4k/xMa7AbNar0rOr+0yY9Z36bqRYoX+qAtj2k0fzgetnStwr7is8mH12iOK4Ykj478Xeu2/mfo5vM07x54pJDrCXZIDs3xsit0fJblDT//wANjCf9DsbHKEdEhbALU2Oacfuk0+6YP/8T9zBw3Km8x/UdVbI8F9Iyxo3ZIinuHe8d57d10O4qFWafyZOVV5uH6ePzjRmC8ezURTe2t2Kgscbc3F4JhDV4kyjaOmjseTtDB44n/SKr/Fq+gsGJSCtiCd+N4azPOAWirIEDNHeu2+e9stFVhphaYEAIGHNUqN8doj8i3ls3Iq5swMbMk3NGkzNIpLnGTLv0Rk6quRoSGYcdeX6tXhNFlIcDeDkP7dMI2RVutgK9x3rqwYLpYYpMICkeoDDQN1UAgkfJjIq4cJUvqSlmiu1NwG6rz3M+Rk+nJDHmstYfgeMUGsohIwdqBV5M+aDfE9LJLIcLNFGA9pEE/gYm5YwsztmUKGCEO6Gy938G64e5rH1u1DceMuRJ63KyRY3FllpXpf9sP3Wr8Xq+zF5dwuRyOK4nwHBuBwUAo271YVHg44OAOBTHzBQ7IGXXOk3nVSauPc+jXv28HBncur9prQ8a'
+                    salt: 'zbZyoVhXfcfmw0UKfZOJWQ==',
+                    iv: 'Bk2N0hL7NOokYI04',
+                    data: 'FOejJZA/mm9dZDSdujYvHruc1snUquEbPab+IDwcoGuEba0/MV3t5PapMwAt9/Ce2n2fPGkm58vUL0mVZ9dEgBYfAA6lLW2/Kxs64p4g6LrJSuj85s1jkKGR/mAdRMRWigPC/L+J4SMQeqXHaj7xJs/I2gUZvqLZedse6ONKkQKxFVbwD12bJKoMgponXDuvTayKIe0Mwr3ooWblJspRHGvfjb2D/mDXWuE/pj+yIXC8FD25MzGLs4E59y1BtAuYXGoVzla/A2Ac6cTQgdPvUPFzDquc3Qo3kjR3ZySyVOI7z12wtp3RQicOxUJHCeUa1W8TZvo4pmEIRrbtQm262m91WUcwzQcfO5O74GLHOlBBJS/ZrM7OgXOMHITispykzmjEQnz0N5rmoMlU3HbpGIggAPL6W7UlnXfjEyOUzN4vWg0+fxRhWi6ddxO8yGEMx7PobPeTZ2LPz76ohh5EKAXtm6hpaLQm7Dw5agcexOvmUqBdBZzEsxzrpN2ZKZXnkXYd7s/ukCS65fmC+to6dzyTJ4fD2bBcFuijRlqcMIzKpggLlDxgRB4NR6mSNWIaijzsxiu5WUtGF7nhCP4qsx1PRIrD9QbYn56gm612UKiKpvsBKr3XKTuBlygCZyKr4/wDnZiYva/NbxqDCiZO3pEWmGWbNKl3GCE0Ea2GOr7pfciKZO3uwJsL9skUJZfK1zPQMj6Kfhp9HNpnvrA4g6QmcrvxzbqYq6FskqqpNn4lGKvcTng9jpZB5WDst4rZPTod+IPbdDAPDyBlznH/y6YgLj/At4E2D6DccfNlefzMWVvER/d3/o4MOJjDpwKioy0KLk8+z0DDySBEfNnROUXhmw2V2EkqVGqDrpgG4wtTEnd7i0wxXAQz9ZVIeALIbQXdwYpMoE93CfiHDhHk8/u8K0UXt1x5QFwWCfXFi7COMcY1XbLplmF3nSSegL7strjMFpDwi1izxII9/jRoU70Vcy/6d9KIbszxDPs5l+CjhUlcLIp5vt9SYu0CfTbxb6AmIy4yhP7v9S72jg3wdyBdnuOtYfq5QfpmeYhnXwQSUjuN9Gcy36KnspcmL/s54Vaq/6gBlgqZoA=='
                 }
             },
             {
@@ -3525,36 +3566,75 @@
                 placeId: 'place-lakeresort',
                 checkIn: '2026-11-04',
                 checkOut: '2026-11-06',
-                status: 'to-book',
+                status: 'confirmed',
+                secretUi: 'stay',
+                note: '2 間（3 位、2 位），皆本館スーペリアツイン。現地付款合計 ¥140,220。「また来て。」割尚未套用，請盡快到 STAYNAVI 領券。',
                 confirmationNo: '',
-                cost: null,
-                offlineAsset: []
+                cost: { amount: 140220, currency: 'JPY' },
+                offlineAsset: [],
+                secret: {
+                    v: 1,
+                    alg: 'AES-GCM',
+                    kdf: 'PBKDF2',
+                    hash: 'SHA-256',
+                    iterations: 600000,
+                    salt: 'JZD5IGXJkoN7+9+XPmQ2QA==',
+                    iv: 'tBJg7A8GEuYGTWcg',
+                    data: 'Y1EA4DqymmOttixTbz9VbreV8AMkePKIgdafLemFjvYBV0lnl3RV5YaQ2gFBscTHVFjyWgeiEyThpHFmVha+He4SH7u3dHdSj5tlyF6IGyGmdGlHKnTAdwwYCYhOJsc1tS9pSznScmNhPXTtOTAGn/H0RYrFi7TXuo5TWx9bFBT41BxkWhjd67+uCuGaCTrhAZsVQaDE4xi4X8ASAoZF6tKRlpnwN63qzryFw/zXPIjx/UYWk45LvZ1oAXQpRA2y3febK9h5mowuKrPn7JRry3RorfFBhaz0Jxvf4IK12z2wR+CIZRh4j5NOzAQ/H2HJMx9e0uRzOmNMY2T6uNiv1GwhSnA+7cABl/iBSHDj0UG/zHXnKlDHibf6YYX/mcM5SIVfoloqzCuoq25oLLsPM+wjwMEejTzZ5mEAnqdUvcGm7fXRxRC/A1SRcgJiT0mfXx5t7jicpzH3kGG6rNVTzrHP/LGm1euzqaWIsYIuTOxzgkBl4MtMfs3knkn+ApvCoSIe0AXuUYc5Deku8PabnVjX2/KyrlTNp+yojNaNOs8gke++Y6Sh/QnzWLN5nY06caB2jm3M/D5AKLcJsbT9vrUtoP4k1Ex04jzjQO9no17PKbr6qrKLXhQDxgZEFpYJfN+tcEGvXN8uR8o6ISDK6xA4bmdoB/Yn2cek6emYCT+dPn9XFF4dKSQvf4lWjZxIyz6woKA7CsT/mgI/b/wR36RD6zoKWm+DPGOFm1sV9XOb0/U71SPGXKPZSa9PQsWpm+AvOmaB0mIe0ehYzzW6gY1qlR8gfExt642yejfsQFw9PisyKAUeMI+k0zpV19QBVwYvLKlRp+PFQGIypMfF6ZhRTwQo4sO1ufEBm/v0AJJ/7soeWJoVLZ3lFmXvtQpUaOoX8lOMHTco7PCxXehqDrsDR4KKu/HB63hAj0y+AJM8EttlHZC+3j6Cy+zBsjfLwpbX9UOXjUlVzDWpZq2LEVNwv3+xYxn/mfUi8E9MC3JB1mq/ol8DUajlZYqE+dJqq83tiEbiI2sOaRP1dIHkcNqK7cDDqnuxQBtlFFLJuAeWBwgJwzr6A0f9zvfebTk6jtvjbjrjb3Ka5YiriRxe6uUbSAw6HDKHonOaOF06CUNOmgt25moqR2ihYfGOLflbGPG2V/LasA=='
+                }
             },
             {
                 id: 'booking-monday',
                 type: 'accommodation',
                 placeId: 'place-monday',
                 checkIn: '2026-11-06',
-                checkOut: '2026-11-07',
-                status: 'to-book',
+                checkOut: '2026-11-11',
+                checkInTime: '15:00',
+                checkoutTime: '11:00',
+                status: 'confirmed',
+                secretUi: 'stay',
+                note: '預計 18:00 抵達。預約至 11/11，共 5 晚。',
                 confirmationNo: '',
-                cost: null,
-                offlineAsset: []
+                cost: { amount: 228310, currency: 'JPY' },
+                offlineAsset: [],
+                secret: {
+                    v: 1,
+                    alg: 'AES-GCM',
+                    kdf: 'PBKDF2',
+                    hash: 'SHA-256',
+                    iterations: 600000,
+                    salt: 'nUXgYQHPI75FCi5WC7A1Wg==',
+                    iv: 'hhIHv887bnmJv+4k',
+                    data: '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'
+                }
             },
             {
                 id: 'booking-jumbo-day2',
                 type: 'transport',
                 mode: 'taxi',
                 placeId: 'place-aizu-taxi',
-                title: '會津ジャンボ計程車',
+                title: '觀光計程車・奧會津を巡る旅',
                 date: '2026-11-02',
-                status: 'to-book',
+                status: 'confirmed',
                 channel: 'phone',
-                channelLabel: '電話預約',
-                note: '會津若松站 → 早戶碼頭 → 道の駅みしま宿 → 柳津町 → 返回華盛頓飯店',
+                channelLabel: '方案頁',
+                href: 'https://taxi.aizubus.com/sightseeing/taxi_de_okuaizu',
+                summary: '10:00–16:00，5 名ジャンボ。五ノ井酒店 → 柳津午餐 → 第一只見川橋梁 → つるの湯 → かねやまふれあい広場 → 華盛頓飯店。',
+                note: '￥66,360。霧幻峽 11/2 已滿。集合在出改札右側的赤べこ前。',
+                secretUi: 'reservation',
                 confirmationNo: '',
-                cost: null,
-                offlineAsset: []
+                cost: { amount: 66360, currency: 'JPY' },
+                offlineAsset: [],
+                secret: {
+                    v: 1,
+                    alg: 'AES-GCM',
+                    kdf: 'PBKDF2',
+                    hash: 'SHA-256',
+                    iterations: 600000,
+                    salt: 'N43WDbTzRWr1Wgl8O5kVJQ==',
+                    iv: 'LREdAWNbbzFb3o+Y',
+                    data: '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'
+                }
             },
             {
                 id: 'booking-jumbo-day3',
@@ -3577,14 +3657,25 @@
                 mode: 'train',
                 title: 'JR 新幹線指定席',
                 date: '2026-11-01',
-                status: 'to-book',
+                status: 'confirmed',
+                secretUi: 'reservation',
                 channel: 'web',
-                channelLabel: 'えきねっと',
-                href: 'https://www.eki-net.com/',
-                summary: '東京 → 郡山',
+                channelLabel: 'QR 換票',
+                href: 'https://shinkansen-ticket.com/pages/how-to-board-the-shinkansen-with-a-qr-voucher',
+                summary: 'やまびこ 145，16:00 東京 → 17:17 郡山。5 位，7 號車 3-A／3-B／3-C／3-D／3-E。上車前換紙本。',
                 confirmationNo: '',
                 cost: null,
-                offlineAsset: []
+                offlineAsset: [],
+                secret: {
+                    v: 1,
+                    alg: 'AES-GCM',
+                    kdf: 'PBKDF2',
+                    hash: 'SHA-256',
+                    iterations: 600000,
+                    salt: '3iVmB+DTqfkxsERdG8/V3w==',
+                    iv: '1v8jFiZ9OcXgGXN6',
+                    data: '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'
+                }
             },
             {
                 id: 'booking-train-return',
@@ -3592,28 +3683,25 @@
                 mode: 'train',
                 title: 'JR 新幹線指定席',
                 date: '2026-11-06',
-                status: 'to-book',
+                status: 'confirmed',
+                secretUi: 'reservation',
                 channel: 'web',
-                channelLabel: 'えきねっと',
-                href: 'https://www.eki-net.com/',
-                summary: '郡山 → 上野',
+                channelLabel: 'QR 換票',
+                href: 'https://shinkansen-ticket.com/pages/how-to-board-the-shinkansen-with-a-qr-voucher',
+                summary: 'やまびこ 134，11:00 郡山 → 12:18 上野。5 位，8 號車 1-A／1-B／1-C、2-D／2-E。上車前換紙本。',
                 confirmationNo: '',
                 cost: null,
-                offlineAsset: []
-            },
-            {
-                id: 'booking-mugenkyo',
-                type: 'activity',
-                placeId: 'place-mugenkyo',
-                title: '霧幻峽周遊船',
-                date: '2026-11-02',
-                status: 'to-book',
-                channel: 'web',
-                channelLabel: '官網預約',
-                href: 'https://www.mugenkyo.info/reservation/',
-                confirmationNo: '',
-                cost: null,
-                offlineAsset: []
+                offlineAsset: [],
+                secret: {
+                    v: 1,
+                    alg: 'AES-GCM',
+                    kdf: 'PBKDF2',
+                    hash: 'SHA-256',
+                    iterations: 600000,
+                    salt: '6WLA0566KSk93H6YpGRlaA==',
+                    iv: 'kz9r7bw+tznOeHmX',
+                    data: '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'
+                }
             },
             {
                 id: 'booking-shibukawa',
@@ -3664,7 +3752,10 @@
             { id: 'place-spal-koriyama', type: 'mall', name: 'S-PAL 郡山', mapQuery: 'S-PAL郡山', area: '郡山' },
             { id: 'place-wako-koriyama', type: 'restaurant', name: 'とんかつ和幸', mapQuery: 'とんかつ和幸 S-PAL郡山', area: 'S-PAL 郡山 2F' },
             { id: 'place-aizu-station', type: 'station', name: '會津若松站', mapQuery: '會津若松站' },
+            { id: 'place-gonoi', type: 'shop', name: '五ノ井酒店', mapQuery: '会津旨酒 五ノ井酒店', area: '會津坂下' },
             { id: 'place-hayato', type: 'activity', name: '霧幻峽の渡し 早戶', mapQuery: '霧幻峽の渡し 早戶' },
+            { id: 'place-tsurunoyu', type: 'activity', name: '早戸温泉つるの湯', mapQuery: '早戸温泉つるの湯' },
+            { id: 'place-kaneyama', type: 'sightseeing', name: 'かねやまふれあい広場', mapQuery: 'かねやまふれあい広場 金山町', area: '金山町' },
             { id: 'place-mishima', type: 'landmark', name: '道の駅みしま宿', mapQuery: '道の駅みしま宿' },
             { id: 'place-hotto-yanaizu', type: 'landmark', name: 'ほっとinやないづ', mapQuery: 'ほっとinやないづ' },
             { id: 'place-enzoji', type: 'sightseeing', name: '圓藏寺', mapQuery: '圓藏寺 柳津' },
@@ -3715,8 +3806,8 @@
                 price: { amount: 0, currency: 'JPY' },
                 coverage: { label: '免費' },
                 details: [
-                    '正式入住 15:00。入住前免費寄放（當日取）。',
-                    '會員方案含 14:00 提早入住。'
+                    '入住前可免費寄放當日行李。貴重品、易碎品與食品不收。',
+                    '飯店通常 15:00 入住、11:00 退房。這筆預約預計 18:00 抵達。'
                 ]
             }
         ];
@@ -3741,7 +3832,7 @@
                     },
                     _review: ['Breakfast handling 未記載（清晨出發、07:20 起飛）。'],
                     startAnchor: { kind: 'airport', placeId: 'place-hnd-t3', flightSegmentId: 'seg-br192', role: 'arrival' },
-                    endAnchor: { kind: 'accommodation', placeId: 'place-daiwa-koriyama', bookingId: 'booking-daiwa-koriyama', time: '19:45' },
+                    endAnchor: { kind: 'accommodation', placeId: 'place-chisun-koriyama', bookingId: 'booking-chisun-koriyama', time: '19:45' },
                     preBoundary: [
                         {
                             id: 'd1-flight-br192',
@@ -3788,44 +3879,42 @@
                             id: 'd1-service-tickets',
                             type: 'service',
                             startTime: '15:10',
-                            endTime: '15:30',
-                            title: '兌換指定席紙本、買零食',
+                            endTime: '15:50',
+                            title: '兌換指定席紙本',
                             placeId: 'place-tokyo-station',
                             icon: 'service',
                             details: [
-                                '抵站後至八重洲 JR 東日本旅行服務中心／みどりの窓口兌換指定席紙本。',
-                                '再到 GRANSTA 或大丸地下買零食上車。'
+                                '列車 16:00 開。抵站後先用 QR 或取票碼換紙本，機器限 JR 東日本或 JR 東海。',
+                                '換完有空再買零食。利木津若晚於 15:10，換票時間會變緊。'
                             ]
                         },
                         {
                             id: 'd1-shinkansen',
                             type: 'movement',
-                            startTime: '16:12',
-                            endTime: '17:34',
+                            startTime: '16:00',
+                            endTime: '17:17',
                             fromPlaceId: 'place-tokyo-station',
                             toPlaceId: 'place-koriyama-station',
                             mode: 'shinkansen',
                             travelMode: 'transit',
                             serviceName: 'やまびこ 145 號　指定席',
-                            price: { amount: 8450, currency: 'JPY', approx: true },
                             bookingId: 'booking-train-outbound',
                             details: [
-                                '東京站 20–23 月台。車廂後方有大行李放置處。',
-                                '預估每人約 ¥8,450：JR 乘車券（東京–郡山）¥4,180；新幹線指定席特急券 ¥4,270。',
-                                '乘車前 1 個月可於 JR 東日本「えきねっと」預約新幹線 e-Ticket，常有トクだ値 10%～30% 早鳥優惠。'
+                                '7 號車指定席：3-A、3-B、3-C、3-D、3-E，同一排。',
+                                '東京站東北新幹線月台。行李放車內指定行李區，不用另訂特大行李。'
                             ]
                         },
                         {
                             id: 'd1-walk-hotel',
                             type: 'movement',
-                            startTime: '17:45',
+                            startTime: '17:25',
                             fromPlaceId: 'place-koriyama-station',
-                            toPlaceId: 'place-daiwa-koriyama',
+                            toPlaceId: 'place-chisun-koriyama',
                             mode: 'walk',
                             travelMode: 'walking',
-                            duration: '約 1 分',
+                            duration: '約 2 分',
                             details: [
-                                'JR 郡山站西口出站即達。Check-in 14:00 起。',
+                                '17:17 抵郡山，西口步行約 2 分。Check-in 15:00 起，住宿確認信預計 18:00 抵達。',
                                 '先放行李進房，再走回車站共構的 S-PAL 吃晚餐。'
                             ]
                         },
@@ -3833,7 +3922,7 @@
                             id: 'd1-walk-spal',
                             type: 'movement',
                             startTime: '18:15',
-                            fromPlaceId: 'place-daiwa-koriyama',
+                            fromPlaceId: 'place-chisun-koriyama',
                             toPlaceId: 'place-spal-koriyama',
                             mode: 'walk',
                             travelMode: 'walking',
@@ -3863,7 +3952,7 @@
                             type: 'movement',
                             startTime: '19:30',
                             fromPlaceId: 'place-spal-koriyama',
-                            toPlaceId: 'place-daiwa-koriyama',
+                            toPlaceId: 'place-chisun-koriyama',
                             mode: 'walk',
                             travelMode: 'walking',
                             duration: '約 2 分',
@@ -3876,7 +3965,7 @@
                 {
                     day: 2,
                     date: '2026-11-02',
-                    title: '第二日：霧幻泛舟',
+                    title: '第二日：奧會津巡遊',
                     weather: {
                         location: '奧會津',
                         low: 3, high: 10, unit: 'C',
@@ -3888,34 +3977,33 @@
                         verifiedAt: null,
                         forecastPlaces: [{ id: 'okuaizu' }]
                     },
-                    startAnchor: { kind: 'accommodation', placeId: 'place-daiwa-koriyama', bookingId: 'booking-daiwa-koriyama' },
-                    endAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington', time: '17:15' },
+                    startAnchor: { kind: 'accommodation', placeId: 'place-chisun-koriyama', bookingId: 'booking-chisun-koriyama' },
+                    endAnchor: { kind: 'accommodation', placeId: 'place-washington', bookingId: 'booking-washington', time: '16:00' },
                     timeline: [
                         {
                             id: 'd2-breakfast',
                             type: 'meal',
                             startTime: '07:00',
                             endTime: '08:00',
-                            placeId: 'place-daiwa-koriyama',
+                            placeId: 'place-chisun-koriyama',
                             title: '飯店早餐',
                             meal: { slot: 'breakfast', resolution: 'restaurant' },
-                            price: { amount: 1700, currency: 'JPY' },
                             details: [
-                                '2F レストラン「ヴィスコンティ」和洋自助。06:00–10:00（L.O. 09:45）。',
-                                '大人 ¥1,700。悠哉吃完再退房，大行李一起帶走。'
+                                '2F レストラン「AZUMA」和洋自助，方案已含。06:30–09:30。',
+                                '吃完再退房，大行李一起帶走。退房截止 10:00。'
                             ]
                         },
                         {
                             id: 'd2-walk-station',
                             type: 'movement',
                             startTime: '08:15',
-                            fromPlaceId: 'place-daiwa-koriyama',
+                            fromPlaceId: 'place-chisun-koriyama',
                             toPlaceId: 'place-koriyama-station',
                             mode: 'walk',
                             travelMode: 'walking',
-                            duration: '約 1 分',
+                            duration: '約 2 分',
                             details: [
-                                '西口步行進站，直上磐越西線月台。'
+                                '西口步行約 2 分進站，直上磐越西線月台。'
                             ],
                             notes: [
                                 '郡山是磐越西線起點站。提早 10–15 分鐘上月台排隊，大行李可放靠門邊，也比較有位子坐。'
@@ -3952,151 +4040,173 @@
                             placeId: 'place-aizu-station',
                             options: [
                                 { name: '會津若松站置物櫃', note: '改札外三處。小 ¥300、中 ¥400–600、大 ¥600–800。只收硬貨。晚上先回車站取行李，再步行回飯店。' },
-                                { name: '華盛頓飯店櫃台', note: '出站步行約 2 分。15:00 才能入住，先寄放櫃台再折回車站。晚上包車直送飯店，最省事。' }
+                                { name: '華盛頓飯店櫃台', note: '出站步行約 2 分。15:00 才能入住，先寄放櫃台再折回車站。回程計程車直接送到飯店。' }
                             ],
                             details: [
-                                '車站或飯店都可以寄。寄完折回會津若松站，10:00 ジャンボ在車站上車。'
+                                '車站或飯店都可以寄。寄完折回會津若松站，10:00 觀光計程車在車站上車。'
                             ],
                             notes: ['記得留硬幣，以備寄車站置物櫃。']
                         },
                         {
-                            id: 'd2-charter-hayato',
+                            id: 'd2-charter-gonoi',
                             type: 'movement',
                             startTime: '10:00',
+                            endTime: '10:20',
                             fromPlaceId: 'place-aizu-station',
-                            toPlaceId: 'place-hayato',
-                            mode: 'charter',
+                            toPlaceId: 'place-gonoi',
+                            mode: 'taxi',
+                            serviceName: '觀光計程車',
                             travelMode: 'driving',
-                            duration: '約 60 分',
+                            duration: '約 20 分',
                             bookingId: 'booking-jumbo-day2',
+                            price: { amount: 66360, currency: 'JPY', unit: '台' },
                             details: [
-                                '普通計程車最多 4 人。五人請訂ジャンボ（定員 9 名）。10:00–17:15 約 7.5–8 小時。',
-                                '會津若松站上車，沿只見川先到最遠的早戶碼頭，回程再順路停點。'
-                            ]
-                        },
-                        {
-                            id: 'd2-mugenkyo',
-                            type: 'activity',
-                            startTime: '11:00',
-                            endTime: '12:30',
-                            title: '霧幻峽木舟',
-                            placeId: 'place-hayato',
-                            icon: 'boat',
-                            duration: '周遊プラン　約 45 分',
-                            price: { amount: 3000, currency: 'JPY', per: 'person' },
-                            bookingId: 'booking-mugenkyo',
-                            details: [
-                                '和式手搖木扁舟，船夫搖櫓滑行只見川。五人一艘包船。全員著輕量救生衣。',
-                                '3 名以上每人 ¥3,000，五人合計 ¥15,000。一艘最多 6 人，須於 5 日前官網預約（完全包船）。'
+                                'あいづタクシー「タクシーで行く 奥会津を巡る旅」。5 名ジャンボ，10:00–16:00，￥66,360。',
+                                '順序：五ノ井酒店 → 道の駅あいづ柳津午餐 → 第一只見川橋梁 → 早戸温泉つるの湯 → かねやまふれあい広場 → 華盛頓飯店。',
+                                '出改札後右側、大赤べこ前面集合。',
+                                '霧幻峽 11/2 已滿，不划船。入場、入浴、餐費另計。各站時間會依路況調整。'
                             ],
-                            alternatives: [
-                                {
-                                    id: 'alt-d2-mugenkyo-walk',
-                                    status: 'available',
-                                    trigger: '想上岸走走',
-                                    summary: '改散策付プラン（約 90 分、每人 ¥6,000），會用完整個時段。'
-                                }
-                            ]
+                            notes: ['出改札後右側、大赤べこ前面集合。']
                         },
                         {
-                            id: 'd2-charter-mishima',
-                            type: 'movement',
-                            startTime: '12:45',
-                            fromPlaceId: 'place-hayato',
-                            toPlaceId: 'place-mishima',
-                            mode: 'charter',
-                            travelMode: 'driving',
-                            duration: '約 15 分',
-                            bookingId: 'booking-jumbo-day2'
-                        },
-                        {
-                            id: 'd2-mishima-stop',
-                            type: 'stop',
-                            startTime: '12:45',
-                            title: '三島宿 / 第一只見川橋梁',
-                            placeId: 'place-mishima',
-                            icon: 'bridge',
-                            children: [
-                                {
-                                    id: 'd2-lunch-mishima',
-                                    type: 'meal',
-                                    startTime: '12:45',
-                                    placeId: 'place-mishima',
-                                    meal: { slot: 'lunch', resolution: 'restaurant' },
-                                    title: '會津地雞午餐',
-                                    price: { amount: 1500, currency: 'JPY', approx: true },
-                                    details: ['道の駅みしま宿：會津地雞蕎麥麵或手作烏龍麵。']
-                                },
-                                {
-                                    id: 'd2-bridge',
-                                    type: 'sightseeing',
-                                    title: '第一只見川橋梁',
-                                    placeId: 'place-mishima',
-                                    icon: 'bridge',
-                                    stay: '步道看橋',
-                                    details: [
-                                        'B 點平緩木梯約 3 分鐘、有扶手；也可在休息站外平地拍拱橋與楓紅水面。',
-                                        '三島町會津桐木杯墊、書籤，還有赤紫蘇霜淇淋與蜜餞。'
-                                    ]
-                                }
+                            id: 'd2-gonoi',
+                            type: 'activity',
+                            startTime: '10:20',
+                            endTime: '10:40',
+                            title: '五ノ井酒店',
+                            placeId: 'place-gonoi',
+                            icon: 'shopping',
+                            stay: '試飲選酒',
+                            details: [
+                                '會津坂下的地酒店，可試飲、可買原創日本酒「央」。',
+                                '11 月店面 10:00–18:30，無公休。'
                             ]
                         },
                         {
                             id: 'd2-charter-yanaizu',
                             type: 'movement',
-                            startTime: '14:30',
-                            fromPlaceId: 'place-mishima',
+                            startTime: '10:40',
+                            endTime: '11:05',
+                            fromPlaceId: 'place-gonoi',
                             toPlaceId: 'place-hotto-yanaizu',
-                            mode: 'charter',
+                            mode: 'taxi',
+                            serviceName: '觀光計程車',
+                            travelMode: 'driving',
+                            duration: '約 25 分',
+                            bookingId: 'booking-jumbo-day2'
+                        },
+                        {
+                            id: 'd2-yanaizu-lunch',
+                            type: 'meal',
+                            startTime: '11:05',
+                            endTime: '12:00',
+                            placeId: 'place-hotto-yanaizu',
+                            meal: { slot: 'lunch', resolution: 'restaurant' },
+                            title: '道の駅あいづ柳津',
+                            price: { amount: 1200, currency: 'JPY', approx: true },
+                            details: [
+                                '午餐在ほっと in やないづ。在地推薦醬汁豬排丼、會津地雞拉麵、冷烏龍麵。',
+                                '同一棟有小池菓子舗現蒸粟饅頭。足湯湯足里若吃完還有空檔可以泡，這段以午餐為主。',
+                                '11/2 週一營業。第 2、第 4 週四才公休。'
+                            ]
+                        },
+                        {
+                            id: 'd2-charter-mishima',
+                            type: 'movement',
+                            startTime: '12:00',
+                            endTime: '12:20',
+                            fromPlaceId: 'place-hotto-yanaizu',
+                            toPlaceId: 'place-mishima',
+                            mode: 'taxi',
+                            serviceName: '觀光計程車',
+                            travelMode: 'driving',
+                            duration: '約 20 分',
+                            bookingId: 'booking-jumbo-day2'
+                        },
+                        {
+                            id: 'd2-bridge',
+                            type: 'sightseeing',
+                            startTime: '12:20',
+                            endTime: '12:50',
+                            title: '第一只見川橋梁',
+                            placeId: 'place-mishima',
+                            icon: 'bridge',
+                            stay: '展望台拍照',
+                            details: [
+                                '道の駅みしま宿。沿山脊步行數分鐘，到只見川第一橋梁展望點。',
+                                '休息站可買會津桐木小物、赤紫蘇霜淇淋與蜜餞。'
+                            ]
+                        },
+                        {
+                            id: 'd2-charter-hayato',
+                            type: 'movement',
+                            startTime: '12:50',
+                            endTime: '13:05',
+                            fromPlaceId: 'place-mishima',
+                            toPlaceId: 'place-tsurunoyu',
+                            mode: 'taxi',
+                            serviceName: '觀光計程車',
                             travelMode: 'driving',
                             duration: '約 15 分',
                             bookingId: 'booking-jumbo-day2'
                         },
                         {
-                            id: 'd2-footbath',
+                            id: 'd2-tsurunoyu',
                             type: 'activity',
-                            startTime: '14:30',
-                            title: '足湯 湯足里',
-                            placeId: 'place-hotto-yanaizu',
+                            startTime: '13:05',
+                            endTime: '13:50',
+                            title: '早戸温泉つるの湯',
+                            placeId: 'place-tsurunoyu',
                             icon: 'onsen',
-                            price: { amount: 0, currency: 'JPY' },
-                            coverage: { label: '足湯免費' },
+                            stay: '入浴',
                             details: [
-                                'ほっとinやないづ 9:00–18:00（11 月仍開到 18:00）。11/2 週一，不是第 2、第 4 週四公休。',
-                                '館內有小池菓子舗現蒸粟饅頭，也可買伴手禮。'
+                                '確認行程是在這裡泡湯，源泉 100%。入浴費自付。',
+                                '霧幻峽 11/2 已滿，這段改成周邊慢慢看，不划船。'
                             ]
                         },
                         {
-                            id: 'd2-walk-enzoji',
+                            id: 'd2-charter-kaneyama',
                             type: 'movement',
-                            fromPlaceId: 'place-hotto-yanaizu',
-                            toPlaceId: 'place-enzoji',
-                            mode: 'walk',
-                            travelMode: 'walking'
+                            startTime: '13:50',
+                            endTime: '14:10',
+                            fromPlaceId: 'place-tsurunoyu',
+                            toPlaceId: 'place-kaneyama',
+                            mode: 'taxi',
+                            serviceName: '觀光計程車',
+                            travelMode: 'driving',
+                            duration: '約 20 分',
+                            bookingId: 'booking-jumbo-day2'
                         },
                         {
-                            id: 'd2-enzoji',
+                            id: 'd2-kaneyama',
                             type: 'sightseeing',
-                            title: '圓藏寺',
-                            placeId: 'place-enzoji',
-                            icon: 'temple',
-                            stay: '14:30 → 16:30 時段內',
+                            startTime: '14:10',
+                            endTime: '14:30',
+                            title: 'かねやまふれあい広場',
+                            placeId: 'place-kaneyama',
+                            icon: 'bridge',
+                            stay: '看只見川與只見線',
                             details: [
-                                '日本三大虛空藏尊之一，赤べこ傳說發源地。',
-                                '門前老舖也賣剛蒸好的粟饅頭。'
+                                '國道 252 號沿線，含大志集落拍照。水面、聚落、田園與川邊的只見線在同一畫面。',
+                                '可改從會津川口站搭只見線到會津柳津站（每人 ¥530），再換回ジャンボ送飯店。不搭車就由計程車直接送華盛頓飯店。'
                             ]
                         },
                         {
                             id: 'd2-charter-return',
                             type: 'movement',
-                            startTime: '17:15',
-                            fromPlaceId: 'place-enzoji',
+                            startTime: '14:30',
+                            endTime: '16:00',
+                            fromPlaceId: 'place-kaneyama',
                             toPlaceId: 'place-washington',
-                            mode: 'charter',
+                            mode: 'taxi',
+                            serviceName: '觀光計程車',
                             travelMode: 'driving',
-                            duration: '約 45 分',
+                            duration: '約 90 分',
                             bookingId: 'booking-jumbo-day2',
-                            details: ['從柳津沿路開回市區，司機送到飯店門口。']
+                            details: [
+                                '約 16:00 送到華盛頓飯店門口。確認信預計 15:00 抵達。',
+                                '行李若在車站置物櫃，請司機先在車站停一下取出。'
+                            ]
                         },
                         {
                             id: 'd2-dinner',
@@ -4129,10 +4239,17 @@
                         {
                             id: 'd3-breakfast',
                             type: 'meal',
-                            timeLabel: '早餐',
-                            meal: { slot: 'breakfast', resolution: 'unresolved' },
-                            areaLabel: '會津若松',
-                            _review: ['華盛頓飯店未記載早餐處理方式。']
+                            startTime: '07:00',
+                            endTime: '08:15',
+                            placeId: 'place-washington',
+                            title: '飯店早餐',
+                            meal: { slot: 'breakfast', resolution: 'included' },
+                            coverage: { label: '住宿含' },
+                            bookingId: 'booking-washington',
+                            details: [
+                                '10F レストラン「ガスライト」和洋自助，方案已含。06:30–09:30。',
+                                '08:45 包車出發，請先吃完再寄行李。'
+                            ]
                         },
                         {
                             id: 'd3-luggage',
@@ -4228,7 +4345,10 @@
                             travelMode: 'driving',
                             duration: '約 15–20 分',
                             bookingId: 'booking-jumbo-day3',
-                            details: ['14:00 塔崖出發，直達飯店辦理入住。']
+                            details: [
+                                '14:00 塔崖出發，直達飯店辦理入住。',
+                                '確認信登錄的預計抵達是 18:00。若 14:30 就到，先跟櫃台確認能否進房。'
+                            ]
                         },
                         {
                             id: 'd3-shamisen',
@@ -4724,9 +4844,8 @@
                             travelMode: 'transit',
                             serviceName: 'JR 磐越西線　快速',
                             price: { amount: 720, currency: 'JPY', approx: true },
-                            coverage: { label: '已含乘車券' },
                             details: [
-                                '豬苗代→上野的 JR 乘車券已含此段。若現場單買，豬苗代→郡山約 ¥720，可用 Suica / PASMO。'
+                                '這張新幹線是郡山→上野，不含這段。豬苗代→郡山約 ¥720，用 Suica / PASMO 付即可。'
                             ],
                             notes: ['下一班普通車 10:52 才到郡山 11:36，會錯過 11:00 新幹線。請 09:50 前到月台。']
                         },
@@ -4755,34 +4874,34 @@
                             mode: 'shinkansen',
                             travelMode: 'transit',
                             serviceName: 'やまびこ 134 號　指定席',
-                            price: { amount: 9120, currency: 'JPY', approx: true },
                             bookingId: 'booking-train-return',
                             details: [
-                                'JR 乘車券（豬苗代→上野）¥5,060；新幹線指定席特急券 ¥4,060；接駁巴士免費。合計約 ¥9,120。',
+                                '8 號車指定席：1-A、1-B、1-C、2-D、2-E。靠近行李放置處，不用另訂特大行李。',
+                                '上車前用 QR 或取票碼換成紙本。機器限 JR 東日本或 JR 東海，JR 西日本不能讀。',
                                 '車上吃郡山便當當午餐。上野下車免轉東京站。'
-                            ],
-                            notes: ['買票時務必指定靠近大行李空間的座位。東北新幹線沒有東海道那種獨立商品名，請在えきねっと座席表選最後列，或 2／4／6／8 號車荷物置き場旁。']
+                            ]
                         },
                         {
                             id: 'd6-taxi-hotel',
                             type: 'movement',
                             startTime: '12:30',
+                            endTime: '12:40',
                             fromPlaceId: 'place-ueno-station',
                             toPlaceId: 'place-monday',
                             mode: 'taxi',
                             travelMode: 'driving',
-                            duration: '約 20–25 分',
-                            price: { amount: 3000, currency: 'JPY', approx: true, unit: '台' },
+                            duration: '約 10 分',
+                            price: { amount: 1500, currency: 'JPY', approx: true, unit: '台' },
                             details: [
-                                '新幹線 21 番線下車，搭電梯往「入谷口／淺草口」。計程車搭乘處在淺草口；跟司機說「マンデーアパート浜松町」或給地址「浜松町 1-15-4」。',
-                                '普通車最多 4 人，加上大行李請叫兩台。車程約 8 km，一台約 ¥2,500–3,500。'
+                                '飯店在台東 4-6-1，離上野站很近。5 人大行李請叫兩台，跟司機說「グランドマンデー上野御徒町」。',
+                                '先把行李寄在櫃台，再去阿美橫町。預計 18:00 回來入住。'
                             ],
                             alternatives: [
                                 {
-                                    id: 'alt-d6-yamanote-hotel',
+                                    id: 'alt-d6-walk-hotel',
                                     status: 'available',
-                                    trigger: '不搭計程車、改搭電車',
-                                    summary: '山手線外回り（品川／東京方向），經秋葉原、東京、新橋，約 13 分抵濱松町，¥180，可用 Suica。北口步行約 2 分；大行李改走單軌轉乘口（有電梯）約 5 分。'
+                                    trigger: '行李不多、想走路',
+                                    summary: '出上野站往御徒町方向步行約 15 分。或搭山手線一站到御徒町，南口步行約 6 分。'
                                 }
                             ]
                         },
@@ -4791,22 +4910,20 @@
                             type: 'service',
                             subtype: 'luggage_storage',
                             serviceId: 'svc-monday-luggage',
-                            startTime: '13:00',
+                            startTime: '12:40',
                             title: '飯店寄放行李',
                             placeId: 'place-monday',
-                            details: ['先把大行李寄在櫃台，空手再回上野採買。']
+                            details: ['先把大行李寄在櫃台，空手去上野採買。入住預計 18:00。']
                         },
                         {
-                            id: 'd6-yamanote-ueno',
+                            id: 'd6-walk-shopping',
                             type: 'movement',
-                            startTime: '13:30',
+                            startTime: '13:00',
                             fromPlaceId: 'place-monday',
                             toPlaceId: 'place-ameyoko',
-                            mode: 'train',
-                            travelMode: 'transit',
-                            serviceName: 'JR 山手線　内回り',
-                            duration: '約 13–15 分',
-                            price: { amount: 180, currency: 'JPY' }
+                            mode: 'walk',
+                            travelMode: 'walking',
+                            duration: '約 10 分'
                         },
                         {
                             id: 'd6-shopping',
@@ -4834,14 +4951,15 @@
                             _review: ['僅 1 家點名餐廳，尚不足以列出 2–3 家推薦。']
                         },
                         {
-                            id: 'd6-yamanote-back',
+                            id: 'd6-walk-back',
                             type: 'movement',
+                            startTime: '18:00',
                             fromPlaceId: 'place-ameyoko',
                             toPlaceId: 'place-monday',
-                            mode: 'train',
-                            travelMode: 'transit',
-                            serviceName: 'JR 山手線　外回り',
-                            notes: ['18:00 後搭山手線外回り回濱松町，不要再拖大件。']
+                            mode: 'walk',
+                            travelMode: 'walking',
+                            duration: '約 10 分',
+                            notes: ['預約的預計抵達是 18:00。走回飯店辦理入住，不要再拖大件。']
                         },
                         {
                             id: 'd6-pack',
@@ -4888,7 +5006,7 @@
                             title: '退房',
                             placeId: 'place-monday',
                             bookingId: 'booking-monday',
-                            details: ['Check-out 10:00。從容將福島與多慶屋採買裝箱。']
+                            details: ['回程當天 10:00 前離開飯店前往羽田。這間房的預約到 11/11。']
                         },
                         {
                             id: 'd7-taxi-hnd',
@@ -4898,18 +5016,18 @@
                             toPlaceId: 'place-hnd-t3',
                             mode: 'taxi',
                             travelMode: 'driving',
-                            duration: '約 15–20 分',
-                            price: { min: 5000, max: 7000, currency: 'JPY' },
+                            duration: '約 40 分',
+                            price: { min: 7000, max: 10000, currency: 'JPY', approx: true },
                             details: [
-                                '飯店門口直達羽田。5 人請叫兩台。',
-                                '建議 10:00 退房出發，10:30 抵羽田報到與免稅採買。'
+                                '從上野御徒町到羽田約 40 分。5 人加大行李請叫兩台。',
+                                '12:40 起飛，建議 10:00 出發，約 10:40 抵第 3 航廈。'
                             ],
                             alternatives: [
                                 {
                                     id: 'alt-d7-monorail',
                                     status: 'available',
-                                    trigger: '不搭計程車、改搭單軌',
-                                    summary: '東京單軌 空港快速 ¥500。北口／單軌轉乘口步行約 5 分（有電梯），約 13–20 分直達第 3 航廈。大行李箱走單軌轉乘口電梯較輕鬆。'
+                                    trigger: '不搭計程車、改搭電車',
+                                    summary: '山手線到浜松町，轉東京單軌空港快速到第 3 航廈。大行李走有電梯的出口。'
                                 }
                             ]
                         }
@@ -7220,7 +7338,7 @@
                 priceUpdatedAt: null,
                 relatedDay: 2,
                 relatedPlace: { id: 'yanazu', label: '柳津' },
-                purchaseLocations: ['ほっとinやないづ 小池菓子舗', '圓藏寺門前老舖']
+                purchaseLocations: ['ほっとinやないづ 小池菓子舗']
             },
             {
                 id: 'rec-ouchi-goma',
@@ -8301,6 +8419,16 @@
             return '無法解密';
         }
 
+        function secretCopy(booking) {
+            if (booking && booking.secretUi === 'reservation') {
+                return { summary: '預約明細', locked: '預約資訊已加密' };
+            }
+            if (booking && booking.secretUi === 'stay') {
+                return { summary: '住宿明細', locked: '住宿資訊已加密' };
+            }
+            return { summary: '訂房明細', locked: '訂房資訊已加密' };
+        }
+
         function renderLockedState(panel, bookingId) {
             panel.replaceChildren();
             const button = document.createElement('button');
@@ -8311,7 +8439,7 @@
             icon.className = 'ph ph-lock-key';
             icon.setAttribute('aria-hidden', 'true');
             const label = document.createElement('span');
-            label.textContent = '訂房資訊已加密';
+            label.textContent = secretCopy(getBooking(bookingId)).locked;
             button.append(icon, label);
             panel.append(button);
             return button;
@@ -8382,6 +8510,13 @@
             input.focus();
         }
 
+        function secretImageSrc(value) {
+            const src = String(value || '').trim();
+            if (!/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(src)) return '';
+            if (src.length > SECRET_LIMITS.maxValue) return '';
+            return src;
+        }
+
         function renderSecretPlain(panel, record) {
             if (!panel || !panel.isConnected) return;
             panel.replaceChildren();
@@ -8398,7 +8533,16 @@
                 label.textContent = labelText;
                 const value = document.createElement('span');
                 value.className = 'secret-value';
-                value.textContent = field.value;
+                const imageSrc = secretImageSrc(field.value);
+                if (imageSrc) {
+                    const img = document.createElement('img');
+                    img.className = 'secret-qr';
+                    img.alt = labelText;
+                    img.src = imageSrc;
+                    value.append(img);
+                } else {
+                    value.textContent = field.value;
+                }
                 row.append(label, value);
                 panel.append(row);
                 shown += 1;
@@ -8406,7 +8550,7 @@
             if (!shown) {
                 const empty = document.createElement('p');
                 empty.className = 'secret-form-error';
-                empty.textContent = '沒有可顯示的訂房欄位';
+                empty.textContent = '沒有可顯示的欄位';
                 panel.append(empty);
             }
         }
@@ -8460,15 +8604,16 @@
         }
 
         function encryptedBookingHtml(booking) {
+            const copy = secretCopy(booking);
             return `
                 <details class="quiet-details overview-booking" data-secret-booking="${escapeHtml(booking.id)}">
                     <summary class="btn-outline is-quiet">
-                        <i class="ph ph-ticket" aria-hidden="true"></i> 訂房明細
+                        <i class="ph ph-ticket" aria-hidden="true"></i> ${escapeHtml(copy.summary)}
                     </summary>
                     <div class="overview-booking-body" data-secret-panel>
                         <button type="button" class="secret-unlock-btn" data-secret-unlock="${escapeHtml(booking.id)}">
                             <i class="ph ph-lock-key" aria-hidden="true"></i>
-                            <span>訂房資訊已加密</span>
+                            <span>${escapeHtml(copy.locked)}</span>
                         </button>
                     </div>
                 </details>
@@ -8587,6 +8732,7 @@
                         </div>
                         ${bookingNo}
                         ${bookingCostHtml(booking)}
+                        ${booking.secret ? `<div class="overview-reserve-actions">${encryptedBookingHtml(booking)}</div>` : ''}
                         ${bookingAssetHtml(booking)}
                     </div>
                 `;
