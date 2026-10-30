@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="秋醉福島">
     <!-- 發布新版時遞增。離線包用這段辨識是否已有更新。 -->
-    <meta name="trip-build" content="2026-10-28.12">
+    <meta name="trip-build" content="2026-10-30.2">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icons/icon-192.png" type="image/png">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -3373,7 +3373,7 @@
             { name: '松山', kind: 'fly', meta: '長榮 BR192' },
             { name: '郡山', kind: 'stay', meta: '東北新幹線' },
             { name: '會津若松', kind: 'stay', meta: '磐越西線' },
-            { name: '蘆之牧溫泉', kind: 'stay', meta: 'ジャンボ包車' },
+            { name: '蘆之牧溫泉', kind: 'stay', meta: '觀光計程車' },
             { name: '裏磐梯', kind: 'stay', meta: '磐越西線＋免費接駁' },
             { name: '東京・上野御徒町', kind: 'stay', meta: '新幹線（郡山→上野）' },
             { name: '松山', kind: 'fly', meta: '長榮 BR191' }
@@ -3641,15 +3641,27 @@
                 type: 'transport',
                 mode: 'taxi',
                 placeId: 'place-aizu-taxi',
-                title: '會津ジャンボ計程車',
+                title: '觀光計程車',
                 date: '2026-11-03',
-                status: 'to-book',
+                status: 'confirmed',
                 channel: 'phone',
-                channelLabel: '電話預約',
-                note: '08:45 阿爾法萬會津若松 → 大內宿 → 塔崖 → 14:30 大川莊',
+                channelLabel: '確認信',
+                summary: '09:00–14:00，5 名ジャンボ。會津若松站前 → 氷玉峠 → 大內宿 → 塔のへつり → 大川莊。',
+                note: '￥55,300。現金或信用卡。09:00 在會津若松站前上車。',
+                secretUi: 'reservation',
                 confirmationNo: '',
-                cost: null,
-                offlineAsset: []
+                cost: { amount: 55300, currency: 'JPY' },
+                offlineAsset: [],
+                secret: {
+                    v: 1,
+                    alg: 'AES-GCM',
+                    kdf: 'PBKDF2',
+                    hash: 'SHA-256',
+                    iterations: 600000,
+                    salt: 'OYhvgQ5dGeqfRyjBf2lQ3w==',
+                    iv: 'XV4Nc0CsJ5KGH4/Q',
+                    data: '/R5k6SQs/wUA11HRiACQFMBw140ZkFQJeGM8/hNMvPda308VspXzKo4JxCNJswhrGz5aL9SIQIdwiI86JqL2uAij5t5xYmTGoOv7vlRQOgEG2Zgtc3eMBHnZx9MOM9nmp4s/EDxdUO8i5J59P0nJcodnfzrrkbpBu4UZglw5pfDVq0GLW2ASbhd4aeqXnDoW4PnApMOOZFcDJFpXdR5FLKFcekb7jJ0XUst3fzprETpEqqaAhl30plz1nkAk2k8c/aryfwZw8FTYUub1JqdDFJQ0i1jalLvjAFuMAVmFROip7qJ2KcV54xAiavOE8e5/DN9Vj8EfAbcQLUCSOaQua7rn94rFZLNcwdcxqpFOqplxPrPDV0qaJLcRnk/7rVEv8l5cpQsITbD5VgrWV27N8nVhNFRiwigzqhAy+X2YXfxUnJi85Gj9sYuRe3Y69SBOeUmHDzbAKtjLcYjkv5JeHPprDfoRwdfkaxpCxHKGYclossQXz2Eib2zTzdKqc7PMIiDdnTyQDuB5Pd7inPmCg1yXCaQ/714gs0owFKKWcaz2EoEWuHYfnu4J1Ncb0hQsKg5qhnKZGWGGI0vpP+dNO37QyceSsapN+NR67Ld3vtRLz0rKiknUUEj8e7huEct2n1MzyoTFy79mib2bCf+fLyNJ/T7F6vQuiRM6A1OnW29ripvBl69hMWYicBIcf/LYPGE0XLznRzlBZGT+p2ldxHWXdGP8EmH64nbSSfZPeX/fLc0iuH9Vq5VJjtP7qmXi8BbxpLUAtSEV'
+                }
             },
             {
                 id: 'booking-train-outbound',
@@ -3759,6 +3771,7 @@
             { id: 'place-mishima', type: 'landmark', name: '道の駅みしま宿', mapQuery: '道の駅みしま宿' },
             { id: 'place-hotto-yanaizu', type: 'landmark', name: 'ほっとinやないづ', mapQuery: 'ほっとinやないづ' },
             { id: 'place-enzoji', type: 'sightseeing', name: '圓藏寺', mapQuery: '圓藏寺 柳津' },
+            { id: 'place-hyogyoku', type: 'sightseeing', name: '氷玉峠', mapQuery: '氷玉峠', area: 'こぶしライン' },
             { id: 'place-ouchi', type: 'sightseeing', name: '大內宿', mapQuery: '大內宿' },
             { id: 'place-misawaya', type: 'restaurant', name: '三澤屋', mapQuery: '三澤屋 大內宿' },
             { id: 'place-tonohetsuri', type: 'sightseeing', name: '塔のへつり', mapQuery: '塔のへつり' },
@@ -4234,13 +4247,13 @@
                         forecastPlaces: [{ id: 'ouchi' }]
                     },
                     startAnchor: { kind: 'accommodation', placeId: 'place-alpha1', bookingId: 'booking-alpha1' },
-                    endAnchor: { kind: 'accommodation', placeId: 'place-ookawaso', bookingId: 'booking-ookawaso', time: '14:30' },
+                    endAnchor: { kind: 'accommodation', placeId: 'place-ookawaso', bookingId: 'booking-ookawaso', time: '14:00' },
                     timeline: [
                         {
                             id: 'd3-breakfast',
                             type: 'meal',
                             startTime: '07:00',
-                            endTime: '08:15',
+                            endTime: '08:10',
                             placeId: 'place-alpha1',
                             title: '飯店早餐',
                             meal: { slot: 'breakfast', resolution: 'included' },
@@ -4248,7 +4261,7 @@
                             bookingId: 'booking-alpha1',
                             details: [
                                 '1F レストラン「アルファ-ガーデン」和洋自助，方案已含。06:30–09:30（最後入店 09:15）。',
-                                '退房截止 10:00。08:45 包車出發，請先吃完再寄行李。'
+                                '退房截止 10:00。09:00 要在會津若松站前上車，請先吃完、寄完行李再走去車站。'
                             ]
                         },
                         {
@@ -4256,7 +4269,7 @@
                             type: 'service',
                             subtype: 'luggage_delivery',
                             serviceId: 'svc-luggage-delivery-d3',
-                            startTime: '08:30',
+                            startTime: '08:15',
                             title: '行李宅配',
                             fromPlaceId: 'place-alpha1',
                             toPlaceId: 'place-lakeresort',
@@ -4267,25 +4280,65 @@
                             ]
                         },
                         {
-                            id: 'd3-charter-ouchi',
+                            id: 'd3-walk-station',
                             type: 'movement',
-                            startTime: '08:45',
+                            startTime: '08:40',
                             fromPlaceId: 'place-alpha1',
-                            toPlaceId: 'place-ouchi',
-                            mode: 'charter',
-                            travelMode: 'driving',
-                            duration: '約 45 分',
-                            bookingId: 'booking-jumbo-day3',
+                            toPlaceId: 'place-aizu-station',
+                            mode: 'walk',
+                            travelMode: 'walking',
+                            duration: '約 3 分',
                             details: [
-                                '普通計程車最多 4 人。五人請訂ジャンボ（定員 9 名）。08:45–14:30 約 6 小時。',
-                                '11/3 連假務必預先預約。'
+                                '走到會津若松站前。觀光計程車 09:00 在站前上車。'
                             ]
+                        },
+                        {
+                            id: 'd3-taxi-hyogyoku',
+                            type: 'movement',
+                            startTime: '09:00',
+                            endTime: '09:40',
+                            fromPlaceId: 'place-aizu-station',
+                            toPlaceId: 'place-hyogyoku',
+                            mode: 'taxi',
+                            serviceName: '觀光計程車',
+                            travelMode: 'driving',
+                            duration: '約 40 分',
+                            bookingId: 'booking-jumbo-day3',
+                            price: { amount: 55300, currency: 'JPY', unit: '台' },
+                            details: [
+                                '觀光計程車 09:00–14:00，5 名，ジャンボタクシー（定員 9），￥55,300。',
+                                '會津若松站前 → 氷玉峠 → 大內宿 → 塔のへつり → 大川莊。',
+                                '現金或信用卡（Mastercard、JCB、American Express、樂天、VISA）。中間各站停留由司機依路況調整。'
+                            ]
+                        },
+                        {
+                            id: 'd3-hyogyoku',
+                            type: 'sightseeing',
+                            startTime: '09:40',
+                            endTime: '10:00',
+                            placeId: 'place-hyogyoku',
+                            icon: 'mountains',
+                            stay: '約 20 分',
+                            details: ['こぶしライン上的峠。停車拍照後繼續前往大內宿。']
+                        },
+                        {
+                            id: 'd3-taxi-ouchi',
+                            type: 'movement',
+                            startTime: '10:00',
+                            endTime: '10:15',
+                            fromPlaceId: 'place-hyogyoku',
+                            toPlaceId: 'place-ouchi',
+                            mode: 'taxi',
+                            serviceName: '觀光計程車',
+                            travelMode: 'driving',
+                            duration: '約 15 分',
+                            bookingId: 'booking-jumbo-day3'
                         },
                         {
                             id: 'd3-ouchi-stop',
                             type: 'stop',
-                            startTime: '09:30',
-                            endTime: '12:30',
+                            startTime: '10:15',
+                            endTime: '12:20',
                             title: '大內宿',
                             placeId: 'place-ouchi',
                             icon: 'house',
@@ -4294,17 +4347,17 @@
                                 {
                                     id: 'd3-ouchi',
                                     type: 'sightseeing',
-                                    startTime: '09:30',
-                                    endTime: '11:00',
+                                    startTime: '10:15',
+                                    endTime: '11:15',
                                     placeId: 'place-ouchi',
                                     icon: 'house',
                                     stay: '老街散策',
-                                    details: ['午前光線好、遊覽車還沒湧入，先逛街再上觀音堂拍茅草屋全景。']
+                                    details: ['先逛街再上觀音堂拍茅草屋全景。']
                                 },
                                 {
                                     id: 'd3-lunch-misawaya',
                                     type: 'meal',
-                                    startTime: '11:00',
+                                    startTime: '11:15',
                                     placeId: 'place-misawaya',
                                     meal: { slot: 'lunch', resolution: 'restaurant' },
                                     title: '大蔥蕎麥麵',
@@ -4314,12 +4367,14 @@
                             ]
                         },
                         {
-                            id: 'd3-charter-hetsuri',
+                            id: 'd3-taxi-hetsuri',
                             type: 'movement',
-                            startTime: '12:30',
+                            startTime: '12:20',
+                            endTime: '12:30',
                             fromPlaceId: 'place-ouchi',
                             toPlaceId: 'place-tonohetsuri',
-                            mode: 'charter',
+                            mode: 'taxi',
+                            serviceName: '觀光計程車',
                             travelMode: 'driving',
                             duration: '約 10 分',
                             bookingId: 'booking-jumbo-day3'
@@ -4328,26 +4383,27 @@
                             id: 'd3-hetsuri',
                             type: 'sightseeing',
                             startTime: '12:30',
-                            endTime: '14:00',
+                            endTime: '13:40',
                             placeId: 'place-tonohetsuri',
                             icon: 'bridge',
-                            stay: '約 90 分',
+                            stay: '約 70 分',
                             details: ['漫步走過吊橋，看奇岩斷崖與紅葉。']
                         },
                         {
-                            id: 'd3-charter-ookawaso',
+                            id: 'd3-taxi-ookawaso',
                             type: 'movement',
-                            startTime: '14:00',
-                            endTime: '14:30',
+                            startTime: '13:40',
+                            endTime: '14:00',
                             fromPlaceId: 'place-tonohetsuri',
                             toPlaceId: 'place-ookawaso',
-                            mode: 'charter',
+                            mode: 'taxi',
+                            serviceName: '觀光計程車',
                             travelMode: 'driving',
-                            duration: '約 15–20 分',
+                            duration: '約 20 分',
                             bookingId: 'booking-jumbo-day3',
                             details: [
-                                '14:00 塔崖出發，直達飯店辦理入住。',
-                                '確認信登錄的預計抵達是 18:00。若 14:30 就到，先跟櫃台確認能否進房。'
+                                '14:00 送到大川莊。',
+                                '住宿確認信預計 18:00 抵達。若 14:00 就到，先跟櫃台確認能否進房。'
                             ]
                         },
                         {
@@ -6119,6 +6175,8 @@
             '雜支': 'other'
         };
         const EXPENSE_STORAGE_KEY = 'fukushima_trip_expenses';
+        const EXPENSE_SEED_KEY = 'fukushima_trip_expenses_seed';
+        const EXPENSE_SEED_VERSION = '2026-10-30-bookings';
         let currentDay = 1;
         let currentTab = 'itinerary';
         let currentRoute = 'a';
@@ -6387,6 +6445,7 @@
 
         function formatExpenseAmount(exp) {
             const amt = Number(exp.amountOriginal) || 0;
+            if (!amt) return '金額未定';
             return exp.currency === 'TWD'
                 ? 'NT$' + amt.toLocaleString()
                 : '¥' + amt.toLocaleString();
@@ -6482,9 +6541,48 @@
                 'exchangeRateToTwd',
                 'amountOriginal',
                 'payerName',
+                'bookingId',
                 'createdAt',
                 'updatedAt'
             ].some((key) => raw[key] !== next[key]);
+        }
+
+        function isLegacyDemoExpense(exp) {
+            const name = String((exp && (exp.name || exp.item)) || '');
+            return name.includes('三澤屋大蔥') || name.includes('湯野上溫泉站至大內宿') || name.includes('霧幻峽渡船');
+        }
+
+        function ledgerNameForBooking(booking) {
+            if (booking.id === 'booking-train-outbound') return 'やまびこ 145　東京 → 郡山';
+            if (booking.id === 'booking-train-return') return 'やまびこ 134　郡山 → 上野';
+            if (booking.id === 'booking-jumbo-day3') return '觀光計程車・大內宿・塔のへつり';
+            if (booking.type === 'accommodation') {
+                const place = getPlace(booking.placeId);
+                return (place && place.name) || booking.title || '';
+            }
+            return booking.title || '';
+        }
+
+        function bookingLedgerDrafts() {
+            const stamped = '2026-10-30T00:00:00.000Z';
+            return BOOKINGS.filter((booking) => {
+                if (!booking || booking.status !== 'confirmed' || booking.type === 'flight') return false;
+                return booking.type === 'accommodation' || booking.type === 'transport';
+            }).map((booking, index) => {
+                const amount = booking.cost && Number(booking.cost.amount);
+                return {
+                    id: 'booking:' + booking.id,
+                    bookingId: booking.id,
+                    name: ledgerNameForBooking(booking),
+                    category: booking.type === 'accommodation' ? '住宿' : '交通',
+                    date: booking.type === 'accommodation' ? booking.checkIn : booking.date,
+                    currency: booking.cost && booking.cost.currency === 'TWD' ? 'TWD' : 'JPY',
+                    amountOriginal: amount > 0 ? amount : 0,
+                    payerName: '',
+                    createdAt: stamped.slice(0, 18) + String(index).padStart(3, '0') + 'Z',
+                    updatedAt: stamped
+                };
+            }).filter((draft) => draft.name && draft.date);
         }
 
         function normalizeExpense(exp) {
@@ -6521,6 +6619,7 @@
                 exchangeRateToTwd: Number.isFinite(exchangeRateToTwd) ? exchangeRateToTwd : null,
                 amountOriginal,
                 payerName: resolvePayerName(exp),
+                bookingId: exp.bookingId ? String(exp.bookingId) : '',
                 createdAt: exp.createdAt || nowIso,
                 updatedAt: exp.updatedAt || exp.createdAt || nowIso
             };
@@ -6701,7 +6800,17 @@
 
         async function initExpenses() {
             try {
-                await refreshExpenses();
+                const stored = await expenseStore.loadExpenses();
+                let seedVersion = '';
+                try { seedVersion = localStorage.getItem(EXPENSE_SEED_KEY) || ''; } catch (err) {}
+                if (seedVersion !== EXPENSE_SEED_VERSION) {
+                    const kept = stored.filter((exp) => !isLegacyDemoExpense(exp) && !exp.bookingId);
+                    expenses = await expenseStore.replaceExpenses(kept.concat(bookingLedgerDrafts()));
+                    try { localStorage.setItem(EXPENSE_SEED_KEY, EXPENSE_SEED_VERSION); } catch (err) {}
+                } else {
+                    expenses = stored;
+                }
+                renderExpenseList();
             } catch (error) {
                 console.error('[ExpenseStore] init failed', error);
                 expenses = [];
