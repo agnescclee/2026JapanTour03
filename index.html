@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="秋醉福島">
     <!-- 發布新版時遞增。離線包用這段辨識是否已有更新。 -->
-    <meta name="trip-build" content="2026-10-30.2">
+    <meta name="trip-build" content="2026-10-30.3">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icons/icon-192.png" type="image/png">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -3676,7 +3676,7 @@
                 href: 'https://shinkansen-ticket.com/pages/how-to-board-the-shinkansen-with-a-qr-voucher',
                 summary: 'やまびこ 145，16:00 東京 → 17:17 郡山。5 位，7 號車 3-A／3-B／3-C／3-D／3-E。上車前換紙本。',
                 confirmationNo: '',
-                cost: null,
+                cost: { amount: 60850, currency: 'JPY' },
                 offlineAsset: [],
                 secret: {
                     v: 1,
@@ -3702,7 +3702,7 @@
                 href: 'https://shinkansen-ticket.com/pages/how-to-board-the-shinkansen-with-a-qr-voucher',
                 summary: 'やまびこ 134，11:00 郡山 → 12:18 上野。5 位，8 號車 1-A／1-B／1-C、2-D／2-E。上車前換紙本。',
                 confirmationNo: '',
-                cost: null,
+                cost: { amount: 57350, currency: 'JPY' },
                 offlineAsset: [],
                 secret: {
                     v: 1,
@@ -3912,7 +3912,9 @@
                             travelMode: 'transit',
                             serviceName: 'やまびこ 145 號　指定席',
                             bookingId: 'booking-train-outbound',
+                            price: { amount: 60850, currency: 'JPY' },
                             details: [
+                                '5 人合計 ¥60,850。',
                                 '7 號車指定席：3-A、3-B、3-C、3-D、3-E，同一排。',
                                 '東京站東北新幹線月台。行李放車內指定行李區，不用另訂特大行李。'
                             ]
@@ -4931,7 +4933,9 @@
                             travelMode: 'transit',
                             serviceName: 'やまびこ 134 號　指定席',
                             bookingId: 'booking-train-return',
+                            price: { amount: 57350, currency: 'JPY' },
                             details: [
+                                '5 人合計 ¥57,350。',
                                 '8 號車指定席：1-A、1-B、1-C、2-D、2-E。靠近行李放置處，不用另訂特大行李。',
                                 '上車前用 QR 或取票碼換成紙本。機器限 JR 東日本或 JR 東海，JR 西日本不能讀。',
                                 '車上吃郡山便當當午餐。上野下車免轉東京站。'
@@ -6176,7 +6180,7 @@
         };
         const EXPENSE_STORAGE_KEY = 'fukushima_trip_expenses';
         const EXPENSE_SEED_KEY = 'fukushima_trip_expenses_seed';
-        const EXPENSE_SEED_VERSION = '2026-10-30-bookings';
+        const EXPENSE_SEED_VERSION = '2026-10-30-train-fares';
         let currentDay = 1;
         let currentTab = 'itinerary';
         let currentRoute = 'a';
@@ -6804,8 +6808,27 @@
                 let seedVersion = '';
                 try { seedVersion = localStorage.getItem(EXPENSE_SEED_KEY) || ''; } catch (err) {}
                 if (seedVersion !== EXPENSE_SEED_VERSION) {
+                    const drafts = bookingLedgerDrafts();
+                    const existingByBooking = new Map();
+                    stored.forEach((exp) => {
+                        if (exp && exp.bookingId) existingByBooking.set(exp.bookingId, exp);
+                    });
                     const kept = stored.filter((exp) => !isLegacyDemoExpense(exp) && !exp.bookingId);
-                    expenses = await expenseStore.replaceExpenses(kept.concat(bookingLedgerDrafts()));
+                    const fareIds = new Set(['booking-train-outbound', 'booking-train-return']);
+                    const merged = drafts.map((draft) => {
+                        const existing = existingByBooking.get(draft.bookingId);
+                        if (!existing) return draft;
+                        if (!fareIds.has(draft.bookingId)) return existing;
+                        return {
+                            ...existing,
+                            name: draft.name,
+                            category: draft.category,
+                            date: draft.date,
+                            currency: draft.currency,
+                            amountOriginal: draft.amountOriginal
+                        };
+                    });
+                    expenses = await expenseStore.replaceExpenses(kept.concat(merged));
                     try { localStorage.setItem(EXPENSE_SEED_KEY, EXPENSE_SEED_VERSION); } catch (err) {}
                 } else {
                     expenses = stored;
